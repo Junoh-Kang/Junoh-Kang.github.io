@@ -24,6 +24,14 @@
             <abbr class="badge">{{entry.abbr}}</abbr>
           {%- endif -%}
         {%- endif -%}
+        
+        {%- if entry.abbr2 -%}
+          <abbr2 class="badge">{{entry.abbr2}}</abbr2>
+        {%- endif -%}
+
+        {%- if entry.abbr3 -%}
+          <abbr2 class="badge">{{entry.abbr3}}</abbr2>
+        {%- endif -%}
         </div>
 
         <!-- Entry bib key -->
@@ -136,7 +144,7 @@
           <!-- Links/Buttons -->
           <div class="links">
           {%- if entry.abstract %}
-            <a class="abstract btn btn-sm z-depth-0" role="button">Abs</a>
+            <a class="abstract btn btn-sm z-depth-0" role="button">Abstract</a>
           {%- endif %}
           {%- if entry.arxiv %}
             <a href="http://arxiv.org/abs/{{ entry.arxiv }}" class="btn btn-sm z-depth-0" role="button">arXiv</a>
