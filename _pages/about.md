@@ -17,7 +17,7 @@ social: true  # includes social icons at the bottom of the page
 ---
 # Junoh Kang
 I am a second year Ph.D. student at the [SNU Computer Vision Lab](https://cv.snu.ac.kr/), advised by [Bohyung Han](https://cv.snu.ac.kr/index.php/~bhhan/).
-I aim to solve problems of machine learning and computer vision in theoretially concrete manner, more than just heuristics.
-My primary research interest is diffusion models and also I am interested in efficiency of neural networks.
+I aim to solve problems of machine learning and computer vision in a theoretically concrete manner, more than just heuristics.
+My primary research interest is diffusion models and I am also interested in the efficiency of neural networks.
 
 I am also interested in economics, quant, and politics and I enjoy sports such as tennis, golf, futsal, and boxing.
