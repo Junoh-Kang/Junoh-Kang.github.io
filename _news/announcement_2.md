@@ -6,4 +6,4 @@ inline: true
 related_posts: false
 ---
 
-Our paper on the Open-Set Representation Learning Through Combinatorial Embedding was presented at CVPR 2023.
+Our paper on the [Open-Set Representation Learning Through Combinatorial Embedding](https://arxiv.org/abs/2106.15278) was presented at CVPR 2023.
