@@ -1,4 +1,4 @@
 User-agent: *
 Disallow:
 
-Sitemap: https://junoh.github.io/sitemap.xml
+Sitemap: https://Junoh-Kang.github.io/sitemap.xml
