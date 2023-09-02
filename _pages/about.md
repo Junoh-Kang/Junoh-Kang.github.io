@@ -20,4 +20,4 @@ I am a second year Ph.D. student at the [SNU Computer Vision Lab](https://cv.snu
 I aim to solve problems of machine learning and computer vision in a theoretically concrete manner, more than just heuristics.
 My primary research interest is diffusion models and I am also interested in the efficiency of neural networks.
 
-I am also interested in economics, quant, and politics and I enjoy sports such as tennis, golf, futsal, and boxing.
+I am also interested in economics, quant investment, and playing sports such as tennis, golf, futsal, and boxing.
