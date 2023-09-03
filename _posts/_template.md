@@ -1,10 +1,29 @@
 ---
-layout: post
-title: 
-date: YYYY-MM-DD
-# description: an example of a blog post with jupyter notebook
-# tags: formatting jupyter
-categories: paper-review
-giscus_comments: false
+layout: distill
+title: template
+date: 2023-01-01
+description: 
+categories: survey # deep-learning, finance, 
+tags: paper-review, survey, # paper-review, survey, 
+giscus_comments: true
 related_posts: false
+featured: false
+
+authors:
+  - name: Junoh Kang
+    url:
+    affiliations:
+      name: Seoul National University
+
+bibliography: diffusion.bib
+
+toc:
+  - name: Section
+    subsections:
+      - name: Subsection 1
+      - name: Subsection 2
 ---
+
+## Section
+
+### Subsection 1
