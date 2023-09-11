@@ -55,11 +55,11 @@ where $$\{\beta_t\}_{t=1}^T$$ are pre-defined constants.
 
 #### Backward (Denoising) Process
 The backward process is a Markov chain that gradually denoises perturbed data and it is parametrized by neural networks.
-From the observation of
+When $$\beta\ll 1$$ the backward distribution can be approximated as
 $$
   \begin{align}
-    \lim_{\beta_t \rightarrow 0} q_{t-1|t}(\mathrm{x}_{t-1}|\mathrm{x}_{t}) 
-    = \mathcal{N}(\mathrm{x}_{t-1}; \cfrac{1}{ \sqrt{1-\beta_t}}(\mathrm{x}_{t} + \beta_t \nabla \log q_t (\mathrm{x}_t)), \beta_t \mathrm{I}),
+    q_{t-1|t}(\mathrm{x}_{t-1}|\mathrm{x}_{t}) 
+    \approx \mathcal{N}(\mathrm{x}_{t-1}; \cfrac{1}{ \sqrt{1-\beta_t}}(\mathrm{x}_{t} + \beta_t \nabla \log q_t (\mathrm{x}_t)), \beta_t \mathrm{I}).
   \end{align}
 $$
 
@@ -71,7 +71,7 @@ $$
   </div>
 {% enddetails %}
 
-it is reasonable to parametrize the denoising distribution as Gaussian as long as $$\{\beta_t\}_{t=1}^T$$ are infinitesimal. Therefore the bacward process is defined as follows:
+It is reasonable to parametrize the denoising distribution as Gaussian as long as $$\{\beta_t\}_{t=1}^T$$ are infinitesimal. Therefore the bacward process is defined as follows:
 $$
   \begin{gather}
     \mathrm{x}_t \perp\mkern-9.5mu\perp \mathrm{x}_{t+1:T}, \\
@@ -81,7 +81,7 @@ $$
   \end{gather}
 $$
 
-Note that we expect $$s_\theta(\mathrm{x}_t,t)$$ to have similar value to $$\nabla\log q_{t}(\mathrm{x}_t)$$.
+Note that we expect $$s_\theta(\mathrm{x}_t,t)$$ to learn $$\nabla\log q_{t}(\mathrm{x}_t)$$.
 
 #### Minimizing Surrogate of Negative Log-Likelihood
 The negative log-likelihood of data is 
