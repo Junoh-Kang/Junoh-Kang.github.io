@@ -11,7 +11,7 @@ featured: false
 
 authors:
   - name: Junoh Kang
-    url:
+    url: https://junoh-kang.github.io/
     affiliations:
       name: Seoul National University
 
@@ -46,8 +46,8 @@ The forward process is a Markov chain that gradually adds Gaussian noise to the 
 $$
   \begin{gather}
     \mathrm{x}_t \perp\mkern-9.5mu\perp \mathrm{x}_{0:t-1}, \\
-    q_0(\mathrm{x}_0) := \mathrm{P}_{data}(\mathrm{x}_0) ~~\text{and}~~ 
-    q_{t|t-1}(\mathrm{x}_t|\mathrm{x}_{t-1}) := \mathcal{N}(\mathrm{x}_t;\sqrt{1-\beta_t}\mathrm{x}_{t-1}, \beta_t \mathrm{I}),
+    q(\mathrm{x}_0) := \mathrm{P}_{data}(\mathrm{x}_0) ~~\text{and}~~ 
+    q(\mathrm{x}_t|\mathrm{x}_{t-1}) := \mathcal{N}(\mathrm{x}_t;\sqrt{1-\beta_t}\mathrm{x}_{t-1}, \beta_t \mathrm{I}),
   \end{gather}
 $$
 
@@ -58,8 +58,8 @@ The backward process is a Markov chain that gradually denoises perturbed data an
 When $$\beta\ll 1$$ the backward distribution can be approximated as
 $$
   \begin{align}
-    q_{t-1|t}(\mathrm{x}_{t-1}|\mathrm{x}_{t}) 
-    \approx \mathcal{N}(\mathrm{x}_{t-1}; \cfrac{1}{ \sqrt{1-\beta_t}}(\mathrm{x}_{t} + \beta_t \nabla \log q_t (\mathrm{x}_t)), \beta_t \mathrm{I}).
+    q(\mathrm{x}_{t-1}|\mathrm{x}_{t}) 
+    \approx \mathcal{N}(\mathrm{x}_{t-1}; \cfrac{1}{ \sqrt{1-\beta_t}}(\mathrm{x}_{t} + \beta_t \nabla \log q (\mathrm{x}_t)), \beta_t \mathrm{I}).
   \end{align}
 $$
 
@@ -75,30 +75,30 @@ It is reasonable to parametrize the denoising distribution as Gaussian as long a
 $$
   \begin{gather}
     \mathrm{x}_t \perp\mkern-9.5mu\perp \mathrm{x}_{t+1:T}, \\
-    p_T(\mathrm{x}_T) := \mathcal{N}(\mathrm{x}_T; \mathrm{0}, \mathrm{I}) ~~\text{and}~~
-    p_{t-1|t}(\mathrm{x}_{t-1}|\mathrm{x}_{t}) 
+    p(\mathrm{x}_T) := \mathcal{N}(\mathrm{x}_T; \mathrm{0}, \mathrm{I}) ~~\text{and}~~
+    p(\mathrm{x}_{t-1}|\mathrm{x}_{t}) 
     = \mathcal{N}(\mathrm{x}_{t-1}; \cfrac{1}{ \sqrt{1-\beta_t}}(\mathrm{x}_{t} + \beta_t s_\theta(\mathrm{x}_t,t)), \beta_t \mathrm{I}),
   \end{gather}
 $$
 
-Note that we expect $$s_\theta(\mathrm{x}_t,t)$$ to learn $$\nabla\log q_{t}(\mathrm{x}_t)$$.
+Note that we expect $$s_\theta(\mathrm{x}_t,t)$$ to learn $$\nabla\log q(\mathrm{x}_t)$$.
 
 #### Minimizing Surrogate of Negative Log-Likelihood
 The negative log-likelihood of data is 
 $$
 \begin{align}
-  \mathbb{E}_{\mathrm{x}_0 \sim q} \left[-\log p_0(\mathrm{x}_0)\right]
-  &\leq \mathbb{E}_{\mathrm{x}_0 \sim q} \mathbb{E}_{\mathrm{x}_{1:T|0} \sim q} \left[ \log \cfrac{q_{1:T|0}(\mathrm{x}_{1:T}|\mathrm{x}_{0})}{p_{0:T}(\mathrm{x}_{0:T})} \right].
+  \mathbb{E}_{\mathrm{x}_0 \sim q} \left[-\log p(\mathrm{x}_0)\right]
+  &\leq \mathbb{E}_{\mathrm{x}_0 \sim q} \mathbb{E}_{\mathrm{x}_{1:T|0} \sim q} \left[ \log \cfrac{q(\mathrm{x}_{1:T}|\mathrm{x}_{0})}{p(\mathrm{x}_{0:T})} \right].
 \end{align}
 $$
 {% details *proof.* %}
 $$
   \begin{align*}
-    -\log p_0(\mathrm{x}_0) 
-    &= -\log \int p_{0:T}(\mathrm{x}_{0:T}) d\mathrm{x}_{1:T} \\
-    &= -\log \int q_{1:T|0}(\mathrm{x}_{1:T}|\mathrm{x}_{0}) \cfrac{p_{0:T}(\mathrm{x}_{0:T})}{q_{1:T|0}(\mathrm{x}_{1:T}|\mathrm{x}_{0})} d\mathrm{x}_{1:T} \\
-    &\leq -\int q_{1:T|0}(\mathrm{x}_{1:T}|\mathrm{x}_{0}) \log \cfrac{p_{0:T}(\mathrm{x}_{0:T})}{q_{1:T|0}(\mathrm{x}_{1:T}|\mathrm{x}_{0})} d\mathrm{x}_{1:T} ~~(\because \text{Jensen})\\
-    &= \mathbb{E}_{\mathrm{x}_{1:T|0} \sim q} \left[ \log \cfrac{q_{1:T|0}(\mathrm{x}_{1:T}|\mathrm{x}_{0})}{p_{0:T}(\mathrm{x}_{0:T})} \right].
+    -\log p(\mathrm{x}_0) 
+    &= -\log \int p(\mathrm{x}_{0:T}) d\mathrm{x}_{1:T} \\
+    &= -\log \int q(\mathrm{x}_{1:T}|\mathrm{x}_{0}) \cfrac{p(\mathrm{x}_{0:T})}{q(\mathrm{x}_{1:T}|\mathrm{x}_{0})} d\mathrm{x}_{1:T} \\
+    &\leq -\int q(\mathrm{x}_{1:T}|\mathrm{x}_{0}) \log \cfrac{p(\mathrm{x}_{0:T})}{q(\mathrm{x}_{1:T}|\mathrm{x}_{0})} d\mathrm{x}_{1:T} ~~(\because \text{Jensen})\\
+    &= \mathbb{E}_{\mathrm{x}_{1:T|0} \sim q} \left[ \log \cfrac{q(\mathrm{x}_{1:T}|\mathrm{x}_{0})}{p(\mathrm{x}_{0:T})} \right].
   \end{align*}
 $$
 {% enddetails %}
@@ -106,10 +106,10 @@ $$
 Using Markov properties, 
 $$
   \begin{align}
-    q_{1:T|0}(\mathrm{x}_{1:T} | \mathrm{x}_0) 
-    &= q_{T|0}(\mathrm{x}_T | \mathrm{x}_0) \prod_{t=2}^T q_{t-1|t,0}(\mathrm{x}_{t-1} | \mathrm{x}_t, \mathrm{x}_0), \\
-    p_{T:0}(\mathrm{x}_{T:0}) 
-    &= p_{T}(\mathrm{x}_T) \prod_{t=T}^{1} p_{t-1|t}(\mathrm{x}_{t-1}|\mathrm{x}_t). 
+    q(\mathrm{x}_{1:T} | \mathrm{x}_0) 
+    &= q(\mathrm{x}_T | \mathrm{x}_0) \prod_{t=2}^T q(\mathrm{x}_{t-1} | \mathrm{x}_t, \mathrm{x}_0), \\
+    p(\mathrm{x}_{T:0}) 
+    &= p(\mathrm{x}_T) \prod_{t=T}^{1} p(\mathrm{x}_{t-1}|\mathrm{x}_t). 
   \end{align}
 $$
 {% details *proof.* %}
@@ -132,18 +132,18 @@ $$
 Therefore, the surrogate of negative log-likelihood becomes
 $$
   \begin{align}
-    D_{KL}(q_{T|0}(\mathrm{x}_T|\mathrm{x}_0) || p(\mathrm{x}_T)) 
-    + \mathbb{E}_q\left[-\log p_{0|1}(\mathrm{x}_0|\mathrm{x}_1)\right] 
-    + \sum_{t=2}^T D_{KL}(q_{t-1|t,0}(\mathrm{x}_{t-1} | \mathrm{x}_t, \mathrm{x}_0) || p_{t-1|t}(\mathrm{x}_{t-1}|\mathrm{x}_t)).
+    D_{KL}(q(\mathrm{x}_T|\mathrm{x}_0) || p(\mathrm{x}_T)) 
+    + \mathbb{E}_q\left[-\log p(\mathrm{x}_0|\mathrm{x}_1)\right] 
+    + \sum_{t=2}^T D_{KL}(q(\mathrm{x}_{t-1} | \mathrm{x}_t, \mathrm{x}_0) || p(\mathrm{x}_{t-1}|\mathrm{x}_t)).
   \end{align}
 $$
 
 The surrogate of negative log-likelihood can be explictly expressed using
 $$
   \begin{align}
-    &p_{t-1|t}(\mathrm{x}_{t-1}|\mathrm{x}_{t}) = \mathcal{N}(\mathrm{x}_{t-1}; \cfrac{1}{ \sqrt{1-\beta_t}}(\mathrm{x}_{t} + \beta_t s_\theta(\mathrm{x}_t,t)), \beta_t \mathrm{I}), \\
-    &q_{t-1|t}(\mathrm{x}_{t-1}|\mathrm{x}_{t}, \mathrm{x}_{0}) 
-    = \mathcal{N}(\mathrm{x}_{t-1}; \cfrac{1}{ \sqrt{1-\beta_t}}(\mathrm{x}_{t} + \beta_t \nabla \log q_{t|0} (\mathrm{x}_t|\mathrm{x}_{0})), \frac{1-\bar\alpha_{t-1}}{1-\bar\alpha_t}\beta_t \mathrm{I}),
+    &p(\mathrm{x}_{t-1}|\mathrm{x}_{t}) = \mathcal{N}(\mathrm{x}_{t-1}; \cfrac{1}{ \sqrt{1-\beta_t}}(\mathrm{x}_{t} + \beta_t s_\theta(\mathrm{x}_t,t)), \beta_t \mathrm{I}), \\
+    &q(\mathrm{x}_{t-1}|\mathrm{x}_{t}, \mathrm{x}_{0}) 
+    = \mathcal{N}(\mathrm{x}_{t-1}; \cfrac{1}{ \sqrt{1-\beta_t}}(\mathrm{x}_{t} + \beta_t \nabla \log q (\mathrm{x}_t|\mathrm{x}_{0})), \frac{1-\bar\alpha_{t-1}}{1-\bar\alpha_t}\beta_t \mathrm{I}),
   \end{align}
 $$
 
@@ -152,7 +152,7 @@ where $$\bar\alpha_t = \prod_{s=1}^t (1-\beta_s)$$.
 Finally, the objective function becomes 
 $$
   \begin{align}
-    \sum_{t=1}^T \mathbb{E}_{\mathrm{x}_0}\mathbb{E}_{\mathrm{x}_{t}|\mathrm{x}_{0}} \left[ \lambda_t ||s_\theta(\mathrm{x}_t,t) - \nabla \log q_{t|0}(\mathrm{x}_t|\mathrm{x}_0)||_2^2 \right],
+    \sum_{t=1}^T \mathbb{E}_{\mathrm{x}_0}\mathbb{E}_{\mathrm{x}_{t}|\mathrm{x}_{0}} \left[ \lambda_t ||s_\theta(\mathrm{x}_t,t) - \nabla \log q(\mathrm{x}_t|\mathrm{x}_0)||_2^2 \right],
   \end{align}
 $$
 

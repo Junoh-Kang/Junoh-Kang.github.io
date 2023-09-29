@@ -11,7 +11,7 @@ featured: false
 
 authors:
   - name: Junoh Kang
-    url:
+    url: https://junoh-kang.github.io/
     affiliations:
       name: Seoul National University
 
@@ -29,6 +29,7 @@ toc:
 <!-- ---------------------------------------------------------------------- -->
 ## Generalizing Formulations
 
+#### ODE formulation
 **Score-Based Model**<d-cite key="song2021scorebased"></d-cite> defines the flow ODE by its evolution:
 $$
   \begin{align}
@@ -53,10 +54,28 @@ $$
   \begin{align}
     d\mathrm{x}_t = \left[
       \dot{s}(t)\mathrm{x}_t / s(t) - s(t)^2 \dot{\sigma}(t)\sigma(t) \nabla_{\mathrm{x}_t}\log p_t(\mathrm{x_t})
-    \right] dt
+    \right] dt.
   \end{align}
 $$
 
+**EDM**<d-cite key="karras2022elucidating"></d-cite> considers the case when $$s(t)=1$$:
+$$
+  \begin{align}
+    d\mathrm{x}_t = - \dot{\sigma}(t)\sigma(t) \nabla_{\mathrm{x}_t}\log p_t(\mathrm{x_t}) dt. \label{eq:edm_ode}
+  \end{align}
+$$
+
+#### SDE formulation
+$$
+  \begin{align}
+    d\mathrm{x}_{t\pm} = 
+    \underbrace{-\dot{\sigma}(t)\sigma(t) \nabla_{\mathrm{x}_t}\log p_t(\mathrm{x_t}) dt}_{\text{probability flow ODE}~(\ref{eq:edm_ode})} 
+    \pm \underbrace{\underbrace{\beta(t)\sigma(t)^2 \nabla_{\mathrm{x}_t}\log p_t(\mathrm{x_t})dt}_{\text{deterministic noise decay}}  
+    + \underbrace{\sqrt{2\beta(t)}\sigma(t) d\mathrm{w}_t}_{\text{noise infection}}}_{\text{Langevin diffusion SDE}},
+    \label{eq:edm_sde}
+  \end{align}
+$$
+where '+' denotes forward SDE and $$-$$ denotes backward SDE.
 
 <!-- ---------------------------------------------------------------------- -->
 ## Enhancements in Sampling
@@ -65,7 +84,9 @@ $$
 
 #### Higher order Runge-Kutta method
 
+
 <!-- ---------------------------------------------------------------------- -->
 
-
 ## Enhancements in Training
+
+#### Preconditioning 

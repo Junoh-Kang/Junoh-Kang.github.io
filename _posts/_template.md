@@ -11,7 +11,7 @@ featured: false
 
 authors:
   - name: Junoh Kang
-    url:
+    url: https://junoh-kang.github.io/
     affiliations:
       name: Seoul National University
 
