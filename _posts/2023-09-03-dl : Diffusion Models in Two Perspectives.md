@@ -42,7 +42,7 @@ This post mainly explains how formulations and objectives of two papers are diff
 ## Maximizing Log-Likelihood
 
 #### Forward (Diffusion) Process
-The forward process is a Markov chain that gradually adds Gaussian noise to the data for $T$ steps with distributions defined as follows:
+The forward process is a Markov chain that gradually adds Gaussian noise to the data for $$T$$ steps with distributions defined as follows:
 $$
   \begin{gather}
     \mathrm{x}_t \perp\mkern-9.5mu\perp \mathrm{x}_{0:t-1}, \\
