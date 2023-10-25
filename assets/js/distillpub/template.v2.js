@@ -99,6 +99,7 @@
     }
     target.description = source.description;
     target.authors = source.authors.map( (authorObject) => new Author(authorObject));
+    target.attachments = source.attachments
     target.katex = source.katex;
     target.password = source.password;
     if (source.doi) {
@@ -111,7 +112,7 @@
       this.title = 'unnamed article'; // 'Attention and Augmented Recurrent Neural Networks'
       this.description = ''; // 'A visual overview of neural attention...'
       this.authors = []; // Array of Author(s)
-
+      this.attachments = ''
       this.bibliography = new Map();
       this.bibliographyParsed = false;
       //  {
@@ -2104,6 +2105,12 @@ d-appendix > distill-appendix {
       ${frontMatter.publishedDate ? `
         <p>${frontMatter.publishedMonth} ${frontMatter.publishedDay}, ${frontMatter.publishedYear}</p> ` : `
         <p><em>Not published yet.</em></p>`}
+    </div>
+    <div>
+    ${frontMatter.attachments ? `
+      <h3>Attachment</h3>
+      <a href="/assets/pdf/post/${frontMatter.attachments}"> PDF </a>` : `
+      <em></em>`}
     </div>
   </div>
 `;

@@ -2,9 +2,11 @@
 layout: distill
 title: Diffusion Models in Two Perspectives
 date: 2023-09-03
-description: 
+description:
 categories: deep-learning # deep-learning, finance, 
 tags: survey 
+attachments: 20230903.pdf
+
 giscus_comments: true
 related_posts: false
 featured: false
@@ -21,13 +23,13 @@ toc:
   - name: Overview
   - name: Maximizing Log-Likelihood
   - name: Matching Marginal Distributions
----
 
+---
 ## Overview
 
 **DDPM**<d-cite key="ho2020denoising"></d-cite> and **Score-Based Model**<d-cite key="song2021scorebased"></d-cite> introduce diffusion model as a new paradigm of generative models. 
 Since the concepts of both papers are similar, one might regard **Score-Based Model**<d-cite key="song2021scorebased"></d-cite> as only a continuous version of **DDPM**<d-cite key="ho2020denoising"></d-cite>. 
-However in my opinion, two papers have slight different views, even their loss functions and implementations are the same. 
+Two papers have slight different views, even their loss functions and implementations are similar. 
 
 This post mainly explains how formulations and objectives of two papers are different, and how they are related even with the differences. 
 
@@ -44,18 +46,18 @@ This post mainly explains how formulations and objectives of two papers are diff
 #### Forward (Diffusion) Process
 The forward process is a Markov chain that gradually adds Gaussian noise to the data for $$T$$ steps with distributions defined as follows:
 $$
-  \begin{gather}
-    \mathrm{x}_t \perp\mkern-9.5mu\perp \mathrm{x}_{0:t-1}, \\
-    q(\mathrm{x}_0) := \mathrm{P}_{data}(\mathrm{x}_0) ~~\text{and}~~ 
-    q(\mathrm{x}_t|\mathrm{x}_{t-1}) := \mathcal{N}(\mathrm{x}_t;\sqrt{1-\beta_t}\mathrm{x}_{t-1}, \beta_t \mathrm{I}),
-  \end{gather}
+  \begin{align}
+    &\mathrm{x}_t \perp\mkern-9.5mu\perp \mathrm{x}_{0:t-1}, \\
+    &q(\mathrm{x}_0) := \mathrm{P}_{data}(\mathrm{x}_0), \\ 
+    &q(\mathrm{x}_t|\mathrm{x}_{t-1}) := \mathcal{N}(\mathrm{x}_t;\sqrt{1-\beta_t}\mathrm{x}_{t-1}, \beta_t \mathrm{I}),
+  \end{align}
 $$
 
 where $$\{\beta_t\}_{t=1}^T$$ are pre-defined constants.
 
 #### Backward (Denoising) Process
 The backward process is a Markov chain that gradually denoises perturbed data and it is parametrized by neural networks.
-When $$\beta\ll 1$$ the backward distribution can be approximated as
+When $$\beta_t\ll 1$$ the backward distribution can be approximated as
 $$
   \begin{align}
     q(\mathrm{x}_{t-1}|\mathrm{x}_{t}) 
@@ -73,12 +75,12 @@ $$
 
 It is reasonable to parametrize the denoising distribution as Gaussian as long as $$\{\beta_t\}_{t=1}^T$$ are infinitesimal. Therefore the bacward process is defined as follows:
 $$
-  \begin{gather}
-    \mathrm{x}_t \perp\mkern-9.5mu\perp \mathrm{x}_{t+1:T}, \\
-    p(\mathrm{x}_T) := \mathcal{N}(\mathrm{x}_T; \mathrm{0}, \mathrm{I}) ~~\text{and}~~
-    p(\mathrm{x}_{t-1}|\mathrm{x}_{t}) 
+  \begin{align}
+    &\mathrm{x}_t \perp\mkern-9.5mu\perp \mathrm{x}_{t+1:T}, \\
+    &p(\mathrm{x}_T) := \mathcal{N}(\mathrm{x}_T; \mathrm{0}, \mathrm{I}) \\
+    &p(\mathrm{x}_{t-1}|\mathrm{x}_{t}) 
     = \mathcal{N}(\mathrm{x}_{t-1}; \cfrac{1}{ \sqrt{1-\beta_t}}(\mathrm{x}_{t} + \beta_t s_\theta(\mathrm{x}_t,t)), \beta_t \mathrm{I}),
-  \end{gather}
+  \end{align}
 $$
 
 Note that we expect $$s_\theta(\mathrm{x}_t,t)$$ to learn $$\nabla\log q(\mathrm{x}_t)$$.
@@ -106,10 +108,10 @@ $$
 Using Markov properties, 
 $$
   \begin{align}
-    q(\mathrm{x}_{1:T} | \mathrm{x}_0) 
-    &= q(\mathrm{x}_T | \mathrm{x}_0) \prod_{t=2}^T q(\mathrm{x}_{t-1} | \mathrm{x}_t, \mathrm{x}_0), \\
-    p(\mathrm{x}_{T:0}) 
-    &= p(\mathrm{x}_T) \prod_{t=T}^{1} p(\mathrm{x}_{t-1}|\mathrm{x}_t). 
+    &q(\mathrm{x}_{1:T} | \mathrm{x}_0) 
+    = q(\mathrm{x}_T | \mathrm{x}_0) \prod_{t=2}^T q(\mathrm{x}_{t-1} | \mathrm{x}_t, \mathrm{x}_0), \\
+    &p(\mathrm{x}_{T:0}) 
+    = p(\mathrm{x}_T) \prod_{t=T}^{1} p(\mathrm{x}_{t-1}|\mathrm{x}_t). 
   \end{align}
 $$
 {% details *proof.* %}
@@ -132,9 +134,9 @@ $$
 Therefore, the surrogate of negative log-likelihood becomes
 $$
   \begin{align}
-    D_{KL}(q(\mathrm{x}_T|\mathrm{x}_0) || p(\mathrm{x}_T)) 
-    + \mathbb{E}_q\left[-\log p(\mathrm{x}_0|\mathrm{x}_1)\right] 
-    + \sum_{t=2}^T D_{KL}(q(\mathrm{x}_{t-1} | \mathrm{x}_t, \mathrm{x}_0) || p(\mathrm{x}_{t-1}|\mathrm{x}_t)).
+    &D_{KL}(q(\mathrm{x}_T|\mathrm{x}_0) || p(\mathrm{x}_T)) 
+    + \mathbb{E}_q\left[-\log p(\mathrm{x}_0|\mathrm{x}_1)\right] \nonumber \\
+    &+ \sum_{t=2}^T D_{KL}(q(\mathrm{x}_{t-1} | \mathrm{x}_t, \mathrm{x}_0) || p(\mathrm{x}_{t-1}|\mathrm{x}_t)).
   \end{align}
 $$
 
