@@ -1,11 +1,11 @@
 ---
 layout: distill
-title: Diffusion Models in Two Perspectives
+title: Understanding Diffusion Models in Two Perspectives
 date: 2023-09-03
-description:
+description: A review of two papers, Denoising diffusion probabilistic models and Score-Based Generative Modeling through Stochastic Differential Equations. This post focuses on theoretical backgrounds of diffusion models, rather than implementations.
 categories: deep-learning # deep-learning, finance, 
 tags: survey 
-attachments: 20230903.pdf
+attachments: 20230903/presentation.pdf
 
 giscus_comments: true
 related_posts: false
@@ -40,10 +40,9 @@ This post mainly explains how formulations and objectives of two papers are diff
 
 <!-- ----------------------------------------------------------------------------------- -->
 
-
+---
 ## Maximizing Log-Likelihood
-
-#### Forward (Diffusion) Process
+### Forward (Diffusion) Process
 The forward process is a Markov chain that gradually adds Gaussian noise to the data for $$T$$ steps with distributions defined as follows:
 $$
   \begin{align}
@@ -55,7 +54,7 @@ $$
 
 where $$\{\beta_t\}_{t=1}^T$$ are pre-defined constants.
 
-#### Backward (Denoising) Process
+### Backward (Denoising) Process
 The backward process is a Markov chain that gradually denoises perturbed data and it is parametrized by neural networks.
 When $$\beta_t\ll 1$$ the backward distribution can be approximated as
 $$
@@ -68,7 +67,7 @@ $$
 {% details *proof.* %}
   <div class="row mt-3">
     <div class="col-sm mt-3 mt-md-0">
-        {% include figure.html path="assets/pdf/post/20230903_proof.png" class="img-fluid rounded z-depth-1" zoomable=true %}
+        {% include figure.html path="blog/post/20230903/proof.png" class="img-fluid rounded z-depth-1" zoomable=true %}
     </div>
   </div>
 {% enddetails %}
@@ -85,7 +84,7 @@ $$
 
 Note that we expect $$s_\theta(\mathrm{x}_t,t)$$ to learn $$\nabla\log q(\mathrm{x}_t)$$.
 
-#### Minimizing Surrogate of Negative Log-Likelihood
+### Minimizing Surrogate of Negative Log-Likelihood
 The negative log-likelihood of data is 
 $$
 \begin{align}
@@ -159,11 +158,11 @@ $$
 $$
 
 where $$\lambda_t$$ are some constants.
-<!-- ----------------------------------------------------------------------------------- -->
 
+---
 ## Matching Marginal Distributions
 
-#### Forward SDE
+### Forward SDE
 For pre-defined function $$f:\mathbb{R}^{h\times w \times 3}\times \mathbb{R} \rightarrow \mathbb{R}^{h\times w \times 3}$$ and $$g:\mathbb{R} \rightarrow \mathbb{R}$$, a forward SDE perturbs the data with Gaussian noise by
 $$
   \begin{align}
@@ -183,7 +182,7 @@ $$
   \end{align}
 $$
 
-#### Backward SDE/ODE
+### Backward SDE/ODE
 Following backward SDE and ODE are known to have the same marginal distributions:
 $$
   \begin{align}
@@ -201,7 +200,7 @@ where $$\bar{\mathrm{w}}_t$$ is the reverse-time Brownian motion.
 Since $$f(\cdot, \cdot)$$ and $$g(\cdot)$$ are known, the only unknown component in backward SDE/ODE is $$\nabla \log p_t (\cdot)$$ which is also known as a score function.
 The score function is parametrized by neural network, $$s_\theta(\mathrm{x}_t,t)$$.
 
-#### Learning Score Function
+### Learning Score Function
 Since we parametrized the score function with the neural network, we can consider a loss function of
 $$
   \begin{align}
