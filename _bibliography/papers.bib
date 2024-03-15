@@ -20,6 +20,7 @@
     pages     = {},
     abstract  = {We propose a novel diffusion model called observation-guided diffusion probabilistic model~(OGDM), which effectively addresses the trade-off between quality control and fast sampling. Our approach reestablishes the training objective by integrating the guidance of the observation process with the Markov chain in a principled way. This is achieved by introducing an additional loss term derived from the observation based on the conditional discriminator on noise level, which employs Bernoulli distribution indicating whether its input lies on the (noisy) real manifold or not. This strategy allows us to optimize the more accurate negative log-likelihood induced in the inference stage especially when the number of function evaluations is limited. The proposed training method is also advantageous even when incorporated only into the fine-tuning process, and it is compatible with various fast inference strategies since our method yields better denoising networks using the exactly same inference procedure without incurring extra computational cost. We demonstrate the effectiveness of the proposed training algorithm using diverse inference methods on strong diffusion model baselines.},
     pdf       = {kang2023ogdm.pdf},
+    code      = {https://github.com/Junoh-Kang/OGDM_edm},
     arxiv     = {2310.04041},
     selected  = {true},
 }
