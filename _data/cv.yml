@@ -27,11 +27,17 @@
 - title: Experience
   type: time_table
   contents:
-    - title: Research Intern
-      institution: SNU Computer Vision Lab, Seoul, Korea
-      year: Jun 2021 - Sep 2021
-      description:
-        - Submitted Open-Set Representation Learning Through Combinatorial Embedding to ICLR 2022.
+    # - title: Research Intern
+    #   institution: Adobe Research, Seattle, USA
+    #   year: June 2024 - Sep 2024
+    #   description:
+      # - Hosted by 
+
+    # - title: Research Intern
+    #   institution: SNU Computer Vision Lab, Seoul, Korea
+    #   year: Jun 2021 - Sep 2021
+    #   description:
+    #     - Submitted Open-Set Representation Learning Through Combinatorial Embedding to ICLR 2022.
     
     - title: Research Intern
       institution: Deepmetrics, Seoul, Korea
@@ -69,6 +75,12 @@
     - year: 2012
       items:
         - Silver medal on 19th <a href="https://humantech.samsung.com/saitext/index.jsp">Samsung Humantech paper award</a>
+
+# - title: Professional Services
+#   type: list
+#   contents:
+#     - <b>Conference Reviewer:</b> ICLR, ICML
+
 
 # - title: Academic Interests
 #   type: nested_list
