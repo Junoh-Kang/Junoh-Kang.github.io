@@ -27,35 +27,35 @@
 - title: Experience
   type: time_table
   contents:
-    # - title: Research Intern
-    #   institution: Adobe Research, Seattle, USA
-    #   year: June 2024 - Sep 2024
-    #   description:
-      # - Hosted by 
-
-    # - title: Research Intern
-    #   institution: SNU Computer Vision Lab, Seoul, Korea
-    #   year: Jun 2021 - Sep 2021
-    #   description:
-    #     - Submitted Open-Set Representation Learning Through Combinatorial Embedding to ICLR 2022.
-    
     - title: Research Intern
-      institution: Deepmetrics, Seoul, Korea
-      year: Mar 2021 - Jun 2021
+      institution: <a href="https://research.adobe.com/">Adobe Research</a>, Seattle, USA
+      year: June 2024 - Sep 2024
       description:
-        - Worked on predicting ABP from PPG using neural networks.
-    
-    - title: Research Intern
-      institution: BioInformatics & BioStatistics Lab, Seoul, Korea
-      year: Jan 2020 - Jun 2020
-      description:
-        - Researched on prognosis of pancreas cancer using clinical information and RNA markers.
+      - Hosted by <a href="http://juiwang.com/">Jui-Hsien Wang</a>.
 
-    - title: Human Resource, Auxiliary Police Management
-      institution: Seoul Metropolitan Police, Seoul, Korea
-      year: Mar 2017 - Dec 2018
+    - title: Research Intern
+      institution: SNU Computer Vision Lab, Seoul, Korea
+      year: Jun 2021 - Sep 2021
       description:
-        - Compulsory military service.
+        - Submitted <a href="https://arxiv.org/abs/2310.04041"> Open-Set Representation Learning Through Combinatorial Embedding </a> to ICLR 2022.
+    
+    # - title: Research Intern
+    #   institution: Deepmetrics, Seoul, Korea
+    #   year: Mar 2021 - Jun 2021
+    #   description:
+    #     - Worked on predicting ABP from PPG using neural networks.
+    
+    # - title: Research Intern
+    #   institution: BioInformatics & BioStatistics Lab, Seoul, Korea
+    #   year: Jan 2020 - Jun 2020
+    #   description:
+    #     - Researched on prognosis of pancreas cancer using clinical information and RNA markers.
+
+    # - title: Human Resource, Auxiliary Police Management
+    #   institution: Seoul Metropolitan Police, Seoul, Korea
+    #   year: Mar 2017 - Dec 2018
+    #   description:
+    #     - Compulsory military service.
 
 - title: Honors and Awards
   type: time_table
