@@ -76,10 +76,34 @@
       items:
         - Silver medal on 19th <a href="https://humantech.samsung.com/saitext/index.jsp">Samsung Humantech paper award</a>
 
+
+
 # - title: Professional Services
 #   type: list
 #   contents:
 #     - <b>Conference Reviewer:</b> ICLR, ICML
+
+- title: Teaching 
+  type: time_table
+  contents:
+    - title: Teaching Assistant
+      description: Topics in Computer and VLSI (Machine Learning), 430.659
+      year: Spring 2024 
+    - title: Teaching Assistant 
+      description: Introduction to Algorithms, 430.329
+      year: Fall 2023 
+    - title: Teaching Assistant
+      description: AI expert course, Samsung
+      year: Sep. 2023 
+
+
+- title: Leadership
+  type: time_table
+  contents: 
+    - title: Student council of College of Natural Sciences, SNU
+      year: 2015-2016
+    - title: General club president, SSHS
+      year: 2013-2014
 
 
 # - title: Academic Interests

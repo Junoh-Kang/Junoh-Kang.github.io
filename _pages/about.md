@@ -21,4 +21,4 @@ I aim to solve problems of deep learning in a theoretically concrete manner by l
 My primary research interest is generative models. 
 <!-- Specifically, I am interested in 1) *unlearning generative models for privacy*, 2) *imposing more controllability for video generation*, and 3) *accelerating video generative models*. -->
 
-Besides the research, I am also interested in economics, investment, and playing sports such as tennis, golf, futsal, and boxing.
+Besides the research, I am also interested in economics, investment, and playing sports such as tennis, golf, and futsal.
