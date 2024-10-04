@@ -28,10 +28,10 @@ Our approach reestablishes the training objective by integrating the guidance of
 }
 
 @InProceedings{kim2024fifo,
-    abbr      = {arXiv},
+    abbr      = {NuerIPS},
     author    = {Kim*, Jihwan and Kang*, Junoh and Choi, Jinyoung and Han, Bohyung},
     title     = {FIFO-Diffusion: Generating Infinite Videos from Text without Training},
-    booktitle = {arXiv},
+    booktitle = {NuerIPS},
     year      = {2024},
     pages     = {},
     abstract  = {We propose a novel inference technique based on a pretrained diffusion model for text-conditional video generation. Our approach, called FIFO-Diffusion, is conceptually capable of generating infinitely long videos without training. This is achieved by iteratively performing diagonal denoising, which concurrently processes a series of consecutive frames with increasing noise levels in a queue; our method dequeues a fully denoised frame at the head while enqueuing a new random noise frame at the tail. However, diagonal denoising is a double-edged sword as the frames near the tail can take advantage of cleaner ones by forward reference but such a strategy induces the discrepancy between training and inference. Hence, we introduce latent partitioning to reduce the training-inference gap and lookahead denoising to leverage the benefit of forward referencing. We have demonstrated the promising results and effectiveness of the proposed methods on existing textto-video generation baselines. Generated video samples and source codes are available at our project page.},
