@@ -30,14 +30,14 @@
     - title: Research Intern
       institution: <a href="https://research.adobe.com/">Adobe Research</a>, Seattle, USA
       year: Jun 2024 - Sep 2024
-      description:
-      - Hosted by <a href="http://juiwang.com/">Jui-Hsien Wang</a>.
+      # description:
+      # - Hosted by <a href="http://juiwang.com/">Jui-Hsien Wang</a>.
 
     - title: Research Intern
       institution: SNU Computer Vision Lab, Seoul, Korea
       year: Jun 2021 - Sep 2021
-      description:
-        - Submitted <a href="https://arxiv.org/abs/2310.04041"> Open-Set Representation Learning Through Combinatorial Embedding </a> to ICLR 2022.
+      # description:
+      #   - Submitted <a href="https://arxiv.org/abs/2310.04041"> Open-Set Representation Learning Through Combinatorial Embedding </a> to ICLR 2022.
     
     # - title: Research Intern
     #   institution: Deepmetrics, Seoul, Korea
