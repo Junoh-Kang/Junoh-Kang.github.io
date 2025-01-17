@@ -2109,7 +2109,7 @@ d-appendix > distill-appendix {
     <div>
     ${frontMatter.attachments ? `
       <h3>Attachment</h3>
-      <a href="/blog/post/${frontMatter.attachments}"> presentation.pdf </a>` : `
+      <a href="${frontMatter.attachments}"> Slides </a>` : `
       <em></em>`}
     </div>
   </div>

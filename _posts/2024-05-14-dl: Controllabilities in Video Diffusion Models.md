@@ -6,7 +6,7 @@ description: A review of papers that add controllabilities to video generation (
 
 categories: deep-learning # deep-learning, finance, 
 tags: paper-review, # paper-review, survey, 
-attachments: 20240514/presentation.pdf
+attachments: /blog/post/20240514/presentation.pdf
 
 giscus_comments: true
 related_posts: false

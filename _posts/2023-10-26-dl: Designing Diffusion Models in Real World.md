@@ -6,7 +6,7 @@ description: A review of a paper, Elucidating the Design Space of Diffusion-Base
 
 categories: deep-learning # deep-learning, finance, 
 tags: paper-review, # paper-review, survey, 
-attachments: 20231026/presentation.pdf
+attachments: /blog/post/20231026/presentation.pdf
 
 giscus_comments: true
 related_posts: false
