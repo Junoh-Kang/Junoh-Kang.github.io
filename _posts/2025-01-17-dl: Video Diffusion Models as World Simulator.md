@@ -24,6 +24,10 @@ toc:
   - name: Overview 
   - name: Conventional Long Video Generation
   - name: Long Sequence Generation
+      subsections:
+      - name: Capability of Long Sequence Generation
+      - name: Preventing Error Accumulation
+      - name: Long Term Context Preservation
 ---
 
 ## Overview
@@ -122,7 +126,7 @@ However, this approach may dilute details in generated tokens.
 - For last denoising steps, noise levels of conditioning tokens gradually decreases.
 
 
-### Long Tern Context Preservation
+### Long Term Context Preservation
 
 
 |![]({{ "/blog/post/20250117/12.video.gif" | relative_url }}){:style="margin:auto; display:block;width:50%; height:auto;"}| 
