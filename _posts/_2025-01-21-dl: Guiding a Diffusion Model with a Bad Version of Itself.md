@@ -1,9 +1,9 @@
 ---
 layout: distill
-title: template
-date: 2023-01-01
+title: Guiding a Diffusion Model with a Bad Version of Itself
+date: 2025-01-20
 description: 
-categories: survey # deep-learning, finance, 
+categories: deep-learning # deep-learning, finance, 
 tags: paper-review, # paper-review, survey, 
 attachments: /blog/post/
 
@@ -27,13 +27,12 @@ toc:
 ---
 
 <!-- 
-# Image
 |![]({{ "/blog/post/path_to_image.png" | relative_url }}){:style="margin:auto; display:block;width:90%; height:auto;"}| 
 |:--:| 
 |  | 
-# Cite
-**DDPM**<d-cite key="ho2020denoising"></d-cite>
 -->
+
+## Overview
 
 
 ## Section

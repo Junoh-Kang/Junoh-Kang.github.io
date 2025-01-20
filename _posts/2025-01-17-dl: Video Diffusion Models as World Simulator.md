@@ -3,7 +3,6 @@ layout: distill
 title: Video Diffusion Models as World Simulators
 date: 2025-01-17
 description: "A review of Oasis: A Universe in a transformer, and Diffusion Forcing: Next-token Prediction Meets Full-Sequence Diffusion" 
-
 categories: deep-learning # deep-learning, finance, 
 tags: paper-review, # paper-review, survey, 
 attachments: https://docs.google.com/presentation/d/1anuY_SaTFu5gXceB_qtCFLKER0aAlHsJq6CWN9KAGhE/edit?usp=sharing
@@ -24,7 +23,7 @@ toc:
   - name: Overview 
   - name: Conventional Long Video Generation
   - name: Long Sequence Generation
-      subsections:
+    subsections:
       - name: Capability of Long Sequence Generation
       - name: Preventing Error Accumulation
       - name: Long Term Context Preservation
