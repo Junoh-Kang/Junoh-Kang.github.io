@@ -38,7 +38,7 @@ This post mainly focuses on how related project **Oasis: A Universe in a transfo
 
 ---
 
-## Conventional Long Video Generation are Inappropriate for World Simulator!
+## Conventional Long Video Generation are inappropriate for World Simulator!
 
 ### Video Diffusion Models (VDMs)
 
@@ -51,7 +51,7 @@ However, video diffusion models are trained and inferenced to denoise tokens of 
 This section reviews approaches to generate long videos using aforementioned VDMs.
 
 
-### Chunked Autoregressive Methods
+### Chunked autoregressive methods
 
 |![]({{ "/blog/post/20250117/2.chunked.png" | relative_url }}){:style="margin:auto; display:block;width:90%; height:auto;"}| 
 
@@ -61,7 +61,7 @@ This section reviews approaches to generate long videos using aforementioned VDM
 
 |![]({{ "/blog/post/20250117/3.chunked_erroraccumulate.png" | relative_url }}){:style="margin:auto; display:block;width:90%; height:auto;"}| 
 
-### Hierarchical Methods (Multi-stage Generation)
+### Hierarchical methods (Multi-stage generation)
 
 |![]({{ "/blog/post/20250117/4.hierarchy.png" | relative_url }}){:style="margin:auto; display:block;width:90%; height:auto;"}| 
 
@@ -76,7 +76,7 @@ This section reviews approaches to generate long videos using aforementioned VDM
 
 ## Long Sequence Generation in Oasis
 
-### Capability of Long Sequence Generation
+### Capability of long sequence generation
 
 **Oasis**<d-cite key="decart2024oasis"></d-cite> follows **Diffusion Forcing**<d-cite key="chen2024diffusionforcing"></d-cite> to train models for long video generation.
 **Diffusion Forcing** inherits advantages of Teacher Forcing and Diffusion Models: **<u>flexible time horizon</u>** from Teacher Forcing, **<u>guidance at sampling</u>** from Diffusion Models.
@@ -92,9 +92,9 @@ The training offers cheaper training than next-token prediction in video domain,
 |:--:| 
 | Sampling in Diffusion Forcing |
 
-### Preventing Error Accumulation
+### Preventing error accumulation
 
-#### The reason of Error Accumulation
+#### The reason of error accumulation
 
 |![]({{ "/blog/post/20250117/8.vanilla.png" | relative_url }}){:style="margin:auto; display:block;width:90%; height:auto;"}| 
 
@@ -102,14 +102,14 @@ The training offers cheaper training than next-token prediction in video domain,
 They interpret **input noise levels to the models as inversely proportional to the confidence** in the corresponding input tokens.
 
 
-#### Stable Rollout in Diffusion Forcing
+#### Stable rollout in Diffusion Forcing
 
 |![]({{ "/blog/post/20250117/9.stable_rollout.png" | relative_url }}){:style="margin:auto; display:block;width:90%; height:auto;"}| 
 
 **Diffusion Forcing** suggests to deceive models that generated clean tokens are little noisy, preventing models from believing generated tokens as GT.
 However, this approach is out of distribution (OOD) inference, and there is no rule of thumb for "little noisy".
 
-#### Stable Rollout (Another Option)
+#### Stable rollout (Another option)
 
 |![]({{ "/blog/post/20250117/10.stable_rollout.png" | relative_url }}){:style="margin:auto; display:block;width:90%; height:auto;"}| 
 
@@ -125,7 +125,7 @@ However, this approach may dilute details in generated tokens.
 - For last denoising steps, noise levels of conditioning tokens gradually decreases.
 
 
-### Long Term Context Preservation
+### Long term context preservation
 
 
 |![]({{ "/blog/post/20250117/12.video.gif" | relative_url }}){:style="margin:auto; display:block;width:50%; height:auto;"}| 
