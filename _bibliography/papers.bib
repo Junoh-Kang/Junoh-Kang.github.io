@@ -6,8 +6,8 @@
     year      = {2023},
     pages     = {19744-19753},
     abstract  = {Visual recognition tasks are often limited to dealing with a small subset of classes simply because the labels for the remaining classes are unavailable. We are interested in identifying novel concepts in a dataset through representation learning based on both labeled and unlabeled examples, and extending the horizon of recognition to both known and novel classes. To address this challenging task, we propose a combinatorial learning approach, which naturally clusters the examples in unseen classes using the compositional knowledge given by multiple supervised meta-classifiers on heterogeneous label spaces. The representations given by the combinatorial embedding are made more robust by unsupervised pairwise relation learning. The proposed algorithm discovers novel concepts via a joint optimization for enhancing the discrimitiveness of unseen classes as well as learning the representations of known classes generalizable to novel ones. Our extensive experiments demonstrate remarkable performance gains by the proposed approach on public datasets for image retrieval and image categorization with novel class discovery.},
-    pdf       = {kim2023openset.pdf},
-    arxiv     = {2106.15278},
+    paper     = {https://openaccess.thecvf.com/content/CVPR2023/papers/Kim_Open-Set_Representation_Learning_Through_Combinatorial_Embedding_CVPR_2023_paper.pdf},
+    arxiv     = {https://arxiv.org/abs/2106.15278},
     selected  = {true},
 }
 
@@ -21,9 +21,9 @@
     abstract  = {We propose a novel diffusion-based image generation method called the observation-guided diffusion probabilistic model (OGDM), which effectively addresses the trade-off between quality control and fast sampling.
 Our approach reestablishes the training objective by integrating the guidance of the observation process with the Markov chain in a principled way. This is achieved by introducing an additional loss term derived from the observation based on a conditional discriminator on noise level, which employs a Bernoulli distribution indicating whether its input lies on the (noisy) real manifold or not. This strategy allows us to optimize the more accurate negative log-likelihood induced in the inference stage especially when the number of function evaluations is limited. The proposed training scheme is also advantageous even when incorporated only into the fine-tuning process, and it is compatible with various fast inference strategies since our method yields better denoising networks using the exactly the same inference procedure without incurring extra computational cost. We demonstrate the effectiveness of our training algorithm using diverse inference techniques on strong diffusion model baselines. Our implementation is available at https://github.com/Junoh-Kang/OGDM_edm.
 },
-    pdf       = {kang2024ogdm.pdf},
+    paper     = {https://openaccess.thecvf.com/content/CVPR2024/papers/Kang_Observation-Guided_Diffusion_Probabilistic_Models_CVPR_2024_paper.pdf},
+    arxiv     = {https://arxiv.org/abs/2310.04041},
     code      = {https://github.com/Junoh-Kang/OGDM_edm},
-    arxiv     = {2310.04041},
     selected  = {true},
 }
 
@@ -35,9 +35,9 @@ Our approach reestablishes the training objective by integrating the guidance of
     year      = {2024},
     pages     = {},
     abstract  = {We propose a novel inference technique based on a pretrained diffusion model for text-conditional video generation. Our approach, called FIFO-Diffusion, is conceptually capable of generating infinitely long videos without training. This is achieved by iteratively performing diagonal denoising, which concurrently processes a series of consecutive frames with increasing noise levels in a queue; our method dequeues a fully denoised frame at the head while enqueuing a new random noise frame at the tail. However, diagonal denoising is a double-edged sword as the frames near the tail can take advantage of cleaner ones by forward reference but such a strategy induces the discrepancy between training and inference. Hence, we introduce latent partitioning to reduce the training-inference gap and lookahead denoising to leverage the benefit of forward referencing. We have demonstrated the promising results and effectiveness of the proposed methods on existing textto-video generation baselines. Generated video samples and source codes are available at our project page.},
-    pdf = {kim2024fifo.pdf},
+    paper     = {https://proceedings.neurips.cc/paper_files/paper/2024/file/a397986e0f34d4b1f0b640686ceaeff7-Paper-Conference.pdf},
+    arxiv     = {https://arxiv.org/abs/2405.11473}, 
     code      = {https://github.com/jjihwan/FIFO-Diffusion_public},
-    arxiv     = {2405.11473}, 
     website = {https://jjihwan.github.io/projects/FIFO-Diffusion},
     selected  = {true},
     
@@ -49,8 +49,8 @@ Our approach reestablishes the training objective by integrating the guidance of
     title     = {Enhanced Diffusion Sampling via Extrapolation with Multiple ODE Solutions},
     booktitle = {ICLR},
     year      = {2025},
-    abstract  = {Diffusion probabilistic models (DPMs), while effective in generating high-quality samples, often suffer from high computational costs due to the iterative sampling process. To address this, we propose an enhanced ODE-based sampling method for DPMs inspired by Richardson extrapolation, which has been shown to reduce numerical error and improve convergence rates. Our method, termed RX-DPM, utilizes numerical solutions obtained over multiple denoising steps, leveraging the multiple ODE solutions to extrapolate the denoised prediction in DPMs. This signiﬁcantly enhances the accuracy of estimations for the ﬁnal sample while preserving the number of function evaluations (NFEs). Unlike standard Richardson extrapolation, which assumes uniform discretization of the time grid, we have developed a more general formulation tailored to arbitrary time step scheduling, guided by the local truncation error derived from a baseline sampling method. The simplicity of our approach facilitates accurate estimation of numerical solutions without additional computational overhead, and allows for seamless and convenient integration into various DPMs and solvers. Additionally, RX-DPM provides explicit error estimates, effectively illustrating the faster convergence achieved as the order of the leading error term increases. Through a series of experiments, we demonstrate that the proposed method effectively enhances the quality of generated samples without requiring additional sampling iterations.},
-    pdf = {choi2025rx.pdf},
-    arxiv     = {}, 
+    abstract  = {Diffusion probabilistic models (DPMs), while effective in generating high-quality samples, often suffer from high computational costs due to their iterative sampling process. To address this, we propose an enhanced ODE-based sampling method for DPMs inspired by Richardson extrapolation, which reduces numerical error and improves convergence rates. Our method, RX-DPM, leverages multiple ODE solutions at intermediate time steps to extrapolate the denoised prediction in DPMs. This significantly enhances the accuracy of estimations for the final sample while maintaining the number of function evaluations (NFEs). Unlike standard Richardson extrapolation, which assumes uniform discretization of the time grid, we develop a more general formulation tailored to arbitrary time step scheduling, guided by local truncation error derived from a baseline sampling method. The simplicity of our approach facilitates accurate estimation of numerical solutions without significant computational overhead, and allows for seamless and convenient integration into various DPMs and solvers. Additionally, RX-DPM provides explicit error estimates, effectively demonstrating the faster convergence as the leading error term's order increases. Through a series of experiments, we show that the proposed method improves the quality of generated samples without requiring additional sampling iterations.},
+    paper     = {},
+    arxiv     = {https://arxiv.org/abs/2504.01855}, 
     selected  = {true},    
 }
