@@ -50,8 +50,7 @@ Our approach reestablishes the training objective by integrating the guidance of
     booktitle = {ICLR},
     year      = {2025},
     abstract  = {Diffusion probabilistic models (DPMs), while effective in generating high-quality samples, often suffer from high computational costs due to the iterative sampling process. To address this, we propose an enhanced ODE-based sampling method for DPMs inspired by Richardson extrapolation, which has been shown to reduce numerical error and improve convergence rates. Our method, termed RX-DPM, utilizes numerical solutions obtained over multiple denoising steps, leveraging the multiple ODE solutions to extrapolate the denoised prediction in DPMs. This signiﬁcantly enhances the accuracy of estimations for the ﬁnal sample while preserving the number of function evaluations (NFEs). Unlike standard Richardson extrapolation, which assumes uniform discretization of the time grid, we have developed a more general formulation tailored to arbitrary time step scheduling, guided by the local truncation error derived from a baseline sampling method. The simplicity of our approach facilitates accurate estimation of numerical solutions without additional computational overhead, and allows for seamless and convenient integration into various DPMs and solvers. Additionally, RX-DPM provides explicit error estimates, effectively illustrating the faster convergence achieved as the order of the leading error term increases. Through a series of experiments, we demonstrate that the proposed method effectively enhances the quality of generated samples without requiring additional sampling iterations.},
-    pdf = {https://openreview.net/forum?id=rCGleSgNBK},
-    pages     = {},
+    pdf = {choi2025rx.pdf},
     arxiv     = {}, 
     selected  = {true},    
 }
