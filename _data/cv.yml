@@ -81,10 +81,10 @@
 
 
 
-# - title: Professional Services
-#   type: list
-#   contents:
-#     - <b>Conference Reviewer:</b> ICLR, ICML
+- title: Professional Services
+  type: list
+  contents:
+    - <b>Conference Reviewer:</b> NeurIPS 2025
 
 - title: Teaching 
   type: time_table
@@ -100,13 +100,13 @@
       year: Fall 2023 
 
 
-- title: Leadership
-  type: time_table
-  contents: 
-    - title: Student council of College of Natural Sciences, SNU
-      year: 2015-2016
-    - title: General club president, SSHS
-      year: 2013-2014
+# - title: Leadership
+#   type: time_table
+#   contents: 
+#     - title: Student council of College of Natural Sciences, SNU
+#       year: 2015-2016
+#     - title: General club president, SSHS
+#       year: 2013-2014
 
 
 # - title: Academic Interests
