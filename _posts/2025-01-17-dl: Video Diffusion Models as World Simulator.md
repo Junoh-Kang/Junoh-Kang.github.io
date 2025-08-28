@@ -5,7 +5,7 @@ date: 2025-01-17
 description: "A review of Oasis: A Universe in a transformer, and Diffusion Forcing: Next-token Prediction Meets Full-Sequence Diffusion" 
 categories: deep-learning # deep-learning, finance, 
 tags: paper-review, # paper-review, survey, 
-attachments: https://docs.google.com/presentation/d/1anuY_SaTFu5gXceB_qtCFLKER0aAlHsJq6CWN9KAGhE/edit?usp=sharing
+attachments: /blog/post/20250117/presentation.pdf
 
 giscus_comments: true
 related_posts: false
@@ -135,3 +135,6 @@ However, models do not have long time horizon memory, leading to inconsistent vi
 While there is no innovative breakthrough yet, I believe that video models with long-term memory is an important next step.
 
 
+<iframe src="/blog/post/20250117/presentation.pdf" width="800" height="600" style="border: none;">
+  This browser does not support PDFs. Please download the PDF to view it: <a href="/blog/post/20250117/presentation.pdf">Download PDF</a>
+</iframe>
