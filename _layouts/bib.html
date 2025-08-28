@@ -2,18 +2,9 @@
 ---
 <!-- _layouts/bib.html -->
       <div class="row">
-        <div class="col-sm-2 {% if entry.preview %}preview{% else %}abbr{% endif %}">
-        {%- if entry.preview -%}
-          {% if entry.preview contains '://' -%}
-          <img class="preview z-depth-1 rounded" src="{{ entry.preview }}">
-          {%- else -%}
-            {%- assign entry_path = entry.preview | prepend: '/assets/img/publication_preview/' -%}
-            {% include figure.html
-            path=entry_path
-            class="preview z-depth-1 rounded"
-            alt=entry.preview -%}
-          {%- endif -%}
-        {%- elsif entry.abbr -%}
+        <div class="col-sm-2 abbr {% if entry.preview %}preview{% endif %}">
+        <!-- <div class="col-sm-2 {% if entry.preview %}preview{% else %}abbr{% endif %}"> -->
+        {%- if entry.abbr -%}
           {%- if site.data.venues[entry.abbr] -%}
             {%- assign venue_style = nil -%}
             {%- if site.data.venues[entry.abbr].color != blank -%}
@@ -32,7 +23,20 @@
         {%- if entry.abbr3 -%}
           <abbr2 class="badge">{{entry.abbr3}}</abbr2>
         {%- endif -%}
-        </div>
+      
+        {%- if entry.preview -%}
+          {% if entry.preview contains '://' -%}
+          <img class="preview z-depth-1 rounded" src="{{ entry.preview }}">
+          {%- else -%}
+            {%- assign entry_path = entry.preview | prepend: '/assets/img/publication_preview/' -%}
+            {% include figure.html
+            path=entry_path
+            class="preview z-depth-1 rounded"
+            alt=entry.preview -%}
+          {%- endif -%}
+        {%- endif -%}
+
+      </div>
 
         <!-- Entry bib key -->
         <div id="{{entry.key}}" class="col-sm-8">
