@@ -24,7 +24,7 @@
     - title: Seoul Science High School (SSHS)
       year: Mar 2012 - Feb 2015
 
-- title: Experience
+- title: Work Experience
   type: time_table
   contents:
     - title: Research Intern
@@ -57,9 +57,13 @@
     #   description:
     #     - Compulsory military service.
 
+
 - title: Honors and Awards
   type: time_table
   contents:
+    - year: 2025 
+      items:
+        - Youlchon AI Star Scholarship
     - year: 2025
       items:
         - Gold medal on 30th <a href="https://humantech.samsung.com/saitext/index.jsp">Samsung Humantech paper award</a>
@@ -81,10 +85,10 @@
 
 
 
-- title: Professional Services
+- title: Academic Services
   type: list
   contents:
-    - <b>Conference Reviewer:</b> NeurIPS 2025
+    - <b>Conference Reviewer:</b> NeurIPS 2025, AAAI 2025
 
 - title: Teaching 
   type: time_table
