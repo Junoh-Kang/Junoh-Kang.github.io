@@ -8,11 +8,11 @@
 
 "Choi":
   - firstname: ["Jinyoung"]
-    url: 
+    url: https://jin01020.github.io/
 
-"Choi":
-  - firstname: ["Sungik"]
-    url: 
+# "Choi":
+#   - firstname: ["Sungik"]
+#     url: 
 
 "Kim":
   - firstname: ["Jihwan"]
@@ -22,6 +22,6 @@
   - firstname: ["Junsung"]
     url: https://jslee525.github.io/
 
-"Ryu":
+"Ryou":
   - firstname: ["Donghun"]
     url: https://doinghun.com/
