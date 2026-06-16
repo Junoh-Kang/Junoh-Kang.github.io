@@ -84,7 +84,6 @@
               {%- endif -%}
               {%- endif -%}
               {% endfor -%}
-              {%- if site.enable_darkmode %}
               <!-- Blog -->
               <li class="nav-item {% if page.url contains 'blog' %}active{% endif %}">
                 <a class="nav-link" href="{{ '/blog/' | relative_url }}">{{ site.blog_nav_title }}
@@ -93,7 +92,6 @@
                   {%- endif -%}
                 </a>
               </li>
-              {%- endif %}
               {%- endif %}
             </ul>
           </div>
