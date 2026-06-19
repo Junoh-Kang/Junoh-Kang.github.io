@@ -3,8 +3,8 @@ layout: distill
 title: "Path Signature: Useful Feature for Timeseries"
 date: 2026-02-01
 description: "Study note on path signature in the literature of rough path theory. This post introduces the definition, algebraic structure, and probabilistic interpretation of signatures, bridging rough path theory and modern machine learning, based primarily on *A Primer on the Signature Method in Machine Learning*." 
-categories: deep-learning, timeseries, finance # deep-learning, finance, 
-tags: study-notes # paper-review, survey, 
+categories: [study-note]
+tags: [time-series, statistics]
 attachments: 
 
 giscus_comments: true

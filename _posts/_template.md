@@ -3,8 +3,8 @@ layout: distill
 title: template
 date: 2023-01-01
 description: 
-categories: survey # deep-learning, finance, 
-tags: paper-review, # paper-review, survey, 
+categories: [paper-review] # paper-review, survey, study-note
+tags: [generative] # generative, video, test-time-scaling, time-series, statistics, llm, rl
 attachments: /blog/post/
 
 giscus_comments: true

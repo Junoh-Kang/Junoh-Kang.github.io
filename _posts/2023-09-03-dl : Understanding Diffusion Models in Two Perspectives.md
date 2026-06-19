@@ -3,8 +3,8 @@ layout: distill
 title: Understanding Diffusion Models in Two Perspectives
 date: 2023-09-03
 description: A review of two papers, Denoising diffusion probabilistic models and Score-Based Generative Modeling through Stochastic Differential Equations. This post focuses on theoretical backgrounds of diffusion models, rather than implementations.
-categories: deep-learning # deep-learning, finance, 
-tags: paper-review
+categories: [survey]
+tags: [generative]
 attachments: /blog/post/20230903/presentation.pdf
 
 giscus_comments: true

@@ -4,8 +4,8 @@ title: Designing Diffusion Models in Real World
 date: 2023-10-26
 description: A review of a paper, Elucidating the Design Space of Diffusion-Based Generative Models. This post focuses on the reasons of the engineering details in the paper.
 
-categories: deep-learning # deep-learning, finance, 
-tags: paper-review, # paper-review, survey, 
+categories: [paper-review]
+tags: [generative]
 attachments: /blog/post/20231026/presentation.pdf
 
 giscus_comments: true

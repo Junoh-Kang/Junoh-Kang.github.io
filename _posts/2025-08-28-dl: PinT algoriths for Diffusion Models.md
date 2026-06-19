@@ -3,8 +3,8 @@ layout: distill
 title: PinT algorithms for Diffusion Models
 date: 2025-08-28
 description: "A review of researches that accelerate diffusion models in wall clock time by parallelization." 
-categories: deep-learning # deep-learning, finance, 
-tags: paper-review, # paper-review, survey, 
+categories: [survey]
+tags: [generative]
 attachments: /blog/post/20250828/presentation.pdf
 
 giscus_comments: true

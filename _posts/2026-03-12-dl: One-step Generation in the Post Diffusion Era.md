@@ -3,8 +3,8 @@ layout: distill
 title: "One-step Generation in the Post Diffusion Era"
 date: 2026-03-12
 description: " A review of one-step generative modeling beyond diffusion-time iteration, covering Consistency Models, CTM, MeanFlow, DMD, and the 2026 Drifting Models framework." 
-categories: deep-learning # deep-learning, finance, 
-tags: paper-review, # paper-review, survey, 
+categories: [survey]
+tags: [generative]
 attachments: /blog/post/20260312/presentation.pdf
 
 giscus_comments: true

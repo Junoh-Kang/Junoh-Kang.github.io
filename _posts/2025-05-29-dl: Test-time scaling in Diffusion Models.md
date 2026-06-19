@@ -3,8 +3,8 @@ layout: distill
 title: Test-time scaling in Diffusion Models
 date: 2025-05-29
 description: "A review of researches that explore test-time scaling for diffusion models." 
-categories: deep-learning # deep-learning, finance, 
-tags: paper-review, # paper-review, survey, 
+categories: [survey]
+tags: [generative, test-time-scaling]
 attachments: /blog/post/20250529/presentation.pdf
 
 giscus_comments: true

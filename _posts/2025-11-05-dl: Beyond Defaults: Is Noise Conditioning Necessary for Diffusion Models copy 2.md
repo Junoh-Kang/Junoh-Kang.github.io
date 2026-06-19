@@ -3,8 +3,8 @@ layout: distill
 title: "Beyond Defaults: Is Noise Conditioning Necessary for Diffusion Models?"
 date: 2025-11-05
 description: "A review of recent research that challenges the necessity of noise level conditioning in generative models, exploring alternative approaches to denoising and flow matching." 
-categories: deep-learning # deep-learning, finance, 
-tags: paper-review, # paper-review, survey, 
+categories: [survey]
+tags: [generative]
 attachments: /blog/post/20251105/presentation.pdf
 
 giscus_comments: true

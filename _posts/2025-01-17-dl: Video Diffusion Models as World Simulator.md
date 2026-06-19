@@ -3,8 +3,8 @@ layout: distill
 title: Video Diffusion Models as World Simulators
 date: 2025-01-17
 description: "A review of Oasis: A Universe in a transformer, and Diffusion Forcing: Next-token Prediction Meets Full-Sequence Diffusion" 
-categories: deep-learning # deep-learning, finance, 
-tags: paper-review, # paper-review, survey, 
+categories: [survey]
+tags: [generative, video]
 attachments: /blog/post/20250117/presentation.pdf
 
 giscus_comments: true
