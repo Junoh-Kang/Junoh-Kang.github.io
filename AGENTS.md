@@ -8,20 +8,14 @@ Apply these instructions only at this repository root.
 - Prefer the nearest subfolder `AGENTS.md` for code, paper, data, artifact, or domain-specific work.
 - If no nearer instructions exist, inspect the relevant files before deciding how to work.
 
-## Brain Context
+## Edit Boundaries
 
-- `.brain` is read-only shared context for consulting the main brain, except for approved project meeting/export writes under `.brain/docs/projects/<project_id>/meetings/`.
-- Do not create, edit, move, or delete files under `.brain/docs/global/`.
-- Global promotion, ingest, and location inventory changes happen from the brain repository.
-- Project meeting/export materials normally belong in the central brain project layer: `.brain/docs/projects/<project_id>/meetings/`.
-- Resolve `project_id` through `.brain/docs/global/refs/locations.json` when the mounted project is registered.
-
-## Local Docs
-
-- Top-level `docs/` is optional local chronological memory, not the default project memory target.
-- Write under local `docs/` only when the user explicitly names a local `docs/` target path or asks for local chronological notes.
-- When writing local docs and `docs/AGENTS.md` exists, follow it.
-- A `docs/` directory under a code, paper, data, or artifact subfolder is governed by that subfolder's nearest `AGENTS.md`.
+- <hard-gate> Style files are protected. Do not modify `_sass/**`, `assets/css/**`, or any `*.css`, `*.scss`, or `*.sass` file without the user's explicit approval for that specific style change.
+- <hard-gate> If a requested task appears to require a protected style-file change, stop and ask for approval before editing those files.
+- Do not edit generated or dependency output such as `_site/**`, `.jekyll-cache/**`, `.bundle/**`, `vendor/**`, or `Gemfile.lock` unless the user explicitly asks for build or dependency output changes.
+- Treat `_site/**` as generated preview/deploy output. Make source changes in `_posts/**`, `_news/**`, `_pages/**`, `_includes/**`, `_layouts/**`, `_data/**`, assets, or config files as appropriate, then rebuild if needed.
+- Content surfaces such as `_posts/**`, `_news/**`, `_pages/**`, and post-local assets under `blog/post/**` are looser editing areas. Inspect the relevant files first, then make narrowly scoped edits that fit the existing format.
+- Do not broaden a content edit into layout, theme, or style changes unless the user explicitly approves that broader scope.
 
 ## Skills
 
