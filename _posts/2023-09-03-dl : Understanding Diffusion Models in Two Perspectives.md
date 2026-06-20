@@ -2,7 +2,7 @@
 layout: distill
 title: Understanding Diffusion Models in Two Perspectives
 date: 2023-09-03
-description: A review of two papers, Denoising diffusion probabilistic models and Score-Based Generative Modeling through Stochastic Differential Equations. This post focuses on theoretical backgrounds of diffusion models, rather than implementations.
+description: DDPM and score-based SDEs as two routes to reverse diffusion, contrasting their shared structure and modeling differences.
 categories: [survey]
 tags: [generative]
 attachments: /blog/post/20230903/presentation.pdf

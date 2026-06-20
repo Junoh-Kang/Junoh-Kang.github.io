@@ -2,7 +2,7 @@
 layout: distill
 title: Designing Diffusion Models in Real World
 date: 2023-10-26
-description: A review of a paper, Elucidating the Design Space of Diffusion-Based Generative Models. This post focuses on the reasons of the engineering details in the paper.
+description: Elucidating the Design Space of Diffusion-Based Generative Models, focusing on the rationale behind its engineering details.
 
 categories: [paper-review]
 tags: [generative]

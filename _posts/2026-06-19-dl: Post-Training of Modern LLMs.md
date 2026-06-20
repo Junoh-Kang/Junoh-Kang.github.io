@@ -2,7 +2,7 @@
 layout: distill
 title: "Post-Training of Modern LLMs"
 date: 2026-06-19
-description: "A review of modern LLM post-training, from RLHF and DPO to reinforcement learning with verifiable rewards, GRPO, and the DeepSeek-R1 pipeline."
+description: "Modern LLM post-training, from preference learning to reinforcement learning with verifiable rewards."
 categories: [survey]
 tags: [llm, rl]
 

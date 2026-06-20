@@ -2,7 +2,7 @@
 layout: distill
 title: "One-step Generation in the Post Diffusion Era"
 date: 2026-03-12
-description: " A review of one-step generative modeling beyond diffusion-time iteration, covering Consistency Models, CTM, MeanFlow, DMD, and the 2026 Drifting Models framework." 
+description: "One-step generative modeling beyond diffusion-time iteration, covering Consistency Models, CTM, MeanFlow, DMD, and the Drifting Models framework."
 categories: [survey]
 tags: [generative]
 attachments: /blog/post/20260312/presentation.pdf
@@ -30,6 +30,5 @@ After summarizing prior approaches such as Consistency Models, CTM, MeanFlow, an
 <iframe src="/blog/post/20260312/presentation.pdf" width="800" height="600" style="border: none;">
   This browser does not support PDFs. Please download the PDF to view it: <a href="/blog/post/20260312/presentation.pdf">Download PDF</a>
 </iframe>
-
 
 
