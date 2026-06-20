@@ -256,7 +256,7 @@ jekyll-archives:
     tag: '/blog/tag/:name/'
     category: '/blog/category/:name/'
 
-display_tags: [] # tags are intentionally hidden from the front page
+display_tags: [generative, llm, rl, video, test-time-scaling, time-series, statistics] # displayed at the bottom of the front page of the blog
 display_categories: [paper-review, survey, study-note] # displayed on the front page of the blog
 
 # -----------------------------------------------------------------------------
