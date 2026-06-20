@@ -9,7 +9,7 @@ attachments: /blog/post/20230903/presentation.pdf
 
 giscus_comments: true
 related_posts: false
-featured: false
+featured: true
 
 authors:
   - name: Junoh Kang

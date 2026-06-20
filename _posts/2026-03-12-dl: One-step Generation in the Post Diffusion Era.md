@@ -9,7 +9,7 @@ attachments: /blog/post/20260312/presentation.pdf
 
 giscus_comments: true
 related_posts: false
-featured: false
+featured: true
 
 authors:
   - name: Junoh Kang
@@ -30,7 +30,6 @@ After summarizing prior approaches such as Consistency Models, CTM, MeanFlow, an
 <iframe src="/blog/post/20260312/presentation.pdf" width="800" height="600" style="border: none;">
   This browser does not support PDFs. Please download the PDF to view it: <a href="/blog/post/20260312/presentation.pdf">Download PDF</a>
 </iframe>
-
 
 
 
