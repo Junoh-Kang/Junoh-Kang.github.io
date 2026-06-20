@@ -14,13 +14,34 @@ end
 failures = []
 
 index = read_repo_file("blog/index.html")
+config = read_repo_file("_config.yml")
 featured_section = index[/<section class="[^"]*featured-posts-list[^"]*">.*?<\/section>/m]
 latest_section = index[/<section class="[^"]*latest-posts-list[^"]*">.*?<\/section>/m]
+browse_section = index[/<div class="[^"]*blog-browse-links[^"]*">.*?<\/div>/m]
 
 collect_failure(failures, "blog index should define a featured posts block") unless index.include?("assign featured_posts = site.posts")
 collect_failure(failures, "featured section should be titled Featured") unless index.include?("<h2>Featured</h2>")
 collect_failure(failures, "latest section should be titled Latest Posts") unless index.include?("<h2>Latest Posts</h2>")
 collect_failure(failures, "blog pagination should show more than five posts") unless index.include?("per_page: 10")
+featured_position = index.index('<section class="featured-posts-list">')
+pagination_position = index.index("{% include pagination.html %}")
+browse_position = index.index("blog-browse-links")
+top_browse_position = index.index("tag-category-list")
+collect_failure(failures, "category/tag navigation should not float above featured posts") if top_browse_position && featured_position && top_browse_position < featured_position
+collect_failure(failures, "category/tag navigation should live below pagination at the bottom of the blog index") unless browse_position && pagination_position && browse_position > pagination_position
+collect_failure(failures, "bottom category/tag browsing should be left aligned") unless browse_section&.include?("text-left")
+collect_failure(failures, "bottom category/tag browsing should not be centered") if browse_section&.include?("text-center")
+collect_failure(failures, "category browsing should keep label and links on one inline line") unless browse_section&.include?("Browse by Category:") && browse_section&.include?("{% for category in site.display_categories %}")
+collect_failure(failures, "tag browsing should keep label and links on one inline line when display tags are configured") unless browse_section&.include?("Browse by Tag:") && browse_section&.include?("{% for tag in site.display_tags %}")
+collect_failure(failures, "category browsing should render on its own line") unless browse_section&.include?('<p class="blog-browse-category m-0">')
+collect_failure(failures, "tag browsing should render on its own line") unless browse_section&.include?('<p class="blog-browse-tags m-0">')
+if browse_section
+  category_label_position = browse_section.index("Browse by Category:")
+  tag_label_position = browse_section.index("Browse by Tag:")
+  collect_failure(failures, "tag browsing should appear after the category line") unless category_label_position && tag_label_position && tag_label_position > category_label_position
+end
+collect_failure(failures, "browse labels should not force line breaks before links") if browse_section&.include?("<br")
+collect_failure(failures, "blog index should configure displayed tags for bottom browsing") unless config.include?("display_tags: [generative, llm, rl, video, test-time-scaling, time-series, statistics]")
 collect_failure(failures, "featured posts should render as an archive-style table") unless featured_section&.include?("table table-sm table-borderless")
 collect_failure(failures, "latest posts should render as an archive-style table") unless latest_section&.include?("table table-sm table-borderless")
 collect_failure(failures, "latest posts should be explicitly left aligned") unless latest_section&.include?('<section class="latest-posts-list text-left">') || latest_section&.include?('class="table table-sm table-borderless text-left"')
