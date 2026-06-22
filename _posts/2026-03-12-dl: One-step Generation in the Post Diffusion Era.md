@@ -5,6 +5,7 @@ date: 2026-03-12
 description: "Training-based routes toward one-step generation for diffusion and flow models, covering distillation, Consistency Models, CTM, MeanFlow, DMD, and Drifting Models."
 categories: [survey]
 tags: [generative]
+attachments: /blog/post/20260312/presentation.pdf
 
 giscus_comments: true
 related_posts: false
