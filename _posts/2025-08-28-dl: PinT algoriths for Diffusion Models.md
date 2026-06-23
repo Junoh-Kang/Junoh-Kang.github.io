@@ -3,7 +3,7 @@ layout: distill
 title: PinT algorithms for Diffusion Models
 date: 2025-08-28
 description: "A review of researches that accelerate diffusion models in wall clock time by parallelization." 
-categories: [survey]
+categories: [paper-review]
 tags: [generative]
 attachments: /blog/post/20250828/presentation.pdf
 
@@ -36,4 +36,3 @@ In this post, I review two papers accelerating sampling in time, which are motiv
 <iframe src="/blog/post/20250828/presentation.pdf" width="800" height="600" style="border: none;">
   This browser does not support PDFs. Please download the PDF to view it: <a href="/blog/post/20250828/presentation.pdf">Download PDF</a>
 </iframe>
-

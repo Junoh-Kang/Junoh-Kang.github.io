@@ -3,7 +3,7 @@ layout: distill
 title: "Beyond Defaults: Is Noise Conditioning Necessary for Diffusion Models?"
 date: 2025-11-05
 description: "A review of recent research that challenges the necessity of noise level conditioning in generative models, exploring alternative approaches to denoising and flow matching." 
-categories: [survey]
+categories: [paper-review]
 tags: [generative]
 attachments: /blog/post/20251105/presentation.pdf
 
@@ -36,7 +36,6 @@ Traditional diffusion models explicitly specify noise level to neural network to
 <iframe src="/blog/post/20251105/presentation.pdf" width="800" height="600" style="border: none;">
   This browser does not support PDFs. Please download the PDF to view it: <a href="/blog/post/20251105/presentation.pdf">Download PDF</a>
 </iframe>
-
 
 
 

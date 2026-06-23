@@ -132,6 +132,25 @@ d-appendix {
   }
 }
 
+@media (min-width: 1025px) {
+  d-article {
+    contain: none !important;
+    overflow-x: visible !important;
+
+    d-contents {
+      position: sticky;
+      top: 5rem;
+      z-index: 10;
+      max-height: none;
+      overflow: visible;
+
+      nav {
+        position: static !important;
+      }
+    }
+  }
+}
+
 @media (max-width: 1024px) {
   d-article {
     d-contents {

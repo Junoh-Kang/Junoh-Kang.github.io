@@ -4,7 +4,7 @@ title: Controllabilities in Video Diffusion Models
 date: 2024-05-14
 description: A review of papers that add controllabilities to video generation (DragNUWA and Boximator)
 
-categories: [survey]
+categories: [paper-review]
 tags: [generative, video]
 attachments: /blog/post/20240514/presentation.pdf
 

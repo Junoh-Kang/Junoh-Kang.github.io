@@ -3,7 +3,7 @@ layout: distill
 title: Test-time scaling in Diffusion Models
 date: 2025-05-29
 description: "A review of researches that explore test-time scaling for diffusion models." 
-categories: [survey]
+categories: [paper-review]
 tags: [generative, test-time-scaling]
 attachments: /blog/post/20250529/presentation.pdf
 
@@ -34,4 +34,3 @@ This post reviews three papers related to test-time scaling which enable optimiz
 <iframe src="/blog/post/20250529/presentation.pdf" width="800" height="600" style="border: none;">
   This browser does not support PDFs. Please download the PDF to view it: <a href="/blog/post/20250529/presentation.pdf">Download PDF</a>
 </iframe>
-
