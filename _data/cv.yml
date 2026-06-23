@@ -1,131 +1,92 @@
-# - title: General Information
-#   type: map
-#   contents:
-#     - name: Full Name
-#       value: Albert Einstein
-#     - name: Date of Birth
-#       value: 14th March 1879
-#     - name: Languages
-#       value: English, German
-
+# Generated from /Users/junoh/Library/Mobile Documents/iCloud~md~obsidian/Documents/brain/docs/refs/cv/cv.yml. Do not edit directly.
 - title: Education
   type: time_table
   contents:
-    - title: Ph.D. program in Electrical and Computer Engineering
-      institution: Seoul National University, Seoul, Korea
-      year: Mar 2022 - present
-      description:
-        - Advised by  <a href="https://cv.snu.ac.kr/index.php/~bhhan/">Bohyung Han</a>
-    - title: B.S. in Statistics and Mathematics
-      institution: Seoul National University, Seoul, Korea
-      year: Mar 2015 - Aug 2021
-      description:
-        - Summa Cum Laude
-    - title: Seoul Science High School (SSHS)
-      year: Mar 2012 - Feb 2015
-
+  - title: Ph.D. program in Electrical and Computer Engineering
+    year: Mar 2022 - present
+    institution: Seoul National University
+    description:
+    - '<a href="https://cv.snu.ac.kr/index.php/~bhhan/">Advisor: Prof. Bohyung Han</a>'
+  - title: B.S. in Statistics and Mathematics
+    year: Mar 2015 - Aug 2021
+    institution: Seoul National University
+    description:
+    - Summa Cum Laude
+    - 'GPA: 4.0/4.3'
+  - title: Seoul Science High School
+    year: Mar 2012 - Feb 2015
+    institution: Seoul Science High School (SSHS)
+- title: Publications
+  type: list
+  contents:
+  - '<a href="https://arxiv.org/abs/2606.15332">Probabilistic Signature Inversion:
+    Learning Conditional Distributions from Truncated Signatures</a>. Junoh Kang,
+    Kiseop Lee, Bohyung Han. <i>arXiv 2026</i>.'
+  - '<a href="https://arxiv.org/abs/2511.22048">ICM-SR: Image-Conditioned Manifold
+    Regularization for Image Super-Resolution</a>. Junoh Kang*, Donghun Ryu*, Bohyung
+    Han. <i>arXiv 2025</i>.'
+  - '<a href="https://arxiv.org/abs/2506.22868">STR-Match: Matching SpatioTemporal
+    Relevance Score for Training-Free Video Editing</a>. Junsung Lee, Junoh Kang,
+    Bohyung Han. <i>arXiv 2025</i>.'
+  - <a href="https://openreview.net/forum?id=rCGleSgNBK">Enhanced Diffusion Sampling
+    via Extrapolation with Multiple ODE Solutions</a>. Jinyoung Choi, Junoh Kang,
+    Bohyung Han. <i>ICLR 2025</i>.
+  - '<a href="https://arxiv.org/abs/2405.11473">FIFO-Diffusion: Generating Infinite
+    Videos from Text without Training</a>. Jihwan Kim*, Junoh Kang*, Jinyoung Choi,
+    Bohyung Han. <i>NeurIPS 2024</i>.'
+  - <a href="https://arxiv.org/abs/2310.04041">Observation-Guided Diffusion Probabilistic
+    Models</a>. Junoh Kang*, Jinyoung Choi*, Sungik Choi, Bohyung Han. <i>CVPR 2024</i>.
+  - <a href="https://arxiv.org/abs/2106.15278">Open-Set Representation Learning through
+    Combinatorial Embedding</a>. Geeho Kim, Junoh Kang, Bohyung Han. <i>CVPR 2023</i>.
 - title: Work Experience
   type: time_table
   contents:
-    - title: Research Intern
-      institution: <a href="https://research.adobe.com/">Adobe Research</a>, Seattle, USA
-      year: Jun 2024 - Sep 2024
-      # description:
-      # - Hosted by <a href="http://juiwang.com/">Jui-Hsien Wang</a>.
-
-    - title: Research Intern
-      institution: SNU Computer Vision Lab, Seoul, Korea
-      year: Jun 2021 - Sep 2021
-      # description:
-      #   - Submitted <a href="https://arxiv.org/abs/2310.04041"> Open-Set Representation Learning Through Combinatorial Embedding </a> to ICLR 2022.
-    
-    # - title: Research Intern
-    #   institution: Deepmetrics, Seoul, Korea
-    #   year: Mar 2021 - Jun 2021
-    #   description:
-    #     - Worked on predicting ABP from PPG using neural networks.
-    
-    # - title: Research Intern
-    #   institution: BioInformatics & BioStatistics Lab, Seoul, Korea
-    #   year: Jan 2020 - Jun 2020
-    #   description:
-    #     - Researched on prognosis of pancreas cancer using clinical information and RNA markers.
-
-    # - title: Human Resource, Auxiliary Police Management
-    #   institution: Seoul Metropolitan Police, Seoul, Korea
-    #   year: Mar 2017 - Dec 2018
-    #   description:
-    #     - Compulsory military service.
-
-
+  - title: Research Intern
+    year: Jun 2024 - Sep 2024
+    institution: <a href="https://research.adobe.com/">Adobe Research</a>
+  - title: Research Intern
+    year: Jun 2021 - Sep 2021
+    institution: <a href="https://cv.snu.ac.kr">SNU Computer Vision Lab</a>
 - title: Honors and Awards
   type: time_table
   contents:
-    - year: 2025 
-      items:
-        - Youlchon AI Star Scholarship
-    - year: 2025
-      items:
-        - Gold medal on 30th <a href="https://humantech.samsung.com/saitext/index.jsp">Samsung Humantech paper award</a>
-    - year: 2020
-      items: 
-        - Dean's list
-    - year: 2016
-      items: 
-        - Dean's list
-    - year: 2015
-      items: 
-        - <a href="https://www.kosaf.go.kr/eng/jsp/aid/aid02_01_01.jsp">Presidential science scholarship</a>
-    - year: 2013
-      items: 
-        - Bronze medal on high school <a href="https://www.kmo.or.kr/main.html">Korean Mathematical Olympiad (KMO)</a>
-    - year: 2012
-      items:
-        - Silver medal on 19th <a href="https://humantech.samsung.com/saitext/index.jsp">Samsung Humantech paper award</a>
-
-
-
+  - year: 2025
+    items:
+    - <a href="https://aiis.snu.ac.kr/bbs/board.php?bo_table=sub4_3&amp;sca=2025">Youlchon
+      AI Star Scholarship</a>
+  - year: 2025
+    items:
+    - <a href="https://humantech.samsung.com/saitext/index.jsp">Gold medal on Samsung
+      Humantech Paper Award</a>
+  - year: 2016, 2020
+    items:
+    - Dean&#39;s List
+  - year: 2015 - 2020
+    items:
+    - <a href="https://www.kosaf.go.kr/eng/jsp/aid/aid02_01_01.jsp">Presidential Science
+      Scholarship</a>
+  - year: 2013
+    items:
+    - <a href="https://www.kmo.or.kr/main.html">Bronze medal on high school Korean
+      Mathematical Olympiad</a>
+  - year: 2012
+    items:
+    - <a href="https://humantech.samsung.com/saitext/index.jsp">Silver medal on Samsung
+      Humantech Paper Award</a>
 - title: Academic Services
   type: list
   contents:
-    - <b>Conference Reviewer:</b> NeurIPS 2025, AAAI 2025
-
-- title: Teaching 
+  - "<b>Conference Reviewer:</b> NeurIPS 2025, AAAI 2025, NeurIPS 2026, CVPR 2026"
+- title: Teaching
   type: time_table
   contents:
-    - title: Teaching Assistant
-      description: Topics in Computer and VLSI (Machine Learning), 430.659
-      year: Spring 2024 
-    - title: Teaching Assistant 
-      description: Introduction to Algorithms, 430.329
-      year: Fall 2023 
-    - title: Teaching Assistant
-      description: AI expert course, Samsung
-      year: Fall 2023 
-
-
-# - title: Leadership
-#   type: time_table
-#   contents: 
-#     - title: Student council of College of Natural Sciences, SNU
-#       year: 2015-2016
-#     - title: General club president, SSHS
-#       year: 2013-2014
-
-
-# - title: Academic Interests
-#   type: nested_list
-#   contents:
-#     - title: Topic 1.
-#       items: 
-#         - Description 1.
-#         - Description 2.
-#     - title: Topic 2.
-#       items:
-#         - Description 1.
-#         - Description 2.
-
-# - title: Other Interests
-#   type: list
-#   contents:
-#     - <u>Hobbies:</u> Hobby 1, Hobby 2, etc.
+  - title: Teaching Assistant
+    description: '430.659: Topics in Computer and VLSI (Machine Learning), Seoul National
+      University'
+    year: Spring 2024
+  - title: Teaching Assistant
+    description: '430.329: Introduction to Algorithms, Seoul National University'
+    year: Fall 2023
+  - title: Teaching Assistant
+    description: AI expert course, Samsung
+    year: Fall 2023
