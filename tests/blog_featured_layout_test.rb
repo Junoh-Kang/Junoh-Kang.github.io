@@ -70,9 +70,9 @@ collect_failure(failures, "latest titles should include inline category labels")
 collect_failure(failures, "latest category label should route to the post, not the category page") if latest_posts_table&.include?("prepend: '/blog/category/'")
 
 featured_paths = [
-  "_posts/2026-06-19-dl: Post-Training of Modern LLMs.md",
-  "_posts/2026-03-12-dl: One-step Generation in the Post Diffusion Era.md",
-  "_posts/2023-09-03-dl : Understanding Diffusion Models in Two Perspectives.md"
+  "_posts/2026-06-19-Post-Training of Modern LLMs.md",
+  "_posts/2026-03-12-One-step Generation in the Post Diffusion Era.md",
+  "_posts/2023-09-03-Understanding Diffusion Models in Two Perspectives.md"
 ]
 
 featured_paths.each do |path|
