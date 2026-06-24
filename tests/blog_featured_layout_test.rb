@@ -21,7 +21,7 @@ browse_section = index[/<div class="[^"]*blog-browse-links[^"]*">.*?<\/div>/m]
 
 collect_failure(failures, "blog index should define a featured posts block") unless index.include?("assign featured_posts = site.posts")
 collect_failure(failures, "featured section should be titled Featured") unless index.include?("<h2>Featured</h2>")
-collect_failure(failures, "latest section should be titled Latest Posts") unless index.include?("<h2>Latest Posts</h2>")
+collect_failure(failures, "all posts section should be titled All Posts") unless index.include?("<h2>All Posts</h2>")
 collect_failure(failures, "blog pagination should show more than five posts") unless index.include?("per_page: 10")
 featured_position = index.index('<section class="featured-posts-list">')
 pagination_position = index.index("{% include pagination.html %}")
