@@ -73,6 +73,26 @@ pagination:
 
   <section class="latest-posts-list text-left">
     <h2>All Posts</h2>
+    {% if site.display_tags.size > 0 or site.display_categories.size > 0 %}
+    <div class="blog-browse-links small text-muted text-left mb-2">
+      {% if site.display_categories.size > 0 %}
+      <span class="blog-browse-category d-block">
+        <span>Category:</span>
+        {% for category in site.display_categories %}
+          <a href="{{ category | slugify | prepend: '/blog/category/' | relative_url }}">{{ category }}</a>{% unless forloop.last %}<span class="mx-1">&middot;</span>{% endunless %}
+        {% endfor %}
+      </span>
+      {% endif %}
+      {% if site.display_tags.size > 0 %}
+      <span class="blog-browse-tags d-block">
+        <span>Tag:</span>
+        {% for tag in site.display_tags %}
+          <a href="{{ tag | slugify | prepend: '/blog/tag/' | relative_url }}">{{ tag }}</a>{% unless forloop.last %}<span class="mx-1">&middot;</span>{% endunless %}
+        {% endfor %}
+      </span>
+      {% endif %}
+    </div>
+    {% endif %}
     <div class="table-responsive">
       <table class="table table-sm table-borderless text-left">
         {% for post in paginator.posts %}
@@ -102,26 +122,5 @@ pagination:
   </section>
 
   {% include pagination.html %}
-
-  {% if site.display_tags.size > 0 or site.display_categories.size > 0 %}
-  <div class="blog-browse-links small text-muted text-left mt-4 pb-3">
-    {% if site.display_categories.size > 0 %}
-    <p class="blog-browse-category m-0">
-      <span>Browse by Category:</span>
-      {% for category in site.display_categories %}
-        <a href="{{ category | slugify | prepend: '/blog/category/' | relative_url }}">{{ category }}</a>{% unless forloop.last %}<span class="mx-1">&middot;</span>{% endunless %}
-      {% endfor %}
-    </p>
-    {% endif %}
-    {% if site.display_tags.size > 0 %}
-    <p class="blog-browse-tags m-0">
-      <span>Browse by Tag:</span>
-      {% for tag in site.display_tags %}
-        <a href="{{ tag | slugify | prepend: '/blog/tag/' | relative_url }}">{{ tag }}</a>{% unless forloop.last %}<span class="mx-1">&middot;</span>{% endunless %}
-      {% endfor %}
-    </p>
-    {% endif %}
-  </div>
-  {% endif %}
 
 </div>
