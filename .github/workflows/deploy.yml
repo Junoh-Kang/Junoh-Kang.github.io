@@ -25,14 +25,20 @@ jobs:
       with:
         ruby-version: '3.2.2'
         bundler-cache: true
+    - name: Install image tools
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y imagemagick webp
     - name: Install and Build 🔧
       run: |
         npm install -g mermaid.cli
         export JEKYLL_ENV=production
         bundle exec jekyll build
+        test -f _site/assets/img/profile1-480.webp
+        test -f _site/assets/img/profile1-800.webp
+        test -f _site/assets/img/profile1-1400.webp
     - name: Deploy 🚀
       if: github.event_name != 'pull_request'
       uses: JamesIves/github-pages-deploy-action@v4
       with:
         folder: _site
-
