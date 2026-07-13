@@ -28,7 +28,7 @@ Besides the research, I am also interested in economics, investment, and playing
 I am a fifth-year Ph.D. student at the [SNU Computer Vision Lab](https://cv.snu.ac.kr/), advised by [Prof. Bohyung Han](https://cv.snu.ac.kr/index.php/~bhhan/).
 
 My earlier work focused on improving and extending diffusion models, from enabling few-step sampling to generating long videos with pretrained models.
-I am increasingly interested in generative modeling for financial applications through ongoing work with [Prof. Kiseop Lee](https://sites.google.com/view/purdue-dsfi/people).
-My broader interest lies in using deep learning where mathematical rigor matters, combining expressive models with structural understanding for real-world stochastic systems.
+Building on this experience, I am now exploring generative modeling for financial applications through ongoing work with [Prof. Kiseop Lee](https://sites.google.com/view/purdue-dsfi/people).
+More broadly, my long-term goal is to develop world models for complex stochastic systems, with a particular focus on financial markets.
 
-Outside research, I enjoy tennis, golf, and running.
+Outside of research, I enjoy tennis, golf, and running.
