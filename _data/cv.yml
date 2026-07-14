@@ -47,6 +47,18 @@
   - title: Research Intern
     year: Jun 2021 - Sep 2021
     institution: <a href="https://cv.snu.ac.kr">SNU Computer Vision Lab</a>
+- title: Current Research
+  type: time_table
+  contents:
+  - title: Replayable and Realistic Limit Order Book Message Generation
+    year: 2026 - present
+    institution: Advised by Prof. Bohyung Han, in collaboration with Prof. Kiseop
+      Lee
+    description:
+    - Developing a generative model for limit-order-book messages that are replayable
+      against the current order-book state.
+    - Developing post-training methods to improve the realism of long-horizon market
+      rollouts.
 - title: Honors and Awards
   type: time_table
   contents:
@@ -76,7 +88,8 @@
 - title: Academic Services
   type: list
   contents:
-  - "<b>Conference Reviewer:</b> NeurIPS 2025, AAAI 2025, NeurIPS 2026, CVPR 2026"
+  - "<b>Conference Reviewer:</b> NeurIPS 2025, AAAI 2025, WACV 2026, NeurIPS 2026,
+    CVPR 2026"
 - title: Teaching
   type: time_table
   contents:
