@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<svg width="1680" height="190" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1680 190" role="img" aria-label="Two Plan-Do-Verify tasks run left to right through a verified outcome and continue.">
+        <defs>
+          <marker id="ah3" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#201e1d" fill-opacity="0.4"></path></marker>
+        </defs>
+        <path stroke="#201e1d" stroke-opacity="0.4" stroke-width="2.5" fill="none" d="M0 74 V60 H620 V74"></path>
+        <path stroke="#201e1d" stroke-opacity="0.4" stroke-width="2.5" fill="none" d="M920 74 V60 H1540 V74"></path>
+        <text font-family="Archivo, system-ui, sans-serif" font-weight="800" fill="#201e1d" fill-opacity="0.45" font-size="24" letter-spacing="2" x="310" y="44" text-anchor="middle">TASK N</text>
+        <text font-family="Archivo, system-ui, sans-serif" font-weight="800" fill="#201e1d" fill-opacity="0.45" font-size="24" letter-spacing="2" x="1230" y="44" text-anchor="middle">TASK N + 1</text>
+        <line stroke="#201e1d" stroke-opacity="0.4" stroke-width="2.5" fill="none" x1="180" y1="130" x2="214" y2="130" marker-end="url(#ah3)"></line>
+        <line stroke="#201e1d" stroke-opacity="0.4" stroke-width="2.5" fill="none" x1="400" y1="130" x2="434" y2="130" marker-end="url(#ah3)"></line>
+        <line stroke="#201e1d" stroke-opacity="0.4" stroke-width="2.5" fill="none" x1="620" y1="130" x2="654" y2="130" marker-end="url(#ah3)"></line>
+        <line stroke="#201e1d" stroke-opacity="0.4" stroke-width="2.5" fill="none" x1="880" y1="130" x2="914" y2="130" marker-end="url(#ah3)"></line>
+        <line stroke="#201e1d" stroke-opacity="0.4" stroke-width="2.5" fill="none" x1="1100" y1="130" x2="1134" y2="130" marker-end="url(#ah3)"></line>
+        <line stroke="#201e1d" stroke-opacity="0.4" stroke-width="2.5" fill="none" x1="1320" y1="130" x2="1354" y2="130" marker-end="url(#ah3)"></line>
+        <line stroke="#201e1d" stroke-opacity="0.4" stroke-width="2.5" fill="none" x1="1540" y1="130" x2="1556" y2="130" marker-end="url(#ah3)"></line>
+        <rect fill="#f3f2f2" stroke="#201e1d" stroke-opacity="0.4" stroke-width="2" x="0" y="84" width="180" height="92"></rect>
+        <rect fill="#eae9e9" stroke="#201e1d" stroke-opacity="0.4" stroke-width="2" x="220" y="84" width="180" height="92"></rect>
+        <rect fill="#f3f2f2" stroke="#201e1d" stroke-opacity="0.4" stroke-width="2" x="440" y="84" width="180" height="92"></rect>
+        <rect fill="#f3f2f2" stroke="#201e1d" stroke-opacity="0.4" stroke-width="2" x="660" y="84" width="220" height="92"></rect>
+        <rect fill="#f3f2f2" stroke="#201e1d" stroke-opacity="0.4" stroke-width="2" x="920" y="84" width="180" height="92"></rect>
+        <rect fill="#eae9e9" stroke="#201e1d" stroke-opacity="0.4" stroke-width="2" x="1140" y="84" width="180" height="92"></rect>
+        <rect fill="#f3f2f2" stroke="#201e1d" stroke-opacity="0.4" stroke-width="2" x="1360" y="84" width="180" height="92"></rect>
+        <text font-family="Archivo, system-ui, sans-serif" font-weight="800" font-size="30" fill="#201e1d" x="90" y="141" text-anchor="middle">Plan</text>
+        <text font-family="Archivo, system-ui, sans-serif" font-weight="800" font-size="30" x="310" y="141" text-anchor="middle" fill="#ec3013">Do</text>
+        <text font-family="Archivo, system-ui, sans-serif" font-weight="800" font-size="30" fill="#201e1d" x="530" y="141" text-anchor="middle">Verify</text>
+        <text font-family="Archivo, system-ui, sans-serif" font-weight="800" fill="#201e1d" x="770" y="123" text-anchor="middle" font-size="26">Verified</text>
+        <text font-family="Archivo, system-ui, sans-serif" font-weight="800" fill="#201e1d" x="770" y="155" text-anchor="middle" font-size="26">Outcome</text>
+        <text font-family="Archivo, system-ui, sans-serif" font-weight="800" font-size="30" fill="#201e1d" x="1010" y="141" text-anchor="middle">Plan</text>
+        <text font-family="Archivo, system-ui, sans-serif" font-weight="800" font-size="30" x="1230" y="141" text-anchor="middle" fill="#ec3013">Do</text>
+        <text font-family="Archivo, system-ui, sans-serif" font-weight="800" font-size="30" fill="#201e1d" x="1450" y="141" text-anchor="middle">Verify</text>
+        <text font-family="Archivo, system-ui, sans-serif" font-weight="800" x="1585" y="150" text-anchor="middle" fill="#8a8785" font-size="34">…</text>
+      </svg>
