@@ -179,26 +179,37 @@ const fmtDate = (d: string) =>
               const sameName = (e.institution ?? '').startsWith(e.title)
               return (
                 <li>
-                  <div class='min-w-0'>
-                    <p class='primary'>{e.institution}</p>
-                    {!sameName && <p class='degree'>{e.title}</p>}
-                    {e.details?.length ? (
-                      <p class='sub'>
-                        {'- '}
-                        {e.details.map((d, i) => (
+                  {/* The date sits on the first line; on narrow screens it wraps to line 2 */}
+                  <p class='head'>
+                    <span class='primary'>{e.institution}</span>
+                    <span class='when'>{dash(e.date)}</span>
+                  </p>
+                  {!sameName && <p class='degree'>{e.title}</p>}
+                  {e.details?.length ? (
+                    <p class='sub'>
+                      {e.details.map((d, i) => {
+                        // "Advisor: Prof. X" with a url: keep the label plain, link only the name
+                        const label = detailText(d)
+                        const url = typeof d === 'string' ? undefined : d.url
+                        const cut = label.indexOf(': ')
+                        return (
                           <>
                             {i > 0 && ', '}
-                            {typeof d !== 'string' && d.url ? (
-                              <a href={d.url}>{d.label}</a>
+                            {url && cut > 0 ? (
+                              <>
+                                {label.slice(0, cut + 2)}
+                                <a href={url}>{label.slice(cut + 2)}</a>
+                              </>
+                            ) : url ? (
+                              <a href={url}>{label}</a>
                             ) : (
-                              detailText(d)
+                              label
                             )}
                           </>
-                        ))}
-                      </p>
-                    ) : null}
-                  </div>
-                  <span class='when'>{dash(e.date)}</span>
+                        )
+                      })}
+                    </p>
+                  ) : null}
                 </li>
               )
             })
@@ -211,16 +222,16 @@ const fmtDate = (d: string) =>
           {
             experience.map((e) => (
               <li>
-                <div class='min-w-0'>
-                  <p>
+                <p class='head'>
+                  <span>
                     <span class='primary'>
                       {e.url ? <a href={e.url}>{e.organization}</a> : e.organization}
                     </span>
                     <span class='secondary'>{e.title}</span>
-                  </p>
-                  {e.location && <p class='sub italic'>{e.location}</p>}
-                </div>
-                <span class='when'>{dash(e.date)}</span>
+                  </span>
+                  <span class='when'>{dash(e.date)}</span>
+                </p>
+                {e.location && <p class='sub italic'>{e.location}</p>}
               </li>
             ))
           }
@@ -239,8 +250,10 @@ const fmtDate = (d: string) =>
           {
             honors.map((a) => (
               <li>
-                <span class='min-w-0'>{a.url ? <a href={a.url}>{a.title}</a> : a.title}</span>
-                <span class='when'>{dash(a.year)}</span>
+                <p class='head'>
+                  <span>{a.url ? <a href={a.url}>{a.title}</a> : a.title}</span>
+                  <span class='when'>{dash(a.year)}</span>
+                </p>
               </li>
             ))
           }
@@ -332,12 +345,12 @@ const fmtDate = (d: string) =>
   .rows {
     display: flex;
     flex-direction: column;
-    gap: 0.8rem;
+    gap: 1.1rem;
   }
   .rows.compact {
     gap: 0.35rem;
   }
-  .rows li {
+  .rows .head {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
@@ -350,6 +363,7 @@ const fmtDate = (d: string) =>
   .rows .secondary {
     margin-inline-start: 0.6rem;
     color: hsl(var(--muted-foreground));
+    white-space: nowrap;
   }
   .rows .degree {
     color: hsl(var(--muted-foreground));
@@ -361,6 +375,7 @@ const fmtDate = (d: string) =>
   .rows .when {
     flex-shrink: 0;
     font-size: 0.875rem;
+    font-variant-numeric: tabular-nums;
     color: hsl(var(--muted-foreground));
   }
   .rows a {
