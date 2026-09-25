@@ -1,0 +1,52 @@
+/* Theme */
+:root {
+  /* Primary: navy #1f4e79 */
+  --primary: 209 59% 30%;
+  /* Foreground: #1a1a1a text, #6b6b6b secondary */
+  --foreground: 0 0% 10%;
+  --muted-foreground: 0 0% 42%;
+  /* Background: #fff */
+  --background: 0 0% 100%;
+  --muted: 0 0% 96%;
+  --card: 0 0% 90%;
+
+  /* Basic */
+  --border: 0 0% 89%;
+  --input: 0 0% 90%;
+  --ring: 0 0% 10%;
+  --radius: 0.5rem;
+}
+.dark {
+  /* Primary */
+  --primary: 210 55% 72%;
+  /* Foreground */
+  --foreground: 0 0% 92%;
+  --muted-foreground: 0 0% 64%;
+  /* Background */
+  --background: 220 10% 7%;
+  --muted: 220 6% 13%;
+  --card: 220 4% 24%;
+
+  /* Basic */
+  --border: 220 4% 22%;
+  --input: 220 4% 18%;
+  --ring: 0 0% 84%;
+}
+:root {
+  --un-default-border-color: hsl(var(--border) / 1);
+}
+html.dark {
+  color-scheme: dark;
+}
+
+/* Global */
+/* The header's full-bleed bar is 100vw wide; never let it add a horizontal scrollbar */
+body {
+  overflow-x: clip;
+}
+a {
+  transition: color 0.2s ease;
+  &:hover {
+    color: hsl(var(--primary) / var(--un-text-opacity, 1));
+  }
+}

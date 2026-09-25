@@ -1,0 +1,12 @@
+---
+import { cn } from 'astro-pure/utils'
+
+const { class: className, title, id } = Astro.props
+---
+
+<section id={id} class={cn('flex flex-col gap-y-4', className)}>
+  <h2 class='border-b pb-2 text-lg font-semibold'>{title}</h2>
+  <div class='flex flex-col gap-y-3'>
+    <slot />
+  </div>
+</section>

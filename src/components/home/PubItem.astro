@@ -1,0 +1,131 @@
+---
+import type { CvItem } from '@/data/cv'
+
+interface Props {
+  pub: CvItem
+  badge?: string
+}
+
+const { pub, badge } = Astro.props
+// Bold the site owner's name, keeping any equal-contribution marker.
+const authors = (pub.authors ?? [])
+  .map((a) => a.replace(/^Junoh Kang(\*?)$/, '<strong>Junoh Kang$1</strong>'))
+  .join(', ')
+
+// Show only Paper, Code, and Project. Paper prefers the published PDF, then OpenReview, then arXiv.
+const byLabel = (label: string) => pub.links?.find((l) => l.label === label)?.url
+const paper = byLabel('Paper') ?? byLabel('OpenReview') ?? byLabel('arXiv')
+const links = [
+  { label: 'Paper', url: paper },
+  { label: 'Code', url: byLabel('Code') },
+  { label: 'Project', url: byLabel('Project') }
+].filter((l): l is { label: string; url: string } => Boolean(l.url))
+const underReview = pub.venue === 'Under review'
+---
+
+<li class='pub' id={pub.id}>
+  <p class='title'>{pub.title}</p>
+  <p class='authors' set:html={authors} />
+  {/* One meta line: venue and award on the left, links pushed to the right edge. */}
+  <div class='meta'>
+    <span>
+      <span class:list={['venue', { review: underReview }]}>{pub.venue}</span>
+      {
+        badge && (
+          <>
+            <span class='dot'>·</span>
+            <span class='award'>{badge}</span>
+          </>
+        )
+      }
+    </span>
+    {
+      links.length > 0 && (
+        <span class='links'>
+          {links.map((l, i) => (
+            <>
+              {i > 0 && <span class='slash'>/</span>}
+              <a href={l.url} target='_blank' rel='noopener' set:text={l.label} />
+            </>
+          ))}
+        </span>
+      )
+    }
+  </div>
+</li>
+
+<style>
+  .pub {
+    padding-block: 0.9rem;
+    border-bottom: 1px solid hsl(var(--border));
+  }
+  .pub:last-child {
+    border-bottom: 0;
+  }
+  .title {
+    font-size: 1.0625rem;
+    font-weight: 600;
+    line-height: 1.4;
+  }
+  .authors {
+    margin-top: 0.2rem;
+    font-size: 0.875rem;
+    color: hsl(var(--muted-foreground));
+  }
+  .authors :global(strong) {
+    color: hsl(var(--foreground));
+    font-weight: 600;
+  }
+  .meta {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 0.25rem 1rem;
+    margin-top: 0.3rem;
+    font-size: 0.8125rem;
+  }
+  .venue {
+    font-size: 0.875rem;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    color: hsl(var(--primary));
+  }
+  .venue.review {
+    font-weight: 500;
+    font-style: italic;
+    color: hsl(var(--muted-foreground));
+  }
+  .dot {
+    margin-inline: 0.35rem;
+    color: hsl(var(--muted-foreground));
+  }
+  .award {
+    font-weight: 500;
+    color: #8a5a00;
+  }
+  :global(.dark) .award {
+    color: #e0b458;
+  }
+  .links a {
+    font-weight: 500;
+    color: hsl(var(--primary));
+    text-decoration: underline;
+    text-decoration-color: hsl(var(--primary) / 0.3);
+    text-underline-offset: 3px;
+  }
+  .links a:hover {
+    text-decoration-color: hsl(var(--primary));
+  }
+  .slash {
+    margin-inline: 0.4rem;
+    color: #b0b0b0;
+  }
+  /* Narrow screens: links drop below the venue, left-aligned */
+  @media (max-width: 640px) {
+    .meta {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+</style>

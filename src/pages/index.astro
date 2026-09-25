@@ -1,0 +1,336 @@
+---
+import { Image } from 'astro:assets'
+import {
+  authorRole,
+  dash,
+  detailText,
+  education,
+  experience,
+  honors,
+  publications
+} from '@/data/cv'
+import { news, profile, pubBadges, researchInterests } from '@/data/profile'
+
+import { Icon } from 'astro-pure/user'
+import PageLayout from '@/layouts/BaseLayout.astro'
+import PubItem from '@/components/home/PubItem.astro'
+import Section from '@/components/home/Section.astro'
+import config from '@/site-config'
+
+// News: the latest three always show; older items within two years (of build time) sit in a toggle.
+const MAX_NEWS = 3
+const NEWS_WINDOW_YEARS = 2
+const newsCutoff = new Date()
+newsCutoff.setFullYear(newsCutoff.getFullYear() - NEWS_WINDOW_YEARS)
+const olderNews = news.slice(MAX_NEWS).filter((n) => new Date(n.date) >= newsCutoff)
+const pubById = Object.fromEntries(publications.map((p) => [p.id, p]))
+const missing = [
+  ...Object.keys(pubBadges),
+  ...researchInterests.flatMap((r) => r.papers.map((p) => p.id))
+].filter((id) => !pubById[id])
+if (missing.length) throw new Error(`Paper ids not in cv.json: ${missing}`)
+
+const imagePath = config.logo.src
+const images = import.meta.glob<{ default: ImageMetadata }>(
+  '/src/assets/*.{jpeg,jpg,png,gif,avif,webp}'
+)
+if (!images[imagePath])
+  throw new Error(
+    `"${imagePath}" does not exist in glob: "src/assets/*.{jpeg,jpg,png,gif,avif,webp}"`
+  )
+
+const fmtDate = (d: string) =>
+  new Date(d).toLocaleDateString('en-US', { month: 'short', year: 'numeric' })
+---
+
+<PageLayout meta={{ title: 'Home' }}>
+  <main class='home animate grid gap-x-12 gap-y-10 md:grid-cols-[15rem_minmax(0,1fr)]'>
+    {/* Left profile */}
+    <aside class='profile md:sticky md:top-24 md:self-start'>
+      <Image
+        src={images[imagePath]()}
+        alt={config.logo.alt ?? profile.name}
+        class='photo'
+        widths={[240, 480]}
+        sizes='240px'
+        loading='eager'
+        fetchpriority='high'
+      />
+      <h1 class='mt-4 text-2xl font-semibold'>{profile.name}</h1>
+      <p class='mt-1 text-sm text-muted-foreground'>{profile.role}</p>
+      <p class='mt-2 text-sm'>{profile.pitch}</p>
+      <p class='status mt-3'>
+        <span class='dot'></span>{profile.status}
+      </p>
+      <ul class='mt-4 flex flex-col gap-y-1.5 text-sm'>
+        {
+          profile.links.map((l) => (
+            <li>
+              <a href={l.href} target='_blank' rel='noopener' class='plink'>
+                <Icon name={l.icon as any} class='size-4' />
+                {l.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+      <a href={profile.cv} class='cv mt-5' target='_blank'>
+        <Icon name='document' class='size-4' /> Download CV
+      </a>
+    </aside>
+
+    {/* Main column */}
+    <div id='content' class='flex min-w-0 flex-col gap-y-10'>
+      <Section title='About'>
+        <p class='about'>
+          I am a fifth-year Ph.D. student at the <a href='https://cv.snu.ac.kr/'
+            >SNU Computer Vision Lab</a
+          >, advised by <a href='https://cv.snu.ac.kr/index.php/~bhhan/'>Prof. Bohyung Han</a>. I
+          build generative models for financial markets, currently limit-order-book simulation and
+          path signatures, with <a href='https://sites.google.com/view/purdue-dsfi/people'
+            >Prof. Kiseop Lee</a
+          >, building on my earlier work on diffusion models. My long-term goal is to develop world
+          models for complex stochastic systems.
+        </p>
+      </Section>
+
+      <Section title='Research Interests'>
+        <ul class='interests'>
+          {
+            researchInterests.map((r) => (
+              <li>
+                <p class='font-medium'>{r.title}</p>
+                <ul class='backing'>
+                  {r.papers.map(({ id, note }) => (
+                    <li>
+                      <a href={`#${id}`} class='venue-link'>
+                        {pubById[id].venue}
+                      </a>
+                      {authorRole(pubById[id]) && (
+                        <span class='meta'> · {authorRole(pubById[id])}</span>
+                      )}
+                      <span class='text-muted-foreground'>
+                        {' — '}
+                        {note}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </li>
+            ))
+          }
+        </ul>
+      </Section>
+
+      <Section title='News' id='news'>
+        <ul class='news flex flex-col gap-y-2'>
+          {
+            news.slice(0, MAX_NEWS).map((n) => (
+              <li class='flex gap-x-4 text-sm'>
+                <span class='w-20 shrink-0 text-muted-foreground'>{fmtDate(n.date)}</span>
+                <span set:html={n.html} />
+              </li>
+            ))
+          }
+        </ul>
+        {
+          olderNews.length > 0 && (
+            <details class='older'>
+              <summary>Show older news ({olderNews.length})</summary>
+              <ul class='news mt-2 flex flex-col gap-y-2'>
+                {olderNews.map((n) => (
+                  <li class='flex gap-x-4 text-sm'>
+                    <span class='w-20 shrink-0 text-muted-foreground'>{fmtDate(n.date)}</span>
+                    <span set:html={n.html} />
+                  </li>
+                ))}
+              </ul>
+            </details>
+          )
+        }
+      </Section>
+
+      <Section title='Education'>
+        <ul class='cv-list edu'>
+          {
+            education.map((e) => {
+              // "Seoul Science High School" + "Seoul Science High School (SSHS)": show the name once
+              const sameName = (e.institution ?? '').startsWith(e.title)
+              return (
+                <li>
+                  <span class='when'>{dash(e.date)}</span>
+                  <div>
+                    <p class='font-medium'>{sameName ? e.institution : e.title}</p>
+                    {!sameName && <p>{e.institution}</p>}
+                    {e.details?.length ? (
+                      <p class='text-muted-foreground'>{e.details.map(detailText).join(' · ')}</p>
+                    ) : null}
+                  </div>
+                </li>
+              )
+            })
+          }
+        </ul>
+      </Section>
+
+      <Section title='Experience'>
+        <ul class='cv-list edu'>
+          {
+            experience.map((e) => (
+              <li>
+                <span class='when'>{dash(e.date)}</span>
+                <div>
+                  <p class='font-medium'>
+                    {e.url ? <a href={e.url}>{e.organization}</a> : e.organization}
+                    {e.location && (
+                      <span class='font-normal text-muted-foreground'> · {e.location}</span>
+                    )}
+                  </p>
+                  <p>{e.title}</p>
+                </div>
+              </li>
+            ))
+          }
+        </ul>
+      </Section>
+
+      <Section title='Honors'>
+        <ul class='cv-list'>
+          {
+            honors.map((a) => (
+              <li>
+                <span class='when'>{dash(a.year)}</span>
+                <span>{a.title}</span>
+              </li>
+            ))
+          }
+        </ul>
+      </Section>
+
+      <Section title='Publications' id='publications'>
+        <p class='text-sm text-muted-foreground'>* denotes equal contribution.</p>
+        <ul>
+          {publications.map((p) => <PubItem pub={p} badge={pubBadges[p.id ?? '']} />)}
+        </ul>
+      </Section>
+    </div>
+  </main>
+</PageLayout>
+
+<style>
+  .photo {
+    width: 100%;
+    max-width: 15rem;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    border-radius: 0.75rem;
+  }
+  .status {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: hsl(var(--primary));
+    border: 1px solid hsl(var(--primary) / 0.35);
+    border-radius: 999px;
+    padding: 0.2rem 0.7rem;
+  }
+  .dot {
+    width: 0.45rem;
+    height: 0.45rem;
+    border-radius: 999px;
+    background: hsl(var(--primary));
+  }
+  .plink {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: hsl(var(--muted-foreground));
+  }
+  .plink:hover {
+    color: hsl(var(--primary));
+  }
+  .cv {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: hsl(var(--background));
+    background: hsl(var(--primary));
+    border-radius: 0.5rem;
+    padding: 0.45rem 0.9rem;
+  }
+  .cv:hover {
+    color: hsl(var(--background));
+    opacity: 0.9;
+  }
+  .about {
+    line-height: 1.7;
+  }
+  .about a,
+  .news :global(a) {
+    color: hsl(var(--primary));
+  }
+  .cv-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    font-size: 0.875rem;
+  }
+  .cv-list li {
+    display: flex;
+    gap: 1rem;
+  }
+  .cv-list.edu {
+    gap: 0.7rem;
+  }
+  .cv-list.edu p {
+    line-height: 1.5;
+  }
+  .cv-list .when {
+    width: 9.5rem;
+    flex-shrink: 0;
+    color: hsl(var(--muted-foreground));
+  }
+  .cv-list a {
+    color: hsl(var(--primary));
+  }
+  .interests {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    list-style: disc;
+    padding-inline-start: 1.1rem;
+    line-height: 1.6;
+  }
+  .backing {
+    margin-top: 0.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    list-style: circle;
+    padding-inline-start: 1.1rem;
+    font-size: 0.875rem;
+  }
+  .venue-link {
+    font-weight: 600;
+    color: hsl(var(--primary));
+  }
+  .venue-link:hover {
+    text-decoration: underline;
+  }
+  .meta {
+    font-size: 0.8125rem;
+  }
+  .older summary {
+    cursor: pointer;
+    width: fit-content;
+    font-size: 0.875rem;
+    color: hsl(var(--muted-foreground));
+  }
+  .older summary:hover {
+    color: hsl(var(--primary));
+  }
+</style>

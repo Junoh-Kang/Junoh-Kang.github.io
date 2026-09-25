@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<svg width="1680" height="470" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1680 470" role="img" aria-label="Horizontal flow: the Model sits inside the Harness; it selects and calls Tools, which act on the Environment; observations and results feed back to the Harness and Model.">
+        
+
+        <rect fill="none" stroke="#201e1d" stroke-opacity="0.4" stroke-width="2" x="2" y="20" width="560" height="300"></rect>
+        <text font-family="Archivo, system-ui, sans-serif" font-weight="800" font-size="32" fill="#201e1d" x="26" y="60">Harness</text>
+        <text font-family="Archivo, system-ui, sans-serif" font-size="25" fill="#201e1d" fill-opacity="0.55" x="26" y="104">Instructions and guardrails</text>
+        <rect fill="none" stroke="#201e1d" stroke-opacity="0.4" stroke-width="2" x="150" y="168" width="264" height="128"></rect>
+        <text font-family="Archivo, system-ui, sans-serif" font-weight="800" font-size="32" fill="#201e1d" x="282" y="220" text-anchor="middle">Model</text>
+        <text font-family="Archivo, system-ui, sans-serif" font-size="25" fill="#201e1d" fill-opacity="0.55" x="282" y="258" text-anchor="middle">Intelligence</text>
+
+        <text font-family="Archivo, system-ui, sans-serif" font-size="24" fill="#201e1d" fill-opacity="0.55" x="661" y="212" text-anchor="middle">Select and call</text>
+        <line stroke="#201e1d" stroke-width="2.5" fill="none" x1="562" y1="232" x2="754" y2="232"></line>
+        <polygon fill="#201e1d" points="760,232 746,225 746,239"></polygon>
+
+        <rect fill="none" stroke="#201e1d" stroke-opacity="0.4" stroke-width="2" x="760" y="158" width="280" height="148"></rect>
+        <text font-family="Archivo, system-ui, sans-serif" font-weight="800" font-size="32" fill="#201e1d" x="784" y="198">Tools</text>
+        <text font-family="Archivo, system-ui, sans-serif" font-size="25" fill="#201e1d" fill-opacity="0.55" x="784" y="236">Shell · API</text>
+        <text font-family="Archivo, system-ui, sans-serif" font-size="25" fill="#201e1d" fill-opacity="0.55" x="784" y="268">MCP · Web</text>
+
+        <text font-family="Archivo, system-ui, sans-serif" font-size="24" fill="#201e1d" fill-opacity="0.55" x="1115" y="212" text-anchor="middle">Act</text>
+        <line stroke="#201e1d" stroke-width="2.5" fill="none" x1="1040" y1="232" x2="1184" y2="232"></line>
+        <polygon fill="#201e1d" points="1190,232 1176,225 1176,239"></polygon>
+
+        <rect fill="none" stroke="#201e1d" stroke-opacity="0.4" stroke-width="2" x="1190" y="158" width="488" height="148"></rect>
+        <text font-family="Archivo, system-ui, sans-serif" font-weight="800" font-size="32" fill="#201e1d" x="1214" y="198">Environment</text>
+        <text font-family="Archivo, system-ui, sans-serif" font-size="25" fill="#201e1d" fill-opacity="0.55" x="1214" y="236">Files · Repository</text>
+        <text font-family="Archivo, system-ui, sans-serif" font-size="25" fill="#201e1d" fill-opacity="0.55" x="1214" y="268">Runtime · Terminal</text>
+
+        <path stroke="#201e1d" stroke-width="2.5" fill="none" d="M1434,306 V410 H282 V326"></path>
+        <polygon fill="#201e1d" points="282,320 275,334 289,334"></polygon>
+        <text font-family="Archivo, system-ui, sans-serif" font-size="24" fill="#201e1d" fill-opacity="0.55" x="858" y="400" text-anchor="middle">Observations and results</text>
+      </svg>

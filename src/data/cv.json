@@ -1,0 +1,344 @@
+{
+  "profile": {
+    "name": "Junoh Kang",
+    "headline": "Ph.D. student in Electrical and Computer Engineering",
+    "affiliations": [
+      {
+        "name": "Seoul National University",
+        "unit": "Electrical and Computer Engineering",
+        "location": "Seoul, Korea"
+      },
+      {
+        "name": "SNU Computer Vision Lab",
+        "url": "https://cv.snu.ac.kr",
+        "location": "Seoul, Korea"
+      }
+    ],
+    "contacts": [
+      {
+        "type": "email",
+        "value": "junoh.kang@snu.ac.kr"
+      },
+      {
+        "type": "website",
+        "url": "https://junoh-kang.github.io"
+      },
+      {
+        "type": "github",
+        "label": "Junoh-Kang",
+        "url": "https://github.com/Junoh-Kang"
+      },
+      {
+        "type": "linkedin",
+        "label": "junohkang",
+        "url": "https://www.linkedin.com/in/junohkang"
+      },
+      {
+        "type": "google_scholar",
+        "label": "Google Scholar",
+        "url": "https://scholar.google.com/citations?user=TLGqhucAAAAJ&hl=en"
+      }
+    ]
+  },
+  "sections": [
+    {
+      "id": "education",
+      "title": "Education",
+      "items": [
+        {
+          "title": "Ph.D. program in Electrical and Computer Engineering",
+          "institution": "Seoul National University",
+          "location": "Seoul, Korea",
+          "date": "Mar 2022 - present",
+          "details": [
+            {
+              "label": "Advisor: Prof. Bohyung Han",
+              "url": "https://cv.snu.ac.kr/index.php/~bhhan/"
+            }
+          ]
+        },
+        {
+          "title": "B.S. in Statistics and Mathematics",
+          "institution": "Seoul National University",
+          "location": "Seoul, Korea",
+          "date": "Mar 2015 - Aug 2021",
+          "details": [
+            "Summa Cum Laude",
+            "GPA: 4.0/4.3"
+          ]
+        },
+        {
+          "title": "Seoul Science High School",
+          "institution": "Seoul Science High School (SSHS)",
+          "location": "Seoul, Korea",
+          "date": "Mar 2012 - Feb 2015"
+        }
+      ]
+    },
+    {
+      "id": "publications",
+      "title": "Publications",
+      "note": "(*) denotes equal contribution.",
+      "items": [
+        {
+          "id": "kang2026relobgen",
+          "title": "ReLOBGen: Replayable Limit Order Book Message Generation",
+          "authors": [
+            "Junoh Kang",
+            "Kiseop Lee",
+            "Bohyung Han"
+          ],
+          "venue": "Under review"
+        },
+        {
+          "id": "kang2025probsiginv",
+          "title": "Probabilistic Signature Inversion: Learning Conditional Distributions from Truncated Signatures",
+          "authors": [
+            "Junoh Kang",
+            "Kiseop Lee",
+            "Bohyung Han"
+          ],
+          "venue": "NeurIPS 2026",
+          "url": "https://arxiv.org/abs/2606.15332",
+          "links": [
+            {
+              "label": "arXiv",
+              "url": "https://arxiv.org/abs/2606.15332"
+            }
+          ]
+        },
+        {
+          "id": "kang2025icmsr",
+          "title": "ICM-SR: Image-Conditioned Manifold Regularization for Image Super-Resolution",
+          "authors": [
+            "Junoh Kang*",
+            "Donghun Ryou*",
+            "Bohyung Han"
+          ],
+          "venue": "Under review",
+          "url": "https://arxiv.org/abs/2511.22048",
+          "links": [
+            {
+              "label": "arXiv",
+              "url": "https://arxiv.org/abs/2511.22048"
+            }
+          ]
+        },
+        {
+          "id": "lee2025strmatch",
+          "title": "STR-Match: Matching SpatioTemporal Relevance Score for Training-Free Video Editing",
+          "authors": [
+            "Junsung Lee",
+            "Junoh Kang",
+            "Bohyung Han"
+          ],
+          "venue": "arXiv 2025",
+          "url": "https://arxiv.org/abs/2506.22868",
+          "links": [
+            {
+              "label": "arXiv",
+              "url": "https://arxiv.org/abs/2506.22868"
+            },
+            {
+              "label": "Project",
+              "url": "https://jslee525.github.io/str-match/"
+            }
+          ]
+        },
+        {
+          "id": "choi2025rx",
+          "title": "Enhanced Diffusion Sampling via Extrapolation with Multiple ODE Solutions",
+          "authors": [
+            "Jinyoung Choi",
+            "Junoh Kang",
+            "Bohyung Han"
+          ],
+          "venue": "ICLR 2025",
+          "url": "https://openreview.net/forum?id=rCGleSgNBK",
+          "links": [
+            {
+              "label": "OpenReview",
+              "url": "https://openreview.net/forum?id=rCGleSgNBK"
+            },
+            {
+              "label": "arXiv",
+              "url": "https://arxiv.org/abs/2504.01855"
+            }
+          ]
+        },
+        {
+          "id": "kim2024fifo",
+          "title": "FIFO-Diffusion: Generating Infinite Videos from Text without Training",
+          "authors": [
+            "Jihwan Kim*",
+            "Junoh Kang*",
+            "Jinyoung Choi",
+            "Bohyung Han"
+          ],
+          "venue": "NeurIPS 2024",
+          "url": "https://arxiv.org/abs/2405.11473",
+          "links": [
+            {
+              "label": "arXiv",
+              "url": "https://arxiv.org/abs/2405.11473"
+            },
+            {
+              "label": "Paper",
+              "url": "https://proceedings.neurips.cc/paper_files/paper/2024/file/a397986e0f34d4b1f0b640686ceaeff7-Paper-Conference.pdf"
+            },
+            {
+              "label": "Code",
+              "url": "https://github.com/jjihwan/FIFO-Diffusion_public"
+            },
+            {
+              "label": "Project",
+              "url": "https://jjihwan.github.io/projects/FIFO-Diffusion"
+            }
+          ]
+        },
+        {
+          "id": "kang2024ogdm",
+          "title": "Observation-Guided Diffusion Probabilistic Models",
+          "authors": [
+            "Junoh Kang*",
+            "Jinyoung Choi*",
+            "Sungik Choi",
+            "Bohyung Han"
+          ],
+          "venue": "CVPR 2024",
+          "url": "https://arxiv.org/abs/2310.04041",
+          "links": [
+            {
+              "label": "arXiv",
+              "url": "https://arxiv.org/abs/2310.04041"
+            },
+            {
+              "label": "Paper",
+              "url": "https://openaccess.thecvf.com/content/CVPR2024/papers/Kang_Observation-Guided_Diffusion_Probabilistic_Models_CVPR_2024_paper.pdf"
+            },
+            {
+              "label": "Code",
+              "url": "https://github.com/Junoh-Kang/OGDM_edm"
+            }
+          ]
+        },
+        {
+          "id": "kim2023openset",
+          "title": "Open-Set Representation Learning through Combinatorial Embedding",
+          "authors": [
+            "Geeho Kim",
+            "Junoh Kang",
+            "Bohyung Han"
+          ],
+          "venue": "CVPR 2023",
+          "url": "https://arxiv.org/abs/2106.15278",
+          "links": [
+            {
+              "label": "arXiv",
+              "url": "https://arxiv.org/abs/2106.15278"
+            },
+            {
+              "label": "Paper",
+              "url": "https://openaccess.thecvf.com/content/CVPR2023/papers/Kim_Open-Set_Representation_Learning_Through_Combinatorial_Embedding_CVPR_2023_paper.pdf"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "experience",
+      "title": "Work Experience",
+      "items": [
+        {
+          "title": "Research Intern",
+          "organization": "Adobe Research",
+          "location": "Seattle, USA",
+          "date": "Jun 2024 - Sep 2024",
+          "url": "https://research.adobe.com/"
+        },
+        {
+          "title": "Research Intern",
+          "organization": "SNU Computer Vision Lab",
+          "location": "Seoul, Korea",
+          "date": "Jun 2021 - Sep 2021",
+          "url": "https://cv.snu.ac.kr"
+        }
+      ]
+    },
+    {
+      "id": "honors",
+      "title": "Honors and Awards",
+      "items": [
+        {
+          "title": "Youlchon AI Star Scholarship",
+          "year": 2025,
+          "url": "https://aiis.snu.ac.kr/bbs/board.php?bo_table=sub4_3&sca=2025"
+        },
+        {
+          "title": "Gold medal on Samsung Humantech Paper Award",
+          "year": 2025,
+          "url": "https://humantech.samsung.com/saitext/index.jsp"
+        },
+        {
+          "title": "Dean's List",
+          "year": "2016, 2020"
+        },
+        {
+          "title": "Presidential Science Scholarship",
+          "year": "2015 - 2020",
+          "url": "https://www.kosaf.go.kr/eng/jsp/aid/aid02_01_01.jsp"
+        },
+        {
+          "title": "Bronze medal on high school Korean Mathematical Olympiad",
+          "year": 2013,
+          "url": "https://www.kmo.or.kr/main.html"
+        },
+        {
+          "title": "Silver medal on Samsung Humantech Paper Award",
+          "year": 2012,
+          "url": "https://humantech.samsung.com/saitext/index.jsp"
+        }
+      ]
+    },
+    {
+      "id": "service",
+      "title": "Academic Services",
+      "items": [
+        {
+          "role": "Conference Reviewer",
+          "venues": [
+            "NeurIPS 2025",
+            "AAAI 2025",
+            "WACV 2026",
+            "NeurIPS 2026",
+            "CVPR 2026"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "teaching",
+      "title": "Teaching",
+      "items": [
+        {
+          "title": "Teaching Assistant",
+          "course": "430.659: Topics in Computer and VLSI (Machine Learning)",
+          "institution": "Seoul National University",
+          "date": "Spring 2024"
+        },
+        {
+          "title": "Teaching Assistant",
+          "course": "430.329: Introduction to Algorithms",
+          "institution": "Seoul National University",
+          "date": "Fall 2023"
+        },
+        {
+          "title": "Teaching Assistant",
+          "course": "AI expert course",
+          "institution": "Samsung",
+          "date": "Fall 2023"
+        }
+      ]
+    }
+  ]
+}
