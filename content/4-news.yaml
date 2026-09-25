@@ -7,6 +7,12 @@
 #     - text: <phrase>
 #       url:  <URL>
 
+- date: '2026-09-29'
+  text: One paper on replayable limit-order-book message generation is available on arXiv.
+  links:
+    - text: replayable limit-order-book message generation
+      url: '#kang2026relobgen'
+
 - date: '2026-09-25'
   text: One paper on probabilistic signature inversion has been accepted to NeurIPS 2026!
   links:
