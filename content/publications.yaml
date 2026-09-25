@@ -1,0 +1,6 @@
+# Site-only extras for the publication list. The list itself comes from the CV
+# (brain/docs/refs/cv/sections/publications.yml); edit titles, authors, venues, and links there.
+#
+# badges: an award shown next to a paper's venue, keyed by paper id
+badges:
+  kim2024fifo: Gold medal, Samsung Humantech Paper Award

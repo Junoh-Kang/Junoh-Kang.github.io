@@ -8,6 +8,7 @@ import remarkMath from 'remark-math'
 // Local integrations
 import rehypeAutolinkHeadings from './src/plugins/rehype-auto-link-headings.ts'
 import rehypeMathjax4 from './src/plugins/rehype-mathjax4.ts'
+import blogAssets from './src/integrations/blog-assets.ts'
 // Shiki
 import {
   addCollapse,
@@ -147,7 +148,8 @@ export default defineConfig({
     // astro-pure will automatically add sitemap, mdx & unocss
     // sitemap(),
     // mdx(),
-    AstroPureIntegration(config)
+    AstroPureIntegration(config),
+    blogAssets()
   ],
 
   // [Experimental]

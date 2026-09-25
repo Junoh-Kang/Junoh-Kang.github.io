@@ -1,5 +1,6 @@
 ---
 import { Image } from 'astro:assets'
+import { news, newsParts, profile, pubBadges, researchInterests } from '@/data/content'
 import {
   authorRole,
   dash,
@@ -9,13 +10,13 @@ import {
   honors,
   publications
 } from '@/data/cv'
-import { news, profile, pubBadges, researchInterests } from '@/data/profile'
 
 import { Icon } from 'astro-pure/user'
 import PageLayout from '@/layouts/BaseLayout.astro'
 import PubItem from '@/components/home/PubItem.astro'
 import Section from '@/components/home/Section.astro'
-import config from '@/site-config'
+
+import { Content as About } from '../../content/about.md'
 
 // News: the latest three always show; older items within two years (of build time) sit in a toggle.
 const MAX_NEWS = 3
@@ -24,20 +25,14 @@ const newsCutoff = new Date()
 newsCutoff.setFullYear(newsCutoff.getFullYear() - NEWS_WINDOW_YEARS)
 const olderNews = news.slice(MAX_NEWS).filter((n) => new Date(n.date) >= newsCutoff)
 const pubById = Object.fromEntries(publications.map((p) => [p.id, p]))
-const missing = [
-  ...Object.keys(pubBadges),
-  ...researchInterests.flatMap((r) => r.papers.map((p) => p.id))
-].filter((id) => !pubById[id])
-if (missing.length) throw new Error(`Paper ids not in cv.json: ${missing}`)
 
-const imagePath = config.logo.src
-const images = import.meta.glob<{ default: ImageMetadata }>(
-  '/src/assets/*.{jpeg,jpg,png,gif,avif,webp}'
+// Profile photo: content/<profile.photo>
+const photos = import.meta.glob<{ default: ImageMetadata }>(
+  '/content/*.{jpeg,jpg,png,gif,avif,webp}'
 )
-if (!images[imagePath])
-  throw new Error(
-    `"${imagePath}" does not exist in glob: "src/assets/*.{jpeg,jpg,png,gif,avif,webp}"`
-  )
+const photoPath = `/content/${profile.photo}`
+if (!photos[photoPath])
+  throw new Error(`content/profile.yaml: photo "${profile.photo}" not found in content/`)
 
 const fmtDate = (d: string) =>
   new Date(d).toLocaleDateString('en-US', { month: 'short', year: 'numeric' })
@@ -48,8 +43,8 @@ const fmtDate = (d: string) =>
     {/* Left profile */}
     <aside class='profile md:sticky md:top-24 md:self-start'>
       <Image
-        src={images[imagePath]()}
-        alt={config.logo.alt ?? profile.name}
+        src={photos[photoPath]()}
+        alt={profile.name}
         class='photo'
         widths={[240, 480]}
         sizes='240px'
@@ -59,9 +54,14 @@ const fmtDate = (d: string) =>
       <h1 class='mt-4 text-2xl font-semibold'>{profile.name}</h1>
       <p class='mt-1 text-sm text-muted-foreground'>{profile.role}</p>
       <p class='mt-2 text-sm'>{profile.pitch}</p>
-      <p class='status mt-3'>
-        <span class='dot'></span>{profile.status}
-      </p>
+      {
+        profile.status && (
+          <p class='status mt-3'>
+            <span class='dot' />
+            {profile.status}
+          </p>
+        )
+      }
       <ul class='mt-4 flex flex-col gap-y-1.5 text-sm'>
         {
           profile.links.map((l) => (
@@ -82,16 +82,9 @@ const fmtDate = (d: string) =>
     {/* Main column */}
     <div id='content' class='flex min-w-0 flex-col gap-y-10'>
       <Section title='About'>
-        <p class='about'>
-          I am a fifth-year Ph.D. student at the <a href='https://cv.snu.ac.kr/'
-            >SNU Computer Vision Lab</a
-          >, advised by <a href='https://cv.snu.ac.kr/index.php/~bhhan/'>Prof. Bohyung Han</a>. I
-          build generative models for financial markets, currently limit-order-book simulation and
-          path signatures, with <a href='https://sites.google.com/view/purdue-dsfi/people'
-            >Prof. Kiseop Lee</a
-          >, building on my earlier work on diffusion models. My long-term goal is to develop world
-          models for complex stochastic systems.
-        </p>
+        <div class='about'>
+          <About />
+        </div>
       </Section>
 
       <Section title='Research Interests'>
@@ -101,7 +94,7 @@ const fmtDate = (d: string) =>
               <li>
                 <p class='font-medium'>{r.title}</p>
                 <ul class='backing'>
-                  {r.papers.map(({ id, note }) => (
+                  {r.papers.map(({ paper: id, note }) => (
                     <li>
                       <a href={`#${id}`} class='venue-link'>
                         {pubById[id].venue}
@@ -128,7 +121,9 @@ const fmtDate = (d: string) =>
             news.slice(0, MAX_NEWS).map((n) => (
               <li class='flex gap-x-4 text-sm'>
                 <span class='w-20 shrink-0 text-muted-foreground'>{fmtDate(n.date)}</span>
-                <span set:html={n.html} />
+                <span>
+                  {newsParts(n).map((p) => (p.url ? <a href={p.url}>{p.text}</a> : p.text))}
+                </span>
               </li>
             ))
           }
@@ -141,7 +136,9 @@ const fmtDate = (d: string) =>
                 {olderNews.map((n) => (
                   <li class='flex gap-x-4 text-sm'>
                     <span class='w-20 shrink-0 text-muted-foreground'>{fmtDate(n.date)}</span>
-                    <span set:html={n.html} />
+                    <span>
+                      {newsParts(n).map((p) => (p.url ? <a href={p.url}>{p.text}</a> : p.text))}
+                    </span>
                   </li>
                 ))}
               </ul>
@@ -266,10 +263,14 @@ const fmtDate = (d: string) =>
     color: hsl(var(--background));
     opacity: 0.9;
   }
+  /* The theme's external-link arrow is for blog posts; the About paragraph reads cleaner without it */
+  .about :global(a > span[style*='user-select']) {
+    display: none;
+  }
   .about {
     line-height: 1.7;
   }
-  .about a,
+  .about :global(a),
   .news :global(a) {
     color: hsl(var(--primary));
   }

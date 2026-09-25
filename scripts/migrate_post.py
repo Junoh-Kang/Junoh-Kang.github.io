@@ -3,9 +3,9 @@
 
 Usage: migrate_post.py <old-repo>
 
-For every _posts/YYYY-MM-DD-*.md in <old-repo>, writes
-src/content/blog/<slug>/index.md, copies every /blog/post/YYYYMMDD/ folder the
-post references into public/ under the same path, and writes
+For every _posts/YYYY-MM-DD-*.md in <old-repo>, writes blog/<slug>/index.md,
+copies the post's /blog/post/YYYYMMDD/ attachments into blog/<date>-<slug>/ (the
+blog-assets integration serves them back at the old URL), and writes
 scripts/redirects.json mapping the old post URL (taken from the old repo's
 built _site/) to the new one. Exits non-zero if Jekyll-only syntax survives.
 """
@@ -237,15 +237,17 @@ def migrate(old_repo, post_path, redirects):
     if fm.get("attachments"):
         body = f"**Slides:** [PDF]({fm['attachments']})\n\n" + body.lstrip("\n")
 
-    dest = ROOT / "src/content/blog" / slug / "index.md"
+    dest = ROOT / "blog" / f"{date}-{slug}" / "index.md"
     dest.parent.mkdir(parents=True, exist_ok=True)
     text = "---\n" + yaml.safe_dump(new_fm, sort_keys=False, allow_unicode=True) + "---\n\n" + body.lstrip("\n")
     dest.write_text(text)
 
     for stamp in sorted(set(re.findall(r"/blog/post/(\d{8})/", text))):
         src = old_repo / "blog/post" / stamp
-        if src.is_dir():
-            shutil.copytree(src, ROOT / "public/blog/post" / stamp, dirs_exist_ok=True)
+        if stamp != date.replace("-", ""):
+            print(f"warning: {post_path.name} references /blog/post/{stamp}/, not its own date", file=sys.stderr)
+        elif src.is_dir():
+            shutil.copytree(src, dest.parent, dirs_exist_ok=True)
         else:
             print(f"warning: {post_path.name} references missing /blog/post/{stamp}/", file=sys.stderr)
 

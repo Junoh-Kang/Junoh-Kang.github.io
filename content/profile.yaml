@@ -1,0 +1,16 @@
+# Left sidebar on the home page.
+name: Junoh Kang
+role: Ph.D. student, Seoul National University
+pitch: Generative models for images, video, and financial markets
+status: Open to quant research roles   # the small badge under the pitch; delete the line to hide it
+photo: photo.png                       # file in this folder
+cv: /assets/pdf/Junoh_Kang_CV.pdf      # generated from brain/docs/refs/cv; do not replace by hand
+
+# icon: one of email, github, x, link (generic)
+links:
+  - { label: Email, icon: email, href: 'mailto:junoh.kang@snu.ac.kr' }
+  - { label: Scholar, icon: link, href: 'https://scholar.google.com/citations?user=TLGqhucAAAAJ&hl' }
+  - { label: alphaXiv, icon: link, href: 'https://www.alphaxiv.org/@junoh-kang' }
+  - { label: GitHub, icon: github, href: 'https://github.com/Junoh-Kang' }
+  - { label: LinkedIn, icon: link, href: 'https://www.linkedin.com/in/junohkang' }
+  - { label: X, icon: x, href: 'https://x.com/junoh__kang' }

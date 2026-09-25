@@ -1,0 +1,18 @@
+# "Research Interests" on the home page: each topic lists papers in one line each.
+#   paper: the paper id from the CV (brain/docs/refs/cv/sections/publications.yml)
+#   note:  a short description shown after the venue
+# The venue and "1st author" label come from the CV automatically.
+
+- title: Generative modeling for financial markets
+  papers:
+    - paper: kang2025probsiginv
+      note: a probabilistic reframing of truncated signature inversion that quantifies its inherent ambiguity
+    - paper: kang2026relobgen
+      note: an LOB message generator whose messages are replayable by construction
+
+- title: Efficient sampling for diffusion models
+  papers:
+    - paper: kang2024ogdm
+      note: a training method for few-step diffusion sampling
+    - paper: choi2025rx
+      note: a few-step diffusion sampler inspired by Richardson extrapolation
