@@ -16,6 +16,7 @@ export type CvItem = {
   year?: string | number
   url?: string
   links?: { label: string; url: string }[]
+  award?: string
   details?: Detail[]
 }
 

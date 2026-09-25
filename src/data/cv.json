@@ -99,7 +99,6 @@
             "Bohyung Han"
           ],
           "venue": "NeurIPS 2026",
-          "url": "https://arxiv.org/abs/2606.15332",
           "links": [
             {
               "label": "arXiv",
@@ -116,7 +115,6 @@
             "Bohyung Han"
           ],
           "venue": "Under review",
-          "url": "https://arxiv.org/abs/2511.22048",
           "links": [
             {
               "label": "arXiv",
@@ -133,7 +131,6 @@
             "Bohyung Han"
           ],
           "venue": "arXiv 2025",
-          "url": "https://arxiv.org/abs/2506.22868",
           "links": [
             {
               "label": "arXiv",
@@ -154,11 +151,10 @@
             "Bohyung Han"
           ],
           "venue": "ICLR 2025",
-          "url": "https://openreview.net/forum?id=rCGleSgNBK",
           "links": [
             {
-              "label": "OpenReview",
-              "url": "https://openreview.net/forum?id=rCGleSgNBK"
+              "label": "Paper",
+              "url": "https://proceedings.iclr.cc/paper_files/paper/2025/file/f4eaa4b8f2d08edb3f0af990d56134ea-Paper-Conference.pdf"
             },
             {
               "label": "arXiv",
@@ -176,7 +172,6 @@
             "Bohyung Han"
           ],
           "venue": "NeurIPS 2024",
-          "url": "https://arxiv.org/abs/2405.11473",
           "links": [
             {
               "label": "arXiv",
@@ -194,7 +189,8 @@
               "label": "Project",
               "url": "https://jjihwan.github.io/projects/FIFO-Diffusion"
             }
-          ]
+          ],
+          "award": "Gold medal, Samsung Humantech Paper Award"
         },
         {
           "id": "kang2024ogdm",
@@ -206,7 +202,6 @@
             "Bohyung Han"
           ],
           "venue": "CVPR 2024",
-          "url": "https://arxiv.org/abs/2310.04041",
           "links": [
             {
               "label": "arXiv",
@@ -231,7 +226,6 @@
             "Bohyung Han"
           ],
           "venue": "CVPR 2023",
-          "url": "https://arxiv.org/abs/2106.15278",
           "links": [
             {
               "label": "arXiv",

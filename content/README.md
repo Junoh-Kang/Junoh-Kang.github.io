@@ -11,20 +11,20 @@ Code under `src/` normally does not need to change.
 
 | File | What it controls |
 | --- | --- |
-| `profile.yaml` | Left sidebar: name, role, one-line pitch, status badge, links, photo, CV link |
-| `photo.png` | Profile photo (the file named by `photo:` in `profile.yaml`) |
-| `about.md` | The About paragraph, in Markdown (`[text](url)` for links) |
-| `research-interests.yaml` | Research Interests: topics, and one line per backing paper |
-| `news.yaml` | News, newest first. See the format at the top of the file. |
-| `publications.yaml` | Award badges shown next to a paper's venue |
+| `1-profile.yaml` | Left sidebar: name, role, one-line pitch, status badge, links, photo, CV link |
+| `1-photo.png` | Profile photo (the file named by `photo:` in `1-profile.yaml`) |
+| `2-about.md` | The About paragraph, in Markdown (`[text](url)` for links) |
+| `3-research-interests.yaml` | Research Interests: topics, and one line per backing paper |
+| `4-news.yaml` | News, newest first. See the format at the top of the file. |
+| `5-cv/` | Shortcut to the CV source: Education, Experience, Honors, and Publications (see below) |
 
-`research-interests.yaml` and `publications.yaml` refer to papers by their CV id, for example `kim2024fifo`. The build fails with a message that names the file if an id is not in the CV, or if a news `linkText` does not appear in its `text`.
+`3-research-interests.yaml` refers to papers by their CV id, for example `kim2024fifo`. The build fails with a message that names the file if an id is not in the CV, or if a news `linkText` does not appear in its `text`.
 
 ## CV, education, experience, honors, and the publication list
 
-These come from the CV, not from this folder. The source of truth is `brain/docs/refs/cv/`:
+These come from the CV, not from this folder. The source of truth is `brain/docs/refs/cv/`. On this Mac, `content/5-cv` is a shortcut (symlink) to it, so you can open the CV files from here. The shortcut is git-ignored because the CV source has private items; it does not exist in other checkouts.
 
-- Papers are in `sections/publications.yml`, including `id`, venue, and links.
+- Papers are in `sections/publications.yml`, including `id`, venue, links, and an optional `award` shown next to the venue.
 - Education, experience, and honors are in their own `sections/*.yml`.
 
 After editing, regenerate the site data and the CV PDF:

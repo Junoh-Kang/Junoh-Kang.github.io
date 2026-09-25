@@ -3,7 +3,7 @@ name: Junoh Kang
 role: Ph.D. student, Seoul National University
 pitch: Generative models for images, video, and financial markets
 status: Open to quant research roles   # the small badge under the pitch; delete the line to hide it
-photo: photo.png                       # file in this folder
+photo: 1-photo.png                       # file in this folder
 cv: /assets/pdf/Junoh_Kang_CV.pdf      # generated from brain/docs/refs/cv; do not replace by hand
 
 # icon: one of email, github, x, link (generic)

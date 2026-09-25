@@ -1,6 +1,6 @@
 ---
 import { Image } from 'astro:assets'
-import { news, newsParts, profile, pubBadges, researchInterests } from '@/data/content'
+import { news, newsParts, profile, researchInterests } from '@/data/content'
 import {
   authorRole,
   dash,
@@ -16,7 +16,7 @@ import PageLayout from '@/layouts/BaseLayout.astro'
 import PubItem from '@/components/home/PubItem.astro'
 import Section from '@/components/home/Section.astro'
 
-import { Content as About } from '../../content/about.md'
+import { Content as About } from '../../content/2-about.md'
 
 // News: the latest three always show; older items within two years (of build time) sit in a toggle.
 const MAX_NEWS = 3
@@ -32,7 +32,7 @@ const photos = import.meta.glob<{ default: ImageMetadata }>(
 )
 const photoPath = `/content/${profile.photo}`
 if (!photos[photoPath])
-  throw new Error(`content/profile.yaml: photo "${profile.photo}" not found in content/`)
+  throw new Error(`content/1-profile.yaml: photo "${profile.photo}" not found in content/`)
 
 const fmtDate = (d: string) =>
   new Date(d).toLocaleDateString('en-US', { month: 'short', year: 'numeric' })
@@ -207,7 +207,7 @@ const fmtDate = (d: string) =>
       <Section title='Publications' id='publications'>
         <p class='text-sm text-muted-foreground'>* denotes equal contribution.</p>
         <ul>
-          {publications.map((p) => <PubItem pub={p} badge={pubBadges[p.id ?? '']} />)}
+          {publications.map((p) => <PubItem pub={p} />)}
         </ul>
       </Section>
     </div>

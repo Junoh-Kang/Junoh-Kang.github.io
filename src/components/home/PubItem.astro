@@ -3,18 +3,24 @@ import type { CvItem } from '@/data/cv'
 
 interface Props {
   pub: CvItem
-  badge?: string
 }
 
-const { pub, badge } = Astro.props
+const { pub } = Astro.props
+const badge = pub.award // from the CV source (sections/publications.yml)
 // Bold the site owner's name, keeping any equal-contribution marker.
 const authors = (pub.authors ?? [])
   .map((a) => a.replace(/^Junoh Kang(\*?)$/, '<strong>Junoh Kang$1</strong>'))
   .join(', ')
 
-// Show only Paper, Code, and Project. Paper prefers the published PDF, then OpenReview, then arXiv.
+// Show only Paper, Code, and Project. Paper opens alphaXiv (built from the arXiv link, fast),
+// else the published PDF. The PDF CV uses the same rule (brain/docs/refs/cv/export.rb).
 const byLabel = (label: string) => pub.links?.find((l) => l.label === label)?.url
-const paper = byLabel('Paper') ?? byLabel('OpenReview') ?? byLabel('arXiv')
+const arxivId = byLabel('arXiv')?.match(
+  /arxiv\.org\/(?:abs|pdf)\/([^/?#]+?)(?:\.pdf)?(?:[?#].*)?$/
+)?.[1]
+const paper = arxivId
+  ? `https://www.alphaxiv.org/abs/${arxivId}`
+  : (byLabel('arXiv') ?? byLabel('Paper'))
 const links = [
   { label: 'Paper', url: paper },
   { label: 'Code', url: byLabel('Code') },
