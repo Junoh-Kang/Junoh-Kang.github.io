@@ -38,6 +38,7 @@ export const education = cvSection('education')
 export const experience = cvSection('experience')
 export const honors = cvSection('honors')
 export const currentResearch = cvSection('current_research')
+export const service = cvSection('service') as (CvItem & { role?: string; venues?: string[] })[]
 
 const ME = 'Junoh Kang'
 

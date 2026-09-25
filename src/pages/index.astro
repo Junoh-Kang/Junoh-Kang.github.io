@@ -8,7 +8,8 @@ import {
   education,
   experience,
   honors,
-  publications
+  publications,
+  service
 } from '@/data/cv'
 
 import { Icon } from 'astro-pure/user'
@@ -33,6 +34,29 @@ const photos = import.meta.glob<{ default: ImageMetadata }>(
 const photoPath = `/content/${profile.photo}`
 if (!photos[photoPath])
   throw new Error(`content/1-profile.yaml: photo "${profile.photo}" not found in content/`)
+
+// Academic Services, grouped like "Organizer / Invited Talk / Reviewer". Each CV service
+// item is { role, venues }; groups with no public items are hidden.
+const byRole = (role: string) =>
+  service.filter((s) => s.role === role).flatMap((s) => s.venues ?? [])
+// Reviewer lines list venue names once, without years ("NeurIPS 2025, NeurIPS 2026" -> "NeurIPS")
+const venueNames = (vs: string[]) =>
+  [...new Set(vs.map((v) => v.replace(/\s*\d{4}$/, '')))].join(', ')
+type ServiceLine = { label?: string; text: string }
+const serviceGroups: { title: string; lines: ServiceLine[] }[] = [
+  { title: 'Organizer', lines: byRole('Organizer').map((v) => ({ text: v })) },
+  {
+    title: 'Invited Talk',
+    lines: byRole('Invited Talk').length ? [{ text: byRole('Invited Talk').join(', ') }] : []
+  },
+  {
+    title: 'Reviewer',
+    lines: [
+      { label: 'Journal', text: venueNames(byRole('Journal Reviewer')) },
+      { label: 'Conference', text: venueNames(byRole('Conference Reviewer')) }
+    ].filter((l) => l.text)
+  }
+].filter((g) => g.lines.length > 0)
 
 const fmtDate = (d: string) =>
   new Date(d).toLocaleDateString('en-US', { month: 'short', year: 'numeric' })
@@ -148,25 +172,22 @@ const fmtDate = (d: string) =>
       </Section>
 
       <Section title='Education'>
-        <ul class='cv-list edu'>
+        <ul class='rows'>
           {
             education.map((e) => {
               // "Seoul Science High School" + "Seoul Science High School (SSHS)": show the name once
               const sameName = (e.institution ?? '').startsWith(e.title)
               return (
                 <li>
-                  <span class='when'>{dash(e.date)}</span>
-                  <div class='min-w-0 flex-1'>
-                    {/* Degree on the left, school pushed to the right edge (as in the PDF CV) */}
-                    <p class='edu-head'>
-                      <span class='font-medium'>{sameName ? e.institution : e.title}</span>
-                      {!sameName && <span class='school'>{e.institution}</span>}
-                    </p>
+                  <div class='min-w-0'>
+                    <p class='primary'>{e.institution}</p>
+                    {!sameName && <p class='degree'>{e.title}</p>}
                     {e.details?.length ? (
-                      <p class='text-muted-foreground'>
+                      <p class='sub'>
+                        {'- '}
                         {e.details.map((d, i) => (
                           <>
-                            {i > 0 && ' · '}
+                            {i > 0 && ', '}
                             {typeof d !== 'string' && d.url ? (
                               <a href={d.url}>{d.label}</a>
                             ) : (
@@ -177,6 +198,7 @@ const fmtDate = (d: string) =>
                       </p>
                     ) : null}
                   </div>
+                  <span class='when'>{dash(e.date)}</span>
                 </li>
               )
             })
@@ -185,33 +207,20 @@ const fmtDate = (d: string) =>
       </Section>
 
       <Section title='Experience'>
-        <ul class='cv-list edu'>
+        <ul class='rows'>
           {
             experience.map((e) => (
               <li>
-                <span class='when'>{dash(e.date)}</span>
-                <div>
-                  <p class='font-medium'>
-                    {e.url ? <a href={e.url}>{e.organization}</a> : e.organization}
-                    {e.location && (
-                      <span class='font-normal text-muted-foreground'> · {e.location}</span>
-                    )}
+                <div class='min-w-0'>
+                  <p>
+                    <span class='primary'>
+                      {e.url ? <a href={e.url}>{e.organization}</a> : e.organization}
+                    </span>
+                    <span class='secondary'>{e.title}</span>
                   </p>
-                  <p>{e.title}</p>
+                  {e.location && <p class='sub italic'>{e.location}</p>}
                 </div>
-              </li>
-            ))
-          }
-        </ul>
-      </Section>
-
-      <Section title='Honors'>
-        <ul class='cv-list'>
-          {
-            honors.map((a) => (
-              <li>
-                <span class='when'>{dash(a.year)}</span>
-                <span>{a.url ? <a href={a.url}>{a.title}</a> : a.title}</span>
+                <span class='when'>{dash(e.date)}</span>
               </li>
             ))
           }
@@ -224,6 +233,37 @@ const fmtDate = (d: string) =>
           {publications.map((p) => <PubItem pub={p} />)}
         </ul>
       </Section>
+
+      <Section title='Honors'>
+        <ul class='rows compact'>
+          {
+            honors.map((a) => (
+              <li>
+                <span class='min-w-0'>{a.url ? <a href={a.url}>{a.title}</a> : a.title}</span>
+                <span class='when'>{dash(a.year)}</span>
+              </li>
+            ))
+          }
+        </ul>
+      </Section>
+
+      {
+        serviceGroups.length > 0 && (
+          <Section title='Academic Services'>
+            {serviceGroups.map((g) => (
+              <div class='svc'>
+                <h3 class='svc-head'>{g.title}</h3>
+                {g.lines.map((l) => (
+                  <p>
+                    {l.label && <span class='font-medium'>{l.label}: </span>}
+                    {l.text}
+                  </p>
+                ))}
+              </div>
+            ))}
+          </Section>
+        )
+      }
     </div>
   </main>
 </PageLayout>
@@ -288,38 +328,55 @@ const fmtDate = (d: string) =>
   .news :global(a) {
     color: hsl(var(--primary));
   }
-  .cv-list {
+  /* Education / Experience / Honors: content on the left, dates pushed to the right edge */
+  .rows {
     display: flex;
     flex-direction: column;
+    gap: 0.8rem;
+  }
+  .rows.compact {
     gap: 0.35rem;
-    font-size: 0.875rem;
   }
-  .cv-list li {
-    display: flex;
-    gap: 1rem;
-  }
-  .cv-list.edu {
-    gap: 0.7rem;
-  }
-  .cv-list.edu p {
-    line-height: 1.5;
-  }
-  .edu-head {
+  .rows li {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    gap: 0 1rem;
+    align-items: baseline;
+    gap: 0 1.5rem;
   }
-  .edu-head .school {
+  .rows .primary {
+    font-weight: 600;
+  }
+  .rows .secondary {
+    margin-inline-start: 0.6rem;
     color: hsl(var(--muted-foreground));
   }
-  .cv-list .when {
-    width: 9.5rem;
+  .rows .degree {
+    color: hsl(var(--muted-foreground));
+  }
+  .rows .sub {
+    font-size: 0.875rem;
+    color: hsl(var(--muted-foreground));
+  }
+  .rows .when {
     flex-shrink: 0;
+    font-size: 0.875rem;
     color: hsl(var(--muted-foreground));
   }
-  .cv-list a {
+  .rows a {
     color: hsl(var(--primary));
+  }
+  .svc + .svc {
+    margin-top: 0.75rem;
+  }
+  .svc-head {
+    font-size: 0.875rem;
+    color: hsl(var(--muted-foreground));
+    margin-bottom: 0.2rem;
+  }
+  .svc p {
+    font-size: 0.9375rem;
+    line-height: 1.6;
   }
   .interests {
     display: flex;

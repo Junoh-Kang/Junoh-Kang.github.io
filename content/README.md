@@ -16,16 +16,17 @@ Code under `src/` normally does not need to change.
 | `2-about.md` | The About paragraph, in Markdown (`[text](url)` for links) |
 | `3-research-interests.yaml` | Research Interests: topics, and one line per backing paper |
 | `4-news.yaml` | News, newest first. See the format at the top of the file. |
-| `5-cv/` | Shortcut to the CV source: Education, Experience, Honors, and Publications (see below) |
+| `cv/` | Shortcut to the CV source: Education, Experience, Publications, Honors, and Service (see below) |
 
 `3-research-interests.yaml` refers to papers by their CV id, for example `kim2024fifo`. The build fails with a message that names the file if an id is not in the CV, or if a news `linkText` does not appear in its `text`.
 
-## CV, education, experience, honors, and the publication list
+## CV: education, experience, publications, honors, and service
 
-These come from the CV, not from this folder. The source of truth is `brain/docs/refs/cv/`. On this Mac, `content/5-cv` is a shortcut (symlink) to it, so you can open the CV files from here. The shortcut is git-ignored because the CV source has private items; it does not exist in other checkouts.
+These come from the CV, not from this folder. The source of truth is `brain/docs/refs/cv/`. On this Mac, `content/cv` is a shortcut (symlink) to it, so you can open the CV files from here. The shortcut is git-ignored because the CV source has private items; it does not exist in other checkouts.
 
 - Papers are in `sections/publications.yml`, including `id`, venue, links, and an optional `award` shown next to the venue.
 - Education, experience, and honors are in their own `sections/*.yml`.
+- Academic Services come from `sections/service.yml`. Each item is `role` plus a `venues` list. The site groups them by role: `Organizer`, `Invited Talk`, and `Journal Reviewer` / `Conference Reviewer` (shown under Reviewer, years dropped). A group with no public items is hidden.
 
 After editing, regenerate the site data and the CV PDF:
 
