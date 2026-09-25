@@ -156,11 +156,25 @@ const fmtDate = (d: string) =>
               return (
                 <li>
                   <span class='when'>{dash(e.date)}</span>
-                  <div>
-                    <p class='font-medium'>{sameName ? e.institution : e.title}</p>
-                    {!sameName && <p>{e.institution}</p>}
+                  <div class='min-w-0 flex-1'>
+                    {/* Degree on the left, school pushed to the right edge (as in the PDF CV) */}
+                    <p class='edu-head'>
+                      <span class='font-medium'>{sameName ? e.institution : e.title}</span>
+                      {!sameName && <span class='school'>{e.institution}</span>}
+                    </p>
                     {e.details?.length ? (
-                      <p class='text-muted-foreground'>{e.details.map(detailText).join(' · ')}</p>
+                      <p class='text-muted-foreground'>
+                        {e.details.map((d, i) => (
+                          <>
+                            {i > 0 && ' · '}
+                            {typeof d !== 'string' && d.url ? (
+                              <a href={d.url}>{d.label}</a>
+                            ) : (
+                              detailText(d)
+                            )}
+                          </>
+                        ))}
+                      </p>
                     ) : null}
                   </div>
                 </li>
@@ -197,7 +211,7 @@ const fmtDate = (d: string) =>
             honors.map((a) => (
               <li>
                 <span class='when'>{dash(a.year)}</span>
-                <span>{a.title}</span>
+                <span>{a.url ? <a href={a.url}>{a.title}</a> : a.title}</span>
               </li>
             ))
           }
@@ -289,6 +303,15 @@ const fmtDate = (d: string) =>
   }
   .cv-list.edu p {
     line-height: 1.5;
+  }
+  .edu-head {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0 1rem;
+  }
+  .edu-head .school {
+    color: hsl(var(--muted-foreground));
   }
   .cv-list .when {
     width: 9.5rem;
