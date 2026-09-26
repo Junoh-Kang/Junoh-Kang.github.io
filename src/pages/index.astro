@@ -336,9 +336,21 @@ const fmtDate = (d: string) =>
   .about {
     line-height: 1.7;
   }
+  .about :global(strong) {
+    font-weight: 600;
+  }
   .about :global(a),
   .news :global(a) {
     color: hsl(var(--primary));
+  }
+  /* Home text links: plain navy at rest, underline on hover (Paper/Code keep their own faint underline) */
+  .about :global(a:hover),
+  .news :global(a:hover),
+  .rows a:hover,
+  .venue-link:hover {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
   }
   /* Education / Experience / Honors: content on the left, dates pushed to the right edge */
   .rows {
@@ -412,9 +424,6 @@ const fmtDate = (d: string) =>
   .venue-link {
     font-weight: 600;
     color: hsl(var(--primary));
-  }
-  .venue-link:hover {
-    text-decoration: underline;
   }
   .meta {
     font-size: 0.8125rem;
