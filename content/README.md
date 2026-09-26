@@ -12,7 +12,7 @@ Code under `src/` normally does not need to change.
 | File | What it controls |
 | --- | --- |
 | `1-profile.yaml` | Left sidebar: name, role, one-line pitch, status badge, links, photo, CV link |
-| `1-photo.png` | Profile photo (the file named by `photo:` in `1-profile.yaml`) |
+| `photos/` | Square profile photo candidates; `photo:` in `1-profile.yaml` picks one. Crop new photos to 1:1 before adding them. |
 | `2-about.md` | The About paragraph, in Markdown (`[text](url)` for links) |
 | `3-research-interests.yaml` | Research Interests: topics, and one line per backing paper |
 | `4-news.yaml` | News, newest first. See the format at the top of the file. |

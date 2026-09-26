@@ -29,7 +29,7 @@ const pubById = Object.fromEntries(publications.map((p) => [p.id, p]))
 
 // Profile photo: content/<profile.photo>
 const photos = import.meta.glob<{ default: ImageMetadata }>(
-  '/content/*.{jpeg,jpg,png,gif,avif,webp}'
+  '/content/**/*.{jpeg,jpg,png,gif,avif,webp}'
 )
 const photoPath = `/content/${profile.photo}`
 if (!photos[photoPath])
@@ -284,7 +284,7 @@ const fmtDate = (d: string) =>
   .photo {
     width: 100%;
     max-width: 15rem;
-    aspect-ratio: 4 / 5;
+    aspect-ratio: 1 / 1;
     object-fit: cover;
     border-radius: 0.75rem;
   }

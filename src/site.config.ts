@@ -26,7 +26,7 @@ export const theme: ThemeUserConfig = {
   },
   /** Set a logo image to show in the homepage. */
   logo: {
-    src: '/content/1-photo.png',
+    src: '/content/photos/forest.jpg',
     alt: 'Junoh Kang'
   },
 
