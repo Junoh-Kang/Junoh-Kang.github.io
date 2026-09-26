@@ -6,9 +6,8 @@ publishDate: '2025-08-28'
 tags:
 - paper-review
 - generative
+slides: presentation.pdf
 ---
-
-**Slides:** [PDF](/blog/post/20250828/presentation.pdf)
 
 ## Overview
 
@@ -19,9 +18,3 @@ In this post, I review two papers accelerating sampling in time, which are motiv
 
 - Parallel Sampling of Diffusion Models
 - Self-Refining Diffusion Samplers: Enabling Paralleization via Parareal Iterations
-
----
-
-<iframe src="/blog/post/20250828/presentation.pdf" width="100%" height="600" style="border: none;">
-  This browser does not support PDFs. Please download the PDF to view it: <a href="/blog/post/20250828/presentation.pdf">Download PDF</a>
-</iframe>

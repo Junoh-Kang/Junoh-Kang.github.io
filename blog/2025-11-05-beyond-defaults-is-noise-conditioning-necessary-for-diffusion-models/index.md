@@ -7,9 +7,8 @@ publishDate: '2025-11-05'
 tags:
 - paper-review
 - generative
+slides: presentation.pdf
 ---
-
-**Slides:** [PDF](/blog/post/20251105/presentation.pdf)
 
 ## Overview
 
@@ -20,10 +19,3 @@ Traditional diffusion models explicitly specify noise level to neural network to
   
 **"Equilibrium Matching: Generative Modeling with Implicit Energy-based Models"**
   - This work reformulates the generative modeling problem as learning an energy landscape, providing a theoretical foundation for noise-unconditioning approaches.
-
----
-
-<iframe src="/blog/post/20251105/presentation.pdf" width="100%" height="600" style="border: none;">
-  This browser does not support PDFs. Please download the PDF to view it: <a href="/blog/post/20251105/presentation.pdf">Download PDF</a>
-</iframe>
-

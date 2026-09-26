@@ -6,9 +6,8 @@ publishDate: '2023-10-26'
 tags:
 - paper-review
 - generative
+slides: presentation.pdf
 ---
-
-**Slides:** [PDF](/blog/post/20231026/presentation.pdf)
 
 ## Overview 
 In deep learning, practical implementations are just as important as theoretical supports. 

@@ -56,6 +56,9 @@ const toc = generateToc(headings)
         progressBar: link.previousElementSibling as HTMLElement,
         slug: (link.getAttribute('href') || '').substring(1)
       }))
+      // Track only the headings listed in the TOC, so a section stays active through its subsections
+      const slugs = new Set(this.tocLinks.map((l) => l.slug))
+      this.headings = this.headings.filter((h) => slugs.has(h.id))
     }
 
     updatePositionAndStyle = () => {

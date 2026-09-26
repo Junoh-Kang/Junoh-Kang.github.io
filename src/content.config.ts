@@ -43,6 +43,8 @@ const blog = defineCollection({
       language: z.string().optional(),
       draft: z.boolean().default(false),
       pin: z.boolean().optional(),
+      // Slide deck file next to index.md (e.g. presentation.pdf); shown above the TOC
+      slides: z.string().optional(),
       // Special fields
       comment: z.boolean().default(true)
     })

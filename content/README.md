@@ -49,6 +49,7 @@ blog/YYYY-MM-DD-<slug>/
 - The folder name starts with the post's `publishDate`, so posts sort by date. The build stops if the two differ.
 - The post URL is `/blog/<slug>`, without the date.
 - Files next to `index.md` are served at `/blog/post/<YYYYMMDD>/<file>`, where `YYYYMMDD` is the post's `publishDate`. Refer to them with that path inside the post, for example `<img src="/blog/post/20260312/fig/cm.png" />`. This matches the old Jekyll URLs.
+- A slide deck goes beside `index.md` and is named in the front matter, for example `slides: presentation.pdf` (PDF or HTML). The post then shows a Slides card under its title. Make the card's preview image once with `scripts/slides-thumb.sh blog/<post>/`, which writes `slides-thumb.png` next to the deck.
 - Math uses `$...$` inline and `$$` on their own lines for display equations. It is rendered with MathJax at build time, so `\label{}` and `\eqref{}` work.
 
 ## Preview

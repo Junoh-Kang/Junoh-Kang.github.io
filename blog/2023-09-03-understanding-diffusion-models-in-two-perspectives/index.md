@@ -6,9 +6,8 @@ publishDate: '2023-09-03'
 tags:
 - survey
 - generative
+slides: presentation.pdf
 ---
-
-**Slides:** [PDF](/blog/post/20230903/presentation.pdf)
 
 ## Overview
 

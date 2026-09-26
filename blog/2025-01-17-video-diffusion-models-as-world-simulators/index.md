@@ -7,9 +7,8 @@ tags:
 - paper-review
 - generative
 - video
+slides: presentation.pdf
 ---
-
-**Slides:** [PDF](/blog/post/20250117/presentation.pdf)
 
 ## Overview
 
@@ -111,9 +110,6 @@ Through above approaches, **Oasis** can autoregressively generate long videos wi
 However, models do not have long time horizon memory, leading to inconsistent videos.
 While there is no innovative breakthrough yet, I believe that video models with long-term memory is an important next step.
 
-<iframe src="/blog/post/20250117/presentation.pdf" width="100%" height="600" style="border: none;">
-  This browser does not support PDFs. Please download the PDF to view it: <a href="/blog/post/20250117/presentation.pdf">Download PDF</a>
-</iframe>
 
 ## References
 
