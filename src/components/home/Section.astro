@@ -1,11 +1,15 @@
 ---
 import { cn } from 'astro-pure/utils'
 
-const { class: className, title, id } = Astro.props
+// `note`: optional small gray text at the right end of the heading row.
+const { class: className, title, id, note } = Astro.props
 ---
 
 <section id={id} class={cn('flex flex-col gap-y-4', className)}>
-  <h2 class='border-b pb-2 text-lg font-semibold'>{title}</h2>
+  <div class='flex items-baseline justify-between gap-x-4 border-b pb-2'>
+    <h2 class='text-lg font-semibold'>{title}</h2>
+    {note && <span class='text-xs text-muted-foreground'>{note}</span>}
+  </div>
   <div class='flex flex-col gap-y-3'>
     <slot />
   </div>
