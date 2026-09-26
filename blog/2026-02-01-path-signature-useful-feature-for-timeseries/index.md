@@ -11,25 +11,25 @@ tags:
 - statistics
 ---
 
-### (Motivation) Random Variable: Polynomial Features
+## (Motivation) Random Variable: Polynomial Features
 
-#### Definition (Words / Multi-Indices)
+### Definition (Words / Multi-Indices)
 A word (or multi-index) is a finite sequence $I:=i_1 \ldots i_k$ with $i_1,\ldots,i_k \in \{1,\ldots,d\}$. The length of $I$ is $|I|:=k$. The set $\{1,\ldots,d\}$ is the alphabet. Denote $\mathcal{W}$ by the set of all words.
 
-#### Definition (Polynomials for RV)
+### Definition (Polynomials for RV)
 For a vector $x=(x^1,\ldots,x^d)$ and a multi-index $I=(i_1,\ldots,i_k)$, define $x^{I}=x^{(i_1,\ldots,i_k)}:=x^{i_1}\ldots x^{i_k}$. The collection $\{x^I\}_{I\in \mathcal{W}}$ is called the polynomials of $x$.
 
-#### Theorem (Stone-Weierstrass, Carleman)
+### Theorem (Stone-Weierstrass, Carleman)
 Under suitable integrability conditions on $\mathbb{P}$, $\mathbb{E}_{X \sim \mathbb{P}}[X^I] = \mathbb{E}_{X \sim \mathbb{Q}}[Y^I] ~~~\forall I \in \mathcal{W} ~~~~~\Leftrightarrow~~~~~ \mathbb{P} = \mathbb{Q}$
 
 ---
 
-### Paths: Iterated Integrals and Signature
+## Paths: Iterated Integrals and Signature
 
-#### Definition (Path-space)
+### Definition (Path-space)
 Let $\mathcal{P}([a,b], \mathbb{R}^d)$ denote the space of continuous bounded variation paths $X=(X^1,\ldots,X^d):[a,b] \rightarrow \mathbb{R}^d.$
 
-#### Definition (Iterated integrals)
+### Definition (Iterated integrals)
 For $X \in \mathcal{P}([a,b], \mathbb{R}^d)$ and word $I=i_1 \ldots i_k$, define the iterated integral $S(X)_{a,\cdot}^I \in \mathcal{P}([a,b], \mathbb{R})$ inductively by 
 
 $$
@@ -42,16 +42,16 @@ $$
 S(X)_{a,t}^{I} = \int_{a<t_1<\ldots<t_k<t} dX_{t_1}^{i_1} \ldots dX_{t_k}^{i_k}.
 $$
 
-#### Definition (Signature)
+### Definition (Signature)
 The signature $S(X)_{a,b}$ of $X \in \mathcal{P}([a,b], \mathbb{R}^d)$ is the collection of real numbers indexed by words $\{ S(X)_{a,b}^I\}_{I\in\mathcal{W}}=(S(X)_{a,b}^{\phi},S(X)_{a,b}^1,\ldots,S(X)_{a,b}^d,S(X)_{a,b}^{11}, \ldots S(X)_{a,b}^{dd},\ldots).$
 
-##### Definition 
+#### Definition 
 
 $$
 S(X)_{a,b}^{(k)} = \{ S(X)_{a,b}^I \}_{|I|=k}
 $$
 
-#### Exercise (Linear path)
+### Exercise (Linear path)
 Let $x \in \mathbb{R}^d$ and define $X(t) = tx$ for $t\in[0,1]$. Then $S(X)_{0,1}^{i_1 \ldots i_k} = \frac{x^{i_1}\ldots x_{i_k}}{k!}.$ sol) 
 
 $$
@@ -63,7 +63,7 @@ S(X)_{0,1}^{i_1 \ldots i_k}
 \end{align*}_\square
 $$
 
-##### Exercise (1D path)
+#### Exercise (1D path)
 > For $X \in \mathcal{P}([a,b],\mathbb{R})$, $S(X)_{a,b}^{1 \ldots 1} = \frac{(X_b-X_a)^k}{k!}.$sol)
 
 $$

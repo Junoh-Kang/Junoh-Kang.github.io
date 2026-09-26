@@ -42,6 +42,10 @@ const socialImageURL = new URL(ogImage ? ogImage : config.socialCard, Astro.url)
   #content.prose :is(h1, h2, h3, h4, h5, h6, table, figcaption) {
     font-family: var(--font-inter), system-ui, sans-serif;
   }
+  /* A #### right under a ### would otherwise sit flush against it */
+  #content.prose h3 + h4 {
+    margin-top: 1.25em;
+  }
 </style>
 
 {/* Canonical URL */}
