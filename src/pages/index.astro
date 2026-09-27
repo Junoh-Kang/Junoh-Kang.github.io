@@ -285,6 +285,27 @@ const fmtDate = (d: string) =>
   </main>
 </PageLayout>
 
+<script>
+  // Clicking a paper link (Research Interests venue, News) scrolls so the paper lands under the
+  // pointer, where its hover band shows which one it is. Keyboard activation and touch screens
+  // (no hover) keep the default jump.
+  const canHover = window.matchMedia('(hover: hover)').matches
+  document.addEventListener('click', (e) => {
+    const link = (e.target as HTMLElement).closest<HTMLAnchorElement>('a[href^="#"]')
+    if (!link || e.detail === 0 || !canHover) return
+    const title = document.getElementById(decodeURIComponent(link.hash.slice(1)))
+    const pub = title?.closest<HTMLElement>('.pub')
+    if (!pub) return
+    e.preventDefault()
+    const rect = pub.getBoundingClientRect()
+    const headerBottom = document.querySelector('header-component')?.getBoundingClientRect().bottom ?? 0
+    // Center the paper on the pointer, but never tuck its top under the sticky header
+    const top = Math.max(e.clientY - rect.height / 2, headerBottom + 16)
+    window.scrollTo({ top: window.scrollY + rect.top - top, behavior: 'smooth' })
+    history.pushState(null, '', link.hash)
+  })
+</script>
+
 <style>
   .photo {
     width: 100%;
@@ -293,15 +314,16 @@ const fmtDate = (d: string) =>
     object-fit: cover;
     border-radius: 0.75rem;
   }
-  /* Neutral pill; only the dot is colored, green as the usual "available" signal */
+  /* Green status chip (the usual "available" signal); #177a43 text keeps 4.9:1 contrast on the tint */
   .status {
     display: inline-flex;
     align-items: center;
     gap: 0.45rem;
     font-size: 0.8125rem;
     font-weight: 500;
-    color: hsl(var(--foreground));
-    border: 1px solid hsl(var(--border));
+    color: #177a43;
+    background: rgb(31 157 85 / 0.08);
+    border: 1px solid rgb(31 157 85 / 0.4);
     border-radius: 999px;
     padding: 0.2rem 0.7rem;
   }

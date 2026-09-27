@@ -69,11 +69,13 @@ const underReview = pub.venue === 'Under review'
   .pub:last-child {
     border-bottom: 0;
   }
-  /* Jumped to from Research Interests or News: tint the paper while it is the URL #target */
-  .pub:has(.title:target) {
-    --hl: hsl(var(--primary) / 0.05);
-    background: var(--hl);
-    box-shadow: -0.75rem 0 0 var(--hl), 0.75rem 0 0 var(--hl);
+  /* The paper under the pointer gets a light gray band (a jump from Research Interests or News
+     lands the paper under the pointer, so the same band marks where it landed) */
+  @media (hover: hover) {
+    .pub:hover {
+      background: hsl(var(--muted));
+      box-shadow: -0.75rem 0 0 hsl(var(--muted)), 0.75rem 0 0 hsl(var(--muted));
+    }
   }
   .title {
     /* Keep the title clear of the sticky header when jumped to */
