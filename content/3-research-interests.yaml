@@ -5,7 +5,7 @@
 
 - title: Generative modeling for financial markets
   papers:
-    - paper: kang2025probsiginv
+    - paper: kang2026probsiginv
       note: a probabilistic reframing of truncated signature inversion that quantifies its inherent ambiguity
     - paper: kang2026relobgen
       note: an LOB message generator whose messages are replayable by construction
