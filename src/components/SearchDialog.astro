@@ -1,0 +1,173 @@
+---
+// Search as a floating dialog over the current page, instead of navigating to /search.
+// Opens from the header search link (data-search-open), ⌘K / Ctrl+K, or "/".
+// Without JavaScript the header link still goes to the /search page.
+import '@pagefind/default-ui/css/ui.css'
+---
+
+<dialog id='search-dialog' aria-label='Search'>
+  <div class='head'>
+    <span class='title'>Search</span>
+    <button type='button' class='close' data-search-close aria-label='Close search'>Esc</button>
+  </div>
+  {
+    import.meta.env.DEV ? (
+      <p class='dev'>Search is disabled in dev mode. Build and preview to try it.</p>
+    ) : (
+      <div id='search-dialog-ui' />
+    )
+  }
+</dialog>
+
+<script>
+  const formatURL = (path: string) => path.replace(/(.)\/(#.*)?$/, '$1$2')
+
+  const dialog = document.getElementById('search-dialog') as HTMLDialogElement | null
+  let loaded = false
+
+  async function loadUI() {
+    if (loaded || import.meta.env.DEV) return
+    loaded = true
+    // @ts-expect-error — Missing types for @pagefind/default-ui package.
+    const { PagefindUI } = await import('@pagefind/default-ui')
+    new PagefindUI({
+      element: '#search-dialog-ui',
+      baseUrl: import.meta.env.BASE_URL,
+      bundlePath: `${import.meta.env.BASE_URL.replace(/\/$/, '')}/pagefind/`,
+      showImages: false,
+      showSubResults: true,
+      processResult: (result: { url: string; sub_results: Array<{ url: string }> }) => {
+        result.url = formatURL(result.url)
+        result.sub_results = result.sub_results.map((sub) => ({ ...sub, url: formatURL(sub.url) }))
+      }
+    })
+  }
+
+  async function open() {
+    if (!dialog || dialog.open) return
+    dialog.showModal()
+    document.documentElement.classList.add('search-open')
+    await loadUI()
+    // Pagefind renders its input asynchronously; focus it once it exists
+    const focus = () => {
+      const input = dialog.querySelector<HTMLInputElement>('.pagefind-ui__search-input')
+      if (input) input.focus()
+      else requestAnimationFrame(focus)
+    }
+    focus()
+  }
+
+  function close() {
+    dialog?.close()
+  }
+
+  dialog?.addEventListener('close', () => document.documentElement.classList.remove('search-open'))
+  // Clicking the dimmed backdrop (outside the panel) closes the dialog
+  dialog?.addEventListener('click', (e) => {
+    if (e.target === dialog) close()
+  })
+  dialog?.querySelector('[data-search-close]')?.addEventListener('click', close)
+
+  document.addEventListener('click', (e) => {
+    const trigger = (e.target as HTMLElement).closest('[data-search-open]')
+    if (!trigger) return
+    e.preventDefault()
+    open()
+  })
+
+  document.addEventListener('keydown', (e) => {
+    const typing = (e.target as HTMLElement).closest('input, textarea, [contenteditable="true"]')
+    if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+      e.preventDefault()
+      open()
+    } else if (e.key === '/' && !typing) {
+      e.preventDefault()
+      open()
+    }
+  })
+</script>
+
+<style>
+  dialog {
+    width: min(40rem, calc(100vw - 2rem));
+    max-height: 75vh;
+    margin: 10vh auto auto;
+    padding: 0.75rem 1rem 1rem;
+    overflow-y: auto;
+    color: hsl(var(--foreground));
+    background: hsl(var(--background));
+    border: 1px solid hsl(var(--border));
+    border-radius: 0.75rem;
+    box-shadow: 0 12px 40px rgb(0 0 0 / 0.18);
+  }
+  dialog::backdrop {
+    background: rgb(0 0 0 / 0.35);
+  }
+  :global(.dark) dialog::backdrop {
+    background: rgb(0 0 0 / 0.65);
+  }
+  /* Phones: take the whole screen */
+  @media (max-width: 639px) {
+    dialog {
+      width: 100vw;
+      max-width: 100vw;
+      height: 100dvh;
+      max-height: 100dvh;
+      margin: 0;
+      border: 0;
+      border-radius: 0;
+    }
+  }
+  .head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+  }
+  .title {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .close {
+    font-size: 0.75rem;
+    color: hsl(var(--muted-foreground));
+    border: 1px solid hsl(var(--border));
+    border-radius: 0.375rem;
+    padding: 0.1rem 0.45rem;
+  }
+  .close:hover {
+    color: hsl(var(--foreground));
+  }
+  .dev {
+    font-size: 0.875rem;
+    color: hsl(var(--muted-foreground));
+  }
+  #search-dialog-ui {
+    --pagefind-ui-scale: 0.8;
+    --pagefind-ui-primary: hsl(var(--primary));
+    --pagefind-ui-text: hsl(var(--foreground));
+    --pagefind-ui-background: hsl(var(--muted));
+    --pagefind-ui-border: hsl(var(--border));
+    --pagefind-ui-tag: hsl(var(--muted-foreground));
+    --pagefind-ui-border-width: 1px;
+    --pagefind-ui-border-radius: calc(var(--radius) + 2px);
+    --pagefind-ui-font: inherit;
+  }
+  /* A modal has no room for the tag filter column; results use the full width */
+  #search-dialog-ui :global(.pagefind-ui__filter-panel) {
+    display: none;
+  }
+  #search-dialog-ui :global(.pagefind-ui__results-area) {
+    margin-top: 1rem;
+  }
+  #search-dialog-ui :global(mark) {
+    color: inherit;
+    background: hsl(var(--primary) / 0.14);
+    border-radius: 2px;
+  }
+  :global(html.search-open) {
+    overflow: hidden;
+  }
+</style>

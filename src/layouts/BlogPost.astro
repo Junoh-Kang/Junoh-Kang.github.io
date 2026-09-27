@@ -68,7 +68,7 @@ const slides = data.slides
   {/* Slide deck card under the title, the same on every screen size */}
   {
     slides && (
-      <a href={slides.href} target='_blank' rel='noopener' class='slides-card' slot='header'>
+      <a href={slides.href} target='_blank' rel='noopener' class='slides-card' slot='header' data-pagefind-ignore>
         {slides.thumb && <img src={slides.thumb} alt='' class='thumb' loading='lazy' />}
         <span class='body'>
           <span class='name'>Slides</span>

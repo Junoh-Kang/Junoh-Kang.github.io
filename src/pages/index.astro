@@ -63,9 +63,10 @@ const fmtDate = (d: string) =>
 ---
 
 <PageLayout meta={{ title: 'Home' }}>
-  <main class='home animate grid gap-x-12 gap-y-10 md:grid-cols-[15rem_minmax(0,1fr)]'>
+  <main data-pagefind-body data-pagefind-meta='title:Junoh Kang' class='home animate grid gap-x-12 gap-y-10 md:grid-cols-[15rem_minmax(0,1fr)]'>
     {/* Left profile */}
-    <aside class='profile md:sticky md:top-24 md:self-start'>
+    {/* Search covers the CV-like sections only; the profile, About, and News stay out */}
+    <aside class='profile md:sticky md:top-24 md:self-start' data-pagefind-ignore='all'>
       <Image
         src={photos[photoPath]()}
         alt={profile.name}
@@ -105,7 +106,7 @@ const fmtDate = (d: string) =>
 
     {/* Main column */}
     <div id='content' class='flex min-w-0 flex-col gap-y-12'>
-      <Section title='About'>
+      <Section title='About' data-pagefind-ignore='all'>
         <div class='about'>
           <About />
         </div>
@@ -139,7 +140,7 @@ const fmtDate = (d: string) =>
         </ul>
       </Section>
 
-      <Section title='News' id='news'>
+      <Section title='News' id='news' data-pagefind-ignore='all'>
         <ul class='news flex flex-col gap-y-2'>
           {
             news.slice(0, MAX_NEWS).map((n) => (

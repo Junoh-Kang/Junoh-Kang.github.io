@@ -29,8 +29,9 @@ const links = [
 const underReview = pub.venue === 'Under review'
 ---
 
-<li class='pub' id={pub.id}>
-  <p class='title'>{pub.title}</p>
+<li class='pub'>
+  {/* A heading with the paper id, so search results can link to each paper */}
+  <h3 class='title' id={pub.id}>{pub.title}</h3>
   <p class='authors' set:html={authors} />
   {/* One meta line: venue and award on the left, links pushed to the right edge. */}
   <div class='meta'>

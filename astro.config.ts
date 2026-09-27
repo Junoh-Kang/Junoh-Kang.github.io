@@ -107,7 +107,8 @@ export default defineConfig({
         rehypeAutolinkHeadings,
         {
           behavior: 'append',
-          properties: { className: ['anchor'] },
+          // data-pagefind-ignore keeps the '#' out of search excerpts
+          properties: { className: ['anchor'], 'data-pagefind-ignore': '' },
           content: { type: 'text', value: '#' }
         }
       ]
