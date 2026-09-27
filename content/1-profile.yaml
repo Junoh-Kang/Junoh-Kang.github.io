@@ -9,8 +9,8 @@ cv: /assets/pdf/Junoh_Kang_CV.pdf      # generated from brain/docs/refs/cv; do n
 # icon: one of email, scholar-line, alphaxiv, github, linkedin-line, x, link (generic)
 links:
   - { label: Email, icon: email, href: 'mailto:junoh.kang@snu.ac.kr' }
-  - { label: Scholar, icon: scholar-line, href: 'https://scholar.google.com/citations?user=TLGqhucAAAAJ&hl' }
-  - { label: alphaXiv, icon: alphaxiv, href: 'https://www.alphaxiv.org/@junoh-kang' }
-  - { label: GitHub, icon: github, href: 'https://github.com/Junoh-Kang' }
   - { label: LinkedIn, icon: linkedin-line, href: 'https://www.linkedin.com/in/junohkang' }
+  - { label: Scholar, icon: scholar-line, href: 'https://scholar.google.com/citations?user=TLGqhucAAAAJ&hl' }
+  - { label: GitHub, icon: github, href: 'https://github.com/Junoh-Kang' }
+  - { label: alphaXiv, icon: alphaxiv, href: 'https://www.alphaxiv.org/@junoh-kang' }
   - { label: X, icon: x, href: 'https://x.com/junoh__kang' }
