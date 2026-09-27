@@ -1,4 +1,11 @@
 export const BuiltInIcons = {
+  // === Profile links, line style to match the theme's mingcute icons ===
+  // mingcute:linkedin-line
+  'linkedin-line': '<path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 8h.002M8 11v5m3-6v2m0 0v4m0-4c0-.5.917-1.783 2-2c1.38-.276 3 .5 3 2v4M6 20h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2"/>',
+  // mingcute:mortarboard-line
+  'scholar-line': '<path fill="currentColor" d="m2.515 8l-.428-.903a1 1 0 0 0 0 1.808zm18.97 0l.428.905a1 1 0 0 0 0-1.808zM22 8a1 1 0 1 0-2 0zm-2 5a1 1 0 1 0 2 0zm-7.786-.615l.427.904zm-.428 0l-.427.904zm0-8.768l.428.904zm.428 0l-.428.904zM18 14h1V9.649h-2v4.352zM6 9.649H5v4.352h2V9.649zM2.515 8.001l.427.904l9.272-4.384l-.428-.904l-.427-.904l-9.272 4.384zm9.699-4.384l-.428.904l9.272 4.384l.427-.904l.428-.904l-9.272-4.384zM21.485 8l-.427-.904l-9.272 4.384l.428.904l.427.904l9.272-4.384zm-9.699 4.384l.428-.904l-9.272-4.384L2.515 8l-.428.904l9.272 4.384zM21 8.001h-1v5h2V8zm-8.786 4.384l-.428-.904a.5.5 0 0 1 .428 0l-.428.904l-.427.904a1.5 1.5 0 0 0 1.282 0zM6 14.001H5a7 7 0 0 0 7 7v-2a5 5 0 0 1-5-5zm5.786-10.384l.428.904a.5.5 0 0 1-.428 0l.428-.904l.427-.904a1.5 1.5 0 0 0-1.282 0zM18 14h-1a5 5 0 0 1-5 5v2a7 7 0 0 0 7-7z"/>',
+  // simple-icons:alphaxiv (Simple Icons v16.32.0, CC0); the brand mark is already line-like
+  alphaxiv: '<path d="M19.749 12.21 24 16.46l-1.827 1.821-4.248-4.23zm-10.6-8.626a4.03 4.03 0 0 1 3.09 1.12L15.4 7.867l-1.841 1.822-3.232-3.226A1.38 1.38 0 0 0 8.55 6.5l-6.725 6.722L0 11.399l6.84-6.837a4.06 4.06 0 0 1 2.309-.979m13.026.033L24 5.44 10.032 19.403c-3.823 3.204-8.805-1.788-5.58-5.598l5.361-5.356 1.825 1.824-5.274 5.271c-1.108 1.347.633 3.054 1.96 1.921z"/>',
   // === Social ===
   // mingcute:github-line
   github:
