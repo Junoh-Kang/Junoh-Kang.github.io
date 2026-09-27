@@ -293,27 +293,24 @@ const fmtDate = (d: string) =>
     object-fit: cover;
     border-radius: 0.75rem;
   }
-  /* Same warm orange as the publication venues */
+  /* Neutral pill; only the dot is colored, green as the usual "available" signal */
   .status {
-    --status: #ad5f1c;
     display: inline-flex;
     align-items: center;
     gap: 0.45rem;
     font-size: 0.8125rem;
     font-weight: 500;
-    color: var(--status);
-    border: 1px solid color-mix(in srgb, var(--status) 35%, transparent);
+    color: hsl(var(--foreground));
+    border: 1px solid hsl(var(--border));
     border-radius: 999px;
     padding: 0.2rem 0.7rem;
-  }
-  :global(.dark) .status {
-    --status: #e89c58;
   }
   .dot {
     width: 0.45rem;
     height: 0.45rem;
     border-radius: 999px;
-    background: var(--status);
+    background: #1f9d55;
+    box-shadow: 0 0 0 3px rgb(31 157 85 / 0.18);
   }
   .plink {
     display: inline-flex;
