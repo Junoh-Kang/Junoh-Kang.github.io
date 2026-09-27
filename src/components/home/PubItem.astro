@@ -69,7 +69,15 @@ const underReview = pub.venue === 'Under review'
   .pub:last-child {
     border-bottom: 0;
   }
+  /* Jumped to from Research Interests or News: tint the paper while it is the URL #target */
+  .pub:has(.title:target) {
+    --hl: hsl(var(--primary) / 0.05);
+    background: var(--hl);
+    box-shadow: -0.75rem 0 0 var(--hl), 0.75rem 0 0 var(--hl);
+  }
   .title {
+    /* Keep the title clear of the sticky header when jumped to */
+    scroll-margin-top: 5.5rem;
     font-size: 1.0625rem;
     font-weight: 600;
     line-height: 1.4;
