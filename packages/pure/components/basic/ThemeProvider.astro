@@ -2,29 +2,15 @@
 
 ---
 
-{/* Use inline mode to quick load color, which can avoid splash */}
+{/* The site is light-only: no dark mode, regardless of the OS setting or a theme saved earlier */}
 <script is:inline>
-  function simpleSetTheme() {
-    let theme = localStorage.getItem('theme')
-    // If undefined or 'system', get from system
-    if (!theme || theme === 'system') {
-      theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
-    }
-    document.documentElement.classList.toggle('dark', theme === 'dark')
-    document
-      .querySelector('meta[name="theme-color"]')
-      ?.setAttribute('content', theme === 'dark' ? '#0B0B10' : '#FCFCFD')
-  }
-  simpleSetTheme()
-  document.addEventListener('astro:page-load', () => simpleSetTheme())
+  try {
+    localStorage.removeItem('theme')
+  } catch {}
 </script>
 
 <script>
   import { Icons } from '../../libs/icons'
-  import { listenThemeChange } from '../../utils'
-
-  // Listen for theme change event
-  listenThemeChange()
   // Listen for toast event
   document.addEventListener('toast', (e) => {
     const { message, time } = (e as CustomEvent).detail

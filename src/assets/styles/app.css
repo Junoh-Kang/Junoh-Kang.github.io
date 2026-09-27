@@ -16,27 +16,12 @@
   --ring: 0 0% 10%;
   --radius: 0.5rem;
 }
-.dark {
-  /* Primary */
-  --primary: 210 55% 72%;
-  /* Foreground */
-  --foreground: 0 0% 92%;
-  --muted-foreground: 0 0% 64%;
-  /* Background */
-  --background: 220 10% 7%;
-  --muted: 220 6% 13%;
-  --card: 220 4% 24%;
-
-  /* Basic */
-  --border: 220 4% 22%;
-  --input: 220 4% 18%;
-  --ring: 0 0% 84%;
-}
 :root {
   --un-default-border-color: hsl(var(--border) / 1);
 }
-html.dark {
-  color-scheme: dark;
+/* Light-only site */
+html {
+  color-scheme: light;
 }
 
 /* Global */

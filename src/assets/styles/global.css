@@ -118,11 +118,6 @@ mjx-container[jax='SVG']:not([display='true']) {
     }
   }
 }
-.dark {
-  .astro-code pre span {
-    color: var(--shiki-dark) !important;
-  }
-}
 
 /* [Shiki transformer] */
 .astro-code {
