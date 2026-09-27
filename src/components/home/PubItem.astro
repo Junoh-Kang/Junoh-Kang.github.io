@@ -96,8 +96,11 @@ const underReview = pub.venue === 'Under review'
     font-size: 0.875rem;
     font-weight: 600;
     letter-spacing: 0.01em;
-    /* Not a link, so not navy; the amber award stays the one colored mark */
-    color: hsl(var(--foreground));
+    /* Not a link, so not navy: a warm orange that complements the navy links */
+    color: #ad5f1c;
+  }
+  :global(.dark) .venue {
+    color: #e89c58;
   }
   .venue.review {
     font-weight: 500;
