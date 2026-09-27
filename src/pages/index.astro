@@ -58,6 +58,10 @@ const serviceGroups: { title: string; lines: ServiceLine[] }[] = [
   }
 ].filter((g) => g.lines.length > 0)
 
+// External links (http/https) open in a new tab, like the profile and paper links; #anchors stay in place
+const ext = (url?: string) =>
+  url && /^https?:/.test(url) ? { target: '_blank', rel: 'noopener' } : {}
+
 const fmtDate = (d: string) =>
   new Date(d).toLocaleDateString('en-US', { month: 'short', year: 'numeric' })
 ---
@@ -147,7 +151,7 @@ const fmtDate = (d: string) =>
               <li class='flex gap-x-4 text-sm'>
                 <span class='w-20 shrink-0 text-muted-foreground'>{fmtDate(n.date)}</span>
                 <span>
-                  {newsParts(n).map((p) => (p.url ? <a href={p.url}>{p.text}</a> : p.text))}
+                  {newsParts(n).map((p) => (p.url ? <a href={p.url} {...ext(p.url)}>{p.text}</a> : p.text))}
                 </span>
               </li>
             ))
@@ -162,7 +166,7 @@ const fmtDate = (d: string) =>
                   <li class='flex gap-x-4 text-sm'>
                     <span class='w-20 shrink-0 text-muted-foreground'>{fmtDate(n.date)}</span>
                     <span>
-                      {newsParts(n).map((p) => (p.url ? <a href={p.url}>{p.text}</a> : p.text))}
+                      {newsParts(n).map((p) => (p.url ? <a href={p.url} {...ext(p.url)}>{p.text}</a> : p.text))}
                     </span>
                   </li>
                 ))}
@@ -199,10 +203,10 @@ const fmtDate = (d: string) =>
                             {url && cut > 0 ? (
                               <>
                                 {label.slice(0, cut + 2)}
-                                <a href={url}>{label.slice(cut + 2)}</a>
+                                <a href={url} {...ext(url)}>{label.slice(cut + 2)}</a>
                               </>
                             ) : url ? (
-                              <a href={url}>{label}</a>
+                              <a href={url} {...ext(url)}>{label}</a>
                             ) : (
                               label
                             )}
@@ -226,7 +230,7 @@ const fmtDate = (d: string) =>
                 <p class='head'>
                   <span>
                     <span class='primary'>
-                      {e.url ? <a href={e.url}>{e.organization}</a> : e.organization}
+                      {e.url ? <a href={e.url} {...ext(e.url)}>{e.organization}</a> : e.organization}
                     </span>
                     <span class='secondary'>{e.title}</span>
                   </span>
@@ -251,7 +255,7 @@ const fmtDate = (d: string) =>
             honors.map((a) => (
               <li>
                 <p class='head'>
-                  <span>{a.url ? <a href={a.url}>{a.title}</a> : a.title}</span>
+                  <span>{a.url ? <a href={a.url} {...ext(a.url)}>{a.title}</a> : a.title}</span>
                   <span class='when'>{dash(a.year)}</span>
                 </p>
               </li>
