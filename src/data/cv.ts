@@ -17,6 +17,8 @@ export type CvItem = {
   url?: string
   links?: { label: string; url: string }[]
   award?: string
+  /** Shown under Selected Publications on the home page (cv/sections/publications.yml). */
+  selected?: boolean
   details?: Detail[]
 }
 

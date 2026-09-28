@@ -3,6 +3,7 @@ note: "(*) denotes equal contribution."
 
 items:
   - id: kang2026relobgen
+    selected: true
     title: "ReLOBGen: Replayable Limit Order Book Message Generation"
     authors:
       - Junoh Kang
@@ -15,6 +16,7 @@ items:
     visibility: public
 
   - id: kang2026probsiginv
+    selected: true
     title: "Probabilistic Signature Inversion: Learning Conditional Distributions from Truncated Signatures"
     authors:
       - Junoh Kang
@@ -53,6 +55,7 @@ items:
     visibility: public
 
   - id: choi2025rx
+    selected: true
     title: "Enhanced Diffusion Sampling via Extrapolation with Multiple ODE Solutions"
     authors:
       - Jinyoung Choi
@@ -69,6 +72,7 @@ items:
     visibility: public
 
   - id: kim2024fifo
+    selected: true
     title: "FIFO-Diffusion: Generating Infinite Videos from Text without Training"
     authors:
       - Jihwan Kim*
@@ -89,6 +93,7 @@ items:
     visibility: public
 
   - id: kang2024ogdm
+    selected: true
     title: "Observation-Guided Diffusion Probabilistic Models"
     authors:
       - Junoh Kang*

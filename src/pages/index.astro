@@ -26,6 +26,9 @@ const newsCutoff = new Date()
 newsCutoff.setFullYear(newsCutoff.getFullYear() - NEWS_WINDOW_YEARS)
 const olderNews = news.slice(MAX_NEWS).filter((n) => new Date(n.date) >= newsCutoff)
 const pubById = Object.fromEntries(publications.map((p) => [p.id, p]))
+// The home page lists only selected papers; the full list is on /publications.
+const selectedPubs = publications.filter((p) => p.selected)
+const paperHref = (id: string) => (pubById[id]?.selected ? `#${id}` : `/publications#${id}`)
 
 // Profile photo: content/<profile.photo>
 const photos = import.meta.glob<{ default: ImageMetadata }>(
@@ -125,7 +128,7 @@ const fmtDate = (d: string) =>
                 <ul class='backing'>
                   {r.papers.map(({ paper: id, note }) => (
                     <li>
-                      <a href={`#${id}`} class='venue-link'>
+                      <a href={paperHref(id)} class='venue-link'>
                         {pubById[id].venue}
                       </a>
                       {authorRole(pubById[id]) && (
@@ -243,10 +246,11 @@ const fmtDate = (d: string) =>
         </ul>
       </Section>
 
-      <Section title='Publications' id='publications' note='* equal contribution'>
+      <Section title='Selected Publications' id='publications' note='* equal contribution'>
         <ul>
-          {publications.map((p) => <PubItem pub={p} />)}
+          {selectedPubs.map((p) => <PubItem pub={p} />)}
         </ul>
+        <a href='/publications' class='all-pubs'>All publications →</a>
       </Section>
 
       <Section title='Honors'>
@@ -376,10 +380,18 @@ const fmtDate = (d: string) =>
   .about :global(a:hover),
   .news :global(a:hover),
   .rows a:hover,
-  .venue-link:hover {
+  .venue-link:hover,
+  .all-pubs:hover {
     text-decoration: underline;
     text-decoration-thickness: 1px;
     text-underline-offset: 3px;
+  }
+  /* "All publications" link under Selected Publications, at the right edge */
+  .all-pubs {
+    align-self: flex-end;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: hsl(var(--primary));
   }
   /* Education / Experience / Honors: content on the left, dates pushed to the right edge */
   .rows {
