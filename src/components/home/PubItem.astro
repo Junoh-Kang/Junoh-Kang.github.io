@@ -62,8 +62,8 @@ const underReview = pub.venue === 'Under review'
 </li>
 
 <script>
-  // Marks the paper named by the URL fragment with the `arrived` class: a fading band and a thin
-  // left bar. A class (not :target) is used so the home page can change the URL with
+  // Mark the paper immediately on navigation with a fading band and a thin left bar.
+  // A class (not :target) is used so the home page can change the URL with
   // history.pushState, which does not update :target and does not make the browser jump.
   function arrive(hash: string) {
     document.querySelectorAll('.pub.arrived').forEach((p) => p.classList.remove('arrived'))
@@ -91,8 +91,7 @@ const underReview = pub.venue === 'Under review'
   .pub:last-child {
     border-bottom: 0;
   }
-  /* A paper reached through an in-page link (e.g. #kang2024ogdm; see the script above) gets a light
-     gray band under its text that fades out over two seconds, so the reader sees where they landed. */
+  /* Hold a pale blue band for one second from navigation, then fade it over 1.5 seconds. */
   .pub {
     position: relative;
     isolation: isolate;
@@ -102,9 +101,9 @@ const underReview = pub.venue === 'Under review'
     position: absolute;
     inset: 0 -0.75rem;
     z-index: -1;
-    background: hsl(var(--muted));
+    background: hsl(210 80% 60% / 0.12);
     pointer-events: none;
-    animation: target-fade 2s ease-out forwards;
+    animation: target-fade 1.5s ease-out 1s both;
   }
   @keyframes target-fade {
     from {
