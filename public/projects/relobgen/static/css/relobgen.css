@@ -73,6 +73,13 @@
   color: var(--text-secondary);
 }
 
+.highlight-note {
+  margin-top: 0.4rem;
+  color: var(--text-secondary);
+  font-size: 0.8rem;
+  line-height: 1.45;
+}
+
 .highlight-label {
   margin-top: 0.4rem;
   color: var(--text-secondary);
