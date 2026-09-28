@@ -61,6 +61,20 @@ const underReview = pub.venue === 'Under review'
   </div>
 </li>
 
+<script>
+  // Clicking a link to the paper that is already the URL fragment does not re-trigger :target,
+  // so restart the arrival fade by hand. The browser still performs the jump itself.
+  document.addEventListener('click', (e) => {
+    const link = (e.target as HTMLElement).closest<HTMLAnchorElement>('a[href^="#"]')
+    if (!link || link.hash !== location.hash) return
+    const pub = document.getElementById(decodeURIComponent(link.hash.slice(1)))?.closest('.pub')
+    if (!pub) return
+    pub.classList.add('replay')
+    void (pub as HTMLElement).offsetWidth
+    pub.classList.remove('replay')
+  })
+</script>
+
 <style>
   .pub {
     padding-block: 0.9rem;
@@ -91,6 +105,22 @@ const underReview = pub.venue === 'Under review'
     to {
       opacity: 0;
     }
+  }
+  /* Restarting the fade when the same link is clicked again (see the script above) */
+  .pub.replay:has(> .title:target)::before {
+    animation: none;
+  }
+  /* A thin navy bar stays at the left of the reached paper while it is the URL fragment */
+  .pub:has(> .title:target)::after {
+    content: '';
+    position: absolute;
+    top: 0.6rem;
+    bottom: 0.6rem;
+    left: -0.75rem;
+    width: 2px;
+    border-radius: 1px;
+    background: hsl(var(--primary));
+    pointer-events: none;
   }
   .title {
     /* Keep the title clear of the sticky header when jumped to */
