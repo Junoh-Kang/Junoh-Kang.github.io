@@ -88,7 +88,13 @@
             "Kiseop Lee",
             "Bohyung Han"
           ],
-          "venue": "Under review"
+          "venue": "Under review",
+          "links": [
+            {
+              "label": "Project",
+              "url": "https://junoh-kang.github.io/projects/relobgen"
+            }
+          ]
         },
         {
           "id": "kang2026probsiginv",

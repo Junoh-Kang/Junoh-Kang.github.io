@@ -13,4 +13,4 @@ links:
   - { label: Scholar, icon: scholar-line, href: 'https://scholar.google.com/citations?user=TLGqhucAAAAJ&hl' }
   - { label: GitHub, icon: github, href: 'https://github.com/Junoh-Kang' }
   - { label: alphaXiv, icon: alphaxiv, href: 'https://www.alphaxiv.org/@junoh-kang' }
-  - { label: X, icon: x, href: 'https://x.com/junoh__kang' }
+  # - { label: X, icon: x, href: 'https://x.com/junoh__kang' }   # hidden; uncomment to show
