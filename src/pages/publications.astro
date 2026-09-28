@@ -1,0 +1,53 @@
+---
+// Full publication list, grouped by year; the header's Publications menu opens this page.
+// Papers come from the CV (cv/sections/publications.yml), rendered the same way as on the home page.
+// Each year is its own section, labeled like the home page sections.
+// The year comes from the paper id (e.g. kang2026relobgen -> 2026).
+import { publications } from '@/data/cv'
+import PageLayout from '@/layouts/BaseLayout.astro'
+import PubItem from '@/components/home/PubItem.astro'
+import Section from '@/components/home/Section.astro'
+
+export const prerender = true
+
+const yearOf = (id: string | undefined) => {
+  const year = id?.match(/(\d{4})/)?.[1]
+  if (!year) throw new Error(`cv/sections/publications.yml: no year in paper id "${id}"`)
+  return year
+}
+const byYear: [string, typeof publications][] = []
+for (const p of publications) {
+  const year = yearOf(p.id)
+  const group = byYear.find(([y]) => y === year)
+  if (group) group[1].push(p)
+  else byYear.push([year, [p]])
+}
+
+const meta = {
+  description: 'Publications by Junoh Kang',
+  title: 'Publications'
+}
+---
+
+<PageLayout {meta}>
+  <main class='mt-6 lg:mt-10'>
+    <div id='content-header' class='animate flex items-baseline justify-between gap-x-4'>
+      <h1 class='mb-2 text-3xl font-medium'>Publications</h1>
+      <span class='text-xs text-muted-foreground'>* equal contribution</span>
+    </div>
+
+    <div id='content' class='animate mt-6 flex flex-col gap-y-10' aria-label='Publication list'>
+      {
+        byYear.map(([year, pubs]) => (
+          <Section title={year} id={`year-${year}`}>
+            <ul>
+              {pubs.map((p) => (
+                <PubItem pub={p} />
+              ))}
+            </ul>
+          </Section>
+        ))
+      }
+    </div>
+  </main>
+</PageLayout>

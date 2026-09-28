@@ -37,7 +37,6 @@ const redirects: Record<string, string> = {
   ...Object.fromEntries(oldCategories.map((c) => [`/blog/category/${c}/`, `/tags/${c}`])),
   ...Object.fromEntries(['2023', '2024', '2025', '2026'].map((y) => [`/blog/${y}/`, '/archives'])),
   '/blog/page/2/': '/blog/2',
-  '/publications': '/#publications',
   ...Object.fromEntries(oldNews.map((d) => [`/news/${d}/`, '/#news'])),
   '/news': '/#news',
   '/cv/': '/assets/pdf/Junoh_Kang_CV.pdf',

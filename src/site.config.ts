@@ -74,7 +74,7 @@ export const theme: ThemeUserConfig = {
   header: {
     menu: [
       { title: 'CV', link: '/assets/pdf/Junoh_Kang_CV.pdf' },
-      { title: 'Publications', link: '/#publications' },
+      { title: 'Publications', link: '/publications' },
       { title: 'Blog', link: '/blog' }
     ]
   },
