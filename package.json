@@ -26,6 +26,7 @@
     "astro-pure": "file:./packages/pure",
     "hast-util-from-html": "^2.0.3",
     "remark-math": "^6.0.0",
+    "satori": "^0.33.5",
     "sharp": "^0.34.5",
     "typescript": "^6.0.3",
     "unist-util-visit": "^5.1.0",
