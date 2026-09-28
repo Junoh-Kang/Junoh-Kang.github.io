@@ -64,6 +64,8 @@ items:
         url: https://proceedings.iclr.cc/paper_files/paper/2025/file/f4eaa4b8f2d08edb3f0af990d56134ea-Paper-Conference.pdf
       - label: arXiv
         url: https://arxiv.org/abs/2504.01855
+      - label: Code
+        url: https://github.com/jin01020/rx-dpm
     visibility: public
 
   - id: kim2024fifo
