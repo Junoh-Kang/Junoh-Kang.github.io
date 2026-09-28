@@ -1,0 +1,15 @@
+{
+  "/blog/2023/Understanding-Diffusion-Models-in-Two-Perspectives/": "/blog/understanding-diffusion-models-in-two-perspectives",
+  "/blog/2023/Designing-Diffusion-Models-in-Real-World/": "/blog/designing-diffusion-models-in-real-world",
+  "/blog/2024/Controllabilities-in-Video-Diffusion-Models/": "/blog/controllabilities-in-video-diffusion-models",
+  "/blog/2025/Video-Diffusion-Models-as-World-Simulators/": "/blog/video-diffusion-models-as-world-simulators",
+  "/blog/2025/Test-time-scaling-in-Diffusion-Models/": "/blog/test-time-scaling-in-diffusion-models",
+  "/blog/2025/PinT-algorithms-for-Diffusion-Models/": "/blog/pint-algorithms-for-diffusion-models",
+  "/blog/2025/Beyond-Defaults-Is-Noise-Conditioning-Necessary-for-Diffusion-Models/": "/blog/beyond-defaults-is-noise-conditioning-necessary-for-diffusion-models",
+  "/blog/2026/Path-Signature-Useful-Feature-for-Timeseries/": "/blog/path-signature-useful-feature-for-timeseries",
+  "/blog/2026/One-step-Generation-in-the-Post-Diffusion-Era/": "/blog/one-step-generation-in-the-post-diffusion-era",
+  "/blog/2026/Post-Training-of-Modern-LLMs/": "/blog/post-training-of-modern-llms",
+  "/blog/2026/SFT-Memorizes,-RL-Generalizes/": "/blog/sft-memorizes-rl-generalizes",
+  "/blog/2026/LOB-Bench-Orderbook-Generative-Model-Evaluation-Benchmark/": "/blog/lob-bench-orderbook-generative-model-evaluation-benchmark",
+  "/blog/2026/Working-Effectively-with-AI-Agents/": "/blog/working-effectively-with-ai-agents"
+}

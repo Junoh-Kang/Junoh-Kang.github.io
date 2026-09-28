@@ -1,0 +1,320 @@
+/* ReLOBGen-specific additions on top of the template's index.css */
+
+:root {
+  --primary-color: #1e3a8a;
+  --primary-hover: #1d4ed8;
+  --ours-bg: #eff6ff;
+  /* Replace the template's pink gradient accents (section title underline) with the navy accent */
+  --gradient-accent: var(--primary-color);
+}
+
+.affiliations {
+  color: var(--text-secondary);
+  margin-top: 0.4rem;
+}
+
+.affiliations .author-block {
+  margin: 0 0.5rem;
+}
+
+.publication-venue-line {
+  color: var(--text-secondary);
+  font-weight: 500;
+  margin-top: 0.6rem;
+}
+
+.button[disabled] {
+  opacity: 0.55;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* Figures */
+.paper-figure {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 0 auto;
+}
+
+.teaser-caption {
+  margin-top: 1.25rem !important;
+  font-size: 1.05rem !important;
+  line-height: 1.6;
+}
+
+/* Highlights */
+.highlights-section {
+  padding-top: 0.5rem;
+  padding-bottom: 2.5rem;
+}
+
+.highlight-card {
+  height: 100%;
+  text-align: center;
+  padding: 1.25rem 1rem;
+  border: 2px solid #cbd5e1;
+  border-radius: var(--border-radius);
+  background: var(--background-primary);
+  box-shadow: var(--shadow-sm);
+}
+
+.highlight-value {
+  font-size: 2rem;
+  font-weight: 800;
+  line-height: 1.2;
+  color: var(--primary-color);
+  font-variant-numeric: tabular-nums;
+}
+
+.highlight-value .of {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.highlight-label {
+  margin-top: 0.4rem;
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  line-height: 1.45;
+}
+
+/* Method */
+.method-block {
+  margin-top: 2rem;
+}
+
+.method-block .title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem !important;
+}
+
+.step-tag {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.6rem;
+  height: 1.6rem;
+  border-radius: 50%;
+  background: var(--primary-color);
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.method-text {
+  margin-top: 1rem;
+  color: var(--text-primary);
+  line-height: 1.65;
+}
+
+.method-columns {
+  margin-top: 0.5rem;
+}
+
+/* Result tables */
+.results-table {
+  font-size: 0.9rem;
+  font-variant-numeric: tabular-nums;
+  background: transparent;
+}
+
+.results-table th,
+.results-table td {
+  text-align: center !important;
+  vertical-align: middle !important;
+  white-space: nowrap;
+  padding: 0.45em 0.6em;
+}
+
+.results-table thead th {
+  font-weight: 600;
+  color: var(--text-primary);
+  border-bottom-width: 1px;
+}
+
+.results-table th.group {
+  border-bottom: 1px solid var(--border-color);
+}
+
+.results-table td.m {
+  text-align: left !important;
+}
+
+.results-table td.ticker {
+  font-weight: 700;
+  background: transparent;
+}
+
+.results-table tr.ours td {
+  background: var(--ours-bg);
+  font-weight: 600;
+}
+
+.results-table tr.group-start td {
+  border-top: 2px solid var(--border-color);
+}
+
+.table-caption {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  line-height: 1.55;
+  margin-top: 0.5rem;
+}
+
+.subsection-title {
+  margin-top: 2.5rem !important;
+  text-align: center;
+}
+
+.legend-img {
+  display: block;
+  margin: 0 auto 0.5rem;
+  width: 260px;
+  max-width: 70%;
+}
+
+.dyn-grid img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.more-results {
+  margin-top: 2rem;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  padding: 0.75rem 1rem;
+}
+
+.more-results summary {
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--primary-color);
+}
+
+.more-results img {
+  display: block;
+  width: 100%;
+  max-width: 820px;
+  margin: 1rem auto 0;
+}
+
+@media screen and (max-width: 768px) {
+  .highlight-value {
+    font-size: 1.7rem;
+  }
+}
+
+/* Keep hero sections at viewport width so wide tables scroll inside .table-container */
+.hero > .container {
+  width: 100%;
+}
+
+/* Table captions sit above their tables, as in the paper */
+.table-caption.is-above {
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+/* Author links look like plain names and underline on hover */
+.publication-authors a {
+  color: inherit !important;
+  font-weight: inherit;
+  text-decoration: none;
+}
+
+.publication-authors a::after {
+  display: none;
+}
+
+.publication-authors a:hover {
+  color: inherit !important;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.table-caption strong {
+  color: var(--text-primary);
+}
+
+/* All captions are left-aligned */
+.teaser-caption,
+.method-text,
+.table-caption {
+  text-align: left !important;
+}
+
+/* Size panels (b) and (c) by their SVG widths so both figures share one scale and height, as in the paper */
+@media screen and (min-width: 769px) {
+  .method-col-b {
+    flex: 231.1642 1 0;
+  }
+
+  .method-col-c {
+    flex: 152.8358 1 0;
+  }
+}
+
+/* Replayability conditions and their link to method panels (b) and (c) */
+
+.replayability-def {
+  color: var(--text-primary);
+  line-height: 1.65;
+}
+
+.replayability-def ul.conditions {
+  list-style: none;
+  margin: 0.25rem 0 1rem 0;
+}
+
+.replayability-def ul.conditions li {
+  margin: 0.5rem 0;
+}
+
+.cond-chip {
+  display: inline-block;
+  padding: 0.1em 0.6em;
+  margin-right: 0.4em;
+  border-radius: 999px;
+  font-size: 0.85em;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.cond-chip {
+  color: var(--primary-color);
+  background: var(--background-accent);
+  border: 1px solid var(--border-color);
+}
+
+.cond-link {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin: -0.5rem 0 1rem;
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+}
+
+.math-inline {
+  white-space: nowrap;
+}
+
+/* Result interpretation bullets below tables */
+.result-points {
+  margin-top: 1.25rem;
+  color: var(--text-primary);
+  line-height: 1.65;
+}
+
+.result-points ul {
+  margin-top: 0.25rem;
+}
+
+.result-points li + li {
+  margin-top: 0.4rem;
+}

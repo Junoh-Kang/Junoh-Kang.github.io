@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Primary Meta Tags -->
+  <meta name="title" content="ReLOBGen: Replayable Limit Order Book Message Generation">
+  <meta name="description" content="ReLOBGen generates limit order book messages that are replayable by construction, with 100% replayability, improved market realism, and a 2.7-3.6x speedup over LOBS5.">
+  <meta name="keywords" content="limit order book, LOB message generation, market simulation, replayability, generative model, quantitative finance">
+  <meta name="author" content="Junoh Kang, Kiseop Lee, Bohyung Han">
+  <meta name="robots" content="index, follow">
+  <meta name="language" content="English">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Seoul National University">
+  <meta property="og:title" content="ReLOBGen: Replayable Limit Order Book Message Generation">
+  <meta property="og:description" content="Limit order book messages that are replayable by construction: no post-hoc correction, no resampling.">
+  <meta property="og:url" content="https://junoh-kang.github.io/projects/relobgen/">
+  <meta property="og:image" content="https://junoh-kang.github.io/projects/relobgen/static/images/social_preview.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="ReLOBGen - closed-loop market simulation overview">
+  <meta property="article:author" content="Junoh Kang">
+  <meta property="article:section" content="Research">
+  <meta property="article:tag" content="limit order book">
+  <meta property="article:tag" content="market simulation">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="ReLOBGen: Replayable Limit Order Book Message Generation">
+  <meta name="twitter:description" content="Limit order book messages that are replayable by construction: no post-hoc correction, no resampling.">
+  <meta name="twitter:image" content="https://junoh-kang.github.io/projects/relobgen/static/images/social_preview.png">
+  <meta name="twitter:image:alt" content="ReLOBGen - closed-loop market simulation overview">
+
+  <!-- Academic/Research Specific -->
+  <meta name="citation_title" content="ReLOBGen: Replayable Limit Order Book Message Generation">
+  <meta name="citation_author" content="Kang, Junoh">
+  <meta name="citation_author" content="Lee, Kiseop">
+  <meta name="citation_author" content="Han, Bohyung">
+  <meta name="citation_publication_date" content="2026">
+  <!-- TODO: Add citation_pdf_url once the arXiv ID exists -->
+
+  <meta name="theme-color" content="#1e3a8a">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <title>ReLOBGen: Replayable Limit Order Book Message Generation</title>
+
+  <link rel="icon" type="image/svg+xml" href="static/images/favicon.svg">
+  <link rel="icon" type="image/x-icon" href="static/images/favicon.ico">
+  <link rel="apple-touch-icon" href="static/images/favicon.ico">
+
+  <link rel="stylesheet" href="static/css/bulma.min.css">
+  <link rel="stylesheet" href="static/css/index.css">
+  <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="static/css/academicons.min.css">
+  <link rel="stylesheet" href="static/css/relobgen.css">
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <script defer src="static/js/jquery.min.js"></script>
+  <script defer src="static/js/fontawesome.all.min.js"></script>
+  <script defer src="static/js/bulma-carousel.min.js"></script>
+  <script defer src="static/js/bulma-slider.min.js"></script>
+  <script defer src="static/js/index.js"></script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ScholarlyArticle",
+    "headline": "ReLOBGen: Replayable Limit Order Book Message Generation",
+    "description": "ReLOBGen generates limit order book messages that are replayable by construction.",
+    "author": [
+      {"@type": "Person", "name": "Junoh Kang", "affiliation": {"@type": "Organization", "name": "Seoul National University"}},
+      {"@type": "Person", "name": "Kiseop Lee", "affiliation": {"@type": "Organization", "name": "Purdue University"}},
+      {"@type": "Person", "name": "Bohyung Han", "affiliation": {"@type": "Organization", "name": "Seoul National University"}}
+    ],
+    "datePublished": "2026",
+    "url": "https://junoh-kang.github.io/projects/relobgen/",
+    "image": "https://junoh-kang.github.io/projects/relobgen/static/images/social_preview.png",
+    "keywords": ["limit order book", "LOB message generation", "market simulation", "replayability"],
+    "isAccessibleForFree": true
+  }
+  </script>
+</head>
+<body>
+
+  <button class="scroll-to-top" onclick="scrollToTop()" title="Scroll to top" aria-label="Scroll to top">
+    <i class="fas fa-chevron-up"></i>
+  </button>
+
+  <main id="main-content">
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <h1 class="title is-1 publication-title">ReLOBGen: Replayable Limit Order Book Message Generation</h1>
+            <div class="is-size-5 publication-authors">
+              <span class="author-block">
+                <a href="https://junoh-kang.github.io" target="_blank">Junoh Kang</a><sup>1</sup>,</span>
+              <span class="author-block">
+                Kiseop Lee<sup>2</sup>,</span>
+              <span class="author-block">
+                Bohyung Han<sup>1,3</sup>
+              </span>
+            </div>
+
+            <div class="is-size-6 publication-authors affiliations">
+              <span class="author-block"><sup>1</sup>ECE, Seoul National University</span>
+              <span class="author-block"><sup>2</sup>Department of Statistics, Purdue University</span>
+              <span class="author-block"><sup>3</sup>IPAI, Seoul National University</span>
+            </div>
+            <div class="publication-venue-line">Preprint, 2026</div>
+
+            <div class="column has-text-centered">
+              <div class="publication-links">
+                <!-- TODO: Replace href with https://arxiv.org/pdf/<ARXIV_ID> and remove the disabled attribute -->
+                <span class="link-block">
+                  <a href="#" class="external-link button is-normal is-rounded is-dark" disabled title="Coming soon">
+                    <span class="icon"><i class="fas fa-file-pdf"></i></span>
+                    <span>Paper</span>
+                  </a>
+                </span>
+
+                <!-- TODO: Replace href with https://arxiv.org/abs/<ARXIV_ID> and remove the disabled attribute -->
+                <span class="link-block">
+                  <a href="#" class="external-link button is-normal is-rounded is-dark" disabled title="Coming soon">
+                    <span class="icon"><i class="ai ai-arxiv"></i></span>
+                    <span>arXiv</span>
+                  </a>
+                </span>
+
+                <!-- TODO: Replace href with the public code repository and remove the disabled attribute -->
+                <span class="link-block">
+                  <a href="#" class="external-link button is-normal is-rounded is-dark" disabled title="Coming soon">
+                    <span class="icon"><i class="fab fa-github"></i></span>
+                    <span>Code (coming soon)</span>
+                  </a>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Teaser figure -->
+  <section class="hero teaser">
+    <div class="container is-max-desktop">
+      <div class="hero-body">
+        <img class="paper-figure" src="static/images/rollout.svg" alt="Closed-loop market simulation with an LOB message generator and post-processing">
+        <h2 class="subtitle teaser-caption">
+          In closed-loop market simulation, an LOB message generator can emit messages the simulator cannot replay.
+          Existing generators therefore require post-processing: correction, which can distort the distribution of replayed messages, or rejection and resampling, which increases inference cost.
+          <strong>ReLOBGen generates replayable messages by construction</strong>, so no post-processing is needed.
+        </h2>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Highlights -->
+  <section class="section highlights-section">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered highlights">
+        <div class="column">
+          <div class="highlight-card">
+            <div class="highlight-value">100%</div>
+            <div class="highlight-label">replayability in 500-message rollouts, with no correction or rejection</div>
+          </div>
+        </div>
+        <div class="column">
+          <div class="highlight-card">
+            <div class="highlight-value">2.7&ndash;3.6&times;</div>
+            <div class="highlight-label">faster per replayed message than the LOBS5 baseline</div>
+          </div>
+        </div>
+        <div class="column">
+          <div class="highlight-card">
+            <div class="highlight-value">35&ndash;49%</div>
+            <div class="highlight-label">lower LOB-Bench <i>L</i><sub>1</sub> distance than the LOBS5 baseline</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Paper abstract -->
+  <section class="section hero is-light">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Abstract</h2>
+          <div class="content has-text-justified">
+            <p>
+              We propose ReLOBGen, a method for generating limit order book (LOB) messages that are replayable by construction.
+              Replayability is required for closed-loop market simulation, yet existing LOB message generators may produce non-replayable raw messages, <i>i.e.</i>, messages inconsistent with the current market state.
+              These generators therefore rely on post-hoc correction or rejection followed by resampling, which may alter the replayed message distribution or increase inference cost.
+              ReLOBGen instead ensures replayability during generation: it selects the referenced order from the resting orders in the current LOB and then generates the remaining message fields to be consistent with that order and the market state.
+              For realistic reference selection, ReLOBGen samples from a learned distribution over eligible resting orders, efficiently computed from cached order representations and a context-dependent query.
+              It then enforces the consistency of the remaining fields by masking out invalid tokens.
+              Together, these components enable efficient generation of realistic messages without post-hoc correction or resampling.
+              In 500-message rollouts, ReLOBGen achieves 100% replayability, improves market realism, particularly for top-of-book statistics and the relative prices of LOB messages, and provides a 2.7&ndash;3.6&times; speedup per replayed message over the LOBS5 baseline.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Method -->
+  <section class="section" id="method">
+    <div class="container is-max-desktop">
+      <h2 class="title is-3 has-text-centered">Method</h2>
+      <div class="content replayability-def">
+        <p>
+          A generated LOB message is <strong>replayable</strong> if the LOB simulator can use it to update the LOB without any correction.
+          More specifically, a message <i>M</i><sub><i>t</i></sub> = (<i>E</i><sub><i>t</i></sub>, <i>R</i><sub><i>t</i></sub>, <i>X</i><sub><i>t</i></sub>) consists of an event, a reference order, and an event order, where a non-add event (cancel, delete, or execute) acts on an existing resting order <i>R</i><sub><i>t</i></sub> in the current resting-order set 𝒪<sub><i>t</i>&minus;1</sub>.
+          <i>M</i><sub><i>t</i></sub> is replayable if it satisfies both of the following conditions:
+        </p>
+        <ul class="conditions">
+          <li><span class="cond-chip">Reference eligibility</span> A non-add event references an eligible resting order: <span class="math-inline"><i>R</i><sub><i>t</i></sub> &isin; 𝒞<sub><i>t</i></sub>(<i>E</i><sub><i>t</i></sub>, 𝒪<sub><i>t</i>&minus;1</sub>) &sub; 𝒪<sub><i>t</i>&minus;1</sub></span>.</li>
+          <li><span class="cond-chip">Event-order compatibility</span> The event order is consistent with the event, the reference, and the current LOB.</li>
+        </ul>
+        <p>ReLOBGen guarantees both by construction, generating each message as event &rarr; reference order &rarr; event order.</p>
+      </div>
+
+      <div class="method-block">
+        <h3 class="title is-5"><span class="step-tag">a</span> Reference-first message representation</h3>
+        <img class="paper-figure" src="static/images/relobgen-preprocessing.svg" alt="LOBS5 reference-last token order versus ReLOBGen reference-first token order">
+        <p class="method-text">
+          The reference order <i>R</i><sub><i>t</i></sub> comes before the event order <i>X</i><sub><i>t</i></sub> and carries its current remaining size, so it can constrain the fields generated after it.
+        </p>
+      </div>
+
+      <div class="columns method-columns">
+        <div class="column method-col-b">
+          <div class="method-block">
+            <h3 class="title is-5"><span class="step-tag">b</span> Resting-order selection</h3>
+            <div class="cond-link"><i class="fas fa-arrow-right"></i><span class="cond-chip">Reference eligibility</span></div>
+            <img class="paper-figure" src="static/images/relobgen-reference-selection.svg" alt="Query-key scoring over cached resting-order keys">
+            <p class="method-text">
+              The reference is selected from eligible resting orders by scoring cached order keys against a context query.
+            </p>
+          </div>
+        </div>
+        <div class="column method-col-c">
+          <div class="method-block">
+            <h3 class="title is-5"><span class="step-tag">c</span> Inference-time masking</h3>
+            <div class="cond-link"><i class="fas fa-arrow-right"></i><span class="cond-chip">Event-order compatibility</span></div>
+            <img class="paper-figure" src="static/images/relobgen-field-masking.svg" alt="Validity mask applied to logits before sampling an event-order token">
+            <p class="method-text">
+              Invalid token values are masked given the selected reference and the market state.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Replayability and runtime -->
+  <section class="section hero is-light" id="replayability">
+    <div class="container is-max-desktop">
+      <h2 class="title is-3 has-text-centered">Replayability and runtime</h2>
+      <p class="table-caption is-above">
+        <strong>Post-processing rates, replayability violations, and runtime.</strong>
+        1,000 rollouts per stock (GOOG, INTC), each with 500 replayed messages on the JAX-LOB simulator.
+        Runtime is measured on an NVIDIA RTX A6000 GPU and covers generation, post-processing, and simulator updates.
+        Aborted baseline rollouts are excluded; ReLOBGen needs no restarts.
+        Lower is better.
+      </p>
+      <div class="table-container">
+        <table class="table is-fullwidth results-table">
+          <thead>
+            <tr>
+              <th rowspan="2">Ticker</th>
+              <th rowspan="2">Method</th>
+              <th colspan="2" class="group">Post-processing</th>
+              <th colspan="2" class="group">Replayability violations</th>
+              <th colspan="2" class="group">Runtime (ms)</th>
+            </tr>
+            <tr>
+              <th>Correction</th><th>Rejection</th><th>Reference</th><th>Event-order</th><th>Per replayed msg.</th><th>Per attempt</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td rowspan="3" class="ticker">GOOG</td><td class="m">LOBS5 (ref.-last)</td><td>13.5%</td><td>25.7%</td><td>39.1%</td><td>0.4%</td><td>602 &plusmn; 164</td><td>447 &plusmn; 119</td></tr>
+            <tr><td class="m">LOBS5 (ref.-first)</td><td>11.7%</td><td>27.6%</td><td>39.5%</td><td>0.1%</td><td>591 &plusmn; 145</td><td>426 &plusmn; 100</td></tr>
+            <tr class="ours"><td class="m">ReLOBGen</td><td><b>0.0%</b></td><td><b>0.0%</b></td><td><b>0.0%</b></td><td><b>0.0%</b></td><td><b>227 &plusmn; 12</b></td><td><b>227 &plusmn; 12</b></td></tr>
+            <tr class="group-start"><td rowspan="3" class="ticker">INTC</td><td class="m">LOBS5 (ref.-last)</td><td>9.7%</td><td>16.3%</td><td>25.6%</td><td>0.5%</td><td>1216 &plusmn; 726</td><td>1018 &plusmn; 606</td></tr>
+            <tr><td class="m">LOBS5 (ref.-first)</td><td>11.5%</td><td>13.2%</td><td>24.5%</td><td>0.2%</td><td>1058 &plusmn; 850</td><td>921 &plusmn; 744</td></tr>
+            <tr class="ours"><td class="m">ReLOBGen</td><td><b>0.0%</b></td><td><b>0.0%</b></td><td><b>0.0%</b></td><td><b>0.0%</b></td><td><b>341 &plusmn; 150</b></td><td><b>341 &plusmn; 150</b></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="content result-points">
+        <ul>
+          <li><strong>100% replayable.</strong>
+            <ul>
+              <li>ReLOBGen needs no correction or rejection, whereas the LOBS5 baselines correct or reject 25&ndash;39% of raw generation attempts.</li>
+            </ul>
+          </li>
+          <li><strong>2.7&ndash;3.6&times; faster per replayed message than LOBS5 (ref.-last).</strong>
+            <ul>
+              <li><strong>Fewer forward passes</strong>: a non-add message takes 7&ndash;8 forward passes instead of 17, because the reference order is selected in one step rather than decoded token by token, and fields with only one valid value are filled without a forward pass.</li>
+              <li><strong>No resampling</strong>: every attempt is replayed, so no computation is wasted on rejected attempts.</li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Rollout realism -->
+  <section class="section" id="realism">
+    <div class="container is-max-desktop">
+      <h2 class="title is-3 has-text-centered">Rollout realism</h2>
+      <p class="table-caption is-above">
+        <strong>LOB-Bench metric-group summary of unconditional <i>L</i><sub>1</sub> distances.</strong>
+        Overall averages all metrics, and each group column averages its metrics.
+        Ref.-first + uniform is also replayable but picks the reference uniformly from the eligible resting orders.
+        Lower is better, and bold marks the lowest value.
+      </p>
+      <div class="table-container">
+        <table class="table is-fullwidth results-table">
+          <thead>
+            <tr>
+              <th rowspan="2">Ticker</th>
+              <th rowspan="2">Method</th>
+              <th rowspan="2">Overall</th>
+              <th colspan="6" class="group">Metric group</th>
+            </tr>
+            <tr><th>State</th><th>Times</th><th>Volumes</th><th>Depths</th><th>Levels</th><th>Trades</th></tr>
+          </thead>
+          <tbody>
+            <tr><td rowspan="3" class="ticker">GOOG</td><td class="m">LOBS5 (ref.-last)</td><td>0.27</td><td>0.35</td><td>0.16</td><td>0.25</td><td>0.40</td><td>0.21</td><td>0.23</td></tr>
+            <tr><td class="m">Ref.-first + uniform</td><td>0.24</td><td>0.31</td><td>0.20</td><td>0.22</td><td>0.23</td><td>0.20</td><td>0.27</td></tr>
+            <tr class="ours"><td class="m">ReLOBGen</td><td><b>0.17</b></td><td><b>0.24</b></td><td><b>0.15</b></td><td><b>0.18</b></td><td><b>0.20</b></td><td><b>0.11</b></td><td><b>0.18</b></td></tr>
+            <tr class="group-start"><td rowspan="3" class="ticker">INTC</td><td class="m">LOBS5 (ref.-last)</td><td>0.22</td><td>0.14</td><td><b>0.14</b></td><td>0.20</td><td>0.32</td><td>0.17</td><td>0.27</td></tr>
+            <tr><td class="m">Ref.-first + uniform</td><td>0.30</td><td>0.10</td><td>0.35</td><td>0.27</td><td>0.36</td><td>0.34</td><td>0.32</td></tr>
+            <tr class="ours"><td class="m">ReLOBGen</td><td><b>0.11</b></td><td><b>0.05</b></td><td>0.21</td><td><b>0.16</b></td><td><b>0.07</b></td><td><b>0.04</b></td><td><b>0.15</b></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 class="title is-5 subsection-title">Market impact and error accumulation (GOOG)</h3>
+      <img class="legend-img" src="static/images/dyn-legend.png" alt="Legend: Real, ReLOBGen, LOBS5 (ref.-last)">
+      <div class="columns is-mobile is-multiline dyn-grid">
+        <div class="column is-half-mobile is-one-quarter-tablet"><img src="static/images/impact-goog-MO0.png" alt="Price response after market orders without an immediate mid-price change" loading="lazy"></div>
+        <div class="column is-half-mobile is-one-quarter-tablet"><img src="static/images/impact-goog-MO1.png" alt="Price response after market orders with an immediate mid-price change" loading="lazy"></div>
+        <div class="column is-half-mobile is-one-quarter-tablet"><img src="static/images/div-goog-ask-volume.png" alt="L1 distance over successive 100-message intervals for ask volume" loading="lazy"></div>
+        <div class="column is-half-mobile is-one-quarter-tablet"><img src="static/images/div-goog-ask-cancel-depth.png" alt="L1 distance over successive 100-message intervals for ask cancellation depth" loading="lazy"></div>
+      </div>
+      <p class="table-caption">
+        Left: lagged price responses after market orders without (MO<sub>0</sub>) and with (MO<sub>1</sub>) an immediate mid-price change; LOBS5 responses stay largely flat, while ReLOBGen tracks the real data more closely.
+        Right: <i>L</i><sub>1</sub> distance over successive 100-message intervals, where ReLOBGen shows lower error.
+      </p>
+
+      <details class="more-results">
+        <summary>All 21 unconditional LOB-Bench metrics</summary>
+        <img src="static/images/uncond-l1.png" alt="Per-metric unconditional L1 distances on GOOG and INTC" loading="lazy">
+        <p class="table-caption">Per-metric unconditional <i>L</i><sub>1</sub> distances with 99% bootstrap confidence intervals.</p>
+      </details>
+      <div class="content result-points">
+        <ul>
+          <li><strong>Better realism than LOBS5.</strong>
+            <ul>
+              <li>Largest gains in top-of-book statistics (State) and in where orders are submitted and canceled relative to the book (Depths, Levels).</li>
+              <li>ReLOBGen reproduces how prices respond to market orders, which LOBS5 largely misses.</li>
+            </ul>
+          </li>
+          <li><strong>Better realism than uniform selection.</strong>
+            <ul>
+              <li>Replayability alone does not make rollouts realistic: which eligible order a message references matters.</li>
+              <li>Learned selection picks more realistic cancellation targets, improving all five cancel-related metrics.</li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+
+  <!--BibTex citation -->
+  <section class="section" id="BibTeX">
+    <div class="container is-max-desktop content">
+      <div class="bibtex-header">
+        <h2 class="title">BibTeX</h2>
+        <button class="copy-bibtex-btn" onclick="copyBibTeX()" title="Copy BibTeX to clipboard">
+          <i class="fas fa-copy"></i>
+          <span class="copy-text">Copy</span>
+        </button>
+      </div>
+      <!-- TODO: Replace journal with the arXiv ID or venue once available -->
+      <pre id="bibtex-code"><code>@article{kang2026relobgen,
+  title={ReLOBGen: Replayable Limit Order Book Message Generation},
+  author={Kang, Junoh and Lee, Kiseop and Han, Bohyung},
+  journal={arXiv preprint},
+  year={2026}
+}</code></pre>
+    </div>
+  </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-8">
+          <div class="content">
+            <p>
+              This page was built using the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank">Academic Project Page Template</a> which was adopted from the <a href="https://nerfies.github.io" target="_blank">Nerfies</a> project page.
+              You are free to borrow the source code of this website, we just ask that you link back to this page in the footer. <br> This website is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative
+              Commons Attribution-ShareAlike 4.0 International License</a>.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

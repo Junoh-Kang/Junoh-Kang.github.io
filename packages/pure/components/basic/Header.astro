@@ -1,0 +1,136 @@
+---
+import config from 'virtual:config'
+
+import { Icon } from '../user'
+---
+
+<header-component
+  class='header-bar group sticky top-0 z-50 max-md:z-30 mb-10 flex items-center justify-between py-3'
+>
+  <a
+    class='z-30 text-xl font-medium'
+    href='/'
+    aria-label='Brand'>{config.title}</a
+  >
+
+  <div class='flex items-center gap-x-2'>
+    {/* Menu links */}
+    <div
+      id='headerExpandContent'
+      class='end-0 start-0 top-12 grid border border-transparent group-[.not-top]:rounded-xl group-[.expanded]:opacity-100 dark:group-[.expanded.not-top]:bg-muted max-sm:absolute max-sm:opacity-0 max-sm:group-[.not-top]:border-border max-sm:group-[.expanded.not-top]:bg-background max-sm:group-[.not-top]:px-4 max-sm:group-[.not-top]:py-2 sm:grid-rows-1'
+    >
+      <div class='flex flex-col items-center justify-center overflow-hidden sm:flex-row'>
+        {
+          config.header.menu.map((item) => (
+            <a
+              href={item.link}
+              class='w-full flex-none grow py-2 text-right font-medium transition-none hover:text-primary sm:w-fit sm:px-3'
+              aria-label='Nav menu item'
+              data-astro-prefetch
+            >
+              {item.title}
+            </a>
+          ))
+        }
+        <div class='flex w-full grow flex-row justify-end gap-x-3 sm:w-fit sm:gap-x-5'>
+          <a class='px-1 py-2 transition-none sm:px-2' href='/search' title='Search (⌘K)' data-search-open>
+            <span class='sr-only'>Search</span>
+            <Icon name='search' class='size-5' />
+          </a>
+        </div>
+      </div>
+    </div>
+
+    {/* buttons */}
+    <div class='z-30 flex gap-x-4'>
+      <button
+        id='toggleMenu'
+        class='rounded-md border p-1.5 transition-colors hover:bg-border sm:hidden'
+      >
+        <span class='sr-only'>Menu</span>
+        <Icon class='size-5' name='menu' />
+      </button>
+    </div>
+  </div>
+</header-component>
+
+<script>
+  class HeaderComponent extends HTMLElement {
+    connectedCallback() {
+      // Header
+      let preScrollY = window.scrollY
+      this.classList.toggle('not-top', preScrollY > 20)
+      window.addEventListener('scroll', () => {
+        this.classList.toggle('not-top', window.scrollY > 20)
+        this.dataset.show = (window.scrollY < 350 || window.scrollY < preScrollY).toString()
+        preScrollY = window.scrollY
+      })
+
+      // Menu
+      this.querySelector('#toggleMenu')?.addEventListener('click', () => {
+        this.classList.toggle('expanded')
+      })
+    }
+  }
+
+  customElements.define('header-component', HeaderComponent)
+</script>
+
+<style>
+  /* Thin bar pinned to the top: full-bleed background and bottom rule, no floating or hiding */
+  header-component::before {
+    content: '';
+    position: absolute;
+    inset-block: 0;
+    left: 50%;
+    width: 100vw;
+    transform: translateX(-50%);
+    z-index: -1;
+    background-color: hsl(var(--background));
+    border-bottom: 1px solid hsl(var(--border));
+  }
+
+  /* header menu */
+  @media (max-width: 640px) {
+    #headerExpandContent {
+      grid-template-rows: 0fr;
+      transition:
+        opacity 0.3s,
+        padding 0.3s,
+        border-color 0.15s,
+        grid-template-rows 0.3s;
+    }
+    .expanded #headerExpandContent {
+      grid-template-rows: 1fr;
+    }
+    .expanded.not-top #headerExpandContent {
+      box-shadow:
+        rgb(255, 255, 255) 0px 0px 0px 0px,
+        rgba(24, 24, 27, 0.08) 0px 0px 0px 1px,
+        rgba(39, 39, 42, 0.08) 0px 10px 15px -3px,
+        rgba(39, 39, 42, 0.08) 0px 4px 6px -4px;
+    }
+
+    /* header component after */
+    header-component #headerExpandContent::after {
+      box-sizing: content-box;
+      content: '';
+      position: absolute;
+      inset-inline: calc(-1rem - 1px);
+      bottom: 0;
+      top: -5rem;
+      z-index: -1;
+      transition: 0.3s;
+      visibility: hidden;
+      opacity: 0;
+      border-bottom: 1px solid transparent;
+    }
+    header-component:not(.not-top) #headerExpandContent::after {
+      visibility: visible;
+      bottom: -1rem;
+      opacity: 1;
+      background-color: hsl(var(--muted) / var(--un-bg-opacity, 1));
+      border-bottom-color: hsl(var(--border) / var(--un-border-opacity, 1));
+    }
+  }
+</style>

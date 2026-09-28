@@ -1,0 +1,41 @@
+---
+import { cn } from 'astro-pure/utils'
+
+// `note`: optional small gray text at the right end of the heading row.
+// The heading carries the id (default: the title as a slug) so search results can link to it.
+// Other attributes (e.g. data-pagefind-ignore) pass through to <section>.
+const { class: className, title, id, note, ...attrs } = Astro.props
+const headingId = id ?? String(title).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')
+---
+
+<section class={cn('flex flex-col gap-y-4', className)} {...attrs}>
+  <div class='flex items-baseline justify-between gap-x-4'>
+    <h2 class='label' id={headingId}>{title}</h2>
+    {note && <span class='text-xs text-muted-foreground'>{note}</span>}
+  </div>
+  <div class='flex flex-col gap-y-3'>
+    <slot />
+  </div>
+</section>
+
+<style>
+  /* Small uppercase label; a hairline fills the rest of the row */
+  .label {
+    scroll-margin-top: 5.5rem;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: hsl(var(--foreground));
+    display: flex;
+    flex: 1;
+    align-items: center;
+    gap: 0.9rem;
+  }
+  .label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: hsl(var(--border));
+  }
+</style>

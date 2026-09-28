@@ -1,0 +1,469 @@
+---
+import { Image } from 'astro:assets'
+import { news, newsParts, profile, researchInterests } from '@/data/content'
+import {
+  authorRole,
+  dash,
+  detailText,
+  education,
+  experience,
+  honors,
+  publications,
+  service
+} from '@/data/cv'
+
+import { Icon } from 'astro-pure/user'
+import PageLayout from '@/layouts/BaseLayout.astro'
+import PubItem from '@/components/home/PubItem.astro'
+import Section from '@/components/home/Section.astro'
+
+import { Content as About } from '../../content/2-about.md'
+
+// News: the latest three always show; older items within two years (of build time) sit in a toggle.
+const MAX_NEWS = 3
+const NEWS_WINDOW_YEARS = 2
+const newsCutoff = new Date()
+newsCutoff.setFullYear(newsCutoff.getFullYear() - NEWS_WINDOW_YEARS)
+const olderNews = news.slice(MAX_NEWS).filter((n) => new Date(n.date) >= newsCutoff)
+const pubById = Object.fromEntries(publications.map((p) => [p.id, p]))
+
+// Profile photo: content/<profile.photo>
+const photos = import.meta.glob<{ default: ImageMetadata }>(
+  '/content/**/*.{jpeg,jpg,png,gif,avif,webp}'
+)
+const photoPath = `/content/${profile.photo}`
+if (!photos[photoPath])
+  throw new Error(`content/1-profile.yaml: photo "${profile.photo}" not found in content/`)
+
+// Academic Services, grouped like "Organizer / Invited Talk / Reviewer". Each CV service
+// item is { role, venues }; groups with no public items are hidden.
+const byRole = (role: string) =>
+  service.filter((s) => s.role === role).flatMap((s) => s.venues ?? [])
+// Reviewer lines list venue names once, without years ("NeurIPS 2025, NeurIPS 2026" -> "NeurIPS")
+const venueNames = (vs: string[]) =>
+  [...new Set(vs.map((v) => v.replace(/\s*\d{4}$/, '')))].join(', ')
+type ServiceLine = { label?: string; text: string }
+const serviceGroups: { title: string; lines: ServiceLine[] }[] = [
+  { title: 'Organizer', lines: byRole('Organizer').map((v) => ({ text: v })) },
+  {
+    title: 'Invited Talk',
+    lines: byRole('Invited Talk').length ? [{ text: byRole('Invited Talk').join(', ') }] : []
+  },
+  {
+    title: 'Reviewer',
+    lines: [
+      { label: 'Journal', text: venueNames(byRole('Journal Reviewer')) },
+      { label: 'Conference', text: venueNames(byRole('Conference Reviewer')) }
+    ].filter((l) => l.text)
+  }
+].filter((g) => g.lines.length > 0)
+
+// External links (http/https) open in a new tab, like the profile and paper links; #anchors stay in place
+const ext = (url?: string) =>
+  url && /^https?:/.test(url) ? { target: '_blank', rel: 'noopener' } : {}
+
+const fmtDate = (d: string) =>
+  new Date(d).toLocaleDateString('en-US', { month: 'short', year: 'numeric' })
+---
+
+<PageLayout meta={{ title: 'Home' }}>
+  <main data-pagefind-body data-pagefind-meta='title:Junoh Kang' class='home animate grid gap-x-12 gap-y-10 md:grid-cols-[15rem_minmax(0,1fr)]'>
+    {/* Left profile */}
+    {/* Search covers the CV-like sections only; the profile, About, and News stay out */}
+    <aside class='profile md:sticky md:top-24 md:self-start' data-pagefind-ignore='all'>
+      <Image
+        src={photos[photoPath]()}
+        alt={profile.name}
+        class='photo'
+        widths={[240, 480]}
+        sizes='240px'
+        loading='eager'
+        fetchpriority='high'
+      />
+      <h1 class='mt-4 text-2xl font-semibold'>{profile.name}</h1>
+      <p class='mt-1 text-sm text-muted-foreground'>{profile.role}</p>
+      <p class='mt-2 text-sm'>{profile.pitch}</p>
+      {
+        profile.status && (
+          <p class='status mt-3'>
+            <span class='dot' />
+            {profile.status}
+          </p>
+        )
+      }
+      <ul class='mt-4 flex flex-col gap-y-1.5 text-sm'>
+        {
+          profile.links.map((l) => (
+            <li>
+              <a href={l.href} target='_blank' rel='noopener' class='plink'>
+                <Icon name={l.icon as any} class='size-4' />
+                {l.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+      <a href={profile.cv} class='cv mt-5' target='_blank'>
+        <Icon name='document' class='size-4' /> Download CV
+      </a>
+    </aside>
+
+    {/* Main column */}
+    <div id='content' class='flex min-w-0 flex-col gap-y-12'>
+      <Section title='About' data-pagefind-ignore='all'>
+        <div class='about'>
+          <About />
+        </div>
+      </Section>
+
+      <Section title='Research Interests'>
+        <ul class='interests'>
+          {
+            researchInterests.map((r) => (
+              <li>
+                <p class='font-medium'>{r.title}</p>
+                <ul class='backing'>
+                  {r.papers.map(({ paper: id, note }) => (
+                    <li>
+                      <a href={`#${id}`} class='venue-link'>
+                        {pubById[id].venue}
+                      </a>
+                      {authorRole(pubById[id]) && (
+                        <span class='meta'> · {authorRole(pubById[id])}</span>
+                      )}
+                      <span class='text-muted-foreground'>
+                        {' — '}
+                        {note}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </li>
+            ))
+          }
+        </ul>
+      </Section>
+
+      <Section title='News' id='news' data-pagefind-ignore='all'>
+        <ul class='news flex flex-col gap-y-2'>
+          {
+            news.slice(0, MAX_NEWS).map((n) => (
+              <li class='flex gap-x-4 text-sm'>
+                <span class='w-20 shrink-0 text-muted-foreground'>{fmtDate(n.date)}</span>
+                <span>
+                  {newsParts(n).map((p) => (p.url ? <a href={p.url} {...ext(p.url)}>{p.text}</a> : p.text))}
+                </span>
+              </li>
+            ))
+          }
+        </ul>
+        {
+          olderNews.length > 0 && (
+            <details class='older'>
+              <summary>Show older news ({olderNews.length})</summary>
+              <ul class='news mt-2 flex flex-col gap-y-2'>
+                {olderNews.map((n) => (
+                  <li class='flex gap-x-4 text-sm'>
+                    <span class='w-20 shrink-0 text-muted-foreground'>{fmtDate(n.date)}</span>
+                    <span>
+                      {newsParts(n).map((p) => (p.url ? <a href={p.url} {...ext(p.url)}>{p.text}</a> : p.text))}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </details>
+          )
+        }
+      </Section>
+
+      <Section title='Education'>
+        <ul class='rows'>
+          {
+            education.map((e) => {
+              // "Seoul Science High School" + "Seoul Science High School (SSHS)": show the name once
+              const sameName = (e.institution ?? '').startsWith(e.title)
+              return (
+                <li>
+                  {/* The date sits on the first line; on narrow screens it wraps to line 2 */}
+                  <p class='head'>
+                    <span class='primary'>{e.institution}</span>
+                    <span class='when'>{dash(e.date)}</span>
+                  </p>
+                  {!sameName && <p class='degree'>{e.title}</p>}
+                  {e.details?.length ? (
+                    <p class='sub'>
+                      {e.details.map((d, i) => {
+                        // "Advisor: Prof. X" with a url: keep the label plain, link only the name
+                        const label = detailText(d)
+                        const url = typeof d === 'string' ? undefined : d.url
+                        const cut = label.indexOf(': ')
+                        return (
+                          <>
+                            {i > 0 && ', '}
+                            {url && cut > 0 ? (
+                              <>
+                                {label.slice(0, cut + 2)}
+                                <a href={url} {...ext(url)}>{label.slice(cut + 2)}</a>
+                              </>
+                            ) : url ? (
+                              <a href={url} {...ext(url)}>{label}</a>
+                            ) : (
+                              label
+                            )}
+                          </>
+                        )
+                      })}
+                    </p>
+                  ) : null}
+                </li>
+              )
+            })
+          }
+        </ul>
+      </Section>
+
+      <Section title='Experience'>
+        <ul class='rows'>
+          {
+            experience.map((e) => (
+              <li>
+                <p class='head'>
+                  <span>
+                    <span class='primary'>
+                      {e.url ? <a href={e.url} {...ext(e.url)}>{e.organization}</a> : e.organization}
+                    </span>
+                    <span class='secondary'>{e.title}</span>
+                  </span>
+                  <span class='when'>{dash(e.date)}</span>
+                </p>
+                {e.location && <p class='sub italic'>{e.location}</p>}
+              </li>
+            ))
+          }
+        </ul>
+      </Section>
+
+      <Section title='Publications' id='publications' note='* equal contribution'>
+        <ul>
+          {publications.map((p) => <PubItem pub={p} />)}
+        </ul>
+      </Section>
+
+      <Section title='Honors'>
+        <ul class='rows compact'>
+          {
+            honors.map((a) => (
+              <li>
+                <p class='head'>
+                  <span>{a.url ? <a href={a.url} {...ext(a.url)}>{a.title}</a> : a.title}</span>
+                  <span class='when'>{dash(a.year)}</span>
+                </p>
+              </li>
+            ))
+          }
+        </ul>
+      </Section>
+
+      {
+        serviceGroups.length > 0 && (
+          <Section title='Academic Services'>
+            {serviceGroups.map((g) => (
+              <div class='svc'>
+                <h3 class='svc-head'>{g.title}</h3>
+                {g.lines.map((l) => (
+                  <p>
+                    {l.label && <span class='font-medium'>{l.label}: </span>}
+                    {l.text}
+                  </p>
+                ))}
+              </div>
+            ))}
+          </Section>
+        )
+      }
+    </div>
+  </main>
+</PageLayout>
+
+<script>
+  // Clicking a paper link (Research Interests venue, News) scrolls so the paper lands under the
+  // pointer, where its hover band shows which one it is. Keyboard activation and touch screens
+  // (no hover) keep the default jump.
+  const canHover = window.matchMedia('(hover: hover)').matches
+  document.addEventListener('click', (e) => {
+    const link = (e.target as HTMLElement).closest<HTMLAnchorElement>('a[href^="#"]')
+    if (!link || e.detail === 0 || !canHover) return
+    const title = document.getElementById(decodeURIComponent(link.hash.slice(1)))
+    const pub = title?.closest<HTMLElement>('.pub')
+    if (!pub) return
+    e.preventDefault()
+    const rect = pub.getBoundingClientRect()
+    const headerBottom = document.querySelector('header-component')?.getBoundingClientRect().bottom ?? 0
+    // Center the paper on the pointer, but never tuck its top under the sticky header
+    const top = Math.max(e.clientY - rect.height / 2, headerBottom + 16)
+    window.scrollTo({ top: window.scrollY + rect.top - top, behavior: 'smooth' })
+    history.pushState(null, '', link.hash)
+  })
+</script>
+
+<style>
+  .photo {
+    width: 100%;
+    max-width: 15rem;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border-radius: 0.75rem;
+  }
+  /* Green status chip (the usual "available" signal); #177a43 text keeps 4.9:1 contrast on the tint */
+  .status {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: #177a43;
+    background: rgb(31 157 85 / 0.08);
+    border: 1px solid rgb(31 157 85 / 0.4);
+    border-radius: 999px;
+    padding: 0.2rem 0.7rem;
+  }
+  .dot {
+    width: 0.45rem;
+    height: 0.45rem;
+    border-radius: 999px;
+    background: #1f9d55;
+    box-shadow: 0 0 0 3px rgb(31 157 85 / 0.18);
+  }
+  .plink {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: hsl(var(--muted-foreground));
+  }
+  .plink:hover {
+    color: hsl(var(--primary));
+  }
+  .cv {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: hsl(var(--background));
+    background: hsl(var(--primary));
+    border-radius: 0.5rem;
+    padding: 0.45rem 0.9rem;
+  }
+  .cv:hover {
+    color: hsl(var(--background));
+    opacity: 0.9;
+  }
+  /* The theme's external-link arrow is for blog posts; the About paragraph reads cleaner without it */
+  .about :global(a > span[style*='user-select']) {
+    display: none;
+  }
+  .about {
+    line-height: 1.7;
+  }
+  .about :global(strong) {
+    font-weight: 600;
+  }
+  .about :global(a),
+  .news :global(a) {
+    color: hsl(var(--primary));
+  }
+  /* Home text links: plain navy at rest, underline on hover (Paper/Code keep their own faint underline) */
+  .about :global(a:hover),
+  .news :global(a:hover),
+  .rows a:hover,
+  .venue-link:hover {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+  }
+  /* Education / Experience / Honors: content on the left, dates pushed to the right edge */
+  .rows {
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+  }
+  .rows.compact {
+    gap: 0.35rem;
+  }
+  .rows .head {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 0 1.5rem;
+  }
+  .rows .primary {
+    font-weight: 600;
+  }
+  .rows .secondary {
+    margin-inline-start: 0.6rem;
+    color: hsl(var(--muted-foreground));
+    white-space: nowrap;
+  }
+  .rows .degree {
+    color: hsl(var(--muted-foreground));
+  }
+  .rows .sub {
+    font-size: 0.875rem;
+    color: hsl(var(--muted-foreground));
+  }
+  .rows .when {
+    flex-shrink: 0;
+    font-size: 0.875rem;
+    font-variant-numeric: tabular-nums;
+    color: hsl(var(--muted-foreground));
+  }
+  .rows a {
+    color: hsl(var(--primary));
+  }
+  .svc + .svc {
+    margin-top: 0.75rem;
+  }
+  .svc-head {
+    font-size: 0.875rem;
+    color: hsl(var(--muted-foreground));
+    margin-bottom: 0.2rem;
+  }
+  .svc p {
+    font-size: 0.9375rem;
+    line-height: 1.6;
+  }
+  .interests {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    list-style: disc;
+    padding-inline-start: 1.1rem;
+    line-height: 1.6;
+  }
+  .backing {
+    margin-top: 0.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    list-style: circle;
+    padding-inline-start: 1.1rem;
+    font-size: 0.875rem;
+  }
+  .venue-link {
+    font-weight: 600;
+    color: hsl(var(--primary));
+  }
+  .meta {
+    font-size: 0.8125rem;
+  }
+  .older summary {
+    cursor: pointer;
+    width: fit-content;
+    font-size: 0.875rem;
+    color: hsl(var(--muted-foreground));
+  }
+  .older summary:hover {
+    color: hsl(var(--primary));
+  }
+</style>

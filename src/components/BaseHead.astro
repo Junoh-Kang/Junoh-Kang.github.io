@@ -1,0 +1,111 @@
+---
+import { Font } from 'astro:assets'
+
+import { prod } from 'astro-pure/server'
+import type { SiteMeta } from 'astro-pure/types'
+import config from 'virtual:config'
+
+type Props = SiteMeta
+
+const { articleDate, description, ogImage, title } = Astro.props
+
+const siteTitle = `${title} ${config.titleDelimiter} ${config.title}`
+const canonicalURL = new URL(Astro.url.pathname, Astro.site)
+const socialImageURL = new URL(ogImage ? ogImage : config.socialCard, Astro.url).href
+---
+
+<meta charset='utf-8' />
+<meta
+  content='width=device-width, initial-scale=1.0, shrink-to-fit=no, viewport-fit=cover'
+  name='viewport'
+/>
+<meta content='IE=edge' http-equiv='X-UA-Compatible' />
+<title>{siteTitle}</title>
+
+{/* Icons / Favicon */}
+<link rel='icon' type={config.favicon.type} href={config.favicon.href} />
+<link rel='shortcut icon' type={config.favicon.type} href={config.favicon.href} />
+
+{/* Font preloads */}
+<Font cssVariable='--font-inter' preload={[{ subset: 'latin', style: 'normal' }]} />
+<Font cssVariable='--font-source-serif' preload={[{ subset: 'latin', style: 'normal' }]} />
+<style is:global>
+  body {
+    font-family: var(--font-inter), system-ui, sans-serif;
+  }
+  /* Post body reads in serif; headings, tables, and UI stay sans */
+  #content.prose {
+    font-family: var(--font-source-serif), Georgia, serif;
+    font-size: 1.0625rem;
+    line-height: 1.75;
+  }
+  #content.prose :is(h1, h2, h3, h4, h5, h6, table, figcaption) {
+    font-family: var(--font-inter), system-ui, sans-serif;
+  }
+  /* A #### right under a ### would otherwise sit flush against it */
+  #content.prose h3 + h4 {
+    margin-top: 1.25em;
+  }
+</style>
+
+{/* Canonical URL */}
+<link rel='canonical' href={canonicalURL} />
+
+{/* Primary Meta Tags */}
+<meta content={siteTitle} name='title' />
+<meta content={description} name='description' />
+<meta content={config.author} name='author' />
+
+{/* Theme Color */}
+{/* <meta content='' name='theme-color' /> */}
+<meta name='color-scheme' content='light dark' />
+
+{/* Open Graph / Facebook */}
+<meta content={articleDate ? 'article' : 'website'} property='og:type' />
+<meta content={title} property='og:title' />
+<meta content={description} property='og:description' />
+<meta content={canonicalURL} property='og:url' />
+<meta content={config.title} property='og:site_name' />
+<meta content={config.locale.attrs} property='og:locale' />
+<meta content={socialImageURL} property='og:image' />
+<meta content='1200' property='og:image:width' />
+<meta content='630' property='og:image:height' />
+{
+  articleDate && (
+    <>
+      <meta content={config.author} property='article:author' />
+      <meta content={articleDate} property='article:published_time' />
+    </>
+  )
+}
+
+{/* Twitter */}
+<meta content='summary_large_image' property='twitter:card' />
+<meta content={canonicalURL} property='twitter:url' />
+<meta content={title} property='twitter:title' />
+<meta content={description} property='twitter:description' />
+<meta content={socialImageURL} property='twitter:image' />
+
+{/* Sitemap */}
+<link href='/sitemap-index.xml' rel='sitemap' />
+
+{/* RSS auto-discovery */}
+<link
+  rel='alternate'
+  type='application/rss+xml'
+  title={config.title}
+  href={`${Astro.site}rss.xml`}
+/>
+
+<meta content={Astro.generator} name='generator' />
+
+{
+  /* User script*/
+  prod && (
+    <script>
+      console.log( '%c Astro Theme Pure %c https://github.com/cworld1/astro-theme-pure/',
+      'color:#fff;background:linear-gradient(90deg,#448bff,#44e9ff);padding:5px 0;',
+      'color:#000;background:linear-gradient(90deg,#44e9ff,#ffffff);padding:5px 10px 5px 0px;' )
+    </script>
+  )
+}

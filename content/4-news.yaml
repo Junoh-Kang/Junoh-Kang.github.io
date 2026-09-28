@@ -1,0 +1,88 @@
+# News shown on the home page, newest first.
+# The latest 3 always show; older items within 2 years sit behind "Show older news".
+#   date:  YYYY-MM-DD
+#   text:  the sentence, as plain text
+#   links: optional list; each `text` is a phrase in the sentence that becomes a link.
+#          Use url: '#<paper id>' to jump to that paper in Publications.
+#     - text: <phrase>
+#       url:  <URL>
+
+- date: '2026-09-29'
+  text: One paper on replayable limit-order-book message generation is available on arXiv.
+  links:
+    - text: replayable limit-order-book message generation
+      url: '#kang2026relobgen'
+
+- date: '2026-09-25'
+  text: One paper on probabilistic signature inversion has been accepted to NeurIPS 2026!
+  links:
+    - text: probabilistic signature inversion
+      url: '#kang2026probsiginv'
+
+- date: '2026-06-16'
+  text: One paper on probabilistic signature inversion is available on arXiv.
+  links:
+    - text: probabilistic signature inversion
+      url: '#kang2026probsiginv'
+
+- date: '2025-11-27'
+  text: One paper on real-world image super-resolution is available on arXiv.
+  links:
+    - text: real-world image super-resolution
+      url: '#kang2025icmsr'
+
+- date: '2025-07-01'
+  text: One paper on training-free video editing is available on arXiv.
+  links:
+    - text: training-free video editing
+      url: '#lee2025strmatch'
+
+- date: '2025-05-27'
+  text: A project page for STR-Match, our training-free video editing method, is released.
+  links:
+    - text: STR-Match
+      url: 'https://jslee525.github.io/str-match/'
+
+- date: '2025-01-24'
+  text: Awarded the Gold Medal at the 30th Samsung Humantech Paper Award for our work on infinite video generation.
+  links:
+    - text: Samsung Humantech Paper Award
+      url: 'https://humantech.samsung.com/saitext/board.do'
+    - text: infinite video generation
+      url: '#kim2024fifo'
+
+- date: '2025-01-23'
+  text: One paper on diffusion sampling has been accepted to ICLR 2025.
+  links:
+    - text: diffusion sampling
+      url: '#choi2025rx'
+
+- date: '2024-06-17'
+  text: I joined the Video AI Lab at Adobe Research as a summer intern.
+  links:
+    - text: Adobe Research
+      url: 'https://research.adobe.com/'
+
+- date: '2024-05-21'
+  text: One paper on training-free infinite video generation is available on arXiv.
+  links:
+    - text: training-free infinite video generation
+      url: '#kim2024fifo'
+
+- date: '2024-02-27'
+  text: One paper on few-step diffusion training has been accepted to CVPR 2024.
+  links:
+    - text: few-step diffusion training
+      url: '#kang2024ogdm'
+
+- date: '2023-10-09'
+  text: One paper on few-step diffusion training is available on arXiv.
+  links:
+    - text: few-step diffusion training
+      url: '#kang2024ogdm'
+
+- date: '2023-06-22'
+  text: One paper on open-set representation learning has been presented at CVPR 2023.
+  links:
+    - text: open-set representation learning
+      url: '#kim2023openset'

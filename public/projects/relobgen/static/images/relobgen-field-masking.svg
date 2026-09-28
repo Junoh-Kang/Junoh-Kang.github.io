@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="152.8358pt" height="91.7015pt" viewBox="405.0149 7.6418 152.8358 91.7015" role="img" aria-labelledby="title desc">
+  <title id="title">ReLOBGen field-validity masking</title>
+  <desc id="desc">A validity mask removes an invalid token value from raw logits, leaving a valid value to be selected for X_t.</desc>
+  <defs>
+    <marker id="arrow-dark" markerWidth="3" markerHeight="3" refX="0" refY="1.5" orient="auto" markerUnits="userSpaceOnUse" overflow="visible">
+      <path d="M0,0 L2.5981,1.5 L0,3 Z" fill="#4b5563"/>
+    </marker>
+    <pattern id="masked-probability" width="2.2925" height="2.2925" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <rect width="2.2925" height="2.2925" fill="#d9dde2"/>
+      <path d="M0,0 V2.2925" stroke="#4b5563" stroke-width="0.28"/>
+    </pattern>
+    <style>
+      .sans{font-family:Helvetica,Arial,sans-serif}
+      .math{font-family:"Times New Roman",Times,serif;font-style:italic}
+      .small{font-family:Helvetica,Arial,sans-serif;font-size:6px;font-weight:400;fill:#4b5563}
+      .edge{fill:none;stroke:#4b5563;stroke-width:0.50;marker-end:url(#arrow-dark)}
+      .line{fill:none;stroke:#4b5563;stroke-width:0.35}
+      .completed{fill:#e6e9ed;stroke:#59616a;stroke-width:0.35}
+      .active{fill:#dbe8fa;stroke:#6c8ebf;stroke-width:0.35}
+    </style>
+  </defs>
+
+  <rect x="405.0149" y="7.6418" width="152.8358" height="91.7015" fill="#fff"/>
+
+  <text class="math" x="469.5881" y="21.7791" text-anchor="middle" font-size="6" fill="#59616a">E<tspan baseline-shift="sub" font-size="4.2">t</tspan></text>
+  <text class="math" x="501.3015" y="21.7791" text-anchor="middle" font-size="6" fill="#59616a">R<tspan baseline-shift="sub" font-size="4.2">t</tspan></text>
+  <text class="math" x="538.3642" y="21.7791" text-anchor="middle" font-size="6" fill="#1f3864">X<tspan baseline-shift="sub" font-size="4.2">t</tspan></text>
+  <g class="completed"><rect x="459.727658" y="25.673958" width="9.022184" height="9.022184" stroke-width="0.350863"/><rect x="470.808258" y="25.673958" width="9.022184" height="9.022184" stroke-width="0.350863"/><rect x="485.709758" y="25.673958" width="9.022184" height="9.022184" stroke-width="0.350863"/><rect x="496.790358" y="25.673958" width="9.022184" height="9.022184" stroke-width="0.350863"/><rect x="507.870958" y="25.673958" width="9.022184" height="9.022184" stroke-width="0.350863"/><rect x="522.772458" y="25.673958" width="9.022184" height="9.022184" stroke-width="0.350863"/><rect x="533.853058" y="25.673958" width="9.022184" height="9.022184" stroke-width="0.350863"/></g>
+  <g class="active"><rect x="544.933658" y="25.673958" width="9.022184" height="9.022184" stroke-width="0.350863"/></g>
+
+  <text class="small" x="421.8269" y="53.1104" text-anchor="middle">Logits</text>
+  <rect x="414.5672" y="58.8418" width="14.5194" height="34.3881" fill="#fff" stroke="#59616a" stroke-width="0.50"/>
+  <path class="line" d="M414.5672,70.3045 H429.0866 M414.5672,81.7672 H429.0866"/>
+  <g class="sans" font-size="5" text-anchor="middle" fill="#374151"><text x="421.8269" y="66.3231">0.2</text><text x="421.8269" y="77.7858">0.9</text><text x="421.8269" y="89.2486">1.6</text></g>
+  <text class="sans" x="438.6388" y="79.4746" text-anchor="middle" font-size="5" font-weight="400" fill="#374151">+</text>
+  <text class="small" x="455.4507" y="53.1104" text-anchor="middle">Validity mask</text>
+  <rect x="448.191" y="58.8418" width="14.5194" height="34.3881" fill="#fff" stroke="#59616a" stroke-width="0.50"/>
+  <path class="line" d="M448.191,70.3045 H462.7104 M448.191,81.7672 H462.7104"/>
+  <g class="sans" font-size="5" text-anchor="middle"><text x="455.4507" y="66.3231" fill="#374151"><tspan dy="-0.7642">−</tspan><tspan dy="0.7642">∞</tspan></text><text x="455.4507" y="77.7858" fill="#374151">0</text><text x="455.4507" y="89.2486" fill="#374151">0</text></g>
+  <path class="edge" d="M464.9604,76.0358 H476.2026"/>
+  <text class="math" x="488.3104" y="53.1104" text-anchor="middle" font-size="6" fill="#374151">p</text>
+  <rect x="481.0507" y="58.8418" width="14.5194" height="34.3881" fill="#fff" stroke="#59616a" stroke-width="0.50"/>
+  <path class="line" d="M481.0507,70.3045 H495.5701 M481.0507,81.7672 H495.5701"/>
+  <rect x="481.4328" y="59.2239" width="13.7552" height="10.6985" fill="url(#masked-probability)"/>
+  <rect x="481.4328" y="82.1493" width="13.7552" height="10.6985" fill="#dbe8fa" stroke="#6c8ebf" stroke-width="0.35"/>
+  <g class="sans" font-size="5" text-anchor="middle"><text x="488.3104" y="66.3231" fill="#374151">0.0</text><text x="488.3104" y="77.7858" fill="#374151">0.3</text><text x="488.3104" y="89.2486" font-weight="400" fill="#1f3864">0.7</text></g>
+  <text class="small" x="526.9015" y="53.1104" text-anchor="middle">Token values</text>
+  <rect x="522.390358" y="60.062058" width="9.022184" height="9.022184" fill="#e6e9ed" stroke="#59616a" stroke-width="0.350863" stroke-dasharray="1.5 1"/>
+  <rect x="522.390358" y="71.524658" width="9.022184" height="9.022184" fill="#e6e9ed" stroke="#59616a" stroke-width="0.350863" stroke-dasharray="1.5 1"/>
+  <rect x="522.390358" y="82.987358" width="9.022184" height="9.022184" fill="#dbe8fa" stroke="#6c8ebf" stroke-width="0.350863"/>
+  <text class="math" x="526.9015" y="66.3231" text-anchor="middle" font-size="5" fill="#374151">v<tspan baseline-shift="sub" font-size="3.5">1</tspan></text>
+  <text class="math" x="526.9015" y="77.7858" text-anchor="middle" font-size="5" fill="#374151">v<tspan baseline-shift="sub" font-size="3.5">2</tspan></text>
+  <text class="math" x="526.9015" y="89.2486" text-anchor="middle" font-size="5" fill="#1f3864">v<tspan baseline-shift="sub" font-size="3.5">3</tspan></text>
+  <path class="edge" d="M533.6616,87.4985 H549.4448 V39.6182"/>
+</svg>

@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="231.1642pt" height="91.7015pt" viewBox="47.6716 7.6418 233.1642 91.7015" role="img" aria-labelledby="title desc">
+  <title id="title">ReLOBGen reference selection working draft</title>
+  <desc id="desc">The eligible order set C_t is shown as order-index boxes paired with their cached keys. A shared query derived from the generation context scores the keys, selects one order, and fills the reference field R_t.</desc>
+  <defs>
+    <marker id="arrow-dark" markerWidth="3" markerHeight="3" refX="0" refY="1.5" orient="auto" markerUnits="userSpaceOnUse" overflow="visible">
+      <path d="M0,0 L2.5981,1.5 L0,3 Z" fill="#4b5563"/>
+    </marker>
+    <marker id="arrow-small" markerWidth="3" markerHeight="3" refX="0" refY="1.5" orient="auto" markerUnits="userSpaceOnUse" overflow="visible">
+      <path d="M0,0 L2.5981,1.5 L0,3 Z" fill="#6b7280"/>
+    </marker>
+    <style>
+      .sans{font-family:Helvetica,Arial,sans-serif}
+      .math{font-family:"Times New Roman",Times,serif;font-style:italic}
+      .small{font-family:Helvetica,Arial,sans-serif;font-size:6px;font-weight:400;fill:#4b5563}
+      .edge{fill:none;stroke:#4b5563;stroke-width:0.50;marker-end:url(#arrow-dark)}
+      .context-edge{fill:none;stroke:#6b7280;stroke-width:0.50;marker-end:url(#arrow-small)}
+      .line{fill:none;stroke:#4b5563;stroke-width:0.35}
+      .completed{fill:#e6e9ed;stroke:#59616a;stroke-width:0.35}
+      .active{fill:#dbe8fa;stroke:#6c8ebf;stroke-width:0.35}
+      .future{fill:#fff;stroke:#9ca3af;stroke-width:0.35;stroke-dasharray:1.5 1}
+    </style>
+  </defs>
+
+  <rect x="47.6716" y="7.6418" width="233.1642" height="91.7015" fill="#fff"/>
+
+  <text class="math" x="195.6299" y="21.7791" text-anchor="middle" font-size="6" fill="#59616a">E<tspan baseline-shift="sub" font-size="4.2">t</tspan></text>
+  <text class="math" x="227.3433" y="21.7791" text-anchor="middle" font-size="6" fill="#1f3864">R<tspan baseline-shift="sub" font-size="4.2">t</tspan></text>
+  <text class="math" x="264.406" y="21.7791" text-anchor="middle" font-size="6" fill="#9ca3af">X<tspan baseline-shift="sub" font-size="4.2">t</tspan></text>
+  <g class="completed"><rect x="185.712286" y="25.616786" width="9.136528" height="9.136528" stroke-width="0.355309"/><rect x="196.792886" y="25.616786" width="9.136528" height="9.136528" stroke-width="0.355309"/></g>
+  <g class="active"><rect x="211.694386" y="25.616786" width="9.136528" height="9.136528" stroke-width="0.355309"/><rect x="222.774986" y="25.616786" width="9.136528" height="9.136528" stroke-width="0.355309"/><rect x="233.855586" y="25.616786" width="9.136528" height="9.136528" stroke-width="0.355309"/></g>
+  <g class="future"><rect x="248.757086" y="25.616786" width="9.136528" height="9.136528" stroke-width="0.355309"/><rect x="259.837686" y="25.616786" width="9.136528" height="9.136528" stroke-width="0.355309"/><rect x="270.918286" y="25.616786" width="9.136528" height="9.136528" stroke-width="0.355309"/></g>
+
+  <text class="small" x="85.5" y="21.7791" text-anchor="middle">Generation context</text>
+  <rect x="75" y="25.6" width="21" height="9.1701" fill="#fff" stroke="#59616a" stroke-width="0.50"/>
+  <text class="math" x="85.5" y="32.0858" text-anchor="middle" font-size="5" fill="#374151">h<tspan baseline-shift="sub" font-size="3.5">t</tspan></text>
+  <path class="context-edge" d="M85.5,36.7701 V40.5 H60.3701 V44.9123"/>
+  <text class="small" x="60.3701" y="53.1104" text-anchor="middle">Query</text>
+  <rect x="54.6388" y="56.9313" width="11.4627" height="38.209" fill="#fff" stroke="#59616a" stroke-width="0.50"/>
+  <text class="math" x="60.3701" y="77.7858" text-anchor="middle" font-size="5" fill="#374151">q<tspan baseline-shift="sub" font-size="3.5">t</tspan></text>
+  <text class="sans" x="75.2716" y="79.4746" text-anchor="middle" font-size="5" font-weight="400" fill="#374151">×</text>
+  <text class="math" x="89.0269" y="53.1104" text-anchor="middle" font-size="6" fill="#374151">𝒞<tspan baseline-shift="sub" font-size="4.2">t</tspan></text>
+  <text class="small" x="113.8627" y="53.1104" text-anchor="middle">Cached keys</text>
+  <rect x="83.2955" y="58.8418" width="11.4627" height="34.3881" fill="#edf0f3" stroke="#59616a" stroke-width="0.50"/>
+  <path class="line" d="M83.7349,70.3045 H94.3188 M83.7349,81.7672 H94.3188"/>
+  <g class="math" font-size="5" text-anchor="middle" fill="#374151"><text x="89.0269" y="66.3231">o<tspan baseline-shift="sub" font-size="3.5">1</tspan></text><text x="89.0269" y="77.7858">o<tspan baseline-shift="sub" font-size="3.5">2</tspan></text><text x="89.0269" y="89.2486">o<tspan baseline-shift="sub" font-size="3.5">3</tspan></text></g>
+  <rect x="94.7582" y="58.8418" width="38.209" height="34.3881" fill="#fff" stroke="#59616a" stroke-width="0.50"/>
+  <path class="line" d="M95.1976,70.3045 H132.5278 M95.1976,81.7672 H132.5278"/>
+  <text class="math" x="113.8627" y="66.3231" text-anchor="middle" font-size="5" fill="#374151">k<tspan baseline-shift="sub" font-size="3.5">1</tspan></text>
+  <text class="math" x="113.8627" y="77.7858" text-anchor="middle" font-size="5" fill="#374151">k<tspan baseline-shift="sub" font-size="3.5">2</tspan></text>
+  <text class="math" x="113.8627" y="89.2486" text-anchor="middle" font-size="5" fill="#374151">k<tspan baseline-shift="sub" font-size="3.5">3</tspan></text>
+  <path class="edge" d="M135.2172,76.0358 H144.931"/>
+  <text class="math" x="157.0388" y="53.1104" text-anchor="middle" font-size="6" fill="#374151">p</text>
+  <rect x="149.7791" y="58.8418" width="14.5194" height="34.3881" fill="#fff" stroke="#59616a" stroke-width="0.50"/>
+  <path class="line" d="M149.7791,70.3045 H164.2985 M149.7791,81.7672 H164.2985"/>
+  <rect x="150.1612" y="70.6866" width="13.7552" height="10.6985" fill="#dbe8fa" stroke="#6c8ebf" stroke-width="0.35"/>
+  <g class="sans" font-size="5" text-anchor="middle"><text x="157.0388" y="66.3231" fill="#374151">0.3</text><text x="157.0388" y="77.7858" font-weight="400" fill="#1f3864">0.5</text><text x="157.0388" y="89.2486" fill="#374151">0.2</text></g>
+  <text class="small" x="196.7761" y="53.1104" text-anchor="middle">Resting orders</text>
+  <text class="math" x="174.2328" y="65.1769" text-anchor="middle" font-size="5" fill="#374151">o<tspan baseline-shift="sub" font-size="3.5">1</tspan></text>
+  <text class="math" x="174.2328" y="77.7858" text-anchor="middle" font-size="5" fill="#1f3864">o<tspan baseline-shift="sub" font-size="3.5">2</tspan></text>
+  <text class="math" x="174.2328" y="90.3947" text-anchor="middle" font-size="5" fill="#374151">o<tspan baseline-shift="sub" font-size="3.5">3</tspan></text>
+  <g fill="#e6e9ed" stroke="#59616a" stroke-width="0.35" stroke-dasharray="1.5 1"><rect x="181.127186" y="58.858586" width="9.136528" height="9.136528" stroke-width="0.355309"/><rect x="192.207786" y="58.858586" width="9.136528" height="9.136528" stroke-width="0.355309"/><rect x="203.288386" y="58.858586" width="9.136528" height="9.136528" stroke-width="0.355309"/><rect x="181.127186" y="84.076486" width="9.136528" height="9.136528" stroke-width="0.355309"/><rect x="192.207786" y="84.076486" width="9.136528" height="9.136528" stroke-width="0.355309"/><rect x="203.288386" y="84.076486" width="9.136528" height="9.136528" stroke-width="0.355309"/></g>
+  <g fill="#dbe8fa" stroke="#6c8ebf" stroke-width="0.35"><rect x="181.127186" y="71.467486" width="9.136528" height="9.136528" stroke-width="0.355309"/><rect x="192.207786" y="71.467486" width="9.136528" height="9.136528" stroke-width="0.355309"/><rect x="203.288386" y="71.467486" width="9.136528" height="9.136528" stroke-width="0.355309"/></g>
+  <path class="edge" d="M214.6168,76.0358 H227.3433 V39.6182"/>
+</svg>

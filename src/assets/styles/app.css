@@ -1,0 +1,37 @@
+/* Theme */
+:root {
+  /* Primary: navy #1f4e79 */
+  --primary: 209 59% 30%;
+  /* Foreground: #1a1a1a text, #6b6b6b secondary */
+  --foreground: 0 0% 10%;
+  --muted-foreground: 0 0% 42%;
+  /* Background: #fff */
+  --background: 0 0% 100%;
+  --muted: 0 0% 96%;
+  --card: 0 0% 90%;
+
+  /* Basic */
+  --border: 0 0% 89%;
+  --input: 0 0% 90%;
+  --ring: 0 0% 10%;
+  --radius: 0.5rem;
+}
+:root {
+  --un-default-border-color: hsl(var(--border) / 1);
+}
+/* Light-only site */
+html {
+  color-scheme: light;
+}
+
+/* Global */
+/* The header's full-bleed bar is 100vw wide; never let it add a horizontal scrollbar */
+body {
+  overflow-x: clip;
+}
+a {
+  transition: color 0.2s ease;
+  &:hover {
+    color: hsl(var(--primary) / var(--un-text-opacity, 1));
+  }
+}
