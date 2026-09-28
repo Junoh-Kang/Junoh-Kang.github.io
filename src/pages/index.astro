@@ -313,19 +313,26 @@ const fmtDate = (d: string) =>
     swallowMomentum()
   })
 
-  // Trackpad momentum from scrolling up to the link keeps arriving as wheel events after the click; it
-  // would cancel the smooth scroll and carry the page back. Ignore wheel input until it pauses for
-  // 100 ms, and never for over 1 s.
+  // Scroll input that outlives the gesture (trackpad momentum, a free-spinning Logitech MagSpeed wheel,
+  // smoothed wheel drivers) keeps arriving as wheel events after the click; it would cancel the smooth
+  // scroll and carry the page back. Such leftover input keeps one direction and weakens, so ignore it
+  // until it pauses for 200 ms, turns around, grows stronger (a new deliberate scroll), or 5 s pass.
   function swallowMomentum() {
     const started = performance.now()
     let last = started
+    let direction = 0
+    let lastSize = Infinity
+    const release = () => window.removeEventListener('wheel', block)
     const block = (e: WheelEvent) => {
       const now = performance.now()
-      if (now - last > 100 || now - started > 1000) {
-        window.removeEventListener('wheel', block)
-        return
-      }
+      const size = Math.abs(e.deltaY)
+      const sign = Math.sign(e.deltaY)
+      const turned = direction !== 0 && sign !== 0 && sign !== direction
+      const stronger = size > lastSize * 1.5 + 2
+      if (now - last > 200 || now - started > 5000 || turned || stronger) return release()
+      if (direction === 0) direction = sign
       last = now
+      lastSize = size
       e.preventDefault()
     }
     window.addEventListener('wheel', block, { passive: false })
