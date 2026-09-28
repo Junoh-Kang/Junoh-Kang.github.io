@@ -289,6 +289,30 @@ const fmtDate = (d: string) =>
   </main>
 </PageLayout>
 
+<script>
+  // Clicking a paper link (Research Interests venue) with a mouse scrolls the paper to the pointer's
+  // height, or as far as the page allows. Keyboard activation and touch screens keep the default jump.
+  const canHover = window.matchMedia('(hover: hover)').matches
+  document.addEventListener('click', (e) => {
+    const link = (e.target as HTMLElement).closest<HTMLAnchorElement>('a[href^="#"]')
+    if (!link || e.detail === 0 || !canHover) return
+    const pub = document.getElementById(decodeURIComponent(link.hash.slice(1)))?.closest<HTMLElement>('.pub')
+    if (!pub) return
+    e.preventDefault()
+    const rect = pub.getBoundingClientRect()
+    const headerBottom = document.querySelector('header-component')?.getBoundingClientRect().bottom ?? 0
+    // Center the paper on the pointer, but never tuck its top under the sticky header
+    const top = Math.max(e.clientY - rect.height / 2, headerBottom + 16)
+    const from = window.scrollY
+    const target = from + rect.top - top
+    // Setting location.hash updates :target (the arrival highlight); undo its jump before the next
+    // paint, then scroll smoothly. The browser stops at the end of the page if the target is past it.
+    location.hash = link.hash
+    window.scrollTo({ top: from, behavior: 'instant' })
+    window.scrollTo({ top: target, behavior: 'smooth' })
+  })
+</script>
+
 <style>
   .photo {
     width: 100%;
