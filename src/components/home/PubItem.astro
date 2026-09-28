@@ -62,16 +62,24 @@ const underReview = pub.venue === 'Under review'
 </li>
 
 <script>
-  // Clicking a link to the paper that is already the URL fragment does not re-trigger :target,
-  // so restart the arrival fade by hand. The browser still performs the jump itself.
+  // Marks the paper named by the URL fragment with the `arrived` class: a fading band and a thin
+  // left bar. A class (not :target) is used so the home page can change the URL with
+  // history.pushState, which does not update :target and does not make the browser jump.
+  function arrive(hash: string) {
+    document.querySelectorAll('.pub.arrived').forEach((p) => p.classList.remove('arrived'))
+    const pub = hash ? document.getElementById(decodeURIComponent(hash.slice(1)))?.closest('.pub') : null
+    if (!pub) return
+    void (pub as HTMLElement).offsetWidth // restart the fade when the same paper is marked again
+    pub.classList.add('arrived')
+  }
+  arrive(location.hash)
+  window.addEventListener('hashchange', () => arrive(location.hash))
+  // The home page's pointer-height scroll announces its target this way
+  window.addEventListener('paper-arrive', (e) => arrive((e as CustomEvent<string>).detail))
+  // A default jump to the paper that is already the fragment fires no hashchange; mark it again
   document.addEventListener('click', (e) => {
     const link = (e.target as HTMLElement).closest<HTMLAnchorElement>('a[href^="#"]')
-    if (!link || link.hash !== location.hash) return
-    const pub = document.getElementById(decodeURIComponent(link.hash.slice(1)))?.closest('.pub')
-    if (!pub) return
-    pub.classList.add('replay')
-    void (pub as HTMLElement).offsetWidth
-    pub.classList.remove('replay')
+    if (link && link.hash === location.hash) arrive(link.hash)
   })
 </script>
 
@@ -83,13 +91,13 @@ const underReview = pub.venue === 'Under review'
   .pub:last-child {
     border-bottom: 0;
   }
-  /* A paper reached through an in-page link (e.g. #kang2024ogdm) gets a light gray band under its
-     text that fades out over two seconds, so the reader sees where they landed. */
+  /* A paper reached through an in-page link (e.g. #kang2024ogdm; see the script above) gets a light
+     gray band under its text that fades out over two seconds, so the reader sees where they landed. */
   .pub {
     position: relative;
     isolation: isolate;
   }
-  .pub:has(> .title:target)::before {
+  .pub.arrived::before {
     content: '';
     position: absolute;
     inset: 0 -0.75rem;
@@ -106,12 +114,8 @@ const underReview = pub.venue === 'Under review'
       opacity: 0;
     }
   }
-  /* Restarting the fade when the same link is clicked again (see the script above) */
-  .pub.replay:has(> .title:target)::before {
-    animation: none;
-  }
   /* A thin navy bar stays at the left of the reached paper while it is the URL fragment */
-  .pub:has(> .title:target)::after {
+  .pub.arrived::after {
     content: '';
     position: absolute;
     top: 0.6rem;

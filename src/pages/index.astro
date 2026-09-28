@@ -303,13 +303,11 @@ const fmtDate = (d: string) =>
     const headerBottom = document.querySelector('header-component')?.getBoundingClientRect().bottom ?? 0
     // Center the paper on the pointer, but never tuck its top under the sticky header
     const top = Math.max(e.clientY - rect.height / 2, headerBottom + 16)
-    const from = window.scrollY
-    const target = from + rect.top - top
-    // Setting location.hash updates :target (the arrival highlight); undo its jump before the next
-    // paint, then scroll smoothly. The browser stops at the end of the page if the target is past it.
-    location.hash = link.hash
-    window.scrollTo({ top: from, behavior: 'instant' })
-    window.scrollTo({ top: target, behavior: 'smooth' })
+    // pushState changes the URL without the browser's own jump; the browser stops the smooth scroll
+    // at the end of the page if the target is past it. PubItem marks the paper on 'paper-arrive'.
+    history.pushState(null, '', link.hash)
+    window.dispatchEvent(new CustomEvent('paper-arrive', { detail: link.hash }))
+    window.scrollTo({ top: window.scrollY + rect.top - top, behavior: 'smooth' })
   })
 </script>
 
