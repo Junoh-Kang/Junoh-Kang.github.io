@@ -147,9 +147,10 @@
       <div class="hero-body">
         <img class="paper-figure" src="static/images/rollout.svg" alt="Closed-loop market simulation with an LOB message generator and post-processing">
         <h2 class="subtitle teaser-caption">
-          In closed-loop market simulation, an LOB message generator can emit messages the simulator cannot replay.
-          Existing generators therefore require post-processing: correction, which can distort the distribution of replayed messages, or rejection and resampling, which increases inference cost.
-          <strong>ReLOBGen generates replayable messages by construction</strong>, so no post-processing is needed.
+          In closed-loop market simulation, the LOB simulator uses each generated message <i>M</i><sub><i>t</i></sub> to update the current resting-order set from 𝒪<sub><i>t</i>&minus;1</sub> to 𝒪<sub><i>t</i></sub>, an operation we call <em>replay</em>.
+          Existing generators may produce messages that cannot be replayed and therefore require post-processing: correction, or rejection and resampling.
+          Post-processing can distort the distribution of replayed messages and increases inference cost.
+          <strong>ReLOBGen instead generates replayable messages by construction.</strong>
         </h2>
       </div>
     </div>
@@ -213,9 +214,9 @@
       <h2 class="title is-3 has-text-centered">Method</h2>
       <div class="content replayability-def">
         <p>
-          A generated LOB message is <strong>replayable</strong> if the LOB simulator can use it to update the LOB without any correction.
-          More specifically, a message <i>M</i><sub><i>t</i></sub> = (<i>E</i><sub><i>t</i></sub>, <i>R</i><sub><i>t</i></sub>, <i>X</i><sub><i>t</i></sub>) consists of an event, a reference order, and an event order, where a non-add event (cancel, delete, or execute) acts on an existing resting order <i>R</i><sub><i>t</i></sub> in the current resting-order set 𝒪<sub><i>t</i>&minus;1</sub>.
-          <i>M</i><sub><i>t</i></sub> is replayable if it satisfies both of the following conditions:
+          Each message <i>M</i><sub><i>t</i></sub> = (<i>E</i><sub><i>t</i></sub>, <i>R</i><sub><i>t</i></sub>, <i>X</i><sub><i>t</i></sub>) has three parts: an event, a reference order, and an event order.
+          For a non-add event, such as a cancellation, the event order <i>X</i><sub><i>t</i></sub> acts on the reference order <i>R</i><sub><i>t</i></sub> in the resting-order set 𝒪<sub><i>t</i>&minus;1</sub>.
+          <i>M</i><sub><i>t</i></sub> is <strong>replayable</strong> if it satisfies both of the following conditions:
         </p>
         <ul class="conditions">
           <li><span class="cond-chip">Reference eligibility</span> A non-add event references an eligible resting order: <span class="math-inline"><i>R</i><sub><i>t</i></sub> &isin; 𝒞<sub><i>t</i></sub>(<i>E</i><sub><i>t</i></sub>, 𝒪<sub><i>t</i>&minus;1</sub>) &sub; 𝒪<sub><i>t</i>&minus;1</sub></span>.</li>
