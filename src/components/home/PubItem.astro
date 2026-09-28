@@ -12,7 +12,7 @@ const authors = (pub.authors ?? [])
   .map((a) => a.replace(/^Junoh Kang(\*?)$/, '<strong>Junoh Kang$1</strong>'))
   .join(', ')
 
-// Show only Paper, Code, and Project. Paper opens alphaXiv (built from the arXiv link, fast),
+// Show only Paper, Project, and Code. Paper opens alphaXiv (built from the arXiv link, fast),
 // else the published PDF. The PDF CV uses the same rule (cv/export.rb).
 const byLabel = (label: string) => pub.links?.find((l) => l.label === label)?.url
 const arxivId = byLabel('arXiv')?.match(
@@ -23,8 +23,8 @@ const paper = arxivId
   : (byLabel('arXiv') ?? byLabel('Paper'))
 const links = [
   { label: 'Paper', url: paper },
-  { label: 'Code', url: byLabel('Code') },
-  { label: 'Project', url: byLabel('Project') }
+  { label: 'Project', url: byLabel('Project') },
+  { label: 'Code', url: byLabel('Code') }
 ].filter((l): l is { label: string; url: string } => Boolean(l.url))
 const underReview = pub.venue === 'Under review'
 ---
