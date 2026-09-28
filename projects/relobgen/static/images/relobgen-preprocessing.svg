@@ -1,0 +1,109 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="396pt" height="68pt" viewBox="0 8 396 68" role="img" aria-labelledby="title desc">
+<title id="title">Reference-grounded preprocessing</title>
+<desc id="desc">Two 22-token serializations reference the same resting order o. A single source box shares price p and submission timestamp tau, and contrasts initial submitted size 100 with current remaining size 60. Initial size connects to the reference size token in LOBS5; remaining size connects to the reference size token in ReLOBGen. Event-order fields are labeled price (two tokens), size (one), delta time (four), and timestamp (five). Both references describe the same order, not two orders or two separate events. Each row has two event tokens, eight reference tokens, and twelve event-order tokens. Numbers inside the reference size tokens illustrate represented quantities rather than vocabulary IDs. Arrows denote preprocessing representation, not inference-time sampling.</desc>
+<defs>
+  <linearGradient id="reference-highlight"><stop offset="0" stop-color="#edf0f3" stop-opacity="0"/><stop offset="0.04" stop-color="#edf0f3"/><stop offset="0.96" stop-color="#edf0f3"/><stop offset="1" stop-color="#edf0f3" stop-opacity="0"/></linearGradient>
+  <linearGradient id="resting-highlight"><stop offset="0" stop-color="#dbe8fa" stop-opacity="0"/><stop offset="0.04" stop-color="#dbe8fa"/><stop offset="0.96" stop-color="#dbe8fa"/><stop offset="1" stop-color="#dbe8fa" stop-opacity="0"/></linearGradient>
+  <marker id="arrow-dark" markerWidth="2.5981" markerHeight="3" refX="2.5981" refY="1.5" orient="auto" markerUnits="userSpaceOnUse" overflow="visible"><path d="M0,0 L2.5981,1.5 L0,3 Z" fill="#4b5563"/></marker>
+  <marker id="arrow-blue" markerWidth="2.8146" markerHeight="3.25" refX="2.8146" refY="1.625" orient="auto" markerUnits="userSpaceOnUse" overflow="visible"><path d="M0,0 L2.8146,1.625 L0,3.25 Z" fill="#6c8ebf"/></marker>
+  <style>
+    .sans{font-family:Helvetica,Arial,sans-serif}
+    .math{font-family:"Times New Roman",Times,serif;font-style:italic}
+    .edge{fill:none;stroke:#4b5563;stroke-width:0.50;marker-end:url(#arrow-dark)}
+    .blue-edge{fill:none;stroke:#6c8ebf;stroke-width:0.65;marker-end:url(#arrow-blue)}
+    .line{fill:none;stroke:#59616a;stroke-width:0.35}
+  </style>
+</defs>
+<rect x="0" y="0" width="396" height="76" fill="#fff" stroke="none" stroke-width="0" />
+<!-- All units are final-size points. Token geometry is reduced without scaling strokes or all typography. -->
+<text class="sans" x="4" y="27" font-size="6" fill="#4b5563" text-anchor="start" font-weight="400">LOBS5</text>
+<text class="sans" x="4" y="34" font-size="5" fill="#4b5563" text-anchor="start" font-weight="400">reference-last</text>
+<g id="lobs5-tokens">
+<text class="math" x="58.5" y="17" font-size="6" fill="#59616a" text-anchor="middle" font-weight="400">E<tspan baseline-shift="sub" font-size="4.2">t</tspan></text>
+<rect x="48.500000" y="20.500000" width="9.000000" height="9.000000" fill="#fff" stroke="#59616a" stroke-width="0.350000" data-token="E-1"/>
+<text class="sans" x="53" y="26.2" font-size="3" fill="#4b5563" text-anchor="middle" font-weight="400">type</text>
+<rect x="59.500000" y="20.500000" width="9.000000" height="9.000000" fill="#fff" stroke="#59616a" stroke-width="0.350000" data-token="E-2"/>
+<text class="sans" x="64" y="26.2" font-size="3" fill="#4b5563" text-anchor="middle" font-weight="400">side</text>
+<text class="math" x="140.5" y="17" font-size="6" fill="#59616a" text-anchor="middle" font-weight="400">X<tspan baseline-shift="sub" font-size="4.2">t</tspan></text>
+<rect x="75.500000" y="20.500000" width="9.000000" height="9.000000" fill="#fff" stroke="#59616a" stroke-width="0.350000" data-token="X-1"/>
+<rect x="86.500000" y="20.500000" width="9.000000" height="9.000000" fill="#fff" stroke="#59616a" stroke-width="0.350000" data-token="X-2"/>
+<rect x="97.500000" y="20.500000" width="9.000000" height="9.000000" fill="#fff" stroke="#59616a" stroke-width="0.350000" data-token="X-3"/>
+<rect x="108.500000" y="20.500000" width="9.000000" height="9.000000" fill="#fff" stroke="#59616a" stroke-width="0.350000" data-token="X-4"/>
+<rect x="119.500000" y="20.500000" width="9.000000" height="9.000000" fill="#fff" stroke="#59616a" stroke-width="0.350000" data-token="X-5"/>
+<rect x="130.500000" y="20.500000" width="9.000000" height="9.000000" fill="#fff" stroke="#59616a" stroke-width="0.350000" data-token="X-6"/>
+<rect x="141.500000" y="20.500000" width="9.000000" height="9.000000" fill="#fff" stroke="#59616a" stroke-width="0.350000" data-token="X-7"/>
+<rect x="152.500000" y="20.500000" width="9.000000" height="9.000000" fill="#fff" stroke="#59616a" stroke-width="0.350000" data-token="X-8"/>
+<rect x="163.500000" y="20.500000" width="9.000000" height="9.000000" fill="#fff" stroke="#59616a" stroke-width="0.350000" data-token="X-9"/>
+<rect x="174.500000" y="20.500000" width="9.000000" height="9.000000" fill="#fff" stroke="#59616a" stroke-width="0.350000" data-token="X-10"/>
+<rect x="185.500000" y="20.500000" width="9.000000" height="9.000000" fill="#fff" stroke="#59616a" stroke-width="0.350000" data-token="X-11"/>
+<rect x="196.500000" y="20.500000" width="9.000000" height="9.000000" fill="#fff" stroke="#59616a" stroke-width="0.350000" data-token="X-12"/>
+<text class="math" x="255.5" y="17" font-size="6" fill="#59616a" text-anchor="middle" font-weight="400">R<tspan baseline-shift="sub" font-size="4.2">t</tspan></text>
+<rect x="212.500000" y="20.500000" width="9.000000" height="9.000000" fill="#edf0f3" stroke="#59616a" stroke-width="0.350000" data-token="R-1"/>
+<rect x="223.500000" y="20.500000" width="9.000000" height="9.000000" fill="#edf0f3" stroke="#59616a" stroke-width="0.350000" data-token="R-2"/>
+<rect x="234.500000" y="20.500000" width="9.000000" height="9.000000" fill="#d9dde2" stroke="#59616a" stroke-width="0.600000" data-token="R-3"/>
+<text class="sans" x="239" y="26.8" font-size="4" fill="#374151" text-anchor="middle" font-weight="400">100</text>
+<rect x="245.500000" y="20.500000" width="9.000000" height="9.000000" fill="#edf0f3" stroke="#59616a" stroke-width="0.350000" data-token="R-4"/>
+<rect x="256.500000" y="20.500000" width="9.000000" height="9.000000" fill="#edf0f3" stroke="#59616a" stroke-width="0.350000" data-token="R-5"/>
+<rect x="267.500000" y="20.500000" width="9.000000" height="9.000000" fill="#edf0f3" stroke="#59616a" stroke-width="0.350000" data-token="R-6"/>
+<rect x="278.500000" y="20.500000" width="9.000000" height="9.000000" fill="#edf0f3" stroke="#59616a" stroke-width="0.350000" data-token="R-7"/>
+<rect x="289.500000" y="20.500000" width="9.000000" height="9.000000" fill="#edf0f3" stroke="#59616a" stroke-width="0.350000" data-token="R-8"/>
+<path class="field-bracket" d="M75.5,31 V32 H95.5 V31" fill="none" stroke="#59616a" stroke-width="0.35"/>
+<text class="sans" x="85.5" y="36.5" font-size="4" fill="#59616a" text-anchor="middle">price</text>
+<path class="field-bracket" d="M97.5,31 V32 H106.5 V31" fill="none" stroke="#59616a" stroke-width="0.35"/>
+<text class="sans" x="102" y="36.5" font-size="4" fill="#59616a" text-anchor="middle">size</text>
+<path class="field-bracket" d="M108.5,31 V32 H150.5 V31" fill="none" stroke="#59616a" stroke-width="0.35"/>
+<text class="sans" x="129.5" y="36.5" font-size="4" fill="#59616a" text-anchor="middle">Δt</text>
+<path class="field-bracket" d="M152.5,31 V32 H205.5 V31" fill="none" stroke="#59616a" stroke-width="0.35"/>
+<text class="sans" x="179" y="36.5" font-size="4" fill="#59616a" text-anchor="middle">time</text>
+<path class="field-bracket" d="M212.5,31 V32 H232.5 V31" fill="none" stroke="#59616a" stroke-width="0.35"/>
+<text class="sans" x="222.5" y="36.5" font-size="4" fill="#59616a" text-anchor="middle">price</text>
+<path class="field-bracket" d="M234.5,31 V32 H243.5 V31" fill="none" stroke="#59616a" stroke-width="0.35"/>
+<text class="sans" x="239" y="36.5" font-size="4" fill="#59616a" text-anchor="middle">size</text>
+<path class="field-bracket" d="M245.5,31 V32 H298.5 V31" fill="none" stroke="#59616a" stroke-width="0.35"/>
+<text class="sans" x="272" y="36.5" font-size="4" fill="#59616a" text-anchor="middle">time</text>
+</g>
+<text class="sans" x="4" y="60" font-size="6" fill="#4b5563" text-anchor="start" font-weight="400">ReLOBGen</text>
+<text class="sans" x="4" y="67" font-size="5" fill="#4b5563" text-anchor="start" font-weight="400">reference-first</text>
+<g id="relobgen-tokens">
+<text class="math" x="58.5" y="50" font-size="6" fill="#59616a" text-anchor="middle" font-weight="400">E<tspan baseline-shift="sub" font-size="4.2">t</tspan></text>
+<rect x="48.500000" y="53.500000" width="9.000000" height="9.000000" fill="#fff" stroke="#59616a" stroke-width="0.350000" data-token="E-1"/>
+<text class="sans" x="53" y="59.2" font-size="3" fill="#4b5563" text-anchor="middle" font-weight="400">type</text>
+<rect x="59.500000" y="53.500000" width="9.000000" height="9.000000" fill="#fff" stroke="#59616a" stroke-width="0.350000" data-token="E-2"/>
+<text class="sans" x="64" y="59.2" font-size="3" fill="#4b5563" text-anchor="middle" font-weight="400">side</text>
+<text class="math" x="118.5" y="50" font-size="6" fill="#1f3864" text-anchor="middle" font-weight="400">R<tspan baseline-shift="sub" font-size="4.2">t</tspan></text>
+<rect x="75.500000" y="53.500000" width="9.000000" height="9.000000" fill="#dbe8fa" stroke="#6c8ebf" stroke-width="0.350000" data-token="R-1"/>
+<rect x="86.500000" y="53.500000" width="9.000000" height="9.000000" fill="#dbe8fa" stroke="#6c8ebf" stroke-width="0.350000" data-token="R-2"/>
+<rect x="97.500000" y="53.500000" width="9.000000" height="9.000000" fill="#c9ddfb" stroke="#6c8ebf" stroke-width="0.600000" data-token="R-3"/>
+<text class="sans" x="102" y="59.8" font-size="4" fill="#1f3864" text-anchor="middle" font-weight="400">60</text>
+<rect x="108.500000" y="53.500000" width="9.000000" height="9.000000" fill="#dbe8fa" stroke="#6c8ebf" stroke-width="0.350000" data-token="R-4"/>
+<rect x="119.500000" y="53.500000" width="9.000000" height="9.000000" fill="#dbe8fa" stroke="#6c8ebf" stroke-width="0.350000" data-token="R-5"/>
+<rect x="130.500000" y="53.500000" width="9.000000" height="9.000000" fill="#dbe8fa" stroke="#6c8ebf" stroke-width="0.350000" data-token="R-6"/>
+<rect x="141.500000" y="53.500000" width="9.000000" height="9.000000" fill="#dbe8fa" stroke="#6c8ebf" stroke-width="0.350000" data-token="R-7"/>
+<rect x="152.500000" y="53.500000" width="9.000000" height="9.000000" fill="#dbe8fa" stroke="#6c8ebf" stroke-width="0.350000" data-token="R-8"/>
+<text class="math" x="233.5" y="50" font-size="6" fill="#59616a" text-anchor="middle" font-weight="400">X<tspan baseline-shift="sub" font-size="4.2">t</tspan></text>
+<rect x="168.500000" y="53.500000" width="9.000000" height="9.000000" fill="#fff" stroke="#59616a" stroke-width="0.350000" data-token="X-1"/>
+<rect x="179.500000" y="53.500000" width="9.000000" height="9.000000" fill="#fff" stroke="#59616a" stroke-width="0.350000" data-token="X-2"/>
+<rect x="190.500000" y="53.500000" width="9.000000" height="9.000000" fill="#fff" stroke="#59616a" stroke-width="0.350000" data-token="X-3"/>
+<rect x="201.500000" y="53.500000" width="9.000000" height="9.000000" fill="#fff" stroke="#59616a" stroke-width="0.350000" data-token="X-4"/>
+<rect x="212.500000" y="53.500000" width="9.000000" height="9.000000" fill="#fff" stroke="#59616a" stroke-width="0.350000" data-token="X-5"/>
+<rect x="223.500000" y="53.500000" width="9.000000" height="9.000000" fill="#fff" stroke="#59616a" stroke-width="0.350000" data-token="X-6"/>
+<rect x="234.500000" y="53.500000" width="9.000000" height="9.000000" fill="#fff" stroke="#59616a" stroke-width="0.350000" data-token="X-7"/>
+<rect x="245.500000" y="53.500000" width="9.000000" height="9.000000" fill="#fff" stroke="#59616a" stroke-width="0.350000" data-token="X-8"/>
+<rect x="256.500000" y="53.500000" width="9.000000" height="9.000000" fill="#fff" stroke="#59616a" stroke-width="0.350000" data-token="X-9"/>
+<rect x="267.500000" y="53.500000" width="9.000000" height="9.000000" fill="#fff" stroke="#59616a" stroke-width="0.350000" data-token="X-10"/>
+<rect x="278.500000" y="53.500000" width="9.000000" height="9.000000" fill="#fff" stroke="#59616a" stroke-width="0.350000" data-token="X-11"/>
+<rect x="289.500000" y="53.500000" width="9.000000" height="9.000000" fill="#fff" stroke="#59616a" stroke-width="0.350000" data-token="X-12"/>
+</g>
+<!-- Both reference representations share one order identity, price, and submission timestamp. -->
+<text class="sans" x="338" y="22.5" font-size="6" fill="#4b5563">Resting order <tspan class="math">o</tspan></text>
+<rect x="338" y="25" width="54" height="29" fill="#fff" stroke="#59616a" stroke-width="0.35"/>
+<text class="sans" x="342" y="32" font-size="5" fill="#4b5563">Price <tspan class="math">p</tspan>, Time <tspan class="math">τ</tspan></text>
+<rect x="339" y="35" width="52" height="9" fill="url(#reference-highlight)"/>
+<rect x="339" y="44" width="52" height="9" fill="url(#resting-highlight)"/>
+<text class="sans" x="342" y="41" font-size="5" fill="#4b5563">Initial size:</text>
+<text class="sans" x="388" y="41" font-size="5" fill="#4b5563" text-anchor="end">100</text>
+<text class="sans" x="342" y="50" font-size="5" fill="#1f3864">Remaining size:</text>
+<text class="sans" x="388" y="50" font-size="5" fill="#1f3864" text-anchor="end">60</text>
+<path class="edge" d="M336,39 H318 V10 H239 V18.5"/>
+<path class="blue-edge" d="M336,48 H318 V71 H102 V64.5"/>
+</svg>

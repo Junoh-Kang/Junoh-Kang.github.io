@@ -1,4 +1,8 @@
-User-agent: *
-Disallow:
+User-agent: GPTBot
+User-agent: ClaudeBot
+User-agent: Claude-Web
 
-Sitemap: https://Junoh-Kang.github.io/sitemap.xml
+User-agent: *
+Allow: /
+
+Sitemap: https://junoh-kang.github.io/sitemap-index.xml
