@@ -69,27 +69,27 @@ const underReview = pub.venue === 'Under review'
   .pub:last-child {
     border-bottom: 0;
   }
-  /* The paper under the pointer gets a light gray band (a jump from Research Interests or News
-     lands the paper under the pointer, so the same band marks where it landed) */
-  @media (hover: hover) {
-    .pub:hover {
-      background: hsl(var(--muted));
-      box-shadow: -0.75rem 0 0 hsl(var(--muted)), 0.75rem 0 0 hsl(var(--muted));
-    }
+  /* A paper reached through an in-page link (e.g. #kang2024ogdm) gets a light gray band under its
+     text that fades out over two seconds, so the reader sees where they landed. */
+  .pub {
+    position: relative;
+    isolation: isolate;
   }
-  /* A paper reached through an in-page link (e.g. #kang2024ogdm) shows the hover band,
-     which fades out over two seconds so the reader sees where they landed */
-  .pub:has(> .title:target) {
-    animation: target-fade 2s ease-out;
+  .pub:has(> .title:target)::before {
+    content: '';
+    position: absolute;
+    inset: 0 -0.75rem;
+    z-index: -1;
+    background: hsl(var(--muted));
+    pointer-events: none;
+    animation: target-fade 2s ease-out forwards;
   }
   @keyframes target-fade {
     from {
-      background: hsl(var(--muted));
-      box-shadow: -0.75rem 0 0 hsl(var(--muted)), 0.75rem 0 0 hsl(var(--muted));
+      opacity: 1;
     }
     to {
-      background: transparent;
-      box-shadow: -0.75rem 0 0 transparent, 0.75rem 0 0 transparent;
+      opacity: 0;
     }
   }
   .title {
