@@ -52,7 +52,7 @@
 .highlight-card {
   height: 100%;
   text-align: center;
-  padding: 1.25rem 1rem;
+  padding: 1.25rem 0.75rem;
   border: 2px solid #cbd5e1;
   border-radius: var(--border-radius);
   background: var(--background-primary);
@@ -71,13 +71,6 @@
   font-size: 1rem;
   font-weight: 600;
   color: var(--text-secondary);
-}
-
-.highlight-note {
-  margin-top: 0.4rem;
-  color: var(--text-secondary);
-  font-size: 0.8rem;
-  line-height: 1.45;
 }
 
 .highlight-label {
