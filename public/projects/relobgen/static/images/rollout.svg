@@ -1,0 +1,109 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="396pt" height="91.4pt" viewBox="0 8 396 91.4" role="img" aria-labelledby="title desc">
+  <title id="title">Working baseline rollout cycle with post-hoc correction and resampling</title>
+  <desc id="desc">Separate message and LOB history streams condition an autoregressive message generator. The generator emits a candidate message that a post-hoc corrector repairs and validates; failures are rejected and resampled. The simulator updates an individual resting-order set, and separate message and aggregated LOB streams are appended for the next rollout step.</desc>
+  <defs>
+    <marker id="arrow-dark" markerWidth="3" markerHeight="3" refX="0" refY="1.5" orient="auto" markerUnits="userSpaceOnUse" overflow="visible"><path d="M0,0 L2.5981,1.5 L0,3 Z" fill="#4b5563"/></marker>
+    <marker id="arrow-blue" markerWidth="3" markerHeight="3" refX="0" refY="1.5" orient="auto" markerUnits="userSpaceOnUse" overflow="visible"><path d="M0,0 L2.5981,1.5 L0,3 Z" fill="#557db6"/></marker>
+    <marker id="arrow-green" markerWidth="3" markerHeight="3" refX="0" refY="1.5" orient="auto" markerUnits="userSpaceOnUse" overflow="visible"><path d="M0,0 L2.5981,1.5 L0,3 Z" fill="#568b4b"/></marker>
+    <marker id="arrow-red" markerWidth="3.25" markerHeight="3.25" refX="0" refY="1.625" orient="auto" markerUnits="userSpaceOnUse" overflow="visible"><path d="M0,0 L2.8146,1.625 L0,3.25 Z" fill="#e56a34"/></marker>
+    <filter id="soft-highlight" x="-12%" y="-25%" width="124%" height="150%"><feGaussianBlur stdDeviation="0.3453"/></filter>
+    <style>
+      .sans{font-family:Helvetica,Arial,sans-serif}.math{font-family:"Times New Roman",Times,serif;font-style:italic}.heading{font-family:Helvetica,Arial,sans-serif;font-size:6px;font-weight:700;fill:#25313b}.label{font-family:Helvetica,Arial,sans-serif;font-size:5px;font-weight:500;fill:#374151}.small{font-family:Helvetica,Arial,sans-serif;font-size:3px;font-weight:500;fill:#4b5563}.tiny{font-family:Helvetica,Arial,sans-serif;font-size:3px;font-weight:500;fill:#4b5563}.edge{fill:none;stroke:#4b5563;stroke-width:0.50px;marker-end:url(#arrow-dark)}.accept{fill:none;stroke:#4b5563;stroke-width:0.50px;marker-end:url(#arrow-dark)}.message-feedback{fill:none;stroke:#6b7280;stroke-width:0.50px;marker-end:url(#arrow-dark)}.lob-feedback{fill:none;stroke:#6b7280;stroke-width:0.50px;marker-end:url(#arrow-dark)}.reject{fill:none;stroke:#e56a34;stroke-width:0.65px;marker-end:url(#arrow-red)}.axis{fill:none;stroke:#6b7280;stroke-width:0.29px}.mid{fill:none;stroke:#6b7280;stroke-width:0.29px;stroke-dasharray:0.5756 0.7674}.ask{fill:#ef4a35}.bid{fill:#2498d8}
+    </style>
+  </defs>
+  <g transform="translate(-7.2907 -26.6744)">
+  <rect width="460.4651" height="172.6744" fill="#fff"/>
+  <g transform="translate(0 -7.4826)">
+
+  <g transform="translate(0 5.7558)">
+  <rect x="13.4302" y="42.2093" width="61.3953" height="38.3721" fill="#fff" stroke="#7b8490" stroke-width="0.50" stroke-dasharray="1.5349 1.1512"/>
+  <rect x="17.8186" y="44.5116" width="49" height="6.5233" fill="#c4dcff" opacity="0.55" filter="url(#soft-highlight)"/>
+  <text class="heading" x="18.4186" y="49.5">Message context</text>
+  <text class="math" x="25.5174" y="55.6395" text-anchor="middle" font-size="4" fill="#1f3864">M<tspan baseline-shift="sub" font-size="2.8">t−L</tspan></text>
+  <text class="math" x="65.0407" y="55.6395" text-anchor="middle" font-size="4" fill="#1f3864">M<tspan baseline-shift="sub" font-size="2.8">t−1</tspan></text>
+  <g transform="translate(18.8023 57.9419)">
+    <g><path d="M0,0 H11.5116 L14.5814,3.0698 V18.8023 H0 Z" fill="#dbe8fa" stroke="#6c8ebf" stroke-width="0.38"/><path d="M11.5116,0 V3.0698 H14.5814" fill="none" stroke="#6c8ebf" stroke-width="0.38"/><rect x="2.4942" y="5.7558" width="8.0581" height="0.7674" fill="#6c8ebf"/><rect x="2.4942" y="8.6337" width="9.593" height="0.7674" fill="#6c8ebf"/><rect x="2.4942" y="11.5116" width="6.907" height="0.7674" fill="#6c8ebf"/></g>
+    <g transform="translate(16.5 0)"><path d="M0,0 H11.5116 L14.5814,3.0698 V18.8023 H0 Z" fill="#dbe8fa" stroke="#6c8ebf" stroke-width="0.38"/><path d="M11.5116,0 V3.0698 H14.5814" fill="none" stroke="#6c8ebf" stroke-width="0.38"/><rect x="2.4942" y="5.7558" width="9.593" height="0.7674" fill="#6c8ebf"/><rect x="2.4942" y="8.6337" width="7.2907" height="0.7674" fill="#6c8ebf"/><rect x="2.4942" y="11.5116" width="8.8256" height="0.7674" fill="#6c8ebf"/></g>
+    <text class="sans" x="33.1919" y="9.0174" font-size="3" fill="#6b7280">⋯</text>
+    <g transform="translate(39.5233 0)"><path d="M0,0 H11.5116 L14.5814,3.0698 V18.8023 H0 Z" fill="#dbe8fa" stroke="#6c8ebf" stroke-width="0.38"/><path d="M11.5116,0 V3.0698 H14.5814" fill="none" stroke="#6c8ebf" stroke-width="0.38"/><rect x="2.4942" y="5.7558" width="7.6744" height="0.7674" fill="#6c8ebf"/><rect x="2.4942" y="8.6337" width="9.9767" height="0.7674" fill="#6c8ebf"/><rect x="2.4942" y="11.5116" width="8.6337" height="0.7674" fill="#6c8ebf"/></g>
+  </g>
+  </g>
+
+  <g transform="translate(0 -5.7558)">
+  <rect x="13.4302" y="95.9302" width="61.3953" height="38.3721" fill="#fff" stroke="#7b8490" stroke-width="0.50" stroke-dasharray="1.5349 1.1512"/>
+  <rect x="17.8186" y="98.2326" width="36.6" height="6.5233" fill="#d7dce1" opacity="0.55" filter="url(#soft-highlight)"/>
+  <text class="heading" x="18.4186" y="103.2209">LOB context</text>
+  <g class="math" fill="#4b5563">
+    <text x="22.6395" y="109.3605" font-size="4">B</text>
+    <text x="25.3256" y="110.8953" font-size="2.8">t−L</text>
+    <text x="25.3256" y="107.0581" font-size="2.8">(N)</text>
+  </g>
+  <g class="math" fill="#4b5563">
+    <text x="60.8198" y="109.3605" font-size="4">B</text>
+    <text x="63.5058" y="110.8953" font-size="2.8">t−1</text>
+    <text x="63.5058" y="107.0581" font-size="2.8">(N)</text>
+  </g>
+  <g transform="translate(18.8023 113.5814)">
+    <rect x="-0.7674" y="-1.5349" width="14.5814" height="18.8023" fill="#fff" stroke="#c5cbd3" stroke-width="0.25"/>
+    <rect x="16.1163" y="-1.5349" width="14.5814" height="18.8023" fill="#fff" stroke="#c5cbd3" stroke-width="0.25"/>
+    <rect x="37.6047" y="-1.5349" width="14.5814" height="18.8023" fill="#fff" stroke="#c5cbd3" stroke-width="0.25"/>
+    <g transform="scale(0.85 1)"><rect class="ask" x="0" y="0" width="9.593" height="1.343"/><rect class="ask" x="0" y="2.4942" width="13.814" height="1.343"/><rect class="ask" x="0" y="4.9884" width="11.1279" height="1.343"/><line class="mid" x1="0" y1="7.8663" x2="14.5814" y2="7.8663"/><rect class="bid" x="0" y="9.4012" width="12.0872" height="1.343"/><rect class="bid" x="0" y="11.8953" width="9.2093" height="1.343"/><rect class="bid" x="0" y="14.3895" width="13.0465" height="1.343"/></g>
+    <g transform="translate(16.8837 0) scale(0.85 1)"><rect class="ask" x="0" y="0" width="11.8953" height="1.343"/><rect class="ask" x="0" y="2.4942" width="9.0174" height="1.343"/><rect class="ask" x="0" y="4.9884" width="13.4302" height="1.343"/><line class="mid" x1="0" y1="7.8663" x2="14.5814" y2="7.8663"/><rect class="bid" x="0" y="9.4012" width="10.5523" height="1.343"/><rect class="bid" x="0" y="11.8953" width="13.6221" height="1.343"/><rect class="bid" x="0" y="14.3895" width="9.593" height="1.343"/></g>
+    <text class="sans" x="32.4244" y="9.0174" font-size="3" fill="#6b7280">⋯</text>
+    <g transform="translate(38.3721 0) scale(0.85 1)"><rect class="ask" x="0" y="0" width="10.5523" height="1.343"/><rect class="ask" x="0" y="2.4942" width="14.1977" height="1.343"/><rect class="ask" x="0" y="4.9884" width="9.2093" height="1.343"/><line class="mid" x1="0" y1="7.8663" x2="14.5814" y2="7.8663"/><rect class="bid" x="0" y="9.4012" width="13.2384" height="1.343"/><rect class="bid" x="0" y="11.8953" width="10.3605" height="1.343"/><rect class="bid" x="0" y="14.3895" width="11.8953" height="1.343"/></g>
+  </g>
+  </g>
+
+  <path class="edge" d="M77.1279,67.1512 H87.2449"/>
+  <path class="edge" d="M77.1279,109.3605 H83.4593 V80.5814 H87.2449"/>
+  <g transform="translate(0 -15.3488)">
+  <rect x="92.093" y="67.1512" width="70.9884" height="42.2093" fill="#f7f7f7" stroke="#59616a" stroke-width="0.50"/>
+  <text class="sans" x="127.5872" y="76.7442" text-anchor="middle" font-size="6" font-weight="700" fill="#25313b">Message generator<tspan class="math" dx="1.7267" font-size="6">π<tspan baseline-shift="sub" font-size="4.2">θ</tspan></tspan></text>
+  <g transform="translate(0 4.7965)" fill="#e6e9ed" stroke="#59616a" stroke-width="0.35"><rect x="99.3837" y="82.8837" width="8.4419" height="8.4419"/><rect x="108.9767" y="82.8837" width="8.4419" height="8.4419"/><rect x="118.5698" y="82.8837" width="8.4419" height="8.4419"/><rect x="128.1628" y="82.8837" width="8.4419" height="8.4419"/><rect x="137.7558" y="82.8837" width="8.4419" height="8.4419"/><rect x="147.3488" y="82.8837" width="8.4419" height="8.4419"/></g>
+  <g transform="translate(0 4.7965)" class="sans" font-size="3" text-anchor="middle" fill="#59616a"><text x="103.6047" y="88.2558">type</text><text x="113.1977" y="88.2558">side</text><text x="122.7907" y="88.2558">price</text><text x="132.3837" y="88.2558">size</text><text x="141.9767" y="88.2558">time</text><text x="151.5698" y="88.2558">ref.</text></g>
+
+  <g transform="translate(-0.9593 0)">
+  <rect x="181.3081" y="65.2326" width="92.093" height="46.0465" fill="#fff" stroke="#e56a34" stroke-width="0.58" stroke-dasharray="1.7267 1.1512"/>
+  <rect x="184.5453" y="68.1105" width="47.6" height="6.5233" fill="#ffd6b8" opacity="0.55" filter="url(#soft-highlight)"/>
+  <text class="sans" x="185.1453" y="73.0988" font-size="6" font-weight="700" fill="#25313b">Post-processing</text>
+  <path d="M186.1047,75.9767 H207.9767 L212.1977,80.1977 V107.0581 H186.1047 Z" fill="#fff0dd" stroke="#e56a34" stroke-width="0.50"/>
+  <path d="M207.9767,75.9767 V80.1977 H212.1977" fill="none" stroke="#e56a34" stroke-width="0.50"/>
+  <text class="math" x="199.1512" y="84.6105" text-anchor="middle" font-size="5" fill="#9b4b16">M̂<tspan baseline-shift="sub" font-size="3.5">t</tspan></text>
+  <line x1="189.5581" y1="91.7093" x2="208.1686" y2="91.7093" stroke="#f6ad7c" stroke-width="0.77"/><line x1="189.5581" y1="95.3547" x2="205.6744" y2="95.3547" stroke="#f6ad7c" stroke-width="0.77"/><line x1="189.5581" y1="99" x2="207.2093" y2="99" stroke="#f6ad7c" stroke-width="0.77"/>
+  <path class="edge" d="M166.343,90.3663 H176.4200"/>
+  <path class="edge" d="M214.5,90.3663 H223.4659"/>
+  <rect x="228.314" y="75.9767" width="40.2907" height="31.0814" fill="#f7f7f7" stroke="#59616a" stroke-width="0.50"/>
+  <text class="sans" x="248.4593" y="89.9826" text-anchor="middle" font-size="5" font-weight="700" fill="#374151">Rule-based</text>
+  <text class="sans" x="248.4593" y="96.314" text-anchor="middle" font-size="5" font-weight="700" fill="#374151">corrector</text>
+  <path class="reject" d="M248.4593,113.9651 V129.314 H128.5465 V114.4251"/>
+  <rect x="229.2733" y="117.4186" width="38.3721" height="8.4419" rx="1.343" fill="#fff" stroke="#25313b" stroke-width="0.35"/>
+  <text class="sans" x="248.4593" y="122.9826" text-anchor="middle" font-size="5" font-weight="500" fill="#25313b">Correction failed</text>
+  <rect x="152.0494" y="131.8081" width="71.9477" height="8.4419" rx="1.343" fill="#fff" stroke="#25313b" stroke-width="0.35"/>
+  <text class="sans" x="188.0233" y="137.3721" text-anchor="middle" font-size="5" font-weight="500" fill="#25313b">Reject and resample</text>
+  </g>
+  <path class="edge" d="M274.7442,90.3663 H284.8612"/>
+  <g transform="translate(-1.9186 0)">
+  <path d="M291.6279,72.7151 H313.5 L317.7209,76.936 V103.7965 H291.6279 Z" fill="#dbe8fa" stroke="#6c8ebf" stroke-width="0.50"/>
+  <path d="M313.5,72.7151 V76.936 H317.7209" fill="none" stroke="#6c8ebf" stroke-width="0.50"/>
+  <text class="math" x="304.6744" y="81.3488" text-anchor="middle" font-size="5" fill="#1f3864">M<tspan baseline-shift="sub" font-size="3.5">t</tspan></text>
+  <g class="sans" font-size="3" fill="#1f3864"><text x="294.314" y="87.8721">timestamp</text><text x="294.314" y="91.9012">type · side</text><text x="294.314" y="95.9302">price · size</text><text x="294.314" y="99.9593">reference order</text></g>
+  </g>
+  <path class="edge" d="M318.1047,90.3663 H328.2217"/>
+  </g>
+
+  <g transform="translate(-0.7674 -15.3488)">
+  <rect x="333.8372" y="58.5174" width="69.0698" height="59.4767" fill="#f7f7f7" stroke="#59616a" stroke-width="0.50"/>
+  <text class="sans" x="368.3721" y="66.1919" text-anchor="middle" font-size="6" font-weight="700" fill="#25313b">LOB simulator</text>
+  <text class="math" x="368.3721" y="71.9477" text-anchor="middle" font-size="4" fill="#4b5563">𝒪<tspan baseline-shift="sub" font-size="2.8">t</tspan> = <tspan font-style="normal">Replay</tspan>(𝒪<tspan baseline-shift="sub" font-size="2.8">t−1</tspan>, M<tspan baseline-shift="sub" font-size="2.8">t</tspan>)</text>
+  <g transform="translate(0 0.9593)">
+  <rect x="337.6744" y="74.8256" width="61.3953" height="38.3721" fill="#fff" stroke="#9ca3af" stroke-width="0.35"/>
+  <text class="sans" x="368.3721" y="80.1977" text-anchor="middle" font-size="4" font-weight="500" fill="#374151">Resting-order set 𝒪<tspan baseline-shift="sub" font-size="2.8">t</tspan></text>
+  <line class="axis" x1="343.4302" y1="84.4186" x2="343.4302" y2="108.4012"/><line class="axis" x1="343.4302" y1="108.4012" x2="393.314" y2="108.4012"/><text class="sans" x="368.3721" y="111.8547" text-anchor="middle" font-size="3" font-weight="500" fill="#4b5563">size</text><text class="sans" x="341.5116" y="96.1221" text-anchor="middle" font-size="3" font-weight="500" fill="#4b5563" transform="rotate(-90 341.5116 96.1221)">price</text><line class="mid" x1="343.4302" y1="96.5058" x2="393.314" y2="96.5058"/>
+  <g><rect class="ask" x="344.1977" y="86.5291" width="13.0465" height="1.7267"/><rect class="ask" x="358.5872" y="86.5291" width="9.593" height="1.7267"/><rect class="ask" x="344.1977" y="89.7907" width="8.8256" height="1.7267"/><rect class="ask" x="354.3663" y="89.7907" width="15.7326" height="1.7267"/><rect class="ask" x="371.4419" y="89.7907" width="8.0581" height="1.7267"/><rect class="ask" x="344.1977" y="93.0523" width="11.7035" height="1.7267"/><rect class="ask" x="357.2442" y="93.0523" width="7.0988" height="1.7267"/><rect class="ask" x="365.686" y="93.0523" width="5.9477" height="1.7267"/><rect class="bid" x="344.1977" y="99.3837" width="17.6512" height="1.7267"/><rect class="bid" x="363.1919" y="99.3837" width="9.593" height="1.7267"/><rect class="bid" x="344.1977" y="102.6453" width="10.936" height="1.7267"/><rect class="bid" x="356.4767" y="102.6453" width="12.6628" height="1.7267"/><rect class="bid" x="344.1977" y="105.907" width="8.4419" height="1.7267"/><rect class="bid" x="353.9826" y="105.907" width="7.2907" height="1.7267"/><rect class="bid" x="362.6163" y="105.907" width="6.907" height="1.7267"/></g>
+  </g>
+  </g>
+  <path class="message-feedback" d="M302.7558,57.3663 V44.1279 H7.6744 V67.1512 H8.5821"/>
+  <path class="lob-feedback" d="M367.6047,104.9477 V132.7674 H7.6744 V109.3605 H8.5821"/>
+  </g>
+  </g>
+</svg>
