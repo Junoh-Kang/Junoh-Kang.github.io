@@ -77,6 +77,21 @@ const underReview = pub.venue === 'Under review'
       box-shadow: -0.75rem 0 0 hsl(var(--muted)), 0.75rem 0 0 hsl(var(--muted));
     }
   }
+  /* A paper reached through an in-page link (e.g. #kang2024ogdm) shows the hover band,
+     which fades out over two seconds so the reader sees where they landed */
+  .pub:has(> .title:target) {
+    animation: target-fade 2s ease-out;
+  }
+  @keyframes target-fade {
+    from {
+      background: hsl(var(--muted));
+      box-shadow: -0.75rem 0 0 hsl(var(--muted)), 0.75rem 0 0 hsl(var(--muted));
+    }
+    to {
+      background: transparent;
+      box-shadow: -0.75rem 0 0 transparent, 0.75rem 0 0 transparent;
+    }
+  }
   .title {
     /* Keep the title clear of the sticky header when jumped to */
     scroll-margin-top: 5.5rem;
