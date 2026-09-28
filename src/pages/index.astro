@@ -29,6 +29,8 @@ const pubById = Object.fromEntries(publications.map((p) => [p.id, p]))
 // The home page lists only selected papers; the full list is on /publications.
 const selectedPubs = publications.filter((p) => p.selected)
 const paperHref = (id: string) => (pubById[id]?.selected ? `#${id}` : `/publications#${id}`)
+// News links written as '#<paper id>' follow the same rule; other URLs pass through.
+const newsHref = (url: string) => (url.startsWith('#') ? paperHref(url.slice(1)) : url)
 
 // Profile photo: content/<profile.photo>
 const photos = import.meta.glob<{ default: ImageMetadata }>(
@@ -154,7 +156,7 @@ const fmtDate = (d: string) =>
               <li class='flex gap-x-4 text-sm'>
                 <span class='w-20 shrink-0 text-muted-foreground'>{fmtDate(n.date)}</span>
                 <span>
-                  {newsParts(n).map((p) => (p.url ? <a href={p.url} {...ext(p.url)}>{p.text}</a> : p.text))}
+                  {newsParts(n).map((p) => (p.url ? <a href={newsHref(p.url)} {...ext(newsHref(p.url))}>{p.text}</a> : p.text))}
                 </span>
               </li>
             ))
@@ -169,7 +171,7 @@ const fmtDate = (d: string) =>
                   <li class='flex gap-x-4 text-sm'>
                     <span class='w-20 shrink-0 text-muted-foreground'>{fmtDate(n.date)}</span>
                     <span>
-                      {newsParts(n).map((p) => (p.url ? <a href={p.url} {...ext(p.url)}>{p.text}</a> : p.text))}
+                      {newsParts(n).map((p) => (p.url ? <a href={newsHref(p.url)} {...ext(newsHref(p.url))}>{p.text}</a> : p.text))}
                     </span>
                   </li>
                 ))}
@@ -303,12 +305,31 @@ const fmtDate = (d: string) =>
     const headerBottom = document.querySelector('header-component')?.getBoundingClientRect().bottom ?? 0
     // Center the paper on the pointer, but never tuck its top under the sticky header
     const top = Math.max(e.clientY - rect.height / 2, headerBottom + 16)
-    // pushState changes the URL without the browser's own jump; the browser stops the smooth scroll
-    // at the end of the page if the target is past it. PubItem marks the paper on 'paper-arrive'.
+    // pushState changes the URL without the browser's own jump; the smooth scroll stops at the end of
+    // the page if the target is past it. PubItem marks the paper on 'paper-arrive'.
     history.pushState(null, '', link.hash)
     window.dispatchEvent(new CustomEvent('paper-arrive', { detail: link.hash }))
     window.scrollTo({ top: window.scrollY + rect.top - top, behavior: 'smooth' })
+    swallowMomentum()
   })
+
+  // Trackpad momentum from scrolling up to the link keeps arriving as wheel events after the click; it
+  // would cancel the smooth scroll and carry the page back. Ignore wheel input until it pauses for
+  // 100 ms, and never for over 1 s.
+  function swallowMomentum() {
+    const started = performance.now()
+    let last = started
+    const block = (e: WheelEvent) => {
+      const now = performance.now()
+      if (now - last > 100 || now - started > 1000) {
+        window.removeEventListener('wheel', block)
+        return
+      }
+      last = now
+      e.preventDefault()
+    }
+    window.addEventListener('wheel', block, { passive: false })
+  }
 </script>
 
 <style>

@@ -3,7 +3,7 @@
 #   date:  YYYY-MM-DD
 #   text:  the sentence, as plain text
 #   links: optional list; each `text` is a phrase in the sentence that becomes a link.
-#          Use url: '#<paper id>' to jump to that paper in Publications.
+#          Use url: '#<paper id>' to jump to that paper (on the home page if selected, else on /publications).
 #     - text: <phrase>
 #       url:  <URL>
 
