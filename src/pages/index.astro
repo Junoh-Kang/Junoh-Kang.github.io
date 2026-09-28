@@ -301,11 +301,18 @@ const fmtDate = (d: string) =>
     const pub = title?.closest<HTMLElement>('.pub')
     if (!pub) return
     e.preventDefault()
+    // Drop any room added by an earlier jump before measuring
+    const home = document.querySelector<HTMLElement>('main.home')
+    if (home) home.style.paddingBottom = ''
     const rect = pub.getBoundingClientRect()
     const headerBottom = document.querySelector('header-component')?.getBoundingClientRect().bottom ?? 0
     // Center the paper on the pointer, but never tuck its top under the sticky header
     const top = Math.max(e.clientY - rect.height / 2, headerBottom + 16)
-    window.scrollTo({ top: window.scrollY + rect.top - top, behavior: 'smooth' })
+    const target = window.scrollY + rect.top - top
+    // Papers near the end of the page cannot scroll that far on tall screens; add just enough room below
+    const maxScroll = document.documentElement.scrollHeight - window.innerHeight
+    if (home && target > maxScroll) home.style.paddingBottom = `${Math.ceil(target - maxScroll)}px`
+    window.scrollTo({ top: target, behavior: 'smooth' })
     history.pushState(null, '', link.hash)
   })
 </script>
