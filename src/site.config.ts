@@ -1,4 +1,29 @@
+import { execSync } from 'node:child_process'
+import { createHash } from 'node:crypto'
+import { readFileSync } from 'node:fs'
+import { join } from 'node:path'
+
 import type { CardListData, Config, IntegrationUserConfig, ThemeUserConfig } from 'astro-pure/types'
+
+// Date of the latest commit (YYYY-MM-DD), shown in the footer; falls back to the build date.
+const lastUpdated = (() => {
+  try {
+    return execSync('git log -1 --format=%cs', { encoding: 'utf8' }).trim()
+  } catch {
+    return new Date().toISOString().slice(0, 10)
+  }
+})()
+
+// Version the social card URL by the profile it is drawn from, so link previews that cache images
+// by URL (KakaoTalk, Slack) fetch a new card whenever the profile or photo changes.
+const socialCardVersion = (() => {
+  // Paths are relative to the project root: this module is bundled, so import.meta.url moves.
+  const profile = readFileSync(join(process.cwd(), 'content/1-profile.yaml'), 'utf8')
+  const photo = /^photo:\s*(\S+)/m.exec(profile)?.[1] ?? ''
+  const hash = createHash('sha256').update(profile)
+  if (photo) hash.update(readFileSync(join(process.cwd(), 'content', photo)))
+  return hash.digest('hex').slice(0, 8)
+})()
 
 export const theme: ThemeUserConfig = {
   // [Basic]
@@ -11,7 +36,7 @@ export const theme: ThemeUserConfig = {
   /** The default favicon for your site which should be a path to an image in the `public/` directory. */
   favicon: '/favicon/favicon.svg',
   /** The default social card image for your site which should be a path to an image in the `public/` directory. */
-  socialCard: '/images/social-card.png',
+  socialCard: `/images/social-card.png?v=${socialCardVersion}`,
   /** Specify the default language for this site. */
   locale: {
     lang: 'en-US',
@@ -57,7 +82,7 @@ export const theme: ThemeUserConfig = {
   /** Configure the footer of your site. */
   footer: {
     // Year format
-    year: `© ${new Date().getFullYear()}`,
+    year: `Last updated ${lastUpdated} · © ${new Date().getFullYear()}`,
     // year: `© 2019 - ${new Date().getFullYear()}`,
     links: [],
     /** Enable displaying a “Astro & Pure theme powered” link in your site’s footer. */

@@ -36,6 +36,21 @@ make -C cv publish-site
 
 This writes `src/data/cv.json` and `public/assets/pdf/Junoh_Kang_CV.pdf`. Do not edit those two files by hand.
 
+The pre-commit hook in `.githooks/` does this for you: when a commit stages changes under `cv/`, it regenerates both files and adds them to the same commit. Enable it once per clone:
+
+```bash
+git config core.hooksPath .githooks
+```
+
+## Build locally
+
+```bash
+scripts/build.sh            # regenerate the CV outputs, then build the site into dist/
+scripts/build.sh --skip-cv  # build the site only
+```
+
+This only builds. The live site updates when `master` is pushed and the GitHub Actions deploy runs. The social preview image (`/images/social-card.png`) is drawn from `1-profile.yaml` during every build, and the footer shows the date of the latest commit.
+
 ## Posts (`blog/`)
 
 Each post is one folder:

@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+# When the CV source is staged, regenerate src/data/cv.json and the CV PDF and stage them too,
+# so the site data never lags behind cv/. Enable once per clone: git config core.hooksPath .githooks
+set -euo pipefail
+
+if git diff --cached --name-only | grep -qE '^cv/(sections/|profile\.yml$|cv\.yml$|export\.rb$)'; then
+  echo "pre-commit: CV source changed; regenerating site data and PDF"
+  make -C cv publish-site >/dev/null
+  git add src/data/cv.json public/assets/pdf/Junoh_Kang_CV.pdf
+fi
