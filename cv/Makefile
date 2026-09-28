@@ -1,15 +1,12 @@
 ROOT := .
 
-.PHONY: test rendercv-data blog-data site-data pdf all publish-site
+.PHONY: test rendercv-data site-data pdf all publish-site
 
 test:
 	ruby "$(ROOT)/test_export.rb"
 
 rendercv-data:
 	ruby "$(ROOT)/export.rb" rendercv-data "$(ROOT)"
-
-blog-data:
-	ruby "$(ROOT)/export.rb" blog-data "$(ROOT)"
 
 site-data:
 	ruby "$(ROOT)/export.rb" site-data "$(ROOT)"

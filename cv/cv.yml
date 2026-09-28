@@ -16,7 +16,6 @@ sections:
 outputs:
   rendercv_data: build/rendercv.yml
   pdf: build/Junoh_Kang_CV.pdf
-  blog_data: build/cv.yml
   site_data: build/site.json
 
 rendercv:

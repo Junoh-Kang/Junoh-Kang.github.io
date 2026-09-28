@@ -2,7 +2,7 @@
 
 This folder is the canonical source tree for Junoh Kang's CV.
 
-The source is split by section so publication, service, teaching, and private reference updates do not require editing one large file. Generated blog data and generated PDF files are outputs, not sources.
+The source is split by section so publication, service, teaching, and private reference updates do not require editing one large file. Generated site data and generated PDF files are outputs, not sources.
 
 ## Editing Rule
 
@@ -11,8 +11,8 @@ The source is split by section so publication, service, teaching, and private re
 - Edit section content in `sections/*.yml`.
 - Edit profile/contact content in `profile.yml`.
 - Use `cv.yml` for section order and output paths.
-- Do not hand-edit generated blog CV data or generated PDF output after the exporter exists.
-- Do not generate or maintain a direct HTML file from this folder. The blog builds HTML from the generated blog data YAML.
+- Do not hand-edit generated site data or generated PDF output.
+- Do not generate or maintain a direct HTML file from this folder. The site builds HTML from the generated site data JSON.
 
 ## Source Model
 
@@ -33,13 +33,12 @@ cv/cv.yml
   -> normalized CV model
   -> generated RenderCV YAML
   -> generated RenderCV PDF
-  -> generated blog data YAML
   -> generated site data JSON
 ```
 
-The site data JSON (`build/site.json`) feeds the Astro site. It holds the public profile and public section items in `cv.yml` order, with `visibility` removed. Publication items may carry an `id`, which the site uses to reference papers, `links` (`label` and `url` pairs) for per-paper links such as Paper, arXiv, Code, or Project, and `award`, a short award line the site shows next to the venue. A paper has no top-level `url`: the PDF and blog YAML link its title to alphaXiv, built from the `arXiv` link because it opens fast. Without an arXiv link the title links to `Paper`, the published PDF. The homepage uses the same rule. The PDF and blog YAML ignore `id` and `award`.
+The site data JSON (`build/site.json`) feeds the Astro site. It holds the public profile and public section items in `cv.yml` order, with `visibility` removed. Publication items may carry an `id`, which the site uses to reference papers, `links` (`label` and `url` pairs) for per-paper links such as Paper, arXiv, Code, or Project, and `award`, a short award line the site shows next to the venue. A paper has no top-level `url`: the PDF links its title to alphaXiv, built from the `arXiv` link because it opens fast. Without an arXiv link the title links to `Paper`, the published PDF. The homepage uses the same rule. The PDF ignores `id` and `award`.
 
-The PDF uses RenderCV with the `engineeringresumes` theme. The blog still builds its own HTML from the generated blog data YAML.
+The PDF uses RenderCV with the `engineeringresumes` theme.
 
 The exporter uses the `rendercv` command when it exists. If `rendercv` is not installed but `uv` is available, it runs RenderCV with `uv run --with rendercv[full] rendercv`.
 
@@ -53,7 +52,7 @@ Run checks:
 make -C cv test
 ```
 
-Generate all outputs (blog data YAML, site data JSON, and PDF) under `cv/build/`:
+Generate all outputs (site data JSON and PDF) under `cv/build/`:
 
 ```bash
 make -C cv all
@@ -76,10 +75,10 @@ make -C cv publish-site
 ## Acceptance Check
 
 - A CV content change happens once in a canonical YAML file.
-- The generated blog YAML and generated PDF contain the same `visibility: public` entries.
-- `visibility: private` and `visibility: archive` items stay out of public blog and PDF outputs.
+- The generated site data and generated PDF contain the same `visibility: public` entries.
+- `visibility: private` and `visibility: archive` items stay out of the site data and PDF outputs.
 - The PDF is generated from `build/rendercv.yml`, not from a hand-edited LaTeX file.
-- The blog repository treats CV output files as generated artifacts.
+- The site treats CV output files as generated artifacts.
 
 ## Seed Sources
 

@@ -1,6 +1,5 @@
 #!/usr/bin/env ruby
 
-require "cgi"
 require "date"
 require "fileutils"
 require "json"
@@ -19,20 +18,6 @@ module CvExport
 
     def initialize(root = File.expand_path(__dir__))
       @root = File.expand_path(root)
-    end
-
-    def render_blog_data
-      validate!
-
-      data = public_sections.map do |section_id, section|
-        render_blog_section(section_id, section)
-      end
-
-      generated_header + data.to_yaml.sub(/\A---\n/, "")
-    end
-
-    def write_blog_data
-      write_file(output_path("blog_data"), render_blog_data)
     end
 
     # Structured public data for the Astro site: public items only, visibility stripped.
@@ -97,7 +82,6 @@ module CvExport
     end
 
     def write_all
-      write_blog_data
       write_site_data if config.fetch("outputs").key?("site_data")
       build_pdf
     end
@@ -481,44 +465,6 @@ module CvExport
       }
     end
 
-    def render_blog_section(section_id, section)
-      {
-        "title" => section.fetch("title"),
-        "type" => blog_section_type(section_id),
-        "contents" => render_blog_contents(section_id, public_items(section))
-      }
-    end
-
-    def blog_section_type(section_id)
-      case section_id
-      when "publications", "service"
-        "list"
-      else
-        "time_table"
-      end
-    end
-
-    def render_blog_contents(section_id, items)
-      case section_id
-      when "publications"
-        items.map { |item| publication_to_html(item) }
-      when "honors"
-        items.map { |item| blog_year_items(item["year"], [html_link_or_text(item.fetch("title"), item["url"])]) }
-      when "service"
-        items.map { |item| "<b>#{html_escape(item.fetch("role"))}:</b> #{html_escape(item.fetch("venues").join(", "))}" }
-      when "teaching"
-        items.map do |item|
-          {
-            "title" => item.fetch("title"),
-            "description" => "#{item.fetch("course")}, #{item.fetch("institution")}",
-            "year" => item.fetch("date")
-          }
-        end
-      else
-        items.map { |item| timeline_item_to_blog(item) }
-      end
-    end
-
     # alphaXiv (built from the arXiv link) first, since it opens fast; then the published
     # PDF. The homepage uses the same rule for its Paper link.
     def publication_url(item)
@@ -531,42 +477,10 @@ module CvExport
       links.find { |l| l["label"] == "Paper" }&.fetch("url")
     end
 
-    def publication_to_html(item)
-      title = html_link_or_text(item.fetch("title"), publication_url(item))
-      authors = html_escape(item.fetch("authors").join(", "))
-      venue = html_escape(item.fetch("venue"))
-      "#{title}. #{authors}. <i>#{venue}</i>."
-    end
-
-    def timeline_item_to_blog(item)
-      entry = {
-        "title" => item.fetch("title"),
-        "year" => item["date"]
-      }
-      entry["institution"] = item["institution"] || item["organization"]
-      entry["institution"] = html_link_or_text(entry["institution"], item["url"]) if entry["institution"]
-      entry["description"] = blog_details(item["details"]) if item["details"]
-      entry
-    end
-
-    def blog_year_items(year, items)
-      {
-        "year" => year,
-        "items" => items
-      }
-    end
-
     def markdown_link(label, url)
       return label.to_s unless url && !url.empty?
 
       "[#{label}](#{url})"
-    end
-
-    def html_link_or_text(label, url)
-      escaped_label = html_escape(label)
-      return escaped_label unless url && !url.empty?
-
-      %(<a href="#{html_escape(url)}">#{escaped_label}</a>)
     end
 
     def rendercv_details(details)
@@ -579,22 +493,8 @@ module CvExport
       markdown_link(detail_label(detail), detail["url"])
     end
 
-    def blog_details(details)
-      Array(details).map { |detail| blog_detail(detail) }
-    end
-
-    def blog_detail(detail)
-      return html_escape(detail) unless detail.is_a?(Hash)
-
-      html_link_or_text(detail_label(detail), detail["url"])
-    end
-
     def detail_label(detail)
       detail.fetch("label")
-    end
-
-    def html_escape(value)
-      CGI.escapeHTML(value.to_s)
     end
 
     def rendercv_text(value)
@@ -657,7 +557,7 @@ module CvExport
 end
 
 if __FILE__ == $PROGRAM_NAME
-  usage = "usage: ruby export.rb [rendercv-data|blog-data|site-data|pdf|all|publish-site] [root]"
+  usage = "usage: ruby export.rb [rendercv-data|site-data|pdf|all|publish-site] [root]"
   command = ARGV.shift || "all"
   root = ARGV.shift || File.expand_path(__dir__)
   abort usage unless ARGV.empty?
@@ -667,8 +567,6 @@ if __FILE__ == $PROGRAM_NAME
   path = case command
          when "rendercv-data"
            exporter.write_rendercv_data
-         when "blog-data"
-           exporter.write_blog_data
          when "site-data"
            exporter.write_site_data
          when "pdf"

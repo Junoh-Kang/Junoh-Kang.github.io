@@ -26,7 +26,6 @@ class CvExportTest < Minitest::Test
       outputs:
         rendercv_data: build/rendercv.yml
         pdf: build/Test_Person_CV.pdf
-        blog_data: build/cv.yml
         site_data: build/site.json
       rendercv:
         theme: classic
@@ -194,10 +193,10 @@ class CvExportTest < Minitest::Test
     root = File.expand_path(__dir__)
     exporter = CvExport::Exporter.new(root)
     rendercv_data = YAML.load(exporter.render_rendercv_data)
-    blog_data = YAML.load(exporter.render_blog_data)
+    site_data = JSON.parse(exporter.render_site_data)
 
     refute rendercv_data.dig("cv", "sections").key?("Current Research")
-    refute blog_data.any? { |section| section["title"] == "Current Research" }
+    refute site_data.fetch("sections").any? { |section| section["title"] == "Current Research" }
   end
 
   def test_render_rendercv_data_uses_pdf_order_theme_and_public_entries_only
@@ -266,29 +265,6 @@ class CvExportTest < Minitest::Test
     ensure
       Date.define_singleton_method(:today) { original_today.call }
     end
-  end
-
-  def test_render_blog_data_uses_public_entries_only
-    data = YAML.load(CvExport::Exporter.new(@tmpdir).render_blog_data)
-
-    assert_equal ["Education", "Publications", "Work Experience", "Honors and Awards"], data.map { |section| section["title"] }
-    assert_equal "time_table", data.fetch(0).fetch("type")
-    assert_equal "Public Degree", data.fetch(0).fetch("contents").fetch(0).fetch("title")
-    assert_equal(
-      [%(<a href="https://example.com/advisor">Advisor: Prof. Public</a>)],
-      data.fetch(0).fetch("contents").fetch(0).fetch("description")
-    )
-    refute_includes data.to_s, "Archived Degree"
-    refute_includes data.to_s, "Private Paper"
-    refute_includes data.to_s, "Private Reference"
-  end
-
-  def test_write_blog_data_uses_configured_output_path
-    path = CvExport::Exporter.new(@tmpdir).write_blog_data
-
-    assert_equal File.join(@tmpdir, "build", "cv.yml"), path
-    assert File.exist?(path), "expected blog data output to be written"
-    assert_includes File.read(path), "Public Degree"
   end
 
   def test_render_site_data_uses_public_entries_only_without_visibility
