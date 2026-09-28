@@ -1,5 +1,5 @@
 # "Research Interests" on the home page: each topic lists papers in one line each.
-#   paper: the paper id from the CV (brain/docs/refs/cv/sections/publications.yml)
+#   paper: the paper id from the CV (cv/sections/publications.yml)
 #   note:  a short description shown after the venue
 # The venue and "1st author" label come from the CV automatically.
 

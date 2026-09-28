@@ -1,0 +1,36 @@
+name: Junoh Kang
+headline: "Ph.D. student in Electrical and Computer Engineering"
+
+affiliations:
+  - name: Seoul National University
+    unit: Electrical and Computer Engineering
+    location: Seoul, Korea
+    visibility: public
+  - name: SNU Computer Vision Lab
+    url: https://cv.snu.ac.kr
+    location: Seoul, Korea
+    visibility: public
+
+contacts:
+  - type: email
+    value: junoh.kang@snu.ac.kr
+    visibility: public
+  - type: website
+    url: https://junoh-kang.github.io
+    visibility: public
+  - type: github
+    label: Junoh-Kang
+    url: https://github.com/Junoh-Kang
+    visibility: public
+  - type: linkedin
+    label: junohkang
+    url: https://www.linkedin.com/in/junohkang
+    visibility: public
+  - type: google_scholar
+    label: Google Scholar
+    url: https://scholar.google.com/citations?user=TLGqhucAAAAJ&hl=en
+    visibility: public
+
+postal_address:
+  label: Seoul Nat'l Univ. SAMSUNG R&D Center 7th floor, 1 Gwanak-ro, Gwanak-gu, Seoul, Korea
+  visibility: private

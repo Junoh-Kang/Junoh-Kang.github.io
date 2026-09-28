@@ -1,0 +1,46 @@
+name: Junoh Kang
+root: cv
+
+profile: profile.yml
+
+sections:
+  - education
+  - publications
+  - experience
+  - current_research
+  - honors
+  - service
+  - teaching
+  - references
+
+outputs:
+  rendercv_data: build/rendercv.yml
+  pdf: build/Junoh_Kang_CV.pdf
+  blog_data: build/cv.yml
+  site_data: build/site.json
+
+rendercv:
+  theme: classic
+  headline:
+  last_updated: auto
+  sections:
+    - education
+    - experience
+    - current_research
+    - publications
+    - honors
+    - service
+    - teaching
+    - references
+
+# Paths relative to this cv/ folder, inside the site repository.
+publish_site:
+  site_data: ../src/data/cv.json
+  pdf: ../public/assets/pdf/Junoh_Kang_CV.pdf
+
+rules:
+  edit_here_only: true
+  visibility_values: [public, private, archive]
+  public_exports_include: public
+  non_public_visibility_excluded_from_exports: true
+  generated_outputs_are_not_sources: true

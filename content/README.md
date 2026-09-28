@@ -1,8 +1,9 @@
 # Site content
 
-Everything you edit by hand lives in two folders:
+Everything you edit by hand lives in three folders:
 
 - `content/` holds the home page.
+- `cv/` holds the CV source (education, publications, and the rest).
 - `blog/` holds the posts.
 
 Code under `src/` normally does not need to change.
@@ -16,13 +17,12 @@ Code under `src/` normally does not need to change.
 | `2-about.md` | The About paragraph, in Markdown (`[text](url)` for links) |
 | `3-research-interests.yaml` | Research Interests: topics, and one line per backing paper |
 | `4-news.yaml` | News, newest first. See the format at the top of the file. |
-| `cv/` | Shortcut to the CV source: Education, Experience, Publications, Honors, and Service (see below) |
 
 `3-research-interests.yaml` refers to papers by their CV id, for example `kim2024fifo`. The build fails with a message that names the file if an id is not in the CV, or if a news `linkText` does not appear in its `text`.
 
 ## CV: education, experience, publications, honors, and service
 
-These come from the CV, not from this folder. The source of truth is `brain/docs/refs/cv/`. On this Mac, `content/cv` is a shortcut (symlink) to it, so you can open the CV files from here. The shortcut is git-ignored because the CV source has private items; it does not exist in other checkouts.
+These come from the CV, not from this folder. The source of truth is `cv/` at the repository root (see `cv/README.md`). Items marked `visibility: private` or `archive` stay out of the site and the PDF, but they are still readable in this public repository.
 
 - Papers are in `sections/publications.yml`, including `id`, venue, links, and an optional `award` shown next to the venue.
 - Education, experience, and honors are in their own `sections/*.yml`.
@@ -31,7 +31,7 @@ These come from the CV, not from this folder. The source of truth is `brain/docs
 After editing, regenerate the site data and the CV PDF:
 
 ```bash
-make -C /Users/junoh/brain/docs/refs/cv publish-site
+make -C cv publish-site
 ```
 
 This writes `src/data/cv.json` and `public/assets/pdf/Junoh_Kang_CV.pdf`. Do not edit those two files by hand.

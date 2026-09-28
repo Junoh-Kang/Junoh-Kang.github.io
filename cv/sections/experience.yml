@@ -1,0 +1,16 @@
+title: Work Experience
+
+items:
+  - title: Research Intern
+    organization: Adobe Research
+    location: Seattle, USA
+    date: Jun 2024 - Sep 2024
+    url: https://research.adobe.com/
+    visibility: public
+
+  - title: Research Intern
+    organization: SNU Computer Vision Lab
+    location: Seoul, Korea
+    date: Jun 2021 - Sep 2021
+    url: https://cv.snu.ac.kr
+    visibility: public

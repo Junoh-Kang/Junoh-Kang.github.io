@@ -41,5 +41,3 @@ bunfig.toml
 /test/
 _unused-demo/
 
-# Local shortcut to the CV source in brain (has private items; never commit)
-/content/cv

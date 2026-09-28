@@ -1,5 +1,5 @@
-// Typed access to cv.json, which is generated from brain/docs/refs/cv
-// (`make -C docs/refs/cv publish-site`). Edit the CV there, not here.
+// Typed access to cv.json, which is generated from cv/
+// (`make -C cv publish-site`). Edit the CV there, not here.
 import raw from './cv.json'
 
 export type Detail = string | { label: string; url?: string }

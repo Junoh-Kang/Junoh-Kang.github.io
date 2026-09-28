@@ -1,0 +1,15 @@
+title: References
+
+items:
+  - role: Advisor
+    name: Bohyung Han
+    affiliation: Seoul National University
+    url: https://cv.snu.ac.kr/index.php/bhhan/
+    email: bhhan@snu.ac.kr
+    visibility: private
+
+  - role: Affiliation
+    name: SNU Computer Vision Lab
+    affiliation: Seoul National University
+    url: https://cv.snu.ac.kr
+    visibility: private

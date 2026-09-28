@@ -1,0 +1,26 @@
+title: Education
+
+items:
+  - title: "Ph.D. program in Electrical and Computer Engineering"
+    institution: Seoul National University
+    location: Seoul, Korea
+    date: Mar 2022 - Exp. Feb 2028
+    details:
+      - label: "Advisor: Prof. Bohyung Han"
+        url: https://cv.snu.ac.kr/index.php/~bhhan/
+    visibility: public
+
+  - title: "B.S. in Statistics and Mathematics"
+    institution: Seoul National University
+    location: Seoul, Korea
+    date: Mar 2015 - Aug 2021
+    details:
+      - Summa Cum Laude
+      - "GPA 4.0/4.3"
+    visibility: public
+
+  - title: Seoul Science High School
+    institution: Seoul Science High School (SSHS)
+    location: Seoul, Korea
+    date: Mar 2012 - Feb 2015
+    visibility: public

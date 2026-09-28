@@ -13,7 +13,7 @@ const authors = (pub.authors ?? [])
   .join(', ')
 
 // Show only Paper, Code, and Project. Paper opens alphaXiv (built from the arXiv link, fast),
-// else the published PDF. The PDF CV uses the same rule (brain/docs/refs/cv/export.rb).
+// else the published PDF. The PDF CV uses the same rule (cv/export.rb).
 const byLabel = (label: string) => pub.links?.find((l) => l.label === label)?.url
 const arxivId = byLabel('arXiv')?.match(
   /arxiv\.org\/(?:abs|pdf)\/([^/?#]+?)(?:\.pdf)?(?:[?#].*)?$/

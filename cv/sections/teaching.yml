@@ -1,0 +1,20 @@
+title: Teaching
+
+items:
+  - title: Teaching Assistant
+    course: "430.659: Topics in Computer and VLSI (Machine Learning)"
+    institution: Seoul National University
+    date: Spring 2024
+    visibility: public
+
+  - title: Teaching Assistant
+    course: "430.329: Introduction to Algorithms"
+    institution: Seoul National University
+    date: Fall 2023
+    visibility: public
+
+  - title: Teaching Assistant
+    course: AI expert course
+    institution: Samsung
+    date: Fall 2023
+    visibility: public

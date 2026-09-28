@@ -1,0 +1,11 @@
+title: Current Research
+
+items:
+  - title: Replayable and Realistic Limit Order Book Message Generation
+    institution: Advised by Prof. Bohyung Han, in collaboration with Prof. Kiseop Lee
+    location: Seoul, Korea
+    date: 2026 - present
+    details:
+      - Developing a generative model for limit-order-book messages that are replayable against the current order-book state.
+      - Developing post-training methods to improve the realism of long-horizon market rollouts.
+    visibility: archive
