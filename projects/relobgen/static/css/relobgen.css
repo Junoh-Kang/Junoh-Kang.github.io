@@ -220,11 +220,15 @@
   margin-bottom: 0.5rem;
 }
 
-/* Author links look like plain names and underline on hover */
+/* Author links: a thin light underline that darkens on hover */
 .publication-authors a {
   color: inherit !important;
   font-weight: inherit;
-  text-decoration: none;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-decoration-color: #cbd5e1;
+  text-underline-offset: 4px;
+  transition: text-decoration-color 0.2s;
 }
 
 .publication-authors a::after {
@@ -233,8 +237,7 @@
 
 .publication-authors a:hover {
   color: inherit !important;
-  text-decoration: underline;
-  text-underline-offset: 3px;
+  text-decoration-color: currentColor;
 }
 
 .table-caption strong {
