@@ -215,9 +215,9 @@
       <div class="content replayability-def">
         <p>
           Each message <i>M</i><sub><i>t</i></sub> = (<i>E</i><sub><i>t</i></sub>, <i>R</i><sub><i>t</i></sub>, <i>X</i><sub><i>t</i></sub>) has three parts: an event, a reference order, and an event order.
-          For a non-add event, such as a cancellation, the event order <i>X</i><sub><i>t</i></sub> acts on the reference order <i>R</i><sub><i>t</i></sub> in the resting-order set 𝒪<sub><i>t</i>&minus;1</sub>.
-          <i>M</i><sub><i>t</i></sub> is <strong>replayable</strong> if it satisfies both of the following conditions:
+          An add event inserts the event order <i>X</i><sub><i>t</i></sub> into the resting-order set 𝒪<sub><i>t</i>&minus;1</sub> as a new resting order; any other event applies <i>X</i><sub><i>t</i></sub> to an existing resting order, the reference order <i>R</i><sub><i>t</i></sub>.
         </p>
+        <p><i>M</i><sub><i>t</i></sub> is <strong>replayable</strong> if it satisfies both of the following conditions:</p>
         <ul class="conditions">
           <li><span class="cond-chip">Reference eligibility</span> A non-add event references an eligible resting order: <span class="math-inline"><i>R</i><sub><i>t</i></sub> &isin; 𝒞<sub><i>t</i></sub>(<i>E</i><sub><i>t</i></sub>, 𝒪<sub><i>t</i>&minus;1</sub>) &sub; 𝒪<sub><i>t</i>&minus;1</sub></span>.</li>
           <li><span class="cond-chip">Event-order compatibility</span> The event order is consistent with the event, the reference, and the current LOB.</li>
