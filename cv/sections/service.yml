@@ -2,7 +2,7 @@ title: Academic Services
 
 items:
   - role: Conference Reviewer
-    venues: [NeurIPS 2025, AAAI 2025, WACV 2026, NeurIPS 2026, CVPR 2026]
+    venues: [NeurIPS 2025, NeurIPS 2026, CVPR 2026, AAAI 2025, WACV 2026]
     visibility: public
 
   - role: Journal Reviewer

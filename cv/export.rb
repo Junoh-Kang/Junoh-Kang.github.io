@@ -443,7 +443,7 @@ module CvExport
     def service_to_rendercv(item)
       {
         "label" => item.fetch("role"),
-        "details" => item.fetch("venues").join(", ")
+        "details" => item.fetch("venues").map { |venue| venue.sub(/\s+\d{4}\z/, "") }.uniq.join(", ")
       }
     end
 
