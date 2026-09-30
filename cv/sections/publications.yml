@@ -11,6 +11,8 @@ items:
       - Bohyung Han
     venue: Under review
     links:
+      - label: arXiv
+        url: https://arxiv.org/abs/2609.35867
       - label: Project
         url: https://junoh-kang.github.io/projects/relobgen
     visibility: public
