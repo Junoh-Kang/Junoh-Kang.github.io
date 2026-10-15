@@ -3,9 +3,7 @@ title: Understanding Diffusion Models in Two Perspectives
 description: DDPM and score-based SDEs as two routes to reverse diffusion, contrasting
   their shared structure and modeling differences.
 publishDate: '2023-09-03'
-tags:
-- survey
-- generative
+category: Research
 slides: presentation.pdf
 ---
 

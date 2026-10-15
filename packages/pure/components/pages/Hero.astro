@@ -10,7 +10,7 @@ interface Props {
 }
 
 const {
-  data: { title, description, draft, heroImage, publishDate, updatedDate, tags, language },
+  data: { title, description, draft, heroImage, publishDate, updatedDate, category, language },
   remarkPluginFrontmatter
 } = Astro.props
 
@@ -44,8 +44,13 @@ const dateTimeOptions: Intl.DateTimeFormatOptions = {
 {draft ? <span class='text-red-500'>(Draft)</span> : null}
 
 <div class='article-info max-lg:mx-auto'>
-  {/* data-pagefind-ignore keeps date/tags out of search excerpts; tag filters are still indexed */}
-  <div class='flex flex-wrap gap-x-4 gap-y-2 text-xs leading-6 text-muted-foreground' data-pagefind-ignore>
+  {
+    /* data-pagefind-ignore keeps date/category out of search excerpts; category filters are still indexed */
+  }
+  <div
+    class='flex flex-wrap gap-x-4 gap-y-2 text-xs leading-6 text-muted-foreground'
+    data-pagefind-ignore
+  >
     {/* Article date */}
     <div class='flex items-center gap-1'>
       <Icon name='calendar' class='size-5' />
@@ -80,27 +85,17 @@ const dateTimeOptions: Intl.DateTimeFormatOptions = {
         </span>
       )
     }
-    {
-      // Tags
-      !!tags?.length && (
-        <span class='flex items-center gap-1'>
-          <Icon name='hashtag' class='size-5' />
-          {tags.map((tag: string, i: number) => (
-            <div>
-              <a
-                aria-label={`View more blogs with the tag ${tag}`}
-                class='hover:underline hover:underline-offset-4'
-                data-pagefind-filter='tag'
-                href={`/tags/${tag}`}
-              >
-                {tag}
-              </a>
-              {i < tags.length - 1 && '/'}
-            </div>
-          ))}
-        </span>
-      )
-    }
+    <span class='flex items-center gap-1'>
+      <Icon name='tag-2' class='size-5' />
+      <a
+        aria-label={`View more ${category} posts`}
+        class='hover:underline hover:underline-offset-4'
+        data-pagefind-filter='category'
+        href={`/categories/${category.toLowerCase()}`}
+      >
+        {category}
+      </a>
+    </span>
   </div>
 
   <h1 class='mt-4 text-2xl font-medium sm:mb-2 sm:mt-6 sm:text-3xl'>

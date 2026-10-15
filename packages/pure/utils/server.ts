@@ -1,14 +1,12 @@
 import { getCollection, type CollectionEntry, type CollectionKey } from 'astro:content'
 
-type Collections = CollectionEntry<CollectionKey>[]
-
 export const prod = import.meta.env.PROD
 
 /** Note: this function filters out draft posts based on the environment */
 export async function getBlogCollection<T extends CollectionKey = 'blog'>(
   contentType: T = 'blog' as T
 ) {
-  return await getCollection(contentType, ({ data }: CollectionEntry<typeof contentType>) => {
+  return await getCollection<T>(contentType, ({ data }) => {
     // Not in production & draft is not false
     return prod ? !data.draft : true
   })
@@ -55,22 +53,12 @@ export function sortMDByDate<T extends CollectionKey>(
   })
 }
 
-/** Note: This function doesn't filter draft posts, pass it the result of getAllPosts above to do so. */
-export function getAllTags(collections: Collections) {
-  return collections.flatMap((collection) => [...collection.data.tags])
-}
-
-/** Note: This function doesn't filter draft posts, pass it the result of getAllPosts above to do so. */
-export function getUniqueTags(collections: Collections) {
-  return [...new Set(getAllTags(collections))]
-}
-
-/** Note: This function doesn't filter draft posts, pass it the result of getAllPosts above to do so. */
-export function getUniqueTagsWithCount(collections: Collections): [string, number][] {
-  return [
-    ...getAllTags(collections).reduce(
-      (acc, t) => acc.set(t, (acc.get(t) || 0) + 1),
-      new Map<string, number>()
-    )
-  ].sort((a, b) => b[1] - a[1])
+/** Pass published posts so empty categories stay hidden. */
+export function getCategoriesWithCount(collections: CollectionEntry<'blog'>[]): [string, number][] {
+  return ['Research', 'Tech', 'Investing', 'Personal']
+    .map((category): [string, number] => [
+      category,
+      collections.filter((post) => post.data.category === category).length
+    ])
+    .filter(([, count]) => count > 0)
 }

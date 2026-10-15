@@ -39,7 +39,7 @@ const blog = defineCollection({
           color: z.string().optional()
         })
         .optional(),
-      tags: z.array(z.string()).default([]).transform(removeDupsAndLowerCase),
+      category: z.enum(['Research', 'Tech', 'Investing', 'Personal']),
       language: z.string().optional(),
       draft: z.boolean().default(false),
       pin: z.boolean().optional(),

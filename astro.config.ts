@@ -33,8 +33,11 @@ const oldNews = ['20230622', '20231009', '20240227', '20240521', '20240617', '20
 const oldCategories = ['paper-review', 'study-note', 'survey']
 const redirects: Record<string, string> = {
   ...postRedirects,
-  ...Object.fromEntries(oldTags.map((t) => [`/blog/tag/${t}/`, `/tags/${t}`])),
-  ...Object.fromEntries(oldCategories.map((c) => [`/blog/category/${c}/`, `/tags/${c}`])),
+  '/tags': '/blog',
+  ...Object.fromEntries([...oldTags, ...oldCategories].map((tag) => [`/tags/${tag}`, '/blog'])),
+  '/tags/generative/2': '/blog',
+  ...Object.fromEntries(oldTags.map((t) => [`/blog/tag/${t}/`, '/blog'])),
+  ...Object.fromEntries(oldCategories.map((c) => [`/blog/category/${c}/`, '/blog'])),
   ...Object.fromEntries(['2023', '2024', '2025', '2026'].map((y) => [`/blog/${y}/`, '/archives'])),
   '/blog/page/2/': '/blog/2',
   ...Object.fromEntries(oldNews.map((d) => [`/news/${d}/`, '/#news'])),

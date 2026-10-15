@@ -1,0 +1,92 @@
+---
+import type { GetStaticPaths, Page } from 'astro'
+import type { CollectionEntry } from 'astro:content'
+
+import { Paginator, PostPreview } from 'astro-pure/components/pages'
+import { getBlogCollection, getCategoriesWithCount, sortMDByDate } from 'astro-pure/server'
+import { Button } from 'astro-pure/user'
+import PageLayout from '@/layouts/BaseLayout.astro'
+import config from '@/site-config'
+
+export const prerender = true
+
+export const getStaticPaths: GetStaticPaths = async ({ paginate }) => {
+  const allPosts = await getBlogCollection()
+  const allPostsByDate = sortMDByDate<'blog'>(allPosts)
+  const categories = getCategoriesWithCount(allPostsByDate)
+
+  return categories.flatMap(([category]) => {
+    const filterPosts = allPostsByDate.filter((post) => post.data.category === category)
+    return paginate(filterPosts, {
+      pageSize: config.content.blogPageSize,
+      params: { category: category.toLowerCase() },
+      props: { category, categories, collectionsCount: allPosts.length }
+    })
+  })
+}
+
+interface Props {
+  page: Page<CollectionEntry<'blog'>>
+  category: string
+  categories: [string, number][]
+  collectionsCount: number
+}
+
+const { page, category, categories, collectionsCount } = Astro.props
+
+const meta = {
+  description: `View all ${category} posts`,
+  title: category
+}
+
+const paginationProps = {
+  ...(page.url.prev && {
+    prevUrl: {
+      text: `← Previous Posts`,
+      url: page.url.prev
+    }
+  }),
+  ...(page.url.next && {
+    nextUrl: {
+      text: `Next Posts →`,
+      url: page.url.next
+    }
+  })
+}
+---
+
+<PageLayout {meta}>
+  <Button title='Back' href='/blog' variant='back' />
+  <main class='mt-6 lg:mt-10'>
+    <div id='content-header' class='animate'>
+      <h1 class='mb-6 flex items-end gap-x-2 text-3xl font-medium'>
+        {category}
+      </h1>
+    </div>
+
+    <nav aria-label='Blog categories' class='mb-6'>
+      <ul class='flex flex-wrap gap-2'>
+        <li><Button title={`All (${collectionsCount})`} href='/blog' variant='pill' /></li>
+        {
+          categories.map(([name, count]) => (
+            <li>
+              <Button
+                title={`${name} (${count})`}
+                href={`/categories/${name.toLowerCase()}`}
+                variant='pill'
+                aria-current={name === category ? 'page' : undefined}
+                class={name === category ? 'font-semibold text-primary' : undefined}
+              />
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+    <section id='content' class='animate' aria-label='Blog post list'>
+      <ul class='flex flex-col gap-y-3 text-start'>
+        {page.data.map((post) => <PostPreview {post} detailed showCategory={false} />)}
+      </ul>
+      <Paginator {...paginationProps} />
+    </section>
+  </main>
+</PageLayout>

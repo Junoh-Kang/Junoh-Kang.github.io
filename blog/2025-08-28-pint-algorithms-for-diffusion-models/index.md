@@ -3,9 +3,7 @@ title: PinT algorithms for Diffusion Models
 description: A review of researches that accelerate diffusion models in wall clock
   time by parallelization.
 publishDate: '2025-08-28'
-tags:
-- paper-review
-- generative
+category: Research
 slides: presentation.pdf
 ---
 

@@ -31,7 +31,7 @@ Each post is one folder:
 
 ```text
 blog/YYYY-MM-DD-<slug>/
-├── index.md        # front matter: title, description, publishDate (YYYY-MM-DD), tags
+├── index.md        # front matter: title, description, publishDate (YYYY-MM-DD), category
 └── ...             # the post's figures, PDFs, and other files
 ```
 
@@ -39,6 +39,9 @@ blog/YYYY-MM-DD-<slug>/
 - The post URL is `/blog/<slug>`, without the date.
 - Files next to `index.md` are served at `/blog/post/<YYYYMMDD>/<file>`, where `YYYYMMDD` is the post's `publishDate`. Refer to them with that path inside the post, for example `<img src="/blog/post/20260312/fig/cm.png" />`. This matches the old Jekyll URLs.
 - A slide deck goes beside `index.md` and is named in the front matter, for example `slides: presentation.pdf` (PDF or HTML). The post then shows a Slides card under its title. Make the card's preview image once with `scripts/slides-thumb.sh blog/<post>/`, run from the repository root, which writes `slides-thumb.png` next to the deck.
+- Each post has one `category`: `Research` (papers, research overviews, theory), `Tech` (AI trends, tools, practical workflows), `Investing` (investment views and market interpretation), or `Personal` (experiences and reflections). Do not add topic tags or the old paper-review/survey/study-note types.
+- Categories appear in navigation only once they have a published post.
+- Language is independent of category. Investing and Personal posts are planned in Korean; set the optional `language` field per post as needed.
 - Field types, defaults, and constraints are defined in [src/content.config.ts](../src/content.config.ts).
 
 ## Starting Templates
@@ -52,8 +55,7 @@ These outlines are starting points. Change headings and order to fit the argumen
 title: "Post title"
 description: "A short description of the post."
 publishDate: 'YYYY-MM-DD'
-tags:
-  - paper-review
+category: Research
 ---
 
 ## Overview
@@ -78,8 +80,7 @@ tags:
 title: "Post title"
 description: "A short description of the post."
 publishDate: 'YYYY-MM-DD'
-tags:
-  - study-note
+category: Research
 slides: presentation.pdf
 ---
 

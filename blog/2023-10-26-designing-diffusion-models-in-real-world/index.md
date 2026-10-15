@@ -3,9 +3,7 @@ title: Designing Diffusion Models in Real World
 description: Elucidating the Design Space of Diffusion-Based Generative Models, focusing
   on the rationale behind its engineering details.
 publishDate: '2023-10-26'
-tags:
-- paper-review
-- generative
+category: Research
 slides: presentation.pdf
 ---
 
