@@ -7,6 +7,9 @@
 #     - text: <phrase>
 #       url:  <URL>
 
+- date: '2026-10-11'
+  text: Selected as a Top Reviewer for NeurIPS 2026!
+
 - date: '2026-09-29'
   text: One paper on replayable limit-order-book message generation is available on arXiv.
   links:
