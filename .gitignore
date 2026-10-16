@@ -5,6 +5,9 @@ dist/
 ### Vercel ###
 .vercel/
 
+### Claude Code ###
+.claude/
+
 ### Vim ###
 [._]*.un~
 
