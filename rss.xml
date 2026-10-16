@@ -1,9 +1,115 @@
-<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet href="/scripts/pretty-feed-v3.xsl" type="text/xsl"?><rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:h="http://www.w3.org/TR/html4/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Junoh Kang</title><description>AI researcher working on generative models for images, video, and financial markets.</description><link>https://junoh-kang.github.io</link><item><title>Working Effectively with AI Agents</title><link>https://junoh-kang.github.io/blog/working-effectively-with-ai-agents</link><guid isPermaLink="true">https://junoh-kang.github.io/blog/working-effectively-with-ai-agents</guid><description>More verified, useful outcomes—for less total human attention.</description><pubDate>Thu, 23 Jul 2026 00:00:00 GMT</pubDate><content:encoded>&lt;h2&gt;Summary&lt;/h2&gt;
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet href="/scripts/pretty-feed-v3.xsl" type="text/xsl"?><rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:h="http://www.w3.org/TR/html4/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Junoh Kang</title><description>AI researcher working on generative models for images, video, and financial markets.</description><link>https://junoh-kang.github.io</link><item><title>Working effectively with AI agents</title><link>https://junoh-kang.github.io/blog/working-effectively-with-ai-agents</link><guid isPermaLink="true">https://junoh-kang.github.io/blog/working-effectively-with-ai-agents</guid><description>More verified, useful outcomes—for less total human attention.</description><pubDate>Thu, 23 Jul 2026 00:00:00 GMT</pubDate><content:encoded>&lt;h2&gt;Overview&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;Productivity with agents means more verified, useful outcomes for less total human attention&lt;/strong&gt;—not just more output. This post works through three questions:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;What should productivity mean?&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;What should we keep, and what should we delegate?&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;How do we work with agents in practice?&lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;As agents accelerate execution, the human role is shifting toward planning the task and verifying the outcome. To do both well, we should stay in the loop. My own practice comes down to three habits:&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Remember what productivity means.&lt;/strong&gt; It is not more output, but more verified outcomes with less human attention.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Stay attached to the Plan → Do → Verify loop.&lt;/strong&gt; Your mental model must evolve with the work; otherwise, you cannot plan or verify what comes next.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Remember the limits of being human.&lt;/strong&gt; Your bio-token budget is finite, cannot be parallelized, and is replenished only by time.&lt;/li&gt;
-&lt;/ul&gt;</content:encoded><h:img src="undefined"/><enclosure url="undefined"/></item><item><title>LOB-Bench: Orderbook Generative Model Evaluation Benchmark</title><link>https://junoh-kang.github.io/blog/lob-bench-orderbook-generative-model-evaluation-benchmark</link><guid isPermaLink="true">https://junoh-kang.github.io/blog/lob-bench-orderbook-generative-model-evaluation-benchmark</guid><description>A review of LOB-Bench, focusing on why generated order book models need rollout-level evaluation beyond one-step loss and stylized facts.</description><pubDate>Wed, 24 Jun 2026 00:00:00 GMT</pubDate><content:encoded>&lt;h2&gt;Overview&lt;/h2&gt;
+&lt;li&gt;&lt;strong&gt;Don&apos;t rush into Do.&lt;/strong&gt; Spend more time on Plan and Verify before delegating execution.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Stay in the loop.&lt;/strong&gt; Ask the agent to quiz me, so I stay in sync at minimal attention cost.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Write for others.&lt;/strong&gt; When my reasoning feels unclear, I write something to explain or persuade other people. An agent can help structure and edit it, but I own the claims and reasoning.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2&gt;What is an agent?&lt;/h2&gt;
+&lt;p&gt;OpenAI defines agents as &quot;systems that independently accomplish tasks on your behalf&quot;[1]. Anthropic defines an agent as &quot;an AI model that directs its own processes and tool use when accomplishing a task&quot;[2]. Both definitions center on the same thing: an agent &lt;strong&gt;accomplishes a task&lt;/strong&gt;, rather than returning a single response.&lt;/p&gt;
+&lt;p&gt;Anthropic also describes an agent by its parts[2]: &lt;strong&gt;Agent = Model + Harness + Tools + Environment&lt;/strong&gt;. The harness is the set of instructions and guardrails around the model.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2&gt;What counts as productivity?&lt;/h2&gt;
+&lt;h3&gt;Throughput is not productivity&lt;/h3&gt;
+&lt;p&gt;OpenAI&apos;s harness-engineering write-up reports roughly 10× faster implementation in an agent-first internal project, but &lt;strong&gt;human QA became the new bottleneck&lt;/strong&gt;[3]. Faster execution moved the bottleneck to verification; it did not by itself produce more verified outcomes.&lt;/p&gt;
+&lt;h3&gt;Productivity depends on the whole loop&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Work is a sequence of interdependent tasks.&lt;/strong&gt; Each task starts from the previous task&apos;s &lt;em&gt;verified outcome&lt;/em&gt;, and its Plan → Do → Verify loop updates the work state into a new one. Productivity improves only when the whole cycle speeds up—not just Do, which is what agents mainly accelerate. The goal, then, is &lt;strong&gt;more verified outcomes for less total human attention&lt;/strong&gt;, including planning, review, and recovering from mistakes.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2&gt;What should we keep, and what should we delegate?&lt;/h2&gt;
+&lt;h3&gt;The human must maintain an updated mental model&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;The human must maintain an updated mental model.&lt;/strong&gt; In Anthropic&apos;s study of agentic coding[4], domain expertise—understanding of the work—mattered in how people used agents. More expert users reached verified success more often, recovered from trouble more often, and delegated longer tasks per instruction. Their expertise showed up in three ways: concrete goals, constraints, and invariants; clear criteria for what and how to verify; and corrections of the model&apos;s domain errors.&lt;/p&gt;
+&lt;h3&gt;When the human mental model falls behind&lt;/h3&gt;
+&lt;p&gt;The human mental model can fall behind in two ways.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Comprehension debt&lt;/strong&gt;[5] is a state-sync failure. The work changes, but my mental model does not, so the deferred attention returns later as review, rework, and recovery.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Cognitive debt&lt;/strong&gt;[6] is capability degradation. Reasoning and debugging are delegated without engagement, so skills, recall, and verification ability weaken.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Failure case 1: Cognitive debt.&lt;/strong&gt; In Anthropic&apos;s study of 52 developers learning an unfamiliar Python library[7], the AI-assisted group finished about two minutes faster—a difference that was not statistically significant—but scored lower than the hand-coding group on a subsequent quiz (50% versus 67%), especially on debugging questions.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Failure case 2: Comprehension debt.&lt;/strong&gt; I had an agent refactor a research codebase and accepted the result once the baseline training reproduced under a fixed seed—without first understanding the original pipeline. When I later tried to change the token order, tokenization turned out to be entangled with encoding, preprocessing, and one-off scripts. I had to trace the pipeline and refactor it again, which delayed my experiments. Reproducing the baseline verified the code&apos;s behavior, not my understanding of it.&lt;/p&gt;
+&lt;h3&gt;Three gates before delegation&lt;/h3&gt;
+&lt;p&gt;Before delegating a task, we ask one question: &lt;strong&gt;can we frame the Plan, define how to Verify, and Reverse a failure?&lt;/strong&gt;[8, 9, 10]&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Plan gate.&lt;/strong&gt; Can we specify the goal, context, constraints, and scope—without prescribing every execution step?&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Verify gate.&lt;/strong&gt; Can we define success before execution and check the outcome independently, rather than trusting the agent&apos;s claim?&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Reversibility gate.&lt;/strong&gt; Can we restore the previous state, and afford the recovery cost if the task fails?&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;When a gate is blocked, we either strengthen it and re-evaluate, or reduce the agent&apos;s role.&lt;/p&gt;
+&lt;p&gt;| Blocked gate | Strengthen | Reduce |
+|---|---|---|
+| &lt;strong&gt;Plan&lt;/strong&gt; | Clarify and reframe the intent. | Narrow the scope. |
+| &lt;strong&gt;Verify&lt;/strong&gt; | Add repeatable, goal-aligned criteria. | The human owns acceptance. |
+| &lt;strong&gt;Reversibility&lt;/strong&gt; | Add a sandbox or dry run. | The agent prepares; the human acts. |&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2&gt;Working with agents in practice&lt;/h2&gt;
+&lt;h3&gt;Protect the bio-token budget&lt;/h3&gt;
+&lt;p&gt;I call human attention &lt;em&gt;bio-tokens&lt;/em&gt;: the human equivalent of AI tokens. Unlike AI tokens, bio-tokens cannot be stored, and only time refills them.&lt;/p&gt;
+&lt;p&gt;Three things drain it quickly:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Reading.&lt;/strong&gt; Low-readability output costs more, and other people&apos;s code and writing cost the most.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Switching.&lt;/strong&gt; Working memory is small[11], and task switching has measurable costs[12]. OpenAI reports that most of its engineers ran three to five concurrent Codex sessions before it started to hurt[13].&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Generation.&lt;/strong&gt; Answering an open-ended question costs more than choosing among concrete options.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The practices below are largely about spending this budget well.&lt;/p&gt;
+&lt;h3&gt;Plan gate: externalize the work state&lt;/h3&gt;
+&lt;pre&gt;&lt;code class=&quot;language-text&quot;&gt;docs/
+├── GOAL.md          goal and non-goals
+├── STATE.md         current state, completed work
+├── DECISIONS.md     key decisions, open questions
+├── plan/            implementation plans and history
+│   └── implementation-001.md
+└── experiment/      results, evidence, uncertainty
+    └── experiment-001.md
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Structure the project so that the agent can collect context from accumulated plans, decisions, and experiment records[14]. The agent can write and update these records; we decide what to record and how, and check that the records stay accurate.&lt;/p&gt;
+&lt;h3&gt;Plan gate: make intent explicit&lt;/h3&gt;
+&lt;p&gt;The same holds when we delegate to an agent: we often do not know exactly what we want until we see a result, so we may not even know what to ask for. &lt;strong&gt;Rather than writing a complete brief up front, I let the agent draw the intent out of me.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;A standard planning flow asks a few questions, drafts a plan, and leaves me to review it open-endedly. I then have to discover what is missing or wrong, and explain it. I prefer an interview pattern, such as the &lt;a href=&quot;https://github.com/mattpocock/skills/blob/66898f6/skills/productivity/grill-me/SKILL.md&quot;&gt;grill-me skill&lt;/a&gt;: the agent asks &lt;strong&gt;one decision question at a time, each with a recommended answer&lt;/strong&gt;, and I accept or correct each one until we are aligned.&lt;/p&gt;
+&lt;p&gt;This turns generation into selection, which costs fewer bio-tokens. It also leaves explicit decisions behind, which makes it clearer what should be verified.&lt;/p&gt;
+&lt;h3&gt;Verify gate: define it first, read less&lt;/h3&gt;
+&lt;p&gt;Define verification before delegating Do, as in test-driven development. Good verification is[9]:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Outcome-based:&lt;/strong&gt; it checks the actual result, not the agent&apos;s claim.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Repeatable:&lt;/strong&gt; the same condition gives the same result.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Goal-aligned:&lt;/strong&gt; passing it is evidence for the actual goal.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Failure-sensitive:&lt;/strong&gt; it fails for plausible wrong outcomes.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Verification does not require rereading the whole implementation:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;Automated checks first.&lt;/strong&gt; Let tests, builds, and output comparisons screen out concrete failures.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Compact review.&lt;/strong&gt; Ask the agent to present the rest: what changed, what evidence was collected, and what remains uncertain.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Quiz.&lt;/strong&gt; When we need to check our own understanding, ask the agent to quiz us on the result.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3&gt;Recover from failure&lt;/h3&gt;
+&lt;p&gt;When a result misses the goal, a simple sequence helps:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;Revert and redo once.&lt;/strong&gt; This is cheap when the work is reversible, and because agent outputs are non-deterministic, a second attempt may succeed.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;If it fails again, stop repeating the same attempt.&lt;/strong&gt; The same input and conditions will not produce a more reliable process.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Change what caused the failure.&lt;/strong&gt; If execution departed from a sound plan, write a failure report and repair execution. If the plan itself was wrong, re-plan and redo. If the problem keeps recurring, update the context, rules, skills, or tests.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h2&gt;References&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&quot;https://cdn.openai.com/business-guides-and-resources/a-practical-guide-to-building-agents.pdf&quot;&gt;OpenAI, &lt;em&gt;A practical guide to building agents&lt;/em&gt; (2025)&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://www.anthropic.com/research/trustworthy-agents&quot;&gt;Anthropic, &lt;em&gt;Trustworthy agents in practice&lt;/em&gt; (Apr 2026)&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://openai.com/index/harness-engineering/&quot;&gt;OpenAI, &lt;em&gt;Harness engineering&lt;/em&gt; (Feb 2026)&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://www.anthropic.com/research/claude-code-expertise&quot;&gt;Anthropic, &lt;em&gt;Agentic coding and persistent returns to expertise&lt;/em&gt; (Jun 2026)&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://medium.com/@addyosmani/comprehension-debt-the-hidden-cost-of-ai-generated-code-285a25dac57e&quot;&gt;Addy Osmani, &lt;em&gt;Comprehension debt: the hidden cost of AI-generated code&lt;/em&gt; (Mar 2026)&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://arxiv.org/abs/2506.08872&quot;&gt;Nataliya Kosmyna et al., &lt;em&gt;Your Brain on ChatGPT&lt;/em&gt; (arXiv:2506.08872, 2025)&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://www.anthropic.com/research/AI-assistance-coding-skills&quot;&gt;Anthropic, &lt;em&gt;How AI assistance impacts the formation of coding skills&lt;/em&gt; (Jan 2026)&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://openai.com/academy/workspace-agents/&quot;&gt;OpenAI Academy, &lt;em&gt;Workspace agents&lt;/em&gt; (Apr 2026)&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents&quot;&gt;Anthropic, &lt;em&gt;Demystifying evals for AI agents&lt;/em&gt; (Jan 2026)&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://www.anthropic.com/research/measuring-agent-autonomy&quot;&gt;Anthropic, &lt;em&gt;Measuring agent autonomy&lt;/em&gt; (Feb 2026)&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://pubmed.ncbi.nlm.nih.gov/11515286/&quot;&gt;Nelson Cowan, &lt;em&gt;The magical number 4 in short-term memory&lt;/em&gt; (Behavioral and Brain Sciences, 2001)&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://pubmed.ncbi.nlm.nih.gov/11518143/&quot;&gt;Joshua S. Rubinstein, David E. Meyer, and Jeffrey E. Evans, &lt;em&gt;Executive control of cognitive processes in task switching&lt;/em&gt; (Journal of Experimental Psychology: Human Perception and Performance, 2001)&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://openai.com/index/open-source-codex-orchestration-symphony/&quot;&gt;OpenAI, &lt;em&gt;Codex orchestration&lt;/em&gt; (Apr 2026)&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents&quot;&gt;Anthropic, &lt;em&gt;Effective context engineering for AI agents&lt;/em&gt; (Sep 2025)&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://www.wired.com/story/unit-109/&quot;&gt;Steve Jobs, interview in &lt;em&gt;BusinessWeek&lt;/em&gt; (1998), quoted in WIRED&lt;/a&gt;&lt;/p&gt;</content:encoded><h:img src="undefined"/><enclosure url="undefined"/><atom:updated>2026-10-16T00:00:00.000Z</atom:updated></item><item><title>LOB-Bench: Orderbook Generative Model Evaluation Benchmark</title><link>https://junoh-kang.github.io/blog/lob-bench-orderbook-generative-model-evaluation-benchmark</link><guid isPermaLink="true">https://junoh-kang.github.io/blog/lob-bench-orderbook-generative-model-evaluation-benchmark</guid><description>A review of LOB-Bench, focusing on why generated order book models need rollout-level evaluation beyond one-step loss and stylized facts.</description><pubDate>Wed, 24 Jun 2026 00:00:00 GMT</pubDate><content:encoded>&lt;h2&gt;Overview&lt;/h2&gt;
 &lt;p&gt;LOB-Bench starts from a critique of how generative limit order book models are usually evaluated. One-step prediction loss and a few stylized facts can be useful local checks, but they do not show whether a model remains realistic after it samples a trajectory. A model can pass those narrower checks and still drift away from realistic market behavior once it generates a sequence autoregressively.&lt;/p&gt;
 &lt;p&gt;The benchmark therefore evaluates generated LOBSTER-compatible order book rollouts by comparing real and generated score distributions, conditional behavior, market-impact response curves, and discriminator separability. This makes it useful for diagnosing where a generated market trajectory fails: quote state, event timing, cancellation behavior, event placement, order flow, price response, or trajectory-level artifacts.&lt;/p&gt;
 &lt;p&gt;The reported results make the benchmark&apos;s role concrete. LOBS5 is the strongest tested model overall, but LOB-Bench still exposes growing horizon error, conditional microstructure failures, market-impact response gaps, and discriminator separability. The useful output is therefore not a single leaderboard score, but a failure profile for generated order book trajectories.&lt;/p&gt;
