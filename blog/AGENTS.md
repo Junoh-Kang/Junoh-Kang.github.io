@@ -16,6 +16,16 @@
 - Make external claims, numerical results, and reused figures traceable to their sources.
 - Never invent results, references, or bibliographic metadata. Report missing evidence explicitly.
 
+### Citations and links
+
+Choose by the link's role for the reader. A link that supports a claim is a citation; a link to something the reader would open or use is an inline link.
+
+- Cite a source behind a claim, number, quote, definition, or reused figure with a numbered reference: `<sup class="cite">[<a href="#ref-1">1</a>]</sup>` in the text, and a matching `<li id="ref-1">` in an `<ol class="references">` list under `## References`. Number references in order of first use.
+- Link inline only to things the reader would open or use, such as tools, repositories, skills, datasets, talks, and other posts on this site. These links do not go in References.
+- If a link disappeared, would the sentence become an unsupported claim? Then cite it. Would it only lose a pointer? Then link it inline.
+- When a sentence names a source, keep the name as plain text and add the number, for example "Anthropic's study of agentic coding[4]". Do not link the name itself.
+- Give each source one form throughout a post. A tool that also serves as evidence for a claim is cited.
+
 ## Figures, Tables, and Mathematics
 
 - Introduce each figure, table, or equation with its purpose.
