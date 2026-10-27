@@ -115,6 +115,10 @@
             {
               "label": "arXiv",
               "url": "https://arxiv.org/abs/2606.15332"
+            },
+            {
+              "label": "Code",
+              "url": "https://github.com/Junoh-Kang/ProbSigInv"
             }
           ]
         },
