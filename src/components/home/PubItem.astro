@@ -12,15 +12,10 @@ const authors = (pub.authors ?? [])
   .map((a) => a.replace(/^Junoh Kang(\*?)$/, '<strong>Junoh Kang$1</strong>'))
   .join(', ')
 
-// Show only Paper, Project, and Code. Paper opens alphaXiv (built from the arXiv link, fast),
+// Show only Paper, Project, and Code. Paper opens arXiv when available,
 // else the published PDF. The PDF CV uses the same rule (cv/export.rb).
 const byLabel = (label: string) => pub.links?.find((l) => l.label === label)?.url
-const arxivId = byLabel('arXiv')?.match(
-  /arxiv\.org\/(?:abs|pdf)\/([^/?#]+?)(?:\.pdf)?(?:[?#].*)?$/
-)?.[1]
-const paper = arxivId
-  ? `https://www.alphaxiv.org/abs/${arxivId}`
-  : (byLabel('arXiv') ?? byLabel('Paper'))
+const paper = byLabel('arXiv') ?? byLabel('Paper')
 const links = [
   { label: 'Paper', url: paper },
   { label: 'Project', url: byLabel('Project') },

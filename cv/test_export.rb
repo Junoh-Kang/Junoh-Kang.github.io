@@ -291,15 +291,15 @@ class CvExportTest < Minitest::Test
     assert_equal "(*) denotes equal contribution.", data.fetch("sections").find { |s| s["id"] == "publications" }.fetch("note")
   end
 
-  def test_publication_title_link_prefers_alphaxiv_then_paper
+  def test_publication_title_link_prefers_arxiv_then_paper
     exporter = CvExport::Exporter.new(@tmpdir)
     both = { "links" => [{ "label" => "Paper", "url" => "https://p" }, { "label" => "arXiv", "url" => "https://arxiv.org/abs/2405.11473" }] }
     arxiv_pdf = { "links" => [{ "label" => "arXiv", "url" => "https://arxiv.org/pdf/2306.00001v2" }] }
     paper_only = { "links" => [{ "label" => "Paper", "url" => "https://p" }] }
     none = { "links" => [{ "label" => "Code", "url" => "https://c" }] }
 
-    assert_equal "https://www.alphaxiv.org/abs/2405.11473", exporter.send(:publication_url, both)
-    assert_equal "https://www.alphaxiv.org/abs/2306.00001v2", exporter.send(:publication_url, arxiv_pdf)
+    assert_equal "https://arxiv.org/abs/2405.11473", exporter.send(:publication_url, both)
+    assert_equal "https://arxiv.org/pdf/2306.00001v2", exporter.send(:publication_url, arxiv_pdf)
     assert_equal "https://p", exporter.send(:publication_url, paper_only)
     assert_nil exporter.send(:publication_url, none)
   end

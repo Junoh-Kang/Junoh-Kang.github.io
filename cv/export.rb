@@ -14,7 +14,6 @@ module CvExport
   class Exporter
     # Matches the homepage accent (navy #1f4e79).
     SITE_NAVY = "rgb(31, 78, 121)"
-    ARXIV_ID = %r{arxiv\.org/(?:abs|pdf)/([^/?#]+?)(?:\.pdf)?(?:[?#].*)?\z}
 
     def initialize(root = File.expand_path(__dir__))
       @root = File.expand_path(root)
@@ -463,15 +462,12 @@ module CvExport
       }
     end
 
-    # alphaXiv (built from the arXiv link) first, since it opens fast; then the published
+    # arXiv first when available; then the published
     # PDF. The homepage uses the same rule for its Paper link.
     def publication_url(item)
       links = item.fetch("links", [])
       arxiv = links.find { |l| l["label"] == "arXiv" }&.fetch("url")
-      if arxiv
-        id = arxiv[ARXIV_ID, 1]
-        return id ? "https://www.alphaxiv.org/abs/#{id}" : arxiv
-      end
+      return arxiv if arxiv
       links.find { |l| l["label"] == "Paper" }&.fetch("url")
     end
 

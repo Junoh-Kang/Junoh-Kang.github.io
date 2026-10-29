@@ -36,7 +36,7 @@ cv/cv.yml
   -> generated site data JSON
 ```
 
-The site data JSON (`build/site.json`) feeds the Astro site. It holds the public profile and public section items in `cv.yml` order, with `visibility` removed. Publication items may carry an `id`, which the site uses to reference papers, `links` (`label` and `url` pairs) for per-paper links such as Paper, arXiv, Code, or Project, and `award`, a short award line the site shows next to the venue. A paper has no top-level `url`: the PDF links its title to alphaXiv, built from the `arXiv` link because it opens fast. Without an arXiv link the title links to `Paper`, the published PDF. The homepage uses the same rule. The PDF ignores `id` and `award`.
+The site data JSON (`build/site.json`) feeds the Astro site. It holds the public profile and public section items in `cv.yml` order, with `visibility` removed. Publication items may carry an `id`, which the site uses to reference papers, `links` (`label` and `url` pairs) for per-paper links such as Paper, arXiv, Code, or Project, and `award`, a short award line the site shows next to the venue. A paper has no top-level `url`: the PDF links its title to the `arXiv` URL when available. Without an arXiv link the title links to `Paper`, the published PDF. The homepage uses the same rule. The PDF ignores `id` and `award`.
 
 The PDF uses RenderCV with the `engineeringresumes` theme.
 
