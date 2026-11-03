@@ -3,7 +3,6 @@ title: "2026년, 하고 싶은 게 생겼다"
 description: "Moved from computer vision to finance."
 publishDate: '2026-10-31'
 tags: [personal]
-language: ko
 ---
 
 ## 글을 써보려 합니다

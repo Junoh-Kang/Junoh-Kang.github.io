@@ -35,3 +35,8 @@ a {
     color: hsl(var(--primary) / var(--un-text-opacity, 1));
   }
 }
+
+/* Post list: tags read as navy links, set apart from the gray date */
+.post-preview a[href^='/tags/'] {
+  color: hsl(var(--primary) / 1);
+}
