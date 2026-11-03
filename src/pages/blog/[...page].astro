@@ -89,24 +89,22 @@ const paginationProps = {
           Tags
         </h2>
         <nav aria-label='Blog tags'>
-          <ul class='flex flex-wrap gap-2'>
+          <ul class='flex flex-col gap-y-1.5 text-sm'>
             <li>
-              <Button
-                title={`All (${collectionsCount})`}
-                href='/blog'
-                variant='pill'
-                aria-current='page'
-                class='font-semibold text-primary'
-              />
+              <a href='/blog' aria-current='page' class='font-semibold text-primary'>
+                All <span class='font-normal text-muted-foreground'>({collectionsCount})</span>
+              </a>
             </li>
             {
               tags.map(([tag, count]) => (
                 <li>
-                  <Button
-                    title={`${tag} (${count})`}
+                  <a
                     href={`/tags/${encodeURIComponent(tag)}`}
-                    variant='pill'
-                  />
+                    class='text-primary underline-offset-4 hover:underline'
+                    data-astro-prefetch
+                  >
+                    {tag} <span class='text-muted-foreground'>({count})</span>
+                  </a>
                 </li>
               ))
             }
