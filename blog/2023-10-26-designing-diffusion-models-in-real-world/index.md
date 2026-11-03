@@ -1,7 +1,6 @@
 ---
 title: Designing Diffusion Models in Real World
-description: Elucidating the Design Space of Diffusion-Based Generative Models, focusing
-  on the rationale behind its engineering details.
+description: "The engineering rationale behind EDM's design choices."
 publishDate: '2023-10-26'
 tags: [diffusion]
 slides: presentation.pdf

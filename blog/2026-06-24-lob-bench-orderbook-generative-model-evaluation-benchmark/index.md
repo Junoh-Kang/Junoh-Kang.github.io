@@ -1,7 +1,6 @@
 ---
 title: 'LOB-Bench: Orderbook Generative Model Evaluation Benchmark'
-description: A review of LOB-Bench, focusing on why generated order book models need
-  rollout-level evaluation beyond one-step loss and stylized facts.
+description: "Why order book generators need rollout-level evaluation."
 publishDate: '2026-06-24'
 tags: [finance, lob-message]
 ---

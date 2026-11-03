@@ -1,9 +1,6 @@
 ---
 title: 'Path Signature: Useful Feature for Timeseries'
-description: Study note on path signature in the literature of rough path theory.
-  This post introduces the definition, algebraic structure, and probabilistic interpretation
-  of signatures, bridging rough path theory and modern machine learning, based primarily
-  on *A Primer on the Signature Method in Machine Learning*.
+description: "Definition, algebraic structure, and probabilistic meaning of path signatures."
 publishDate: '2026-02-01'
 tags: [time-series]
 ---

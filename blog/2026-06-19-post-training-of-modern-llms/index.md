@@ -1,7 +1,6 @@
 ---
 title: Post-Training of Modern LLMs
-description: Modern LLM post-training, from preference learning to reinforcement learning
-  with verifiable rewards.
+description: "From preference learning to RL with verifiable rewards."
 publishDate: '2026-06-19'
 tags: [llm]
 ---

@@ -1,6 +1,6 @@
 ---
 title: Working effectively with AI agents
-description: More verified, useful outcomes—for less total human attention.
+description: "More verified, useful outcomes—for less total human attention."
 publishDate: '2026-07-23'
 updatedDate: '2026-10-16'
 tags: [ai-tools]

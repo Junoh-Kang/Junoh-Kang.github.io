@@ -1,7 +1,6 @@
 ---
 title: Controllabilities in Video Diffusion Models
-description: A review of papers that add controllabilities to video generation (DragNUWA
-  and Boximator)
+description: "Adding controllability to video generation with DragNUWA and Boximator."
 publishDate: '2024-05-14'
 tags: [diffusion]
 slides: presentation.pdf

@@ -1,8 +1,6 @@
 ---
 title: SFT Memorizes, RL Generalizes
-description: A review of SFT Memorizes, RL Generalizes, focusing on how supervised
-  finetuning and verifier-based reinforcement learning behave under shifted rules
-  and visual inputs.
+description: "How SFT and verifier-based RL behave under rule and visual shifts."
 publishDate: '2026-06-20'
 tags: [llm]
 ---
