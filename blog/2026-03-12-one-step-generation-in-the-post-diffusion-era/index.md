@@ -4,7 +4,7 @@ description: Training-based routes toward one-step generation for diffusion and 
   models, covering distillation, Consistency Models, CTM, MeanFlow, DMD, and Drifting
   Models.
 publishDate: '2026-03-12'
-category: Research
+tags: [diffusion]
 slides: presentation.pdf
 ---
 

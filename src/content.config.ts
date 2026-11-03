@@ -4,7 +4,7 @@ import { z } from 'astro/zod'
 
 function removeDupsAndLowerCase(array: string[]) {
   if (!array.length) return array
-  const lowercaseItems = array.map((str) => str.toLowerCase())
+  const lowercaseItems = array.map((str) => str.trim().toLowerCase()).filter(Boolean)
   const distinctItems = new Set(lowercaseItems)
   return Array.from(distinctItems)
 }
@@ -39,7 +39,7 @@ const blog = defineCollection({
           color: z.string().optional()
         })
         .optional(),
-      category: z.enum(['Research', 'Tech', 'Investing', 'Personal']),
+      tags: z.array(z.string()).default([]).transform(removeDupsAndLowerCase),
       language: z.string().optional(),
       draft: z.boolean().default(false),
       pin: z.boolean().optional(),

@@ -3,7 +3,7 @@ title: Working effectively with AI agents
 description: More verified, useful outcomes—for less total human attention.
 publishDate: '2026-07-23'
 updatedDate: '2026-10-16'
-category: Tech
+tags: [ai-tools]
 slides: working-with-ai-agents.html
 ---
 

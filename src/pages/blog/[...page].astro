@@ -3,7 +3,7 @@ import type { GetStaticPaths, Page } from 'astro'
 import type { CollectionEntry } from 'astro:content'
 
 import { Paginator, PostPreview } from 'astro-pure/components/pages'
-import { getBlogCollection, getCategoriesWithCount, sortMDByDate } from 'astro-pure/server'
+import { getBlogCollection, getTagsWithCount, sortMDByDate } from 'astro-pure/server'
 import { Button, Icon } from 'astro-pure/user'
 import PageLayout from '@/layouts/BaseLayout.astro'
 import config from '@/site-config'
@@ -11,22 +11,23 @@ import config from '@/site-config'
 export const prerender = true
 
 export const getStaticPaths = (async ({ paginate }) => {
-  const collections = sortMDByDate<'blog'>(await getBlogCollection())
-  const categories = getCategoriesWithCount(collections)
+  const allPosts = await getBlogCollection()
+  const tags = getTagsWithCount(allPosts)
+  const collections = sortMDByDate<'blog'>(allPosts)
   const collectionsCount = collections.length
   return paginate(collections, {
     pageSize: config.content.blogPageSize,
-    props: { categories, collectionsCount }
+    props: { tags, collectionsCount }
   })
 }) satisfies GetStaticPaths
 
 interface Props {
   page: Page<CollectionEntry<'blog'>>
-  categories: [string, number][]
+  tags: [string, number][]
   collectionsCount: number
 }
 
-const { page, categories, collectionsCount } = Astro.props
+const { page, tags, collectionsCount } = Astro.props
 
 const meta = {
   description: 'Some posts or archives of my blog',
@@ -53,61 +54,65 @@ const paginationProps = {
   <Button title='Back' href='/' variant='back' />
   <main class='mt-6 lg:mt-10'>
     <h1 class='sr-only'>Blog</h1>
-    {
-      page.data.length === 0 ? (
-        <p>No posts yet.</p>
-      ) : (
-        <div class='grid gap-y-16 sm:grid-cols-[3fr_1fr] sm:gap-x-8'>
-          <section aria-label='Blog posts list' class='animate' id='content'>
-            {/* header */}
-            <div class='mb-3 flex flex-col justify-between text-sm sm:mb-5 sm:flex-row'>
-              <span class='text-muted-foreground'>
-                Page {page.currentPage} - Showing {page.data.length} of {collectionsCount} posts
-              </span>
-              <a aria-label='View all blog by years' href='/archives' data-astro-prefetch>
-                View all posts by years →
-              </a>
-            </div>
-            {/* posts */}
-            <ul class='flex flex-col gap-y-4 text-start'>
-              {page.data.map((post) => (
-                <PostPreview {post} detailed />
-              ))}
-            </ul>
-            <Paginator {...paginationProps} />
-          </section>
-
-          {/* sidebar */}
-          <aside class='animate' id='sidebar'>
-            <h2 class='mb-4 flex items-center text-lg font-medium'>
-              <Icon name='tag-2' class='me-2' />
-              Categories
-            </h2>
-            <nav aria-label='Blog categories'>
-              <ul class='flex flex-wrap gap-2'>
-                <li>
-                  <Button
-                    title={`All (${collectionsCount})`}
-                    href='/blog'
-                    variant='pill'
-                    aria-current='page'
-                    class='font-semibold text-primary'
-                  />
-                </li>
-                {categories.map(([category, count]) => (
-                  <li>
-                    <Button
-                      title={`${category} (${count})`}
-                      href={`/categories/${category.toLowerCase()}`}
-                      variant='pill'
-                    />
-                  </li>
+    <div class='grid gap-y-16 sm:grid-cols-[3fr_1fr] sm:gap-x-8'>
+      <section aria-label='Blog posts list' class='animate' id='content'>
+        {
+          page.data.length === 0 ? (
+            <p>No posts yet.</p>
+          ) : (
+            <>
+              {/* header */}
+              <div class='mb-3 flex flex-col justify-between text-sm sm:mb-5 sm:flex-row'>
+                <span class='text-muted-foreground'>
+                  Page {page.currentPage} - Showing {page.data.length} of {collectionsCount} posts
+                </span>
+                <a aria-label='View all blog by years' href='/archives' data-astro-prefetch>
+                  View all posts by years →
+                </a>
+              </div>
+              {/* posts */}
+              <ul class='flex flex-col gap-y-4 text-start'>
+                {page.data.map((post) => (
+                  <PostPreview {post} detailed />
                 ))}
               </ul>
-            </nav>
-          </aside>
-        </div>
-      )
-    }
+              <Paginator {...paginationProps} />
+            </>
+          )
+        }
+      </section>
+
+      {/* sidebar */}
+      <aside class='animate' id='sidebar'>
+        <h2 class='mb-4 flex items-center text-lg font-medium'>
+          <Icon name='tag-2' class='me-2' />
+          Tags
+        </h2>
+        <nav aria-label='Blog tags'>
+          <ul class='flex flex-wrap gap-2'>
+            <li>
+              <Button
+                title={`All (${collectionsCount})`}
+                href='/blog'
+                variant='pill'
+                aria-current='page'
+                class='font-semibold text-primary'
+              />
+            </li>
+            {
+              tags.map(([tag, count]) => (
+                <li>
+                  <Button
+                    title={`${tag} (${count})`}
+                    href={`/tags/${encodeURIComponent(tag)}`}
+                    variant='pill'
+                  />
+                </li>
+              ))
+            }
+          </ul>
+        </nav>
+      </aside>
+    </div>
   </main>
 </PageLayout>

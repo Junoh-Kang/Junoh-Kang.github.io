@@ -4,7 +4,7 @@ description: A review of recent research that challenges the necessity of noise 
   conditioning in generative models, exploring alternative approaches to denoising
   and flow matching.
 publishDate: '2025-11-05'
-category: Research
+tags: [diffusion]
 slides: presentation.pdf
 ---
 

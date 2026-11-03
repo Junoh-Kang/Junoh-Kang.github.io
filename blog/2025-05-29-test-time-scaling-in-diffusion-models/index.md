@@ -2,7 +2,7 @@
 title: Test-time scaling in Diffusion Models
 description: A review of researches that explore test-time scaling for diffusion models.
 publishDate: '2025-05-29'
-category: Research
+tags: [diffusion]
 slides: presentation.pdf
 ---
 

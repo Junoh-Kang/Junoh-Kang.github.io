@@ -3,7 +3,7 @@ title: Video Diffusion Models as World Simulators
 description: 'A review of Oasis: A Universe in a transformer, and Diffusion Forcing:
   Next-token Prediction Meets Full-Sequence Diffusion'
 publishDate: '2025-01-17'
-category: Research
+tags: [diffusion]
 slides: presentation.pdf
 ---
 

@@ -53,12 +53,11 @@ export function sortMDByDate<T extends CollectionKey>(
   })
 }
 
-/** Pass published posts so empty categories stay hidden. */
-export function getCategoriesWithCount(collections: CollectionEntry<'blog'>[]): [string, number][] {
-  return ['Research', 'Tech', 'Investing', 'Personal']
-    .map((category): [string, number] => [
-      category,
-      collections.filter((post) => post.data.category === category).length
-    ])
-    .filter(([, count]) => count > 0)
+/** Count posts per tag, showing frequently used tags first. */
+export function getTagsWithCount(collections: CollectionEntry<'blog'>[]): [string, number][] {
+  const counts = new Map<string, number>()
+  for (const post of collections) {
+    for (const tag of post.data.tags) counts.set(tag, (counts.get(tag) ?? 0) + 1)
+  }
+  return [...counts].sort(([a, countA], [b, countB]) => countB - countA || a.localeCompare(b))
 }

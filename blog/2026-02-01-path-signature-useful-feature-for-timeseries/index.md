@@ -5,7 +5,7 @@ description: Study note on path signature in the literature of rough path theory
   of signatures, bridging rough path theory and modern machine learning, based primarily
   on *A Primer on the Signature Method in Machine Learning*.
 publishDate: '2026-02-01'
-category: Research
+tags: [time-series]
 ---
 
 ## (Motivation) Random Variable: Polynomial Features

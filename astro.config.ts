@@ -34,8 +34,7 @@ const oldCategories = ['paper-review', 'study-note', 'survey']
 const redirects: Record<string, string> = {
   ...postRedirects,
   '/tags': '/blog',
-  ...Object.fromEntries([...oldTags, ...oldCategories].map((tag) => [`/tags/${tag}`, '/blog'])),
-  '/tags/generative/2': '/blog',
+  ...Object.fromEntries(['research', 'tech', 'investing', 'life'].map((category) => [`/categories/${category}`, '/blog'])),
   ...Object.fromEntries(oldTags.map((t) => [`/blog/tag/${t}/`, '/blog'])),
   ...Object.fromEntries(oldCategories.map((c) => [`/blog/category/${c}/`, '/blog'])),
   ...Object.fromEntries(['2023', '2024', '2025', '2026'].map((y) => [`/blog/${y}/`, '/archives'])),

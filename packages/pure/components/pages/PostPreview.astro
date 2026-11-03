@@ -9,11 +9,10 @@ import { FormattedDate } from '../user'
 type Props<T extends CollectionKey> = {
   post: CollectionEntry<T>
   detailed?: boolean
-  showCategory?: boolean
   class?: string
 }
 
-const { post, detailed = false, showCategory = true, class: className } = Astro.props
+const { post, detailed = false, class: className } = Astro.props
 const { id, data } = post
 const postDate = data.updatedDate ?? data.publishDate
 type PreviewMetadata = {
@@ -108,17 +107,19 @@ const previewData = data as typeof data & Partial<PreviewMetadata>
             </p>
             <div class='mt-2 flex flex-wrap items-center gap-x-2 text-xs text-muted-foreground'>
               {postDate && <FormattedDate date={postDate} />}
-              {showCategory && 'category' in data && (
+              {data.tags.length > 0 && (
                 <>
                   {postDate && <span aria-hidden='true'>·</span>}
-                  <a
-                    href={`/categories/${data.category.toLowerCase()}`}
-                    class='relative z-10 underline-offset-4 hover:underline hover:text-primary focus-visible:underline'
-                    aria-label={`View ${data.category} posts`}
-                    data-astro-prefetch
-                  >
-                    {data.category}
-                  </a>
+                  {data.tags.map((tag) => (
+                    <a
+                      href={`/tags/${encodeURIComponent(tag)}`}
+                      class='relative z-10 underline-offset-4 hover:underline hover:text-primary focus-visible:underline'
+                      aria-label={`View posts tagged ${tag}`}
+                      data-astro-prefetch
+                    >
+                      {tag}
+                    </a>
+                  ))}
                 </>
               )}
               {previewData.language && (
