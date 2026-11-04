@@ -405,8 +405,6 @@ module CvExport
 
     def rendercv_section_title(section_id, section)
       case section_id
-      when "experience"
-        "Experience"
       when "publications"
         selected_publications_only? ? "Selected Publications" : section.fetch("title")
       else

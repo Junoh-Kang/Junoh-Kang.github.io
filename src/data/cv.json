@@ -278,8 +278,19 @@
     },
     {
       "id": "experience",
-      "title": "Work Experience",
+      "title": "Research Experience",
       "items": [
+        {
+          "title": "Ph.D. Candidate",
+          "organization": "Seoul National University",
+          "location": "Seoul, Korea",
+          "date": "Mar 2022 - Present",
+          "details": [
+            "Developed an order-flow generator ensuring message validity against the current LOB.",
+            "Reframed truncated signature inversion as recovering path distributions.",
+            "Developed methods for efficient diffusion model training and sampling."
+          ]
+        },
         {
           "title": "Research Intern",
           "organization": "Adobe Research",

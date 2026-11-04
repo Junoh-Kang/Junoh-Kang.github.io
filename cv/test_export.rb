@@ -176,7 +176,7 @@ class CvExportTest < Minitest::Test
     data = YAML.load(CvExport::Exporter.new(root).render_rendercv_data)
 
     assert_equal(
-      ["Education", "Research Interests", "Experience", "Selected Publications", "Honors and Awards", "Skills"],
+      ["Education", "Research Experience", "Selected Publications", "Honors and Awards", "Skills"],
       data.dig("cv", "sections").keys
     )
   end
@@ -233,13 +233,13 @@ class CvExportTest < Minitest::Test
     assert_equal "0.12cm", data.dig("design", "entries", "highlights", "space_above")
     assert_equal true, data.dig("design", "header", "connections", "show_icons")
     assert_equal false, data.dig("design", "header", "connections", "display_urls_instead_of_usernames")
-    assert_equal ["Education", "Experience", "Publications", "Honors and Awards"], data.dig("cv", "sections").keys
+    assert_equal ["Education", "Work Experience", "Publications", "Honors and Awards"], data.dig("cv", "sections").keys
     assert_equal "Public Degree", data.dig("cv", "sections", "Education", 0, "name")
     assert_equal(
       "Public University · [Advisor Prof. Public](https://example.com/advisor)",
       data.dig("cv", "sections", "Education", 0, "summary")
     )
-    assert_equal "Research Lab", data.dig("cv", "sections", "Experience", 0, "company")
+    assert_equal "Research Lab", data.dig("cv", "sections", "Work Experience", 0, "company")
     assert_equal "[Public Paper](https://example.com/paper)", data.dig("cv", "sections", "Publications", 0, "name")
     assert_equal "#underline[Test Person]\\*, Coauthor · (\\*) equal contribution", data.dig("cv", "sections", "Publications", 0, "summary")
     assert_equal "arXiv 2026", data.dig("cv", "sections", "Publications", 0, "date")

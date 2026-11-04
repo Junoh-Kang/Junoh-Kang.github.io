@@ -7,6 +7,7 @@ import {
   detailText,
   education,
   experience,
+  experienceTitle,
   honors,
   publications,
   service
@@ -121,7 +122,7 @@ const fmtDate = (d: string) =>
         </div>
       </Section>
 
-      <Section title='Research Interests'>
+      <Section title='Research Overview'>
         <ul class='interests'>
           {
             researchInterests.map((r) => (
@@ -227,7 +228,7 @@ const fmtDate = (d: string) =>
         </ul>
       </Section>
 
-      <Section title='Experience'>
+      <Section title={experienceTitle}>
         <ul class='rows'>
           {
             experience.map((e) => (

@@ -38,6 +38,7 @@ export const dash = (s?: string | number) => String(s ?? '').replace(/\s-\s/g, '
 export const publications = cvSection('publications')
 export const education = cvSection('education')
 export const experience = cvSection('experience')
+export const experienceTitle = sections.find((s) => s.id === 'experience')!.title
 export const honors = cvSection('honors')
 export const currentResearch = cvSection('current_research')
 export const service = cvSection('service') as (CvItem & { role?: string; venues?: string[] })[]

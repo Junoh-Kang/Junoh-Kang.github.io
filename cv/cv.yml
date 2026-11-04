@@ -29,7 +29,6 @@ rendercv:
   # A 1-page CV for quant research roles; the site still shows every public item.
   sections:
     - education
-    - research_interests
     - experience
     - current_research
     - publications
