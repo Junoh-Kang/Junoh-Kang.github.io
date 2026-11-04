@@ -1,0 +1,6 @@
+title: Research Interests
+
+items:
+  - title: Generative modeling for financial markets
+    detail: with a focus on limit order book message generation for market simulation
+    visibility: public

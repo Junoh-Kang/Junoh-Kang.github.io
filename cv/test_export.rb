@@ -171,12 +171,12 @@ class CvExportTest < Minitest::Test
     assert_includes File.read(path), "Public Degree"
   end
 
-  def test_public_config_places_publications_after_experience
+  def test_public_config_builds_the_one_page_section_order
     root = File.expand_path(__dir__)
     data = YAML.load(CvExport::Exporter.new(root).render_rendercv_data)
 
     assert_equal(
-      ["Education", "Experience", "Publications", "Honors and Awards", "Academic Services", "Teaching"],
+      ["Education", "Research Interests", "Experience", "Selected Publications", "Honors and Awards", "Skills"],
       data.dig("cv", "sections").keys
     )
   end
@@ -213,7 +213,7 @@ class CvExportTest < Minitest::Test
         { "fontawesome_icon" => "globe", "placeholder" => "example.com", "url" => "https://example.com" },
         { "fontawesome_icon" => "github", "placeholder" => "TestGitHub", "url" => "https://github.com/TestGitHub" },
         { "fontawesome_icon" => "linkedin", "placeholder" => "TestLinkedIn", "url" => "https://www.linkedin.com/in/testlinkedin" },
-        { "fontawesome_icon" => "graduation-cap", "placeholder" => "testuser", "url" => "https://scholar.google.com/citations?user=testuser&hl=en" },
+        { "fontawesome_icon" => "graduation-cap", "placeholder" => "Google Scholar", "url" => "https://scholar.google.com/citations?user=testuser&hl=en" },
       ],
       data.dig("cv", "custom_connections")
     )
@@ -223,23 +223,25 @@ class CvExportTest < Minitest::Test
     assert_equal "rgb(0, 0, 0)", data.dig("design", "colors", "name")
     assert_equal "rgb(0, 0, 0)", data.dig("design", "colors", "connections")
     assert_equal "rgb(31, 78, 121)", data.dig("design", "colors", "section_titles")
-    assert_equal "LOCATION\nYEAR_LABEL\nDATE", data.dig("design", "templates", "normal_entry", "date_and_location_column")
+    assert_equal "YEAR_LABEL\nDATE", data.dig("design", "templates", "normal_entry", "date_and_location_column")
+    assert_equal "LOCATION\nDATE", data.dig("design", "templates", "experience_entry", "date_and_location_column")
     assert_equal true, data.dig("design", "page", "show_top_note")
+    assert_equal false, data.dig("design", "page", "show_footer")
     assert_equal "Last updated: June 2026", data.dig("design", "templates", "top_note")
     assert_equal false, data.dig("design", "sections", "allow_page_break")
-    assert_equal "0.8em", data.dig("design", "sections", "space_between_regular_entries")
-    assert_equal "0.18cm", data.dig("design", "entries", "highlights", "space_above")
+    assert_equal "0.5em", data.dig("design", "sections", "space_between_regular_entries")
+    assert_equal "0.12cm", data.dig("design", "entries", "highlights", "space_above")
     assert_equal true, data.dig("design", "header", "connections", "show_icons")
     assert_equal false, data.dig("design", "header", "connections", "display_urls_instead_of_usernames")
     assert_equal ["Education", "Experience", "Publications", "Honors and Awards"], data.dig("cv", "sections").keys
     assert_equal "Public Degree", data.dig("cv", "sections", "Education", 0, "name")
     assert_equal(
-      ["[Advisor: Prof. Public](https://example.com/advisor)"],
-      data.dig("cv", "sections", "Education", 0, "highlights")
+      "Public University · [Advisor Prof. Public](https://example.com/advisor)",
+      data.dig("cv", "sections", "Education", 0, "summary")
     )
     assert_equal "Research Lab", data.dig("cv", "sections", "Experience", 0, "company")
     assert_equal "[Public Paper](https://example.com/paper)", data.dig("cv", "sections", "Publications", 0, "name")
-    assert_equal "#underline[Test Person]\\*, Coauthor", data.dig("cv", "sections", "Publications", 0, "summary")
+    assert_equal "#underline[Test Person]\\*, Coauthor · (\\*) equal contribution", data.dig("cv", "sections", "Publications", 0, "summary")
     assert_equal "arXiv 2026", data.dig("cv", "sections", "Publications", 0, "date")
     assert_equal "[Public Award](https://example.com/award)", data.dig("cv", "sections", "Honors and Awards", 0, "name")
     assert_equal "2025", data.dig("cv", "sections", "Honors and Awards", 0, "year_label")
@@ -248,6 +250,92 @@ class CvExportTest < Minitest::Test
     refute_includes data.to_s, "Private Paper"
     refute_includes data.to_s, "Private Award"
     refute_includes data.to_s, "Private Reference"
+  end
+
+  def test_pdf_false_items_stay_on_site_but_leave_the_pdf
+    write("sections/honors.yml", <<~YAML)
+      title: Honors and Awards
+      items:
+        - title: Public Award
+          year: 2025
+          note: 1 of 10 selected
+          visibility: public
+        - title: Site-only Award
+          year: 2012
+          pdf: false
+          visibility: public
+    YAML
+    exporter = CvExport::Exporter.new(@tmpdir)
+    pdf = YAML.load(exporter.render_rendercv_data)
+    site = JSON.parse(exporter.render_site_data)
+
+    assert_equal ["Public Award"], pdf.dig("cv", "sections", "Honors and Awards").map { |entry| entry["name"] }
+    assert_equal "1 of 10 selected", pdf.dig("cv", "sections", "Honors and Awards", 0, "summary")
+    assert_equal(
+      ["Public Award", "Site-only Award"],
+      site.fetch("sections").find { |s| s["id"] == "honors" }.fetch("items").map { |item| item["title"] }
+    )
+  end
+
+  def test_selected_publications_only_with_equal_contribution_legend
+    write("sections/publications.yml", <<~YAML)
+      title: Publications
+      items:
+        - title: Selected Paper
+          authors: [Test Person*, Coauthor*]
+          venue: arXiv 2026
+          selected: true
+          visibility: public
+        - title: Other Paper
+          authors: [Test Person]
+          venue: arXiv 2025
+          visibility: public
+    YAML
+    path = File.join(@tmpdir, "cv.yml")
+    File.write(path, File.read(path).sub("  last_updated: June 2026\n", "  last_updated: June 2026\n  publications: selected\n"))
+
+    data = YAML.load(CvExport::Exporter.new(@tmpdir).render_rendercv_data)
+    papers = data.dig("cv", "sections", "Selected Publications")
+
+    refute data.dig("cv", "sections").key?("Publications")
+    assert_equal ["Selected Paper"], papers.map { |entry| entry["name"] }
+    assert_equal "#underline[Test Person]\\*, Coauthor\\* · (\\*) equal contribution", papers.last["summary"]
+  end
+
+  def test_research_interests_skills_and_repeated_institution
+    write("sections/education.yml", <<~YAML)
+      title: Education
+      items:
+        - title: Test High School
+          institution: Test High School (THS)
+          date: 2010
+          visibility: public
+    YAML
+    write("sections/research_interests.yml", <<~YAML)
+      title: Research Interests
+      items:
+        - title: Market modeling
+          detail: with a focus on order books
+          visibility: public
+    YAML
+    write("sections/skills.yml", <<~YAML)
+      title: Skills
+      items:
+        - label: Programming
+          value: Python
+          visibility: public
+    YAML
+    path = File.join(@tmpdir, "cv.yml")
+    config = File.read(path)
+      .sub("  - honors\n  - references\n", "  - honors\n  - research_interests\n  - skills\n  - references\n")
+      .sub("    - honors\nrules:", "    - honors\n    - research_interests\n    - skills\nrules:")
+    File.write(path, config)
+
+    sections = YAML.load(CvExport::Exporter.new(@tmpdir).render_rendercv_data).dig("cv", "sections")
+
+    refute sections.dig("Education", 0).key?("summary")
+    assert_equal ["**Market modeling**, with a focus on order books"], sections.fetch("Research Interests")
+    assert_equal [{ "label" => "Programming", "details" => "Python" }], sections.fetch("Skills")
   end
 
   def test_render_rendercv_data_expands_auto_last_updated_to_build_month

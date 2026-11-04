@@ -1,13 +1,15 @@
 title: Education
 
 items:
-  - title: "Ph.D. program in Electrical and Computer Engineering"
+  - title: "Ph.D. in Electrical and Computer Engineering"
     institution: Seoul National University
     location: Seoul, Korea
     date: Mar 2022 - Exp. Feb 2028
     details:
       - label: "Advisor: Prof. Bohyung Han"
         url: https://cv.snu.ac.kr/index.php/~bhhan/
+      - label: "Collaborator: Prof. Kiseop Lee (Purdue)"
+        url: https://sites.google.com/view/purdue-dsfi/people
     visibility: public
 
   - title: "B.S. in Statistics and Mathematics"

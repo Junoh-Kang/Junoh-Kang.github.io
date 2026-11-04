@@ -5,12 +5,14 @@ profile: profile.yml
 
 sections:
   - education
+  - research_interests
   - publications
   - experience
   - current_research
   - honors
   - service
   - teaching
+  - skills
   - references
 
 outputs:
@@ -22,15 +24,17 @@ rendercv:
   theme: classic
   headline:
   last_updated: auto
+  # `selected` lists only papers marked `selected: true`, under "Selected Publications".
+  publications: selected
+  # A 1-page CV for quant research roles; the site still shows every public item.
   sections:
     - education
+    - research_interests
     - experience
     - current_research
     - publications
     - honors
-    - service
-    - teaching
-    - references
+    - skills
 
 # Paths relative to this cv/ folder, inside the site repository.
 publish_site:

@@ -1,0 +1,10 @@
+title: Skills
+
+items:
+  - label: Programming
+    value: Python (PyTorch, JAX)
+    visibility: public
+
+  - label: Languages
+    value: Korean (native), English (fluent)
+    visibility: public

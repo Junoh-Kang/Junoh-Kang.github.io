@@ -6,6 +6,8 @@ items:
     location: Seattle, USA
     date: Jun 2024 - Sep 2024
     url: https://research.adobe.com/
+    details:
+      - Research on generative modeling of RGBA video
     visibility: public
 
   - title: Research Intern
@@ -13,4 +15,4 @@ items:
     location: Seoul, Korea
     date: Jun 2021 - Sep 2021
     url: https://cv.snu.ac.kr
-    visibility: public
+    visibility: archive

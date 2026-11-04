@@ -24,6 +24,14 @@ Each `sections/*.yml` file stores one logical CV section. Entries should use sim
 
 Public export is item-level. An item with `visibility: public` appears in generated public outputs. Items with `visibility: private` or `visibility: archive` stay in the canonical source but are excluded from public outputs.
 
+The PDF is a 1-page CV for quant research roles, so it shows less than the site:
+
+- `rendercv.sections` in `cv.yml` picks the PDF sections and their order. Service and Teaching are site-only.
+- `rendercv.publications: selected` keeps only papers with `selected: true`, under "Selected Publications". The last paper's author line carries the "(\*) equal contribution" legend.
+- `pdf: false` on an item keeps it on the site but out of the PDF.
+- An honor's `note` is a short second line in the PDF, such as how many are selected each year. The site does not show it.
+- `research_interests.yml` (a `title` plus optional `detail`) and `skills.yml` (`label` and `value`) feed PDF sections only; the site's Research Interests come from `content/3-research-interests.yaml`.
+
 ## Export Flow
 
 ```text
@@ -38,7 +46,7 @@ cv/cv.yml
 
 The site data JSON (`build/site.json`) feeds the Astro site. It holds the public profile and public section items in `cv.yml` order, with `visibility` removed. Publication items may carry an `id`, which the site uses to reference papers, `links` (`label` and `url` pairs) for per-paper links such as Paper, arXiv, Code, or Project, and `award`, a short award line the site shows next to the venue. A paper has no top-level `url`: the PDF links its title to the `arXiv` URL when available. Without an arXiv link the title links to `Paper`, the published PDF. The homepage uses the same rule. The PDF ignores `id` and `award`.
 
-The PDF uses RenderCV with the `engineeringresumes` theme.
+The PDF uses RenderCV with the `classic` theme.
 
 The exporter uses the `rendercv` command when it exists. If `rendercv` is not installed but `uv` is available, it runs RenderCV with `uv run --with rendercv[full] rendercv`.
 

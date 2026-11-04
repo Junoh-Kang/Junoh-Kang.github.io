@@ -221,15 +221,18 @@ module CvExport
               "underline" => false
             },
             "page" => {
-              "show_top_note" => !rendercv_last_updated.nil?
+              "show_top_note" => !rendercv_last_updated.nil?,
+              "top_margin" => "1.0cm",
+              "bottom_margin" => "1.0cm",
+              "show_footer" => false
             },
             "sections" => {
               "allow_page_break" => false,
-              "space_between_regular_entries" => "0.8em"
+              "space_between_regular_entries" => "0.5em"
             },
             "entries" => {
               "highlights" => {
-                "space_above" => "0.18cm"
+                "space_above" => "0.12cm"
               }
             },
             "header" => {
@@ -241,7 +244,10 @@ module CvExport
             "templates" => {
               "top_note" => rendercv_top_note,
               "normal_entry" => {
-                "date_and_location_column" => "LOCATION\nYEAR_LABEL\nDATE"
+                "date_and_location_column" => "YEAR_LABEL\nDATE"
+              },
+              "experience_entry" => {
+                "date_and_location_column" => "LOCATION\nDATE"
               }
             }
           }
@@ -319,7 +325,7 @@ module CvExport
       when "website"
         compact_url_label(contact["url"])
       when "google_scholar"
-        google_scholar_user_id(contact["url"]) || compact_url_label(contact["url"])
+        contact["label"] || google_scholar_user_id(contact["url"]) || compact_url_label(contact["url"])
       when "github", "linkedin"
         contact["label"] || trailing_path_segment(contact["url"]) || compact_url_label(contact["url"])
       else
@@ -375,7 +381,7 @@ module CvExport
     def rendercv_sections
       rendercv_section_ids.each_with_object({}) do |section_id, output|
         section = section_by_id.fetch(section_id)
-        items = public_items(section)
+        items = rendercv_items(section_id, section)
         next if items.empty?
 
         output[rendercv_section_title(section_id, section)] = rendercv_entries(section_id, items)
@@ -386,10 +392,23 @@ module CvExport
       rendercv_config["sections"] || config.fetch("sections")
     end
 
+    # Public items, minus those marked `pdf: false` (still shown on the site).
+    def rendercv_items(section_id, section)
+      items = public_items(section).reject { |item| item["pdf"] == false }
+      items = items.select { |item| item["selected"] } if section_id == "publications" && selected_publications_only?
+      items
+    end
+
+    def selected_publications_only?
+      rendercv_config["publications"] == "selected"
+    end
+
     def rendercv_section_title(section_id, section)
       case section_id
       when "experience"
         "Experience"
+      when "publications"
+        selected_publications_only? ? "Selected Publications" : section.fetch("title")
       else
         section.fetch("title")
       end
@@ -398,7 +417,13 @@ module CvExport
     def rendercv_entries(section_id, items)
       case section_id
       when "publications"
-        items.map { |item| publication_to_rendercv(item) }
+        with_equal_contribution_note(items.map { |item| publication_to_rendercv(item) }, items)
+      when "education"
+        items.map { |item| education_to_rendercv(item) }
+      when "research_interests"
+        items.map { |item| research_interest_to_rendercv(item) }
+      when "skills"
+        items.map { |item| skill_to_rendercv(item) }
       when "experience"
         items.map { |item| experience_to_rendercv(item) }
       when "honors"
@@ -420,6 +445,44 @@ module CvExport
       }
     end
 
+    # The PDF has no section notes, so the last entry carries the "*" legend.
+    def with_equal_contribution_note(entries, items)
+      return entries unless items.any? { |item| item.fetch("authors").any? { |author| author.to_s.end_with?("*") } }
+
+      entries.last["summary"] += " · (\\*) equal contribution"
+      entries
+    end
+
+    # The institution and details share one line under the degree, with "Advisor: Prof. X"
+    # shortened to "Advisor Prof. X" so the line fits. An institution that repeats the
+    # title, like "Seoul Science High School (SSHS)", is left out.
+    def education_to_rendercv(item)
+      institution = item["institution"]
+      institution = nil if institution.to_s.start_with?(item.fetch("title"))
+      details = Array(item["details"]).map do |detail|
+        next detail.to_s.sub(": ", " ") unless detail.is_a?(Hash)
+
+        markdown_link(detail_label(detail).sub(": ", " "), detail["url"])
+      end
+      {
+        "name" => markdown_link(item.fetch("title"), item["url"]),
+        "location" => item["location"],
+        "date" => item["date"],
+        "summary" => [institution, *details].compact.join(" · ")
+      }
+    end
+
+    def research_interest_to_rendercv(item)
+      ["**#{item.fetch("title")}**", item["detail"]].compact.join(", ")
+    end
+
+    def skill_to_rendercv(item)
+      {
+        "label" => item.fetch("label"),
+        "details" => item.fetch("value")
+      }
+    end
+
     def experience_to_rendercv(item)
       {
         "company" => markdown_link(item["organization"] || item["institution"], item["url"]),
@@ -433,7 +496,8 @@ module CvExport
     def honor_to_rendercv(item)
       {
         "name" => markdown_link(item.fetch("title"), item["url"]),
-        "year_label" => item.fetch("year").to_s
+        "year_label" => item.fetch("year").to_s,
+        "summary" => item["note"]
       }
     end
 

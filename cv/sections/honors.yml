@@ -5,31 +5,36 @@ items:
     year: 2026
     visibility: public
 
-  - title: Youlchon AI Star Scholarship
+  - title: Youlchon AI Star Scholarship, SNU AI Institute
     year: 2025
     url: https://aiis.snu.ac.kr/bbs/board.php?bo_table=sub4_3&sca=2025
+    note: 5–10 SNU AI researchers selected per year
     visibility: public
 
-  - title: Gold medal on Samsung Humantech Paper Award
+  - title: Gold Prize, Samsung Humantech Paper Award
     year: 2025
     url: https://humantech.samsung.com/saitext/index.jsp
+    note: For FIFO-Diffusion · 2,750 university-division entries
     visibility: public
 
   - title: Dean's List
     year: 2016, 2020
+    pdf: false
     visibility: public
 
-  - title: Presidential Science Scholarship
+  - title: Presidential Science Scholarship, Korea Student Aid Foundation
     year: 2015 - 2020
     url: https://www.kosaf.go.kr/eng/jsp/aid/aid02_01_01.jsp
+    note: Full scholarship with stipend · ~120 selected nationwide per year at university entry
     visibility: public
 
-  - title: Bronze medal on high school Korean Mathematical Olympiad
+  - title: Bronze Medal, Korean Mathematical Olympiad (High School Division)
     year: 2013
     url: https://www.kmo.or.kr/main.html
     visibility: public
 
-  - title: Silver medal on Samsung Humantech Paper Award
+  - title: Silver Prize, Samsung Humantech Paper Award (High School Division)
     year: 2012
     url: https://humantech.samsung.com/saitext/index.jsp
+    pdf: false
     visibility: public

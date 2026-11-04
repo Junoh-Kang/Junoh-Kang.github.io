@@ -46,7 +46,7 @@
       "title": "Education",
       "items": [
         {
-          "title": "Ph.D. program in Electrical and Computer Engineering",
+          "title": "Ph.D. in Electrical and Computer Engineering",
           "institution": "Seoul National University",
           "location": "Seoul, Korea",
           "date": "Mar 2022 - Exp. Feb 2028",
@@ -54,6 +54,10 @@
             {
               "label": "Advisor: Prof. Bohyung Han",
               "url": "https://cv.snu.ac.kr/index.php/~bhhan/"
+            },
+            {
+              "label": "Collaborator: Prof. Kiseop Lee (Purdue)",
+              "url": "https://sites.google.com/view/purdue-dsfi/people"
             }
           ]
         },
@@ -72,6 +76,16 @@
           "institution": "Seoul Science High School (SSHS)",
           "location": "Seoul, Korea",
           "date": "Mar 2012 - Feb 2015"
+        }
+      ]
+    },
+    {
+      "id": "research_interests",
+      "title": "Research Interests",
+      "items": [
+        {
+          "title": "Generative modeling for financial markets",
+          "detail": "with a focus on limit order book message generation for market simulation"
         }
       ]
     },
@@ -271,14 +285,10 @@
           "organization": "Adobe Research",
           "location": "Seattle, USA",
           "date": "Jun 2024 - Sep 2024",
-          "url": "https://research.adobe.com/"
-        },
-        {
-          "title": "Research Intern",
-          "organization": "SNU Computer Vision Lab",
-          "location": "Seoul, Korea",
-          "date": "Jun 2021 - Sep 2021",
-          "url": "https://cv.snu.ac.kr"
+          "url": "https://research.adobe.com/",
+          "details": [
+            "Research on generative modeling of RGBA video"
+          ]
         }
       ]
     },
@@ -291,33 +301,38 @@
           "year": 2026
         },
         {
-          "title": "Youlchon AI Star Scholarship",
+          "title": "Youlchon AI Star Scholarship, SNU AI Institute",
           "year": 2025,
-          "url": "https://aiis.snu.ac.kr/bbs/board.php?bo_table=sub4_3&sca=2025"
+          "url": "https://aiis.snu.ac.kr/bbs/board.php?bo_table=sub4_3&sca=2025",
+          "note": "5–10 SNU AI researchers selected per year"
         },
         {
-          "title": "Gold medal on Samsung Humantech Paper Award",
+          "title": "Gold Prize, Samsung Humantech Paper Award",
           "year": 2025,
-          "url": "https://humantech.samsung.com/saitext/index.jsp"
+          "url": "https://humantech.samsung.com/saitext/index.jsp",
+          "note": "For FIFO-Diffusion · 2,750 university-division entries"
         },
         {
           "title": "Dean's List",
-          "year": "2016, 2020"
+          "year": "2016, 2020",
+          "pdf": false
         },
         {
-          "title": "Presidential Science Scholarship",
+          "title": "Presidential Science Scholarship, Korea Student Aid Foundation",
           "year": "2015 - 2020",
-          "url": "https://www.kosaf.go.kr/eng/jsp/aid/aid02_01_01.jsp"
+          "url": "https://www.kosaf.go.kr/eng/jsp/aid/aid02_01_01.jsp",
+          "note": "Full scholarship with stipend · ~120 selected nationwide per year at university entry"
         },
         {
-          "title": "Bronze medal on high school Korean Mathematical Olympiad",
+          "title": "Bronze Medal, Korean Mathematical Olympiad (High School Division)",
           "year": 2013,
           "url": "https://www.kmo.or.kr/main.html"
         },
         {
-          "title": "Silver medal on Samsung Humantech Paper Award",
+          "title": "Silver Prize, Samsung Humantech Paper Award (High School Division)",
           "year": 2012,
-          "url": "https://humantech.samsung.com/saitext/index.jsp"
+          "url": "https://humantech.samsung.com/saitext/index.jsp",
+          "pdf": false
         }
       ]
     },
@@ -358,6 +373,20 @@
           "course": "AI expert course",
           "institution": "Samsung",
           "date": "Fall 2023"
+        }
+      ]
+    },
+    {
+      "id": "skills",
+      "title": "Skills",
+      "items": [
+        {
+          "label": "Programming",
+          "value": "Python (PyTorch, JAX)"
+        },
+        {
+          "label": "Languages",
+          "value": "Korean (native), English (fluent)"
         }
       ]
     }
