@@ -7,15 +7,23 @@ draft: false
 series: "LOB Message Generation"
 seriesOrder: 1
 ---
-## Market Microstructure: Orders, Messages, and the LOB
 
 To understand how LOB message generation can support a market world model, we first look at how orders and messages shape the order book.
+## Market Microstructure: Orders, Messages, and the LOB
+<figure>
+  <img class="zoomable" src="/blog/post/20261105/order-to-lob-messages.svg" alt="A trader submits a limit buy for 50 shares at $101. The exchange executes 20 shares against the resting ask and adds 30 shares as a new bid. The chart compares the book before and after." width="784" height="264" style="display: block; width: 90%; height: auto; margin-inline: auto;" />
+</figure>
+Markets can be viewed from both macro and micro perspectives. From a micro perspective, stock prices emerge from the interaction of individual buy and sell orders. The figure illustrates this microstructure view of price formation. 
 
-Markets can be viewed from both macro and micro perspectives. From a micro perspective, stock prices emerge from the interaction of individual buy and sell orders. An order is
+1. A trader submits a limit buy for 50 shares at \$101.
+2. The exchange matches 20 shares against an existing sell order at \$101 and records an `execute` message. It adds the remaining 30 shares to the book as a new buy order and records an `add` message.
+3. The highest buy price in the book rises from \$100 to \$101, while the lowest sell price rises from \$101 to \$102.
+
+We now describe the process illustrated above more precisely by defining orders, messages, and the limit order book. An **order** is
 $$
 \mathrm{order} = (\mathrm{action},\mathrm{side},\mathrm{price},\mathrm{quantity}),
 $$
-where `action` is add or cancel, and `side` is buy or sell.
+where $\mathrm{action}$ is `add` or `cancel`, and $\mathrm{side}$ is `buy` or `sell`.
 
 As the exchange processes orders, events such as additions, cancellations, and executions are recorded as **messages**. We refer to these order-level records as **LOB messages**, available through [LOBSTER](https://php.lobsterdata.com/index.php)’s message files and [Databento](https://databento.com/docs/schemas/mbo)’s **market-by-order (MBO) data**:
 $$
@@ -24,15 +32,14 @@ $$
 (\mathrm{time},\mathrm{action},\mathrm{side},\mathrm{order\_id},\mathrm{price},\mathrm{quantity}),
 $$
 
-where `action` is add, cancel, or execute. The `order_id` is the exchange-assigned identifier of the affected order.
+where $\mathrm{action}$ is `add`, `cancel`, or `execute`. The $\mathrm{order\_id}$ is the exchange-assigned identifier of the affected order.
 
 The **limit order book (LOB)** contains outstanding orders and their remaining quantities. Each message updates this book according to the exchange’s rules:
 $$
 \mathrm{LOB}_n
 =
-\mathrm{Update}(\mathrm{LOB}_{n-1},\mathrm{message}_n),
+\mathrm{Update}(\mathrm{LOB}_{n-1},\mathrm{message}_n).
 $$
-where $n$ indexes messages.
 
 ## LOB Message Generation as a Market World Model
 

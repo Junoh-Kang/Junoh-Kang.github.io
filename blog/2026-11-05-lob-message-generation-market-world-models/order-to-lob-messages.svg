@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="784" height="264" viewBox="0 0 784 264" role="img" aria-labelledby="title description">
+  <title id="title">From a trader’s order to a change in the limit order book</title>
+  <desc id="description">A trader submits a limit buy for 50 shares at $101. One order can produce multiple LOB messages. In this example, the stock exchange records an execution for 20 shares against the resting ask at $101 and an addition for the remaining 30 shares as a new bid at $101. The charts compare resting share quantities before and after.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M1 1 L8 5 L1 9" fill="none" stroke="#405674" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+    <style>
+      text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; fill: #172a43; }
+      .heading { font-size: 21px; font-weight: 700; }
+      .detail { font-size: 17px; }
+      .small { font-size: 15px; }
+      .muted { fill: #4b5d75; }
+      .ask { fill: #a3312c; }
+      .bid { fill: #1855a6; }
+      .flow { stroke: #405674; stroke-width: 2; marker-end: url(#arrow); }
+    </style>
+  </defs>
+
+  <rect x="1" y="1" width="782" height="262" rx="17" fill="#f6f8fc" stroke="#d7e1ef" stroke-width="2"/>
+  <rect x="12" y="15" width="144" height="234" rx="12" fill="#fff" stroke="#cfdaea"/>
+  <rect x="202" y="15" width="230" height="234" rx="12" fill="#fff" stroke="#a7bbd8" stroke-width="1.5"/>
+  <rect x="478" y="15" width="294" height="234" rx="12" fill="#fff" stroke="#cfdaea"/>
+  <path d="M169 132 H189" class="flow"/>
+  <path d="M445 132 H465" class="flow"/>
+
+  <circle cx="84" cy="67" r="32" fill="#ebf1fa"/>
+  <g fill="none" stroke="#274973" stroke-width="2.4" stroke-linecap="round">
+    <circle cx="84" cy="59" r="8"/>
+    <path d="M68 84 V82 A16 12 0 0 1 100 82 V84"/>
+  </g>
+  <text x="84" y="125" class="heading" text-anchor="middle">Trader</text>
+  <text x="84" y="151" class="detail muted" text-anchor="middle">Submits order</text>
+  <rect x="24" y="168" width="120" height="65" rx="7" fill="#eff4fb"/>
+  <text x="84" y="194" class="detail" text-anchor="middle" font-weight="700">Limit buy</text>
+  <text x="84" y="217" class="detail" text-anchor="middle">50 @ $101</text>
+
+  <g transform="translate(259 25)">
+    <path d="M9 29 L58 1 L107 29 Z" fill="#e4edf9" stroke="#23466e" stroke-width="2.2" stroke-linejoin="round"/>
+    <path d="M15 29 H101 V59 H15 Z" fill="#f2f6fc"/>
+    <path d="M23 34 V59 M46 34 V59 M70 34 V59 M93 34 V59" stroke="#23466e" stroke-width="5.5"/>
+    <path d="M14 60 H102 M8 66 H108 M4 72 H112" stroke="#23466e" stroke-width="2.2" stroke-linecap="round"/>
+    <path d="M48 22 L54 16 L60 19 L68 11" fill="none" stroke="#1855a6" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/>
+  </g>
+  <text x="317" y="120" class="heading" text-anchor="middle">Stock Exchange</text>
+  <text x="317" y="144" class="detail muted" text-anchor="middle">One order can produce</text>
+  <text x="317" y="164" class="detail" text-anchor="middle" font-weight="700">multiple LOB messages</text>
+  <rect x="216" y="178" width="202" height="27" rx="6" fill="#fbeae7"/>
+  <rect x="216" y="211" width="202" height="27" rx="6" fill="#e9f1fc"/>
+  <text y="197" class="detail ask"><tspan x="228" font-weight="700">Execute</tspan><tspan x="314">20 @ $101</tspan></text>
+  <text y="230" class="detail bid"><tspan x="228" font-weight="700">Add bid</tspan><tspan x="314">30 @ $101</tspan></text>
+
+  <text x="492" y="54" class="heading">Limit order book</text>
+  <text x="492" y="80" class="detail muted">Resting shares by price</text>
+  <g class="small muted" font-weight="600">
+    <text x="492" y="107">Price</text>
+    <text x="589" y="107" text-anchor="middle">Before</text>
+    <text x="713" y="107" text-anchor="middle">After</text>
+  </g>
+
+  <rect x="489" y="148" width="272" height="31" rx="5" fill="#edf2f8"/>
+  <path d="M542 116 V207 H633 M665 116 V207 H756" fill="none" stroke="#b8c7d9"/>
+  <g fill="#c3473f">
+    <rect x="543" y="124" width="66" height="13" rx="2"/>
+    <rect x="666" y="124" width="66" height="13" rx="2"/>
+    <rect x="543" y="157" width="22" height="13" rx="2"/>
+  </g>
+  <g fill="#2d6db7">
+    <rect x="666" y="157" width="33" height="13" rx="2"/>
+    <rect x="543" y="190" width="44" height="13" rx="2"/>
+    <rect x="666" y="190" width="44" height="13" rx="2"/>
+  </g>
+
+  <g class="small">
+    <text x="492" y="136">$102</text>
+    <text x="492" y="169" font-weight="700">$101</text>
+    <text x="492" y="202">$100</text>
+    <text x="615" y="136">60</text>
+    <text x="738" y="136">60</text>
+    <text x="571" y="169" class="ask" font-weight="700">20</text>
+    <text x="705" y="169" class="bid" font-weight="700">30</text>
+    <text x="593" y="202">40</text>
+    <text x="716" y="202">40</text>
+  </g>
+
+  <rect x="552" y="224" width="13" height="10" rx="2" fill="#c3473f"/>
+  <text x="571" y="234" class="small">Ask</text>
+  <rect x="628" y="224" width="13" height="10" rx="2" fill="#2d6db7"/>
+  <text x="647" y="234" class="small">Bid</text>
+</svg>
