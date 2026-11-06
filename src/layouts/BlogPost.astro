@@ -45,6 +45,17 @@ const showPostFooter = false
 const topDepth = Math.min(...headings.map((h) => h.depth))
 const tocHeadings = headings.filter((h) => h.depth === topDepth)
 
+// The supplied posts exclude drafts in production; keep the visibility rule explicit here too.
+const seriesPosts = data.series
+  ? posts
+      .filter((entry) => entry.data.series === data.series && (!import.meta.env.PROD || !entry.data.draft))
+      .sort((a, b) =>
+        (a.data.seriesOrder ?? Infinity) - (b.data.seriesOrder ?? Infinity) ||
+        a.data.publishDate.getTime() - b.data.publishDate.getTime() ||
+        a.id.localeCompare(b.id)
+      )
+  : []
+
 // `slides:` names a deck beside index.md. Post files are served at /blog/post/<YYYYMMDD>/<file>;
 // slides-thumb.png (made by scripts/slides-thumb.sh) is the card's preview image.
 const assetBase = `/blog/post/${publishDate.toISOString().slice(0, 10).replaceAll('-', '')}`
@@ -62,7 +73,31 @@ const slides = data.slides
   meta={{ articleDate, description, ogImage: socialImage, title }}
   back='/blog'
 >
-  {!!tocHeadings.length && <TOC headings={tocHeadings} slot='sidebar' />}
+  <Fragment slot='sidebar'>
+    {!!tocHeadings.length && <TOC headings={tocHeadings} />}
+    {seriesPosts.length > 1 && (
+      <nav aria-label={`${data.series} series`} class='series-nav' data-pagefind-ignore>
+        <h2 class='series-eyebrow'>SERIES</h2>
+        <p class='series-title'>{data.series}</p>
+        <ol role='list'>
+          {seriesPosts.map((entry, index) => {
+            const prefix = `${data.series} (${entry.data.seriesOrder}): `
+            const label = entry.data.title.startsWith(prefix)
+              ? entry.data.title.slice(prefix.length)
+              : entry.data.title
+            return (
+              <li value={entry.data.seriesOrder}>
+                <a href={`/blog/${entry.id}`} aria-current={entry.id === id ? 'page' : undefined}>
+                  <span class='series-number' aria-hidden='true'>{String(entry.data.seriesOrder ?? index + 1).padStart(2, '0')}</span>
+                  <span>{label}</span>
+                </a>
+              </li>
+            )
+          })}
+        </ol>
+      </nav>
+    )}
+  </Fragment>
 
   <Hero {data} {remarkPluginFrontmatter} slot='header' />
   {/* Slide deck card under the title, the same on every screen size */}
@@ -98,6 +133,71 @@ const slides = data.slides
 {config.integ.mediumZoom.enable && <MediumZoom />}
 
 <style>
+  .series-nav {
+    margin: 3rem 0.25rem 1rem 0;
+    padding: 1rem;
+    border: 1px solid hsl(var(--border) / 0.65);
+    border-radius: 0.875rem;
+    background: hsl(var(--muted) / 0.3);
+  }
+  .series-eyebrow {
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    color: hsl(var(--muted-foreground));
+  }
+  .series-title {
+    margin: 0.5rem 0 1rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    line-height: 1.5;
+    text-wrap: balance;
+  }
+  .series-nav ol {
+    display: grid;
+    gap: 0.25rem;
+    list-style: none;
+    padding: 0;
+    margin: 0 -0.5rem;
+  }
+  .series-nav li {
+    list-style: none;
+  }
+  .series-nav li::marker {
+    content: '';
+  }
+  .series-nav a {
+    display: grid;
+    grid-template-columns: 1.25rem minmax(0, 1fr);
+    gap: 0.5rem;
+    padding: 0.65rem 0.5rem;
+    border-radius: 0.5rem;
+    font-size: 0.8125rem;
+    line-height: 1.55;
+    color: hsl(var(--muted-foreground));
+    overflow-wrap: anywhere;
+    transition: background-color 150ms, color 150ms;
+  }
+  .series-number {
+    padding-top: 0.1rem;
+    font-size: 0.6875rem;
+    font-variant-numeric: tabular-nums;
+    opacity: 0.65;
+  }
+  .series-nav a:hover {
+    background: hsl(var(--muted) / 0.7);
+    color: hsl(var(--foreground));
+  }
+  .series-nav a[aria-current='page'] {
+    background: hsl(var(--primary) / 0.08);
+    color: hsl(var(--primary));
+    font-weight: 500;
+  }
+  .series-nav a:focus-visible {
+    outline: 2px solid hsl(var(--primary));
+    outline-offset: 2px;
+  }
+
   .slides-card {
     margin-top: 1.5rem;
     display: flex;

@@ -41,6 +41,8 @@ const blog = defineCollection({
         .optional(),
       tags: z.array(z.string()).default([]).transform(removeDupsAndLowerCase),
       language: z.string().optional(),
+      series: z.string().trim().min(1).optional(),
+      seriesOrder: z.number().int().positive().optional(),
       draft: z.boolean().default(false),
       pin: z.boolean().optional(),
       // Slide deck file next to index.md (e.g. presentation.pdf); shown above the TOC

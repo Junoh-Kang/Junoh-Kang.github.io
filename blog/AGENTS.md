@@ -102,6 +102,7 @@ slides: presentation.pdf
 
 ## Verification
 
-- After editing a post or its assets, run `npm run build` from the repository root and check affected links and assets.
-- For layout, figure, or math changes, inspect the rendered post. Run `npx astro preview --port 4329` after building, then open `http://localhost:4329/blog/<slug>`.
+- During drafting, verify only the requested source changes.
+- After the post is complete, run `npm run build` from the repository root and check affected links and assets only when the user explicitly requests final verification.
+- During that requested verification, inspect the rendered post for layout, figure, or math changes. Use the development server for drafts and the built-site preview for published posts.
 - For instructions-only changes, check the diff and local documentation links; a site build is unnecessary.
