@@ -1,22 +1,26 @@
-<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet href="/scripts/pretty-feed-v3.xsl" type="text/xsl"?><rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:h="http://www.w3.org/TR/html4/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Junoh Kang</title><description>AI researcher working on generative models for images, video, and financial markets.</description><link>https://junoh-kang.github.io</link><item><title>LOB Message Generation (1): A Building Block for Market World Models</title><link>https://junoh-kang.github.io/blog/lob-message-generation-market-world-models</link><guid isPermaLink="true">https://junoh-kang.github.io/blog/lob-message-generation-market-world-models</guid><description>LOB message generation as a building block for market world models.</description><pubDate>Thu, 05 Nov 2026 00:00:00 GMT</pubDate><content:encoded>&lt;h2&gt;Market Microstructure: Orders, Messages, and the LOB&lt;/h2&gt;
-&lt;p&gt;To understand how LOB message generation can support a market world model, we first look at how orders and messages shape the order book.&lt;/p&gt;
-&lt;p&gt;Markets can be viewed from both macro and micro perspectives. From a micro perspective, stock prices emerge from the interaction of individual buy and sell orders. An order is
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet href="/scripts/pretty-feed-v3.xsl" type="text/xsl"?><rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:h="http://www.w3.org/TR/html4/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Junoh Kang</title><description>AI researcher working on generative models for images, video, and financial markets.</description><link>https://junoh-kang.github.io</link><item><title>LOB Message Generation (1): A Building Block for Market World Models</title><link>https://junoh-kang.github.io/blog/lob-message-generation-market-world-models</link><guid isPermaLink="true">https://junoh-kang.github.io/blog/lob-message-generation-market-world-models</guid><description>LOB message generation as a building block for market world models.</description><pubDate>Thu, 05 Nov 2026 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;To understand how LOB message generation can support a market world model, we first look at how orders and messages shape the order book.&lt;/p&gt;
+&lt;h2&gt;Market Microstructure: Orders, Messages, and the LOB&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;A trader submits a limit buy for 50 shares at $101.&lt;/li&gt;
+&lt;li&gt;The exchange matches 20 shares against an existing sell order at $101 and records an &lt;code&gt;execute&lt;/code&gt; message. It adds the remaining 30 shares to the book as a new buy order and records an &lt;code&gt;add&lt;/code&gt; message.&lt;/li&gt;
+&lt;li&gt;The highest buy price in the book rises from $100 to $101, while the lowest sell price rises from $101 to $102.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;We now describe the process illustrated above more precisely by defining orders, messages, and the limit order book. An &lt;strong&gt;order&lt;/strong&gt; is
 $$
 \mathrm{order} = (\mathrm{action},\mathrm{side},\mathrm{price},\mathrm{quantity}),
 $$
-where &lt;code&gt;action&lt;/code&gt; is add or cancel, and &lt;code&gt;side&lt;/code&gt; is buy or sell.&lt;/p&gt;
+where $\mathrm{action}$ is &lt;code&gt;add&lt;/code&gt; or &lt;code&gt;cancel&lt;/code&gt;, and $\mathrm{side}$ is &lt;code&gt;buy&lt;/code&gt; or &lt;code&gt;sell&lt;/code&gt;.&lt;/p&gt;
 &lt;h1&gt;As the exchange processes orders, events such as additions, cancellations, and executions are recorded as &lt;strong&gt;messages&lt;/strong&gt;. We refer to these order-level records as &lt;strong&gt;LOB messages&lt;/strong&gt;, available through &lt;a href=&quot;https://php.lobsterdata.com/index.php&quot;&gt;LOBSTER&lt;/a&gt;’s message files and &lt;a href=&quot;https://databento.com/docs/schemas/mbo&quot;&gt;Databento&lt;/a&gt;’s &lt;strong&gt;market-by-order (MBO) data&lt;/strong&gt;:
 $$
 \mathrm{message}&lt;/h1&gt;
 &lt;p&gt;(\mathrm{time},\mathrm{action},\mathrm{side},\mathrm{order_id},\mathrm{price},\mathrm{quantity}),
 $$&lt;/p&gt;
-&lt;p&gt;where &lt;code&gt;action&lt;/code&gt; is add, cancel, or execute. The &lt;code&gt;order_id&lt;/code&gt; is the exchange-assigned identifier of the affected order.&lt;/p&gt;
+&lt;p&gt;where $\mathrm{action}$ is &lt;code&gt;add&lt;/code&gt;, &lt;code&gt;cancel&lt;/code&gt;, or &lt;code&gt;execute&lt;/code&gt;. The $\mathrm{order_id}$ is the exchange-assigned identifier of the affected order.&lt;/p&gt;
 &lt;h1&gt;The &lt;strong&gt;limit order book (LOB)&lt;/strong&gt; contains outstanding orders and their remaining quantities. Each message updates this book according to the exchange’s rules:
 $$
 \mathrm{LOB}_n&lt;/h1&gt;
-&lt;p&gt;\mathrm{Update}(\mathrm{LOB}_{n-1},\mathrm{message}_n),
-$$
-where $n$ indexes messages.&lt;/p&gt;
+&lt;p&gt;\mathrm{Update}(\mathrm{LOB}_{n-1},\mathrm{message}_n).
+$$&lt;/p&gt;
 &lt;h2&gt;LOB Message Generation as a Market World Model&lt;/h2&gt;
 &lt;p&gt;A LOB message generation model $\pi_\theta$ can serve as a building block for a market world model. A world model predicts the next state given the current state and an agent’s action:&lt;/p&gt;
 &lt;p&gt;$$
