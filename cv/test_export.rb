@@ -176,7 +176,7 @@ class CvExportTest < Minitest::Test
     data = YAML.load(CvExport::Exporter.new(root).render_rendercv_data)
 
     assert_equal(
-      ["Education", "Research Experience", "Selected Publications", "Honors and Awards", "Skills"],
+      ["Education", "Research Experience", "Selected Publications", "Honors and Awards", "Academic Services", "Skills"],
       data.dig("cv", "sections").keys
     )
   end

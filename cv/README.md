@@ -26,7 +26,7 @@ Public export is item-level. An item with `visibility: public` appears in genera
 
 The PDF is a 1-page CV for quant research roles, so it shows less than the site:
 
-- `rendercv.sections` in `cv.yml` picks the PDF sections and their order. Service and Teaching are site-only.
+- `rendercv.sections` in `cv.yml` picks the PDF sections and their order. Teaching is site-only.
 - `rendercv.publications: selected` keeps only papers with `selected: true`, under "Selected Publications". The last paper's author line carries the "(\*) equal contribution" legend.
 - `pdf: false` on an item keeps it on the site but out of the PDF.
 - An honor's `note` is a short second line in the PDF, such as how many are selected each year. The site does not show it.

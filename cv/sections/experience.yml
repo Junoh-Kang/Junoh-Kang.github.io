@@ -6,9 +6,9 @@ items:
     location: Seoul, Korea
     date: Mar 2022 - Present
     details:
-      - Developed an order-flow generator ensuring message validity against the current LOB.
-      - Reframed truncated signature inversion as recovering path distributions.
-      - Developed methods for efficient diffusion model training and sampling.
+      - Proposed an LOB message generation model that always emits replayable messages.
+      - Formulated truncated signature inversion as learning conditional path distributions.
+      - Developed diffusion model training and sampling methods for efficient generation.
     visibility: public
 
   - title: Research Intern
@@ -17,7 +17,7 @@ items:
     date: Jun 2024 - Sep 2024
     url: https://research.adobe.com/
     details:
-      - Research on generative modeling of RGBA video
+      - Researched generative modeling of RGBA video.
     visibility: public
 
   - title: Research Intern
