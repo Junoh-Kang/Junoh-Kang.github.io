@@ -6,7 +6,7 @@ items:
     location: Seoul, Korea
     date: Mar 2022 - Present
     details:
-      - Proposed an LOB message generation model that always emits replayable messages.
+      - Proposed an LOB message generator that emits replayable messages by construction.
       - Formulated truncated signature inversion as learning conditional path distributions.
       - Developed diffusion model training and sampling methods for efficient generation.
     visibility: public
