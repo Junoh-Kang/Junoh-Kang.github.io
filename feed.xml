@@ -1,4 +1,106 @@
-<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet href="/scripts/pretty-feed-v3.xsl" type="text/xsl"?><rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:h="http://www.w3.org/TR/html4/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Junoh Kang</title><description>AI researcher working on generative models for images, video, and financial markets.</description><link>https://junoh-kang.github.io</link><item><title>LOB message generation (1): A building block for market world models</title><link>https://junoh-kang.github.io/blog/lob-message-generation-market-world-models</link><guid isPermaLink="true">https://junoh-kang.github.io/blog/lob-message-generation-market-world-models</guid><description>LOB message generation as a building block for market world models.</description><pubDate>Thu, 05 Nov 2026 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;To understand how LOB message generation can support a market world model, we first look at how orders and messages shape the order book.&lt;/p&gt;
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet href="/scripts/pretty-feed-v3.xsl" type="text/xsl"?><rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:h="http://www.w3.org/TR/html4/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Junoh Kang</title><description>AI researcher working on generative models for images, video, and financial markets.</description><link>https://junoh-kang.github.io</link><item><title>LOB message generation (2): Existing approaches</title><link>https://junoh-kang.github.io/blog/lob-message-generation-existing-approaches</link><guid isPermaLink="true">https://junoh-kang.github.io/blog/lob-message-generation-existing-approaches</guid><pubDate>Thu, 12 Nov 2026 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;In the &lt;a href=&quot;/blog/lob-message-generation-market-world-models&quot;&gt;previous post&lt;/a&gt;, we looked at why LOB message generation matters for finance. Here, we introduce existing generation methods, grouped by the unit the model generates at each step:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Field-wise generation (LOBS5):&lt;/strong&gt; generates a message one field token at a time.
+&lt;ul&gt;
+&lt;li&gt;Lossless except for clipping, and each token is interpretable.&lt;/li&gt;
+&lt;li&gt;Each message takes many positions, so the context covers a short history.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Message-wise generation (M3):&lt;/strong&gt; generates a whole message at each step, and a decoder or projection head recovers the fields.
+&lt;ul&gt;
+&lt;li&gt;Each message takes one position, so the context covers a long history.&lt;/li&gt;
+&lt;li&gt;Recovering the fields from a message-level output can be lossy.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2&gt;LOBS5: Field-wise generation&lt;/h2&gt;
+&lt;p&gt;Nagy et al.&apos;s &lt;em&gt;Generative AI for End-to-End Limit Order Book Modelling&lt;/em&gt;[^lobs5] provides a direct starting point. LOBS5 uses an S5 state-space model to generate message tokens autoregressively, conditioned on message and book history.&lt;/p&gt;
+&lt;h3&gt;Message representation&lt;/h3&gt;
+&lt;p&gt;Each message spans &lt;strong&gt;22 discrete tokens&lt;/strong&gt; describing fields such as event type, side, price, size, time, and reference attributes. All fields &lt;strong&gt;share a vocabulary of 12,011 tokens&lt;/strong&gt;, including three special tokens. For new-order additions, no existing order is referenced, so the reference-order fields are filled with &lt;code&gt;&amp;#x3C;NA&gt;&lt;/code&gt; tokens. A training sequence of 500 messages therefore spans 11,000 positions.[^lobs5]&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Price:&lt;/strong&gt; $\mathrm{price}\rightarrow(\mathrm{sign}(\Delta\mathrm{price}),|\Delta\mathrm{price}|)$&lt;br&gt;
+$\Delta\mathrm{price}$ is the tick offset from the tick-aligned mid-price, clipped to $[-999,999]$.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Quantity:&lt;/strong&gt; $\mathrm{quantity}\rightarrow\min(\mathrm{quantity},9999)$&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Inter-arrival time:&lt;/strong&gt; $\Delta\mathrm{time}\rightarrow(\mathrm{seconds},\mathrm{ns}_1,\mathrm{ns}_2,\mathrm{ns}_3)$&lt;br&gt;
+The nanosecond component is split into three-digit groups.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;Related work&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;MarketGPT&lt;/strong&gt;[^marketgpt] uses a decoder-only Transformer to generate tokenized messages from message histories.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;sigma-0&lt;/strong&gt;[^sigma0] increases the message length from 22 to 24 tokens by splitting prices into base-100 chunks. A later version uses 26 tokens per message, but the available documentation does not specify which fields account for the increase from 24 to 26.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;ByteGen&lt;/strong&gt;[^bytegen] goes below fields: it predicts the raw 32-byte event, including absolute price, nanosecond timestamp, and order ID, one byte at a time. It trains on sequences of 100–320 events.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2&gt;M3: Message-wise generation&lt;/h2&gt;
+&lt;p&gt;M3 places each order at &lt;strong&gt;one sequence position&lt;/strong&gt; by tokenizing it into one discrete token. Causal Transformer blocks then predict each next order token, conditioned on a prefix that encodes the initial LOB. A decoder translates generated tokens back into order fields, but this round trip is lossy.[^m3]&lt;/p&gt;
+&lt;h3&gt;Message representation&lt;/h3&gt;
+&lt;p&gt;Each order is a &lt;strong&gt;five-field vector&lt;/strong&gt; of three continuous fields and two binary flags:&lt;/p&gt;
+&lt;p&gt;$$
+\left[\frac{\mathrm{price}-P^{\mathrm{open}}}{P^{\mathrm{open}}},\ \log(1+\mathrm{quantity}),\ \Delta\mathrm{time},\ \mathrm{event\ type},\ \mathrm{side}\right]
+$$&lt;/p&gt;
+&lt;p&gt;Event type is &lt;code&gt;add&lt;/code&gt; or &lt;code&gt;cancel&lt;/code&gt;, and side is &lt;code&gt;bid&lt;/code&gt; or &lt;code&gt;ask&lt;/code&gt;. The continuous fields are clipped at their 0.5th and 99.5th percentiles.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Why the gap arises.&lt;/strong&gt; Lossy order reconstruction can shift the simulated mid-price, changing the reference used to decode the next order’s price.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Trade-off.&lt;/strong&gt; Prices relative to the daily open span a wider range because they also reflect intraday price movements.[^m3]&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The learned tokenizer maps each order to &lt;strong&gt;one of 32,768 discrete codes&lt;/strong&gt; and is trained to reconstruct the order using the following steps.[^m3]&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;Encode.&lt;/strong&gt; A causal encoder maps the order and its history to a latent vector, $z_t = E(x_{\le t})$.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Select a code.&lt;/strong&gt; Find the codebook vector closest to $z_t$. Its index is the order token, $c_t = \arg\min_k \lVert z_t - e_k \rVert_2^2$.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Look up the vector.&lt;/strong&gt; Retrieve the vector stored at index $c_t$. This quantized vector is $q_t = e_{c_t}$.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Decode.&lt;/strong&gt; A causal decoder reconstructs the order fields from the quantized vectors, $\hat{x}&lt;em&gt;t = D(q&lt;/em&gt;{\le t})$.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;The tokenizer loss has four terms.&lt;/p&gt;
+&lt;p&gt;$$
+L_{\mathrm{tokenizer}}
+= L_{\mathrm{continuous}} + L_{\mathrm{categorical}}&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;\underbrace{0.25\lVert z_t-\operatorname{sg}(q_t)\rVert_2^2}_{\mathrm{commitment}}&lt;/li&gt;
+&lt;li&gt;0.001 L_{\mathrm{tick}}.
+$$&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;Limitations&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Lossy representation.&lt;/strong&gt; Of the reconstructed prices, 37.7% match the original price exactly and 66.2% are within one tick.[^m3]&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Stale prefix in long rollouts.&lt;/strong&gt; M3 trains on windows of at most 1,024 orders, each starting right after its LOB snapshot. Longer rollouts keep the initial prefix but drop the oldest orders, so the prefix no longer matches the start of the window, a combination never seen in training.[^m3]&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;Related work&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;MarS&lt;/strong&gt;[^mars] also generates one token per order, but its token indexes a fixed grid of type, price, volume, and interval bins. A separate model generates minute-level order distributions that steer the order-level generator.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;LOBERT&lt;/strong&gt;[^lobert] represents each message at one position as a hand-binned token plus continuous price and volume features, and predicts fine values with regression heads. It evaluates next-message prediction rather than long rollouts.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;TRADES&lt;/strong&gt;[^trades] also places each order at one position, but instead of quantizing it into a token, it generates the normalized field values directly with a conditional diffusion model, conditioned on recent orders and LOB snapshots.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2&gt;Evaluating LOB message generators&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;LOB-Bench&lt;/strong&gt;[^lob-bench] compares the distributions of market statistics in generated and historical order flow to assess how closely the simulations resemble real trading.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;LOB-Impact&lt;/strong&gt;[^lob-impact] injects orders into the simulated market and tests whether the resulting price impact follows patterns observed in real markets, including how impact grows during execution and decays afterward.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2&gt;Message representations compared&lt;/h2&gt;
+&lt;p&gt;| Model | Positions per message | Vocabulary | Messages in context | Book input |
+|---|---|---:|---:|---|
+| &lt;em&gt;&lt;strong&gt;Field-wise generation&lt;/strong&gt;&lt;/em&gt; | | | | |
+| ByteGen[^bytegen] | 32 bytes | 256 | 100–320 | — |
+| LOBS5[^lobs5] | 22 tokens | 12,011 | 500 | LOB state per message |
+| MarketGPT[^marketgpt] | 24 tokens | 12,111 | 432 | — |
+| &lt;em&gt;&lt;strong&gt;Message-wise generation&lt;/strong&gt;&lt;/em&gt; | | | | |
+| M3[^m3] | 1 learned code | 32,768 | 1,024 | Initial LOB prefix only |
+| MarS[^mars] | 1 binned token | 49,152 | 1,024 | LOB volumes and mid-price per order |
+| LOBERT[^lobert] | 1 binned token + continuous values | 293 | 512 | Optional LOB snapshot per message |
+| TRADES[^trades] | 1 continuous 8-D vector | — | 255 | LOB snapshot per order |&lt;/p&gt;
+&lt;h2&gt;References&lt;/h2&gt;
+&lt;p&gt;[^lobs5]: &lt;a href=&quot;https://arxiv.org/abs/2309.00638&quot;&gt;Generative AI for End-to-End Limit Order Book Modelling&lt;/a&gt;, Sections 3–6.&lt;/p&gt;
+&lt;p&gt;[^marketgpt]: &lt;a href=&quot;https://arxiv.org/abs/2411.16585&quot;&gt;MarketGPT&lt;/a&gt;, Materials and Methods; &lt;a href=&quot;https://github.com/aaron-wheeler/marketgpt/blob/070c3ad6d10877fcb9651ba9f7affefdbf68320c/scripts/simulate.py#L424-L523&quot;&gt;simulation code&lt;/a&gt;, commit &lt;code&gt;070c3ad&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;[^m3]: &lt;a href=&quot;https://arxiv.org/html/2608.19227v1&quot;&gt;M3: A State-Event Generative Foundation Model for Market Microstructure Dynamics&lt;/a&gt;, Sections 3–4 and Appendices B–D.&lt;/p&gt;
+&lt;p&gt;[^lobert]: &lt;a href=&quot;https://arxiv.org/html/2511.12563v2&quot;&gt;LOBERT: Generative AI Foundation Model for Limit Order Book Messages&lt;/a&gt;, Sections 2.1, 2.3, and 3.2 and Appendix B.&lt;/p&gt;
+&lt;p&gt;[^trades]: &lt;a href=&quot;https://arxiv.org/html/2502.07071v3&quot;&gt;TRADES: Generating Realistic Market Simulations with Diffusion Models&lt;/a&gt;, Figure 1 and Sections 4.2 and 5; supplementary material, Section 3.&lt;/p&gt;
+&lt;p&gt;[^lob-bench]: &lt;a href=&quot;https://arxiv.org/abs/2502.09172&quot;&gt;LOB-Bench: Benchmarking Generative AI for Finance – an Application to Limit Order Book Data&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;[^lob-impact]: &lt;a href=&quot;https://arxiv.org/abs/2610.27100&quot;&gt;LOB-Impact Benchmark: Emergent Market Impact in Generative Limit Order Book Models&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;[^sigma0]: &lt;a href=&quot;https://kangoxford.github.io/sigma0/&quot;&gt;sigma-0 project notes&lt;/a&gt;, Q12, and &lt;a href=&quot;https://huggingface.co/datasets/oxford-lob/sigma-0-synthetic-messages&quot;&gt;sigma-0 synthetic LOB order flow, release 3a&lt;/a&gt;, dataset card.&lt;/p&gt;
+&lt;p&gt;[^bytegen]: &lt;a href=&quot;https://arxiv.org/abs/2508.02247&quot;&gt;ByteGen: A Tokenizer-Free Generative Model for Orderbook Events in Byte Space&lt;/a&gt;, Sections 3.1 and 4.2 and Appendix A.1.&lt;/p&gt;
+&lt;p&gt;[^mars]: &lt;a href=&quot;https://arxiv.org/abs/2409.07486&quot;&gt;MarS: a Financial Market Simulation Engine Powered by Generative Foundation Model&lt;/a&gt;, Appendices B–D.&lt;/p&gt;</content:encoded><h:img src="undefined"/><enclosure url="undefined"/></item><item><title>LOB message generation (1): A building block for market world models</title><link>https://junoh-kang.github.io/blog/lob-message-generation-market-world-models</link><guid isPermaLink="true">https://junoh-kang.github.io/blog/lob-message-generation-market-world-models</guid><description>LOB message generation as a building block for market world models.</description><pubDate>Thu, 05 Nov 2026 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;To understand how LOB message generation can support a market world model, we first look at how orders and messages shape the order book.&lt;/p&gt;
 &lt;h2&gt;Market microstructure: Orders, messages, and the LOB&lt;/h2&gt;
 &lt;ol&gt;
 &lt;li&gt;A trader submits a limit buy for 50 shares at $101.&lt;/li&gt;
