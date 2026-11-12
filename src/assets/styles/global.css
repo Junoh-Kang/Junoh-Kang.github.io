@@ -284,3 +284,11 @@ mjx-container[jax='SVG']:not([display='true']) {
     border-radius: 999px;
   }
 }
+
+/* Display Markdown footnote citations as [1], [2], ... */
+#content a[data-footnote-ref]::before {
+  content: '[';
+}
+#content a[data-footnote-ref]::after {
+  content: ']';
+}
