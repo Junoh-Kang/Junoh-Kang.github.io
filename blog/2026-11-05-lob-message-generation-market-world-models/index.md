@@ -4,7 +4,7 @@ description: "LOB message generation as a building block for market world models
 publishDate: '2026-11-05'
 tags: [finance]
 draft: false
-series: "LOB Message Generation"
+series: "LOB message generation"
 seriesOrder: 1
 ---
 

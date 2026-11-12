@@ -42,8 +42,9 @@ const articleDate = updatedDate?.toISOString() ?? publishDate.toISOString()
 const showPostFooter = false
 
 // TOC lists only the post's top heading level (usually ##), without nested subsections
-const topDepth = Math.min(...headings.map((h) => h.depth))
-const tocHeadings = headings.filter((h) => h.depth === topDepth)
+const sectionHeadings = headings.filter((h) => h.slug !== 'footnote-label')
+const topDepth = Math.min(...sectionHeadings.map((h) => h.depth))
+const tocHeadings = sectionHeadings.filter((h) => h.depth === topDepth)
 
 // The supplied posts exclude drafts in production; keep the visibility rule explicit here too.
 const seriesPosts = data.series
@@ -77,12 +78,12 @@ const slides = data.slides
     {!!tocHeadings.length && <TOC headings={tocHeadings} />}
     {seriesPosts.length > 1 && (
       <nav aria-label={`${data.series} series`} class='series-nav' data-pagefind-ignore>
-        <h2 class='series-eyebrow'>SERIES</h2>
+        <h2 class='series-eyebrow'>Series</h2>
         <p class='series-title'>{data.series}</p>
         <ol role='list'>
           {seriesPosts.map((entry, index) => {
             const prefix = `${data.series} (${entry.data.seriesOrder}): `
-            const label = entry.data.title.startsWith(prefix)
+            const label = entry.data.title.slice(0, prefix.length).toLowerCase() === prefix.toLowerCase()
               ? entry.data.title.slice(prefix.length)
               : entry.data.title
             return (
