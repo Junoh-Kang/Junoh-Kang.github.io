@@ -55,7 +55,8 @@ const socialImageURL = new URL(ogImage ? ogImage : config.socialCard, Astro.url)
 
 {/* Primary Meta Tags */}
 <meta content={siteTitle} name='title' />
-<meta content={description} name='description' />
+{/* Posts pass an empty description, so these tags are omitted and previewers pick their own text */}
+{description && <meta content={description} name='description' />}
 <meta content={config.author} name='author' />
 
 {/* Theme Color */}
@@ -65,7 +66,7 @@ const socialImageURL = new URL(ogImage ? ogImage : config.socialCard, Astro.url)
 {/* Open Graph / Facebook */}
 <meta content={articleDate ? 'article' : 'website'} property='og:type' />
 <meta content={ogTitle} property='og:title' />
-<meta content={description} property='og:description' />
+{description && <meta content={description} property='og:description' />}
 <meta content={canonicalURL} property='og:url' />
 <meta content={config.title} property='og:site_name' />
 <meta content={config.locale.attrs} property='og:locale' />
@@ -85,7 +86,7 @@ const socialImageURL = new URL(ogImage ? ogImage : config.socialCard, Astro.url)
 <meta content='summary_large_image' property='twitter:card' />
 <meta content={canonicalURL} property='twitter:url' />
 <meta content={ogTitle} property='twitter:title' />
-<meta content={description} property='twitter:description' />
+{description && <meta content={description} property='twitter:description' />}
 <meta content={socialImageURL} property='twitter:image' />
 
 {/* Sitemap */}
