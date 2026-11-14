@@ -1,6 +1,5 @@
 ---
 title: Video Diffusion Models as World Simulators
-description: "Oasis and Diffusion Forcing: video diffusion as world simulators."
 publishDate: '2025-01-17'
 tags: [diffusion]
 slides: presentation.pdf

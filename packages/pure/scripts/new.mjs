@@ -112,7 +112,6 @@ export default function main(args) {
 
   let content = `---
 title: '${postTitle}'
-description: 'Write your description here.'
 publishDate: '${getDate()}'
 `
   content += parsedArgs.draft ? 'draft: true\n' : ''

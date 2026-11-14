@@ -1,6 +1,5 @@
 ---
 title: 'Beyond Defaults: Is Noise Conditioning Necessary for Diffusion Models?'
-description: "Do generative models need noise-level conditioning? Recent evidence and alternatives."
 publishDate: '2025-11-05'
 tags: [diffusion]
 slides: presentation.pdf

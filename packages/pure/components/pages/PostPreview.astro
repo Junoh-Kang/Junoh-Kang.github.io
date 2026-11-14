@@ -96,15 +96,6 @@ const previewData = data as typeof data & Partial<PreviewMetadata>
       {
         detailed && (
           <>
-            {/* desc */}
-            <p
-              class={cn(
-                'line-clamp-2 text-sm text-muted-foreground sm:line-clamp-3',
-                previewData.heroImage && 'sm:me-24'
-              )}
-            >
-              {data.description}
-            </p>
             <div class='mt-2 flex flex-wrap items-center gap-x-2 text-xs text-muted-foreground'>
               {postDate && <FormattedDate date={postDate} />}
               {data.tags.length > 0 && (

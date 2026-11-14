@@ -1,6 +1,5 @@
 ---
 title: Understanding Diffusion Models in Two Perspectives
-description: "DDPM and score-based SDEs: shared structure, different modeling."
 publishDate: '2023-09-03'
 tags: [diffusion]
 slides: presentation.pdf

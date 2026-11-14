@@ -1,6 +1,5 @@
 ---
 title: One-step Generation in the Post Diffusion Era
-description: "Distillation, Consistency Models, CTM, MeanFlow, DMD, and Drifting Models."
 publishDate: '2026-03-12'
 tags: [diffusion]
 slides: presentation.pdf

@@ -1,6 +1,5 @@
 ---
 title: 'Path Signature: Useful Feature for Timeseries'
-description: "Definition, algebraic structure, and probabilistic meaning of path signatures."
 publishDate: '2026-02-01'
 tags: [time-series]
 ---

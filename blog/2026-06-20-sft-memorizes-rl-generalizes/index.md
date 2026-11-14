@@ -1,6 +1,5 @@
 ---
 title: SFT Memorizes, RL Generalizes
-description: "How SFT and verifier-based RL behave under rule and visual shifts."
 publishDate: '2026-06-20'
 tags: [llm]
 ---

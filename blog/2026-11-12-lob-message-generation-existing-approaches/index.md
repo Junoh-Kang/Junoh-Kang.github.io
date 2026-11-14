@@ -1,6 +1,5 @@
 ---
 title: "LOB message generation (2): Existing approaches"
-description: ""
 publishDate: '2026-11-12'
 tags: [finance]
 draft: false

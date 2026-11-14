@@ -24,7 +24,6 @@ const {
 } = Astro.props
 
 const {
-  description,
   heroImage,
   publishDate,
   title,
@@ -71,7 +70,7 @@ const slides = data.slides
 ---
 
 <PageLayout
-  meta={{ articleDate, description, ogImage: socialImage, title }}
+  meta={{ articleDate, description: '', ogImage: socialImage, title }}
   back='/blog'
 >
   <Fragment slot='sidebar'>

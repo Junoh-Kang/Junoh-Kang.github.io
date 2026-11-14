@@ -41,7 +41,7 @@ Each post is one folder:
 
 ```text
 blog/YYYY-MM-DD-<slug>/
-├── index.md        # front matter: title, description, publishDate (YYYY-MM-DD), tags
+├── index.md        # front matter: title, publishDate (YYYY-MM-DD), tags
 └── ...             # the post's figures, PDFs, and other files
 ```
 
@@ -65,7 +65,6 @@ These outlines are starting points. Change headings and order to fit the argumen
 ```markdown
 ---
 title: "Post title"
-description: "A short description of the post."
 publishDate: 'YYYY-MM-DD'
 tags: [diffusion]
 ---
@@ -90,7 +89,6 @@ tags: [diffusion]
 ```markdown
 ---
 title: "Post title"
-description: "A short description of the post."
 publishDate: 'YYYY-MM-DD'
 tags: [diffusion]
 slides: presentation.pdf

@@ -1,6 +1,5 @@
 ---
 title: Post-Training of Modern LLMs
-description: "From preference learning to RL with verifiable rewards."
 publishDate: '2026-06-19'
 tags: [llm]
 ---

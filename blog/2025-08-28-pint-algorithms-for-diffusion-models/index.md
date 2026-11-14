@@ -1,6 +1,5 @@
 ---
 title: PinT algorithms for Diffusion Models
-description: "Parallelizing diffusion sampling to cut wall-clock time."
 publishDate: '2025-08-28'
 tags: [diffusion]
 slides: presentation.pdf
