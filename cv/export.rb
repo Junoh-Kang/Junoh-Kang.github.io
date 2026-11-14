@@ -453,20 +453,29 @@ module CvExport
 
     # The institution and details share one line under the degree, with "Advisor: Prof. X"
     # shortened to "Advisor Prof. X" so the line fits. An institution that repeats the
-    # title, like "Seoul Science High School (SSHS)", is left out.
+    # title, like "Seoul Science High School (SSHS)", is left out. A detail with
+    # `pdf_new_line: true` starts a new line in the PDF instead of following a " · ".
     def education_to_rendercv(item)
       institution = item["institution"]
       institution = nil if institution.to_s.start_with?(item.fetch("title"))
-      details = Array(item["details"]).map do |detail|
-        next detail.to_s.sub(": ", " ") unless detail.is_a?(Hash)
-
-        markdown_link(detail_label(detail).sub(": ", " "), detail["url"])
+      summary = institution.to_s
+      Array(item["details"]).each do |detail|
+        text = if detail.is_a?(Hash)
+                 markdown_link(detail_label(detail).sub(": ", " "), detail["url"])
+               else
+                 detail.to_s.sub(": ", " ")
+               end
+        separator = if summary.empty? then ""
+                    elsif detail.is_a?(Hash) && detail["pdf_new_line"] then "\n"
+                    else " · "
+                    end
+        summary += separator + text
       end
       {
         "name" => markdown_link(item.fetch("title"), item["url"]),
         "location" => item["location"],
         "date" => item["date"],
-        "summary" => [institution, *details].compact.join(" · ")
+        "summary" => summary.empty? ? nil : summary
       }
     end
 

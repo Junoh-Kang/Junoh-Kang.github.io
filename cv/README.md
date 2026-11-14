@@ -29,6 +29,7 @@ The PDF is a 1-page CV for quant research roles, so it shows less than the site:
 - `rendercv.sections` in `cv.yml` picks the PDF sections and their order. Teaching is site-only.
 - `rendercv.publications: selected` keeps only papers with `selected: true`, under "Selected Publications". The last paper's author line carries the "(\*) equal contribution" legend.
 - `pdf: false` on an item keeps it on the site but out of the PDF.
+- An education detail written as `label` with `pdf_new_line: true` starts its own line in the PDF instead of following a " · ".
 - An honor's `note` is a short second line in the PDF, such as how many are selected each year. The site does not show it.
 - `research_interests.yml` (a `title` plus optional `detail`) and `skills.yml` (`label` and `value`) feed PDF sections only; the site's Research Interests come from `content/3-research-interests.yaml`.
 
