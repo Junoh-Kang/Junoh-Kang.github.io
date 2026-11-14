@@ -10,6 +10,7 @@ items:
         url: https://cv.snu.ac.kr/index.php/~bhhan/
       - label: "Collaborator: Prof. Kiseop Lee (Purdue)"
         url: https://sites.google.com/view/purdue-dsfi/people
+        pdf_new_line: true
     visibility: public
 
   - title: "B.S. in Statistics and Mathematics"

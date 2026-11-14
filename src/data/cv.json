@@ -57,7 +57,8 @@
             },
             {
               "label": "Collaborator: Prof. Kiseop Lee (Purdue)",
-              "url": "https://sites.google.com/view/purdue-dsfi/people"
+              "url": "https://sites.google.com/view/purdue-dsfi/people",
+              "pdf_new_line": true
             }
           ]
         },
