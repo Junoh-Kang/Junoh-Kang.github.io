@@ -33,7 +33,6 @@ rendercv:
     - current_research
     - publications
     - honors
-    - service
     - skills
 
 # Paths relative to this cv/ folder, inside the site repository.
