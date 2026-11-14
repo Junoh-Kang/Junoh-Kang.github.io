@@ -1,0 +1,16 @@
+---
+import type { CollectionEntry } from 'astro:content'
+
+import { PostPreview } from 'astro-pure/components/pages'
+
+// Compact post rows (date, title, tags) in one flat list; /archives keeps the by-year view.
+interface Props {
+  posts: CollectionEntry<'blog'>[]
+}
+
+const { posts } = Astro.props
+---
+
+<ul class='flex flex-col text-start'>
+  {posts.map((post) => <PostPreview {post} showTags class='border-0 bg-transparent py-2' />)}
+</ul>

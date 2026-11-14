@@ -2,9 +2,10 @@
 import type { GetStaticPaths, Page } from 'astro'
 import type { CollectionEntry } from 'astro:content'
 
-import { Paginator, PostPreview } from 'astro-pure/components/pages'
+import { Paginator } from 'astro-pure/components/pages'
 import { getBlogCollection, getTagsWithCount, sortMDByDate } from 'astro-pure/server'
 import { Button } from 'astro-pure/user'
+import PostList from '@/components/PostList.astro'
 import PageLayout from '@/layouts/BaseLayout.astro'
 import config from '@/site-config'
 
@@ -90,9 +91,7 @@ const paginationProps = {
       </ul>
     </nav>
     <section id='content' class='animate' aria-label='Blog post list'>
-      <ul class='flex flex-col gap-y-3 text-start'>
-        {page.data.map((post) => <PostPreview {post} detailed />)}
-      </ul>
+      <PostList posts={page.data} />
       <Paginator {...paginationProps} />
     </section>
   </main>

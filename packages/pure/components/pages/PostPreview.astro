@@ -9,10 +9,12 @@ import { FormattedDate } from '../user'
 type Props<T extends CollectionKey> = {
   post: CollectionEntry<T>
   detailed?: boolean
+  // Compact (non-detailed) rows only: list the post's tags under its title
+  showTags?: boolean
   class?: string
 }
 
-const { post, detailed = false, class: className } = Astro.props
+const { post, detailed = false, showTags = false, class: className } = Astro.props
 const { id, data } = post
 const postDate = data.updatedDate ?? data.publishDate
 type PreviewMetadata = {
@@ -54,44 +56,47 @@ const previewData = data as typeof data & Partial<PreviewMetadata>
         />
       )
     }
-    <div class={cn('flex flex-col gap-1', !detailed && 'sm:flex-row sm:items-center')}>
+    <div
+      class={cn(
+        'flex flex-col gap-1',
+        !detailed && 'sm:flex-row',
+        !detailed && (showTags ? 'sm:items-baseline' : 'sm:items-center')
+      )}
+    >
       {!detailed && postDate && <FormattedDate class='min-w-[95px] text-xs' date={postDate} />}
 
       {/* title */}
       <div class='flex justify-between flex-grow'>
-        <a
-          href={`/blog/${id}`}
-          data-astro-prefetch
-          class={cn(
-            'after:absolute after:inset-0 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4',
-            detailed && 'font-medium'
-          )}
-        >
-          {previewData.pin && <span class='text-primary me-1'>[Pin]</span>}
-          {data.draft && <span class='text-red-500 me-1'>(Draft)</span>}
-          {data.title}
-        </a>
-        <svg
-          xmlns='http://www.w3.org/2000/svg'
-          width='16'
-          height='16'
-          viewBox='0 0 24 24'
-          fill='none'
-          stroke-width='2.5'
-          stroke-linecap='round'
-          stroke-linejoin='round'
-          class='preview-redirect my-1 stroke-muted-foreground group-hover:stroke-primary'
-          ><line
-            x1='5'
-            y1='12'
-            x2='19'
-            y2='12'
-            class='translate-x-4 scale-x-0 transition-all duration-300 ease-in-out group-hover:translate-x-1 group-hover:scale-x-100'
-          ></line><polyline
-            points='12 5 19 12 12 19'
-            class='translate-x-0 transition-all duration-300 ease-in-out group-hover:translate-x-1'
-          ></polyline></svg
-        >
+        <div class='min-w-0'>
+          <a
+            href={`/blog/${id}`}
+            data-astro-prefetch
+            class={cn(
+              'after:content-empty after:absolute after:inset-0 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4',
+              detailed && 'font-medium'
+            )}
+          >
+            {previewData.pin && <span class='text-primary me-1'>[Pin]</span>}
+            {data.draft && <span class='text-red-500 me-1'>(Draft)</span>}
+            {data.title}
+          </a>
+          {
+            !detailed && showTags && data.tags.length > 0 && (
+              <div class='mt-0.5 flex flex-wrap gap-x-2 text-xs text-muted-foreground'>
+                {data.tags.map((tag) => (
+                  <a
+                    href={`/tags/${encodeURIComponent(tag)}`}
+                    class='relative z-10 underline-offset-4 hover:underline hover:text-primary focus-visible:underline'
+                    aria-label={`View posts tagged ${tag}`}
+                    data-astro-prefetch
+                  >
+                    {tag}
+                  </a>
+                ))}
+              </div>
+            )
+          }
+        </div>
       </div>
       {
         detailed && (
@@ -142,9 +147,6 @@ const previewData = data as typeof data & Partial<PreviewMetadata>
       }
       & > div {
         color: var(--preview-highlight-final) !important;
-      }
-      & > div .preview-redirect {
-        stroke: var(--preview-highlight-final) !important;
       }
     }
     .cover-image {
