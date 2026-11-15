@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Learning BPE merge rules</title><style>body{margin:0;padding:2px; background:transparent}figure{margin:0}</style></head><body><figure id="bpe-demo">
+<style>
+#bpe-demo{font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;color:#2C2C2A}
+#bpe-demo .bpe-card{background:#fff;border:1px solid #D3D1C7;border-radius:12px;padding:1rem 1.25rem}
+#bpe-demo .bpe-controls{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:0.75rem}
+#bpe-demo button{font:inherit;font-size:0.85rem;padding:4px 12px;border:1px solid #B4B2A9;border-radius:6px;background:#fff;color:#2C2C2A;cursor:pointer}
+#bpe-demo button:hover{background:#F1EFE8}
+#bpe-demo .bpe-label{font-size:0.8rem;color:#5F5E5A}
+#bpe-demo .bpe-grid{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:1.25rem}
+@media (max-width:640px){#bpe-demo .bpe-grid{grid-template-columns:minmax(0,1fr)}}
+#bpe-demo .bpe-tk{display:inline-block;padding:1px 7px;margin:2px;border-radius:6px;font-family:ui-monospace,Menlo,monospace;font-size:0.85rem;background:#fff;border:1px solid #B4B2A9;color:#2C2C2A}
+#bpe-demo .bpe-tk.hit{background:#EEEDFE;border-color:#534AB7;color:#3C3489}
+#bpe-demo .bpe-row{display:flex;align-items:center;gap:8px;padding:4px 0;border-bottom:1px solid #F1EFE8}
+#bpe-demo .bpe-pair{display:flex;justify-content:space-between;font-family:ui-monospace,Menlo,monospace;font-size:0.8rem;padding:2px 8px;border-radius:6px}
+#bpe-demo .bpe-pair.top{background:#EEEDFE;color:#3C3489}
+#bpe-demo code{font-family:ui-monospace,Menlo,monospace;background:#EEEDFE;color:#3C3489;border:none;padding:0 4px;border-radius:4px}
+#bpe-demo code::before,#bpe-demo code::after{content:none}
+</style>
+<div class="bpe-card">
+<div class="bpe-controls">
+<button type="button" data-bpe="prev">Previous</button>
+<button type="button" data-bpe="next">Next merge</button>
+<button type="button" data-bpe="reset">Reset</button>
+<span class="bpe-label" data-bpe-out="step" style="margin-left:auto"></span>
+</div>
+<div class="bpe-label" data-bpe-out="msg" style="font-size:0.9rem;color:#2C2C2A;min-height:1.5rem;margin-bottom:0.5rem"></div>
+<div class="bpe-grid">
+<div>
+<div class="bpe-label">Corpus (word × count), _ marks the end of a word</div>
+<div data-bpe-out="corpus"></div>
+</div>
+<div>
+<div class="bpe-label">Most frequent adjacent pairs</div>
+<div data-bpe-out="pairs"></div>
+</div>
+</div>
+<div class="bpe-label" style="margin-top:0.75rem">Vocabulary <span data-bpe-out="vsize"></span></div>
+<div data-bpe-out="vocab"></div>
+</div>
+<noscript><p class="bpe-label">This interactive example requires JavaScript.</p></noscript>
+
+<script>
+(() => {
+  const root = document.getElementById('bpe-demo')
+  if (!root) return
+  const W = [['low', 5], ['lower', 2], ['newest', 6], ['widest', 3]]
+  const SEP = '\u0001'
+  const init = () => W.map(([w, c]) => ({ t: [...w, '_'], c }))
+  let hist = [], st = init(), merges = []
+  const out = (k) => root.querySelector('[data-bpe-out="' + k + '"]')
+  const esc = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;')
+  const tk = (x, hit) => '<span class="bpe-tk' + (hit ? ' hit' : '') + '">' + esc(x) + '</span>'
+  function pairs(s) {
+    const m = {}
+    s.forEach(({ t, c }) => { for (let i = 0; i < t.length - 1; i++) { const k = t[i] + SEP + t[i + 1]; m[k] = (m[k] || 0) + c } })
+    return Object.entries(m).sort((a, b) => b[1] - a[1])
+  }
+  function apply(s, a, b) {
+    return s.map(({ t, c }) => {
+      const o = []
+      for (let i = 0; i < t.length; i++) {
+        if (i < t.length - 1 && t[i] === a && t[i + 1] === b) { o.push(a + b); i++ } else o.push(t[i])
+      }
+      return { t: o, c }
+    })
+  }
+  function vocab() {
+    const v = new Set()
+    W.forEach(([w]) => [...w, '_'].forEach((x) => v.add(x)))
+    merges.forEach(([a, b]) => v.add(a + b))
+    return [...v]
+  }
+  const fmt = (k) => '(' + k.split(SEP).map(esc).join(', ') + ')'
+  function render(hl) {
+    const p = pairs(st), top = p[0]
+    out('step').textContent = merges.length + (merges.length === 1 ? ' merge' : ' merges')
+    out('corpus').innerHTML = st.map(({ t, c }) => '<div class="bpe-row"><div>' + t.map((x) => tk(x, hl && x === hl)).join('') + '</div><span class="bpe-label" style="margin-left:auto">×' + c + '</span></div>').join('')
+    out('pairs').innerHTML = p.length ? p.slice(0, 6).map((e, i) => '<div class="bpe-pair' + (i === 0 ? ' top' : '') + '"><span>' + fmt(e[0]) + '</span><span>' + e[1] + '</span></div>').join('') : '<div class="bpe-label">No pairs left to merge</div>'
+    const v = vocab()
+    out('vsize').textContent = '(' + v.length + ' units)'
+    out('vocab').innerHTML = v.map((x) => tk(x, merges.some(([a, b]) => a + b === x))).join('')
+    const next = top ? 'Next candidate: ' + fmt(top[0]) + ', ' + top[1] + ' times.' : 'Every word is now a single unit.'
+    out('msg').innerHTML = hl ? 'Merged the most frequent pair into <code>' + esc(hl) + '</code>. ' + next : 'Every word starts as characters. ' + next
+  }
+  root.querySelector('[data-bpe="next"]').addEventListener('click', () => {
+    const p = pairs(st); if (!p.length) return
+    const [a, b] = p[0][0].split(SEP)
+    hist.push(st); st = apply(st, a, b); merges.push([a, b]); render(a + b)
+  })
+  root.querySelector('[data-bpe="prev"]').addEventListener('click', () => {
+    if (!hist.length) return
+    st = hist.pop(); merges.pop()
+    const m = merges[merges.length - 1]; render(m ? m[0] + m[1] : null)
+  })
+  root.querySelector('[data-bpe="reset"]').addEventListener('click', () => { hist = []; st = init(); merges = []; render(null) })
+  render(null)
+})()
+</script>
+</figure><script>// Same-origin figure documents resize only their own embedding frame.
+(() => {
+  if (!window.frameElement) return;
+  let pending = false;
+  const resize = () => {
+    if (pending) return;
+    pending = true;
+    requestAnimationFrame(() => {
+      pending = false;
+      const height = Math.ceil(document.body.getBoundingClientRect().height) + 2;
+      if (window.frameElement.style.height !== height + 'px') window.frameElement.style.height = height + 'px';
+    });
+  };
+  new ResizeObserver(resize).observe(document.body);
+  window.addEventListener('load', resize);
+  document.fonts.ready.then(resize);
+  resize();
+})();
+</script></body></html>

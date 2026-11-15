@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="214" viewBox="0 0 720 214" role="img" aria-labelledby="title desc">
+<title id="title">From text to BPE tokens</title>
+<desc id="desc">Eleven UTF-8 bytes for hello world are grouped into two GPT-2 tokens. The space belongs to the second token. Token IDs are 31373 and 995.</desc>
+<style>text{font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;fill:#2C2C2A}.mono{font-family:ui-monospace,Menlo,Consolas,monospace}.lbl{font-size:16px;font-weight:500}.sub{font-size:14px;fill:#5F5E5A}</style>
+<text x="0" y="34" class="lbl">Text</text><text x="0" y="52" class="sub">11 characters</text>
+<text x="0" y="88" class="lbl">UTF-8 bytes</text><text x="0" y="106" class="sub">11 byte values</text>
+<text x="0" y="172" class="lbl">GPT-2 BPE</text><text x="0" y="190" class="sub">2 token IDs</text>
+<text x="172" y="38" text-anchor="middle" class="mono" font-size="20">h</text>
+<path d="M172 48 v12 m-3.5 -4 l3.5 4 3.5 -4" stroke="#B4B2A9" stroke-width="1" fill="none"/>
+<rect x="150" y="68" width="44" height="34" rx="6" fill="#E1F5EE" stroke="#0F6E56" stroke-width="1"/>
+<text x="172" y="90" text-anchor="middle" class="mono" font-size="16" style="fill:#085041">104</text>
+<text x="222" y="38" text-anchor="middle" class="mono" font-size="20">e</text>
+<path d="M222 48 v12 m-3.5 -4 l3.5 4 3.5 -4" stroke="#B4B2A9" stroke-width="1" fill="none"/>
+<rect x="200" y="68" width="44" height="34" rx="6" fill="#E1F5EE" stroke="#0F6E56" stroke-width="1"/>
+<text x="222" y="90" text-anchor="middle" class="mono" font-size="16" style="fill:#085041">101</text>
+<text x="272" y="38" text-anchor="middle" class="mono" font-size="20">l</text>
+<path d="M272 48 v12 m-3.5 -4 l3.5 4 3.5 -4" stroke="#B4B2A9" stroke-width="1" fill="none"/>
+<rect x="250" y="68" width="44" height="34" rx="6" fill="#E1F5EE" stroke="#0F6E56" stroke-width="1"/>
+<text x="272" y="90" text-anchor="middle" class="mono" font-size="16" style="fill:#085041">108</text>
+<text x="322" y="38" text-anchor="middle" class="mono" font-size="20">l</text>
+<path d="M322 48 v12 m-3.5 -4 l3.5 4 3.5 -4" stroke="#B4B2A9" stroke-width="1" fill="none"/>
+<rect x="300" y="68" width="44" height="34" rx="6" fill="#E1F5EE" stroke="#0F6E56" stroke-width="1"/>
+<text x="322" y="90" text-anchor="middle" class="mono" font-size="16" style="fill:#085041">108</text>
+<text x="372" y="38" text-anchor="middle" class="mono" font-size="20">o</text>
+<path d="M372 48 v12 m-3.5 -4 l3.5 4 3.5 -4" stroke="#B4B2A9" stroke-width="1" fill="none"/>
+<rect x="350" y="68" width="44" height="34" rx="6" fill="#E1F5EE" stroke="#0F6E56" stroke-width="1"/>
+<text x="372" y="90" text-anchor="middle" class="mono" font-size="16" style="fill:#085041">111</text>
+<text x="422" y="38" text-anchor="middle" class="mono" font-size="20">·</text>
+<path d="M422 48 v12 m-3.5 -4 l3.5 4 3.5 -4" stroke="#B4B2A9" stroke-width="1" fill="none"/>
+<rect x="400" y="68" width="44" height="34" rx="6" fill="#EEEDFE" stroke="#534AB7" stroke-width="1"/>
+<text x="422" y="90" text-anchor="middle" class="mono" font-size="16" style="fill:#3C3489">32</text>
+<text x="472" y="38" text-anchor="middle" class="mono" font-size="20">w</text>
+<path d="M472 48 v12 m-3.5 -4 l3.5 4 3.5 -4" stroke="#B4B2A9" stroke-width="1" fill="none"/>
+<rect x="450" y="68" width="44" height="34" rx="6" fill="#EEEDFE" stroke="#534AB7" stroke-width="1"/>
+<text x="472" y="90" text-anchor="middle" class="mono" font-size="16" style="fill:#3C3489">119</text>
+<text x="522" y="38" text-anchor="middle" class="mono" font-size="20">o</text>
+<path d="M522 48 v12 m-3.5 -4 l3.5 4 3.5 -4" stroke="#B4B2A9" stroke-width="1" fill="none"/>
+<rect x="500" y="68" width="44" height="34" rx="6" fill="#EEEDFE" stroke="#534AB7" stroke-width="1"/>
+<text x="522" y="90" text-anchor="middle" class="mono" font-size="16" style="fill:#3C3489">111</text>
+<text x="572" y="38" text-anchor="middle" class="mono" font-size="20">r</text>
+<path d="M572 48 v12 m-3.5 -4 l3.5 4 3.5 -4" stroke="#B4B2A9" stroke-width="1" fill="none"/>
+<rect x="550" y="68" width="44" height="34" rx="6" fill="#EEEDFE" stroke="#534AB7" stroke-width="1"/>
+<text x="572" y="90" text-anchor="middle" class="mono" font-size="16" style="fill:#3C3489">114</text>
+<text x="622" y="38" text-anchor="middle" class="mono" font-size="20">l</text>
+<path d="M622 48 v12 m-3.5 -4 l3.5 4 3.5 -4" stroke="#B4B2A9" stroke-width="1" fill="none"/>
+<rect x="600" y="68" width="44" height="34" rx="6" fill="#EEEDFE" stroke="#534AB7" stroke-width="1"/>
+<text x="622" y="90" text-anchor="middle" class="mono" font-size="16" style="fill:#3C3489">108</text>
+<text x="672" y="38" text-anchor="middle" class="mono" font-size="20">d</text>
+<path d="M672 48 v12 m-3.5 -4 l3.5 4 3.5 -4" stroke="#B4B2A9" stroke-width="1" fill="none"/>
+<rect x="650" y="68" width="44" height="34" rx="6" fill="#EEEDFE" stroke="#534AB7" stroke-width="1"/>
+<text x="672" y="90" text-anchor="middle" class="mono" font-size="16" style="fill:#3C3489">100</text>
+<path d="M150 110 v6 h244 v-6 M272 116 v16 m-3.5 -4 l3.5 4 3.5 -4" stroke="#0F6E56" stroke-width="1" fill="none"/>
+<rect x="150" y="140" width="244" height="52" rx="8" fill="#E1F5EE" stroke="#0F6E56" stroke-width="1"/>
+<text x="272" y="163" text-anchor="middle" class="mono" font-size="18" font-weight="500" style="fill:#085041">hello</text>
+<text x="272" y="183" text-anchor="middle" font-size="14" style="fill:#0F6E56">Token ID 31373</text>
+<path d="M400 110 v6 h294 v-6 M547 116 v16 m-3.5 -4 l3.5 4 3.5 -4" stroke="#534AB7" stroke-width="1" fill="none"/>
+<rect x="400" y="140" width="294" height="52" rx="8" fill="#EEEDFE" stroke="#534AB7" stroke-width="1"/>
+<text x="547" y="163" text-anchor="middle" class="mono" font-size="18" font-weight="500" style="fill:#3C3489">·world</text>
+<text x="547" y="183" text-anchor="middle" font-size="14" style="fill:#534AB7">Token ID 995</text>
+</svg>

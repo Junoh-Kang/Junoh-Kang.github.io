@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Python MLP: H-Net stage 1 and Llama 3 BPE</title><style>body { margin: 0; padding: 2px 0; color: #242826; background: transparent; font-family: system-ui, sans-serif; }
+* { box-sizing: border-box; }
+figure { margin: 0; }
+.chunk-scroll { width: 100%; max-width: 100%; margin: 0 auto; overflow-x: auto; border: 1px solid #deded7; border-radius: 8px; background: #fafaf8; }
+.chunk-scroll:focus-visible { outline: 2px solid #528171; outline-offset: -2px; }
+table { width: 100%; margin: 0 auto; border-collapse: collapse; table-layout: fixed; }
+th { padding: 8px 10px; text-align: left; font-size: 10px; font-weight: 600; border-bottom: 1px solid #deded7; }
+td { padding: 4px 10px; white-space: pre; font: 10px/1.8 ui-monospace, Menlo, Consolas, monospace; }
+th + th, td + td { border-left: 1px solid #deded7; }
+.chunk { padding: 3px 0; }
+td:first-child .chunk-0 { background: #acd49b; }
+td:first-child .chunk-1 { background: #d1e3e9; }
+td:last-child .chunk-0 { background: #e9ebe5; }
+td:last-child .chunk-1 { background: #d3d6ce; }
+.chunk-hint { font-size: 10px; color: #737373; margin: 0 0 8px; text-align: center; }
+</style></head><body><div class="chunk-scroll" role="region" aria-label="H-Net stage 1 and Llama 3 BPE comparison" tabindex="0"><table><thead><tr><th scope="col">H-Net · stage 1</th><th scope="col">Llama 3 BPE</th></tr></thead><tbody><tr><td><span class="chunk chunk-0" data-byte-start="0" data-byte-end="6">class </span><span class="chunk chunk-1" data-byte-start="6" data-byte-end="10">Mlp(</span><span class="chunk chunk-0" data-byte-start="10" data-byte-end="20">nn.Module)</span><span class="chunk chunk-1" data-byte-start="20" data-byte-end="22">:↵</span></td><td><span class="chunk chunk-0" data-byte-start="0" data-byte-end="5">class</span><span class="chunk chunk-1" data-byte-start="5" data-byte-end="7"> M</span><span class="chunk chunk-0" data-byte-start="7" data-byte-end="9">lp</span><span class="chunk chunk-1" data-byte-start="9" data-byte-end="12">(nn</span><span class="chunk chunk-0" data-byte-start="12" data-byte-end="19">.Module</span><span class="chunk chunk-1" data-byte-start="19" data-byte-end="22">):↵</span></td></tr><tr><td><span class="chunk chunk-0" data-byte-start="22" data-byte-end="30">    def </span><span class="chunk chunk-1" data-byte-start="30" data-byte-end="74">__init__(↵</span></td><td><span class="chunk chunk-0" data-byte-start="22" data-byte-end="25">   </span><span class="chunk chunk-1" data-byte-start="25" data-byte-end="29"> def</span><span class="chunk chunk-0" data-byte-start="29" data-byte-end="32"> __</span><span class="chunk chunk-1" data-byte-start="32" data-byte-end="36">init</span><span class="chunk chunk-0" data-byte-start="36" data-byte-end="40">__(↵</span></td></tr><tr><td><span class="chunk chunk-1" data-byte-start="30" data-byte-end="74">        self,↵</span></td><td><span class="chunk chunk-1" data-byte-start="40" data-byte-end="47">       </span><span class="chunk chunk-0" data-byte-start="47" data-byte-end="52"> self</span><span class="chunk chunk-1" data-byte-start="52" data-byte-end="54">,↵</span></td></tr><tr><td><span class="chunk chunk-1" data-byte-start="30" data-byte-end="74">        in_features,</span><span class="chunk chunk-0" data-byte-start="74" data-byte-end="99">↵</span></td><td><span class="chunk chunk-0" data-byte-start="54" data-byte-end="61">       </span><span class="chunk chunk-1" data-byte-start="61" data-byte-end="64"> in</span><span class="chunk chunk-0" data-byte-start="64" data-byte-end="73">_features</span><span class="chunk chunk-1" data-byte-start="73" data-byte-end="75">,↵</span></td></tr><tr><td><span class="chunk chunk-0" data-byte-start="74" data-byte-end="99">        hidden_features=</span><span class="chunk chunk-1" data-byte-start="99" data-byte-end="104">None,</span><span class="chunk chunk-0" data-byte-start="104" data-byte-end="126">↵</span></td><td><span class="chunk chunk-0" data-byte-start="75" data-byte-end="82">       </span><span class="chunk chunk-1" data-byte-start="82" data-byte-end="89"> hidden</span><span class="chunk chunk-0" data-byte-start="89" data-byte-end="98">_features</span><span class="chunk chunk-1" data-byte-start="98" data-byte-end="103">=None</span><span class="chunk chunk-0" data-byte-start="103" data-byte-end="105">,↵</span></td></tr></tbody></table></div><script>// Same-origin figure documents resize only their own embedding frame.
+(() => {
+  if (!window.frameElement) return;
+  let pending = false;
+  const resize = () => {
+    if (pending) return;
+    pending = true;
+    requestAnimationFrame(() => {
+      pending = false;
+      const height = Math.ceil(document.body.getBoundingClientRect().height) + 2;
+      if (window.frameElement.style.height !== height + 'px') window.frameElement.style.height = height + 'px';
+    });
+  };
+  new ResizeObserver(resize).observe(document.body);
+  window.addEventListener('load', resize);
+  document.fonts.ready.then(resize);
+  resize();
+})();
+</script></body></html>
