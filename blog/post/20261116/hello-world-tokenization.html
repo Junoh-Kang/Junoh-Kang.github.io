@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Hello world: bytes and BPE tokens</title><style>body{margin:0;padding:2px 0}</style></head><body>
+<img src="hello-world-tokenization.svg" alt="The text hello world becomes 11 UTF-8 bytes, then two GPT-2 BPE tokens: hello, ID 31373, and a leading space followed by world, ID 995." width="720" height="214" style="display: block; width: 100%; max-width: 560px; height: auto; margin: 0 auto;" />
+<script>// Same-origin figure documents resize only their own embedding frame.
+(() => {
+  if (!window.frameElement) return;
+  let pending = false;
+  const resize = () => {
+    if (pending) return;
+    pending = true;
+    requestAnimationFrame(() => {
+      pending = false;
+      const height = Math.ceil(document.body.getBoundingClientRect().height) + 2;
+      if (window.frameElement.style.height !== height + 'px') window.frameElement.style.height = height + 'px';
+    });
+  };
+  new ResizeObserver(resize).observe(document.body);
+  window.addEventListener('load', resize);
+  document.fonts.ready.then(resize);
+  resize();
+})();
+</script>
+</body></html>

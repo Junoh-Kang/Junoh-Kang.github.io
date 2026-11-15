@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Korean: H-Net stage 1 and Llama 3 BPE</title><style>body { margin: 0; padding: 2px 0; color: #242826; background: transparent; font-family: system-ui, sans-serif; }
+* { box-sizing: border-box; }
+figure { margin: 0; }
+.chunk-scroll { width: 100%; max-width: 100%; margin: 0 auto; overflow-x: auto; border: 1px solid #deded7; border-radius: 8px; background: #fafaf8; }
+.chunk-scroll:focus-visible { outline: 2px solid #528171; outline-offset: -2px; }
+table { width: 100%; margin: 0 auto; border-collapse: collapse; table-layout: fixed; }
+th { padding: 8px 10px; text-align: left; font-size: 10px; font-weight: 600; border-bottom: 1px solid #deded7; }
+td { padding: 4px 10px; white-space: pre; font: 10px/1.8 ui-monospace, Menlo, Consolas, monospace; }
+th + th, td + td { border-left: 1px solid #deded7; }
+.chunk { padding: 3px 0; }
+td:first-child .chunk-0 { background: #acd49b; }
+td:first-child .chunk-1 { background: #d1e3e9; }
+td:last-child .chunk-0 { background: #e9ebe5; }
+td:last-child .chunk-1 { background: #d3d6ce; }
+.chunk-hint { font-size: 10px; color: #737373; margin: 0 0 8px; text-align: center; }
+</style></head><body><div class="chunk-scroll" role="region" aria-label="H-Net stage 1 and Llama 3 BPE comparison" tabindex="0"><table><thead><tr><th scope="col">H-Net · stage 1</th><th scope="col">Llama 3 BPE</th></tr></thead><tbody><tr><td><span class="chunk chunk-0">대</span><span class="chunk chunk-0">한</span><span class="chunk" title="Chunk boundary within this UTF-8 character" style="background:linear-gradient(to right, #acd49b 0.0000% 33.3333%, #d1e3e9 33.3333% 66.6667%, #d1e3e9 66.6667% 100.0000%)">제</span><span class="chunk chunk-1">국</span><span class="chunk chunk-0"> </span><span class="chunk chunk-0">국</span><span class="chunk chunk-0">새</span><span class="chunk chunk-1">가</span><span class="chunk chunk-1"> </span><span class="chunk chunk-0">두</span><span class="chunk chunk-0"> </span><span class="chunk chunk-1">발</span><span class="chunk chunk-1">로</span><span class="chunk chunk-0"> </span><span class="chunk chunk-1">걸</span><span class="chunk chunk-1">어</span><span class="chunk chunk-0"> </span><span class="chunk chunk-0">나</span><span class="chunk chunk-0">오</span><span class="chunk chunk-1">고</span><span class="chunk chunk-1">,</span><span class="chunk chunk-1"> </span></td><td><span class="chunk chunk-0">대</span><span class="chunk chunk-0">한</span><span class="chunk chunk-1">제</span><span class="chunk chunk-0">국</span><span class="chunk chunk-1"> </span><span class="chunk chunk-1">국</span><span class="chunk chunk-0">새</span><span class="chunk chunk-1">가</span><span class="chunk chunk-0"> </span><span class="chunk chunk-0">두</span><span class="chunk chunk-1"> </span><span class="chunk chunk-1">발</span><span class="chunk chunk-0">로</span><span class="chunk chunk-1"> </span><span class="chunk chunk-1">걸</span><span class="chunk chunk-0">어</span><span class="chunk chunk-1"> </span><span class="chunk chunk-1">나</span><span class="chunk chunk-1">오</span><span class="chunk chunk-0">고</span><span class="chunk chunk-1">,</span><span class="chunk chunk-0"> </span></td></tr><tr><td><span class="chunk chunk-0">금</span><span class="chunk chunk-0">동</span><span class="chunk chunk-1"> </span><span class="chunk chunk-1">반</span><span class="chunk chunk-1">가</span><span class="chunk chunk-1">사</span><span class="chunk chunk-0">유</span><span class="chunk chunk-1">상</span><span class="chunk chunk-0">은</span><span class="chunk chunk-0"> </span></td><td><span class="chunk chunk-0">금</span><span class="chunk chunk-1">동</span><span class="chunk chunk-0"> </span><span class="chunk chunk-0">반</span><span class="chunk chunk-1">가</span><span class="chunk chunk-0">사</span><span class="chunk chunk-1">유</span><span class="chunk chunk-0">상</span><span class="chunk chunk-1">은</span><span class="chunk chunk-0"> </span></td></tr><tr><td><span class="chunk chunk-1">무</span><span class="chunk chunk-1">대</span><span class="chunk chunk-0">에</span><span class="chunk chunk-0">서</span><span class="chunk chunk-0"> </span><span class="chunk chunk-1">‘</span><span class="chunk chunk-0">셀</span><span class="chunk chunk-0">프</span><span class="chunk chunk-1"> </span><span class="chunk chunk-1">회</span><span class="chunk chunk-1">전</span><span class="chunk chunk-0">’</span><span class="chunk chunk-1">을</span><span class="chunk chunk-1"> </span><span class="chunk chunk-0">했</span><span class="chunk chunk-0">다</span><span class="chunk chunk-0">.</span></td><td><span class="chunk chunk-0">무</span><span class="chunk chunk-1">대</span><span class="chunk chunk-0">에</span><span class="chunk chunk-0">서</span><span class="chunk chunk-1"> </span><span class="chunk chunk-1">‘</span><span class="chunk chunk-0">셀</span><span class="chunk chunk-1">프</span><span class="chunk chunk-0"> </span><span class="chunk chunk-0">회</span><span class="chunk chunk-1">전</span><span class="chunk chunk-0">’</span><span class="chunk chunk-1">을</span><span class="chunk chunk-0"> </span><span class="chunk chunk-0">했</span><span class="chunk chunk-0">다</span><span class="chunk chunk-1">.</span></td></tr></tbody></table></div><script>// Same-origin figure documents resize only their own embedding frame.
+(() => {
+  if (!window.frameElement) return;
+  let pending = false;
+  const resize = () => {
+    if (pending) return;
+    pending = true;
+    requestAnimationFrame(() => {
+      pending = false;
+      const height = Math.ceil(document.body.getBoundingClientRect().height) + 2;
+      if (window.frameElement.style.height !== height + 'px') window.frameElement.style.height = height + 'px';
+    });
+  };
+  new ResizeObserver(resize).observe(document.body);
+  window.addEventListener('load', resize);
+  document.fonts.ready.then(resize);
+  resize();
+})();
+</script></body></html>
