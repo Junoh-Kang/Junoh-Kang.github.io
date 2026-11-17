@@ -40,3 +40,46 @@ a {
 .post-preview a[href^='/tags/'] {
   color: hsl(var(--primary) / 1);
 }
+
+/* Post collapsibles: a chevron marks the summary; the open block reads as an inset panel */
+#content.prose details {
+  margin: 1.25rem 0;
+  border-radius: var(--radius);
+  & > summary {
+    cursor: pointer;
+    list-style: none;
+    font-weight: 500;
+    padding: 0.5rem 0.75rem;
+    border-radius: var(--radius);
+    &::-webkit-details-marker {
+      display: none;
+    }
+    &::before {
+      content: '';
+      display: inline-block;
+      width: 0.45em;
+      height: 0.45em;
+      margin: 0 0.65em 0.1em 0.1em;
+      border-right: 2px solid hsl(var(--primary) / 1);
+      border-bottom: 2px solid hsl(var(--primary) / 1);
+      transform: rotate(-45deg);
+      transition: transform 0.2s ease;
+    }
+    &:hover {
+      background: hsl(var(--muted) / 1);
+    }
+  }
+  &[open] {
+    background: hsl(var(--muted) / 1);
+    border-left: 3px solid hsl(var(--primary) / 1);
+    border-radius: 0;
+    padding: 0 1rem 0.75rem;
+    & > summary {
+      padding-left: 0;
+      margin-bottom: 0.25rem;
+      &::before {
+        transform: rotate(45deg);
+      }
+    }
+  }
+}
