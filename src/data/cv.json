@@ -353,6 +353,18 @@
       ]
     },
     {
+      "id": "talks",
+      "title": "Invited Talks",
+      "items": [
+        {
+          "title": "Rough Paths Interest Group Seminar, DataSig",
+          "talk": "Probabilistic Signature Inversion: Learning Conditional Distributions from Truncated Signatures",
+          "date": "Nov 2026",
+          "url": "https://x.com/data_sig/status/2120868228524397021"
+        }
+      ]
+    },
+    {
       "id": "service",
       "title": "Academic Services",
       "items": [

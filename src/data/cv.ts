@@ -40,6 +40,7 @@ export const education = cvSection('education')
 export const experience = cvSection('experience')
 export const experienceTitle = sections.find((s) => s.id === 'experience')!.title
 export const honors = cvSection('honors')
+export const talks = cvSection('talks') as (CvItem & { talk?: string })[]
 export const currentResearch = cvSection('current_research')
 export const service = cvSection('service') as (CvItem & { role?: string; venues?: string[] })[]
 

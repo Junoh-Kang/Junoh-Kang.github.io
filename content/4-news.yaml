@@ -7,6 +7,14 @@
 #     - text: <phrase>
 #       url:  <URL>
 
+- date: '2026-11-18'
+  text: Gave an invited talk on probabilistic signature inversion at the Rough Paths Interest Group Seminar (DataSig).
+  links:
+    - text: probabilistic signature inversion
+      url: '#kang2026probsiginv'
+    - text: Rough Paths Interest Group Seminar (DataSig)
+      url: 'https://x.com/data_sig/status/2120868228524397021'
+
 - date: '2026-10-11'
   text: Selected as a Top Reviewer for NeurIPS 2026!
 

@@ -10,7 +10,8 @@ import {
   experienceTitle,
   honors,
   publications,
-  service
+  service,
+  talks
 } from '@/data/cv'
 
 import { Icon } from 'astro-pure/user'
@@ -270,6 +271,24 @@ const fmtDate = (d: string) =>
           }
         </ul>
       </Section>
+
+      {
+        talks.length > 0 && (
+          <Section title='Invited Talks'>
+            <ul class='rows compact'>
+              {talks.map((t) => (
+                <li>
+                  <p class='head'>
+                    <span>{t.url ? <a href={t.url} {...ext(t.url)}>{t.title}</a> : t.title}</span>
+                    <span class='when'>{dash(t.date)}</span>
+                  </p>
+                  {t.talk && <p class='sub italic'>{t.talk}</p>}
+                </li>
+              ))}
+            </ul>
+          </Section>
+        )
+      }
 
       {
         serviceGroups.length > 0 && (
