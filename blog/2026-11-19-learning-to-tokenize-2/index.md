@@ -156,26 +156,6 @@ $$
 $$
 for $F=\frac{1}{L}\sum_{t=1}^{L}b_t$ and $G=\frac{1}{L}\sum_{t=1}^{L}p_t$. $F$ is the fraction of positions selected as boundaries, $G$ is the average routing probability, and $N$ is the target compression ratio. Under $F=G$, the ratio loss is minimized at $F=G=1/N$; when $F\neq G$, it can fall below this value. For multiple chunking stages, the ratio losses are summed across stages.
 
-<details>
-<summary>Interpreting the ratio loss as a chi-square divergence</summary>
-
-With target boundary rate $q=1/N$, the ratio loss can be rewritten as
-
-$$
-\frac{FG}{q}+\frac{(1-F)(1-G)}{1-q}.
-$$
-
-If $F$ were used in place of $G$, this would become
-
-$$
-\frac{F^2}{q}+\frac{(1-F)^2}{1-q}
-=1+\chi^2\big((F,1-F)\,\|\,(q,1-q)\big),
-$$
-
-where the second term is the chi-square divergence of the actual boundary rate from the target rate. The ratio loss replaces one factor of $F$ with $G$ because $F$ is computed from hard boundary decisions and has no gradient, whereas $G$ is differentiable with respect to the routing scores. The same structure appears in the load-balancing loss of mixture-of-experts models.
-
-</details>
-
 ## References
 
 <ol class="references">
