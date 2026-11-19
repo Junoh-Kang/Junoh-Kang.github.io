@@ -74,9 +74,9 @@ $$&lt;/p&gt;
 &lt;p&gt;Here, $\mathrm{sg}$ denotes stop-gradient. The STE sets the multiplier to one in the forward pass, so $u_t=\tilde{z}&lt;em&gt;t$, but keeps a gradient path to $p_t$. The contribution through this multiplier is:
 $$
 \left.\frac{\partial\mathcal{L}}{\partial p_t}\right|&lt;/em&gt;{\mathrm{STE}}
-=(2b_t-1)\left(\frac{\partial\mathcal{L}}{\partial u_t}\right)^{!\top}\tilde{z}_t.
+=(2b_t-1)\left\langle\frac{\partial\mathcal{L}}{\partial u_t},\tilde{z}_t\right\rangle.
 $$
-When strengthening $\tilde{z}_t$ would lower the loss, this gradient reinforces the current boundary decision; otherwise it weakens it.&lt;/p&gt;
+The inner product measures how the loss changes as the scale of $\tilde{z}_t$ changes, evaluated at the forward-pass scale of one. When strengthening $\tilde{z}_t$ would lower the loss, this gradient reinforces the current boundary decision; otherwise it weakens it.&lt;/p&gt;
 &lt;hr&gt;
 &lt;h2&gt;Training objective&lt;/h2&gt;
 &lt;h1&gt;LH-Net’s objective is next-byte prediction with compression regularization. The prediction loss provides the main learning signal for the entire model, including chunking, while the ratio loss encourages each stage to meet its target compression ratio.
