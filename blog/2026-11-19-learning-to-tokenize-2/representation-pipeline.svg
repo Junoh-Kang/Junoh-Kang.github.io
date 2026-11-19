@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="620" viewBox="0 0 800 620" role="img" aria-labelledby="title desc">
+<title id="title">A shared view of sequence modeling</title>
+<desc id="desc">Raw inputs are encoded into a shorter sequence, transformed by a main network, then decoded into raw-level predictions. Encoder and decoder are conceptual transformations, not necessarily learned networks. Colors distinguish representations before and after the main network.</desc>
+<defs><marker id="arrow" markerWidth="8.66" markerHeight="10" refX="8.66" refY="5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0 0 L8.66 5 L0 10 Z" fill="#4b5563"/></marker></defs>
+<rect width="800" height="620" fill="#fff"/>
+<style>text{font-family:Helvetica,Arial,sans-serif;fill:#374151;text-anchor:middle}.label{font-size:19px}.block{font-size:22px;font-weight:700}.edge{stroke:#4b5563;stroke-width:1.5;marker-end:url(#arrow)}</style>
+<text x="400" y="30" class="label">Raw representation</text>
+<rect x="107.0" y="48" width="31" height="28" fill="#edf0f3" stroke="#929aa5" stroke-width="1.05"/>
+<rect x="144.0" y="48" width="31" height="28" fill="#edf0f3" stroke="#929aa5" stroke-width="1.05"/>
+<rect x="181.0" y="48" width="31" height="28" fill="#edf0f3" stroke="#929aa5" stroke-width="1.05"/>
+<rect x="218.0" y="48" width="31" height="28" fill="#edf0f3" stroke="#929aa5" stroke-width="1.05"/>
+<rect x="255.0" y="48" width="31" height="28" fill="#edf0f3" stroke="#929aa5" stroke-width="1.05"/>
+<rect x="292.0" y="48" width="31" height="28" fill="#edf0f3" stroke="#929aa5" stroke-width="1.05"/>
+<rect x="329.0" y="48" width="31" height="28" fill="#edf0f3" stroke="#929aa5" stroke-width="1.05"/>
+<rect x="366.0" y="48" width="31" height="28" fill="#edf0f3" stroke="#929aa5" stroke-width="1.05"/>
+<rect x="403.0" y="48" width="31" height="28" fill="#edf0f3" stroke="#929aa5" stroke-width="1.05"/>
+<rect x="440.0" y="48" width="31" height="28" fill="#edf0f3" stroke="#929aa5" stroke-width="1.05"/>
+<rect x="477.0" y="48" width="31" height="28" fill="#edf0f3" stroke="#929aa5" stroke-width="1.05"/>
+<rect x="514.0" y="48" width="31" height="28" fill="#edf0f3" stroke="#929aa5" stroke-width="1.05"/>
+<rect x="551.0" y="48" width="31" height="28" fill="#edf0f3" stroke="#929aa5" stroke-width="1.05"/>
+<rect x="588.0" y="48" width="31" height="28" fill="#edf0f3" stroke="#929aa5" stroke-width="1.05"/>
+<rect x="625.0" y="48" width="31" height="28" fill="#edf0f3" stroke="#929aa5" stroke-width="1.05"/>
+<rect x="662.0" y="48" width="31" height="28" fill="#edf0f3" stroke="#929aa5" stroke-width="1.05"/>
+<path d="M108 112 H692 L507 176 H293 Z" fill="#f3f4f6" stroke="#59616a" stroke-width="1.5"/>
+<text x="400" y="145" dominant-baseline="middle" class="block">Encoder</text>
+<rect x="299.0" y="212" width="34" height="28" fill="#a7ccc6" stroke="#668f89" stroke-width="1.05"/>
+<rect x="341.0" y="212" width="34" height="28" fill="#a7ccc6" stroke="#668f89" stroke-width="1.05"/>
+<rect x="383.0" y="212" width="34" height="28" fill="#a7ccc6" stroke="#668f89" stroke-width="1.05"/>
+<rect x="425.0" y="212" width="34" height="28" fill="#a7ccc6" stroke="#668f89" stroke-width="1.05"/>
+<rect x="467.0" y="212" width="34" height="28" fill="#a7ccc6" stroke="#668f89" stroke-width="1.05"/>
+<text class="label" style="text-anchor:end"><tspan x="275" y="221">Compressed</tspan><tspan x="275" y="243">representation</tspan></text>
+<rect x="267" y="276" width="266" height="72" fill="#edf0f3" stroke="#59616a" stroke-width="1.5"/>
+<text x="400" y="312" dominant-baseline="middle" class="block">Main network</text>
+<rect x="299.0" y="384" width="34" height="28" fill="#c3b6d8" stroke="#9180aa" stroke-width="1.05"/>
+<rect x="341.0" y="384" width="34" height="28" fill="#c3b6d8" stroke="#9180aa" stroke-width="1.05"/>
+<rect x="383.0" y="384" width="34" height="28" fill="#c3b6d8" stroke="#9180aa" stroke-width="1.05"/>
+<rect x="425.0" y="384" width="34" height="28" fill="#c3b6d8" stroke="#9180aa" stroke-width="1.05"/>
+<rect x="467.0" y="384" width="34" height="28" fill="#c3b6d8" stroke="#9180aa" stroke-width="1.05"/>
+<text class="label" style="text-anchor:end"><tspan x="275" y="393">Compressed</tspan><tspan x="275" y="415">representation</tspan></text>
+<path d="M293 448 H507 L692 512 H108 Z" fill="#f3f4f6" stroke="#59616a" stroke-width="1.5"/>
+<text x="400" y="483" dominant-baseline="middle" class="block">Decoder</text>
+<rect x="107.0" y="548" width="31" height="28" fill="#edf0f3" stroke="#929aa5" stroke-width="1.05"/>
+<rect x="144.0" y="548" width="31" height="28" fill="#edf0f3" stroke="#929aa5" stroke-width="1.05"/>
+<rect x="181.0" y="548" width="31" height="28" fill="#edf0f3" stroke="#929aa5" stroke-width="1.05"/>
+<rect x="218.0" y="548" width="31" height="28" fill="#edf0f3" stroke="#929aa5" stroke-width="1.05"/>
+<rect x="255.0" y="548" width="31" height="28" fill="#edf0f3" stroke="#929aa5" stroke-width="1.05"/>
+<rect x="292.0" y="548" width="31" height="28" fill="#edf0f3" stroke="#929aa5" stroke-width="1.05"/>
+<rect x="329.0" y="548" width="31" height="28" fill="#edf0f3" stroke="#929aa5" stroke-width="1.05"/>
+<rect x="366.0" y="548" width="31" height="28" fill="#edf0f3" stroke="#929aa5" stroke-width="1.05"/>
+<rect x="403.0" y="548" width="31" height="28" fill="#edf0f3" stroke="#929aa5" stroke-width="1.05"/>
+<rect x="440.0" y="548" width="31" height="28" fill="#edf0f3" stroke="#929aa5" stroke-width="1.05"/>
+<rect x="477.0" y="548" width="31" height="28" fill="#edf0f3" stroke="#929aa5" stroke-width="1.05"/>
+<rect x="514.0" y="548" width="31" height="28" fill="#edf0f3" stroke="#929aa5" stroke-width="1.05"/>
+<rect x="551.0" y="548" width="31" height="28" fill="#edf0f3" stroke="#929aa5" stroke-width="1.05"/>
+<rect x="588.0" y="548" width="31" height="28" fill="#edf0f3" stroke="#929aa5" stroke-width="1.05"/>
+<rect x="625.0" y="548" width="31" height="28" fill="#edf0f3" stroke="#929aa5" stroke-width="1.05"/>
+<rect x="662.0" y="548" width="31" height="28" fill="#edf0f3" stroke="#929aa5" stroke-width="1.05"/>
+<text x="400" y="606" class="label">Raw representation (predictions)</text>
+<line x1="400" y1="84" x2="400" y2="104" class="edge"/>
+<line x1="400" y1="184" x2="400" y2="204" class="edge"/>
+<line x1="400" y1="248" x2="400" y2="268" class="edge"/>
+<line x1="400" y1="356" x2="400" y2="376" class="edge"/>
+<line x1="400" y1="420" x2="400" y2="440" class="edge"/>
+<line x1="400" y1="520" x2="400" y2="540" class="edge"/>
+</svg>
