@@ -98,7 +98,7 @@ The **downsampler** constructs a compressed sequence using the boundaries select
 
 ### Dechunking layer
 
-The dechunking layer takes the main network output $\hat{z}=\mathcal{M}(x_{\mathrm{chunk}})$ and the routing scores $p$, restores the sequence length, and adds the encoder residual before decoding: $z=\operatorname{Dechunk}(\hat{z},p)+\operatorname{Linear}(\hat{x})$. 
+The dechunking layer takes the main network output $\hat{z}=\mathcal{M}(x_{\mathrm{chunk}})$ and the routing scores $p$, restores the sequence length, and adds the encoder residual before decoding: $z=\operatorname{Dechunk}(\hat{z},p)+\operatorname{Linear}(\hat{x})$.
 The dechunking components are designed to provide a learning signal for chunk boundary decisions. This requires gradients with respect to the routing scores $p_t$.
 
 #### Smoothing module
@@ -205,4 +205,3 @@ for $F=\frac{1}{L}\sum_{t=1}^{L}b_t$ and $G=\frac{1}{L}\sum_{t=1}^{L}p_t$. $F$ i
 
 </li>
 </ol>
-
