@@ -1,4 +1,102 @@
-<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet href="/scripts/pretty-feed-v3.xsl" type="text/xsl"?><rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:h="http://www.w3.org/TR/html4/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Junoh Kang</title><description>AI researcher working on generative models for images, video, and financial markets.</description><link>https://junoh-kang.github.io</link><item><title>Learning to tokenize (1): The bitter lesson meets tokenization</title><link>https://junoh-kang.github.io/blog/learning-to-tokenize-1</link><guid isPermaLink="true">https://junoh-kang.github.io/blog/learning-to-tokenize-1</guid><pubDate>Mon, 16 Nov 2026 00:00:00 GMT</pubDate><content:encoded>&lt;h2&gt;Modern LLMs through the lens of the bitter lesson&lt;/h2&gt;
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet href="/scripts/pretty-feed-v3.xsl" type="text/xsl"?><rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:h="http://www.w3.org/TR/html4/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Junoh Kang</title><description>AI researcher working on generative models for images, video, and financial markets.</description><link>https://junoh-kang.github.io</link><item><title>Learning to tokenize (2): How LH-Net works</title><link>https://junoh-kang.github.io/blog/learning-to-tokenize-2</link><guid isPermaLink="true">https://junoh-kang.github.io/blog/learning-to-tokenize-2</guid><pubDate>Thu, 19 Nov 2026 00:00:00 GMT</pubDate><content:encoded>&lt;h2&gt;LH-Net and H-Net&lt;/h2&gt;
+&lt;p&gt;The previous post explored the motivation behind H-Net and what it can do. In this post, we turn to &lt;em&gt;Dynamic Chunking for End-to-End Hierarchical Sequence Modeling&lt;/em&gt;[1] to understand &lt;em&gt;how it works&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;Following &lt;a href=&quot;https://www.cartesia.ai/blog/from-tokens-to-bytes-part-1#aside-how-does-this-compare-to-the-original-h-net&quot;&gt;Cartesia’s distinction&lt;/a&gt;, we call the original model &lt;strong&gt;LH-Net&lt;/strong&gt;, where “L” stands for “lazy” or “lookahead.” Although Cartesia has not disclosed the full architectural details of the updated H-Net, it highlights a key difference: LH-Net draws a boundary only after seeing the start of the next chunk. This gives it more context for chunking, but, according to Cartesia, hurts next-byte prediction. While LH-Net differs from the H-Net discussed in the previous post, studying it provides a technical foundation for understanding hierarchical sequence modeling.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2&gt;A lens for understanding sequence modeling&lt;/h2&gt;
+&lt;p&gt;We can view tokenization and learned compression methods through a shared frame: &lt;em&gt;encode raw inputs into a shorter sequence, process it with a main network, and decode the result into raw-level predictions&lt;/em&gt;. They differ in how they construct these compressed representations—and which parts of this process are learned jointly with the main network. Keeping this picture in mind, we will first look at earlier approaches, then examine how LH-Net learns to form and use these representations.&lt;/p&gt;
+&lt;p&gt;Viewed through this lens, BPE and the prior approaches discussed in the paper differ in how they construct compressed representations and choose their boundaries. The limitations below follow the paper’s discussion.&lt;/p&gt;
+&lt;p&gt;| Approach | How compression works | Limitation |
+| --- | --- | --- |
+| BPE[3] | Merge bytes into vocabulary tokens. | Segmentation stays fixed during language-model training. |
+| Direct byte modeling(MambaByte[4]) | — | Processing the full byte sequence remains costly. |
+| Fixed-size chunking(Hourglass[5], MegaByte[6]) | Encode each group of $k$ bytes into a single representation. | Boundaries do not adapt to content. |
+| Heuristic chunking(SpaceByte[7], BLT[8]) | Form chunks using delimiter or entropy rules. | The boundary-selection rule may not align with the main objective. |
+| End-to-end chunking(DPT’s Gumbel variant[9]) | Learn chunk boundaries jointly with next-token prediction. | Training instability limits scaling and deeper hierarchies. |&lt;/p&gt;
+&lt;p&gt;LH-Net follows the same end-to-end direction as the last approach, with architectural and training changes designed to make learned chunking stable and scalable across model sizes and hierarchy levels.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2&gt;LH-Net architecture overview&lt;/h2&gt;
+&lt;p&gt;LH-Net follows an encoder → chunking layer → main network → dechunking layer → decoder structure. During autoregressive generation, the encoder and decoder run at every byte, while the main network advances only when a new chunk boundary is selected.&lt;/p&gt;
+&lt;p&gt;Crucially, &lt;em&gt;the main network can itself be another LH-Net&lt;/em&gt;, allowing the same structure to repeat across multiple levels of compression. The paper’s Figure 1 shows a two-stage example. For simplicity, this post focuses on a single-stage architecture with one encoder, one main network, and one decoder.&lt;/p&gt;
+&lt;p&gt;The architecture and its learning objective can be understood through the following principles:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Keep the encoder and decoder efficient.&lt;/strong&gt; Since the encoder and decoder process long, uncompressed sequences, they use efficient state space models: four Mamba-2 layers in each encoder and decoder.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Preserve fine-grained information for the decoder.&lt;/strong&gt; The encoder passes fine-grained information through residual connections.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Concentrate compute and model capacity in the main network.&lt;/strong&gt; The main network operates on a shorter sequence of richer representations. The encoder builds these representations, and the chunking layer reduces the sequence length.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Use next-byte prediction as the main learning signal, including for chunking.&lt;/strong&gt; Learn chunk boundaries that support next-byte prediction, without explicit boundary supervision.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2&gt;Dynamic chunking&lt;/h2&gt;
+&lt;p&gt;In LH-Net, the encoder preserves sequence length so that the model can decide where to place chunk boundaries before compression. &lt;em&gt;There are no ground-truth boundary labels&lt;/em&gt;; instead, boundary decisions are learned to improve next-byte prediction.&lt;/p&gt;
+&lt;p&gt;The &lt;strong&gt;chunking layer&lt;/strong&gt; uses a routing module to determine boundaries and a downsampler to construct compressed representations. The &lt;strong&gt;dechunking layer&lt;/strong&gt; uses a smoothing module to support stable boundary learning and an upsampler to restore the original sequence length. The decoder then processes these full-length representations to predict the next byte at each position.&lt;/p&gt;
+&lt;h3&gt;Chunking layer&lt;/h3&gt;
+&lt;p&gt;For a single hierarchy level, the encoder first produces a representation at every input position, then the chunking layer returns a shorter sequence and routing scores:&lt;/p&gt;
+&lt;p&gt;$$
+\hat{x}=\mathcal{E}(x),
+\qquad
+(x_{\mathrm{chunk}},p)=\operatorname{Chunk}(\hat{x}).
+$$&lt;/p&gt;
+&lt;h4&gt;Routing module&lt;/h4&gt;
+&lt;p&gt;The &lt;strong&gt;routing module&lt;/strong&gt; builds on the intuition that &lt;em&gt;meaningful boundaries tend to occur where context or meaning shifts&lt;/em&gt;. Each encoder output $\hat{x}&lt;em&gt;t$ represents $x_t$ in the context of $x&lt;/em&gt;{&amp;#x3C;t}$. The router compares learned projections of adjacent representations to detect these shifts:&lt;/p&gt;
+&lt;p&gt;$$
+p_t = \frac{1}{2}\left(
+1-\frac{q_t^\top k_{t-1}}{|q_t||k_{t-1}|}
+\right),
+\qquad
+b_t = \mathbf{1}[p_t \geq 0.5].
+$$
+Here, $q_t$ and $k_t$ are learned projections of the encoder output $\hat{x}_t$. The binary indicator $b_t$ determines whether the current position starts a new chunk. The first position is always selected, with $p_1=1$.&lt;/p&gt;
+&lt;h4&gt;Downsampler&lt;/h4&gt;
+&lt;p&gt;The &lt;strong&gt;downsampler&lt;/strong&gt; constructs a compressed sequence using the boundaries selected by the routing module. LH-Net selects encoder outputs at boundary positions, rather than pooling the representations within each chunk. The same selection is applied to the routing scores: retaining only the boundary positions from $p$ produces $P$, which is passed to the smoothing module during dechunking.&lt;/p&gt;
+&lt;h3&gt;Dechunking layer&lt;/h3&gt;
+&lt;p&gt;The dechunking layer takes the main network output $\hat{z}=\mathcal{M}(x_{\mathrm{chunk}})$ and the routing scores $p$, restores the sequence length, and adds the encoder residual before decoding: $z=\operatorname{Dechunk}(\hat{z},p)+\operatorname{Linear}(\hat{x})$.
+The dechunking components are designed to provide a learning signal for chunk boundary decisions. This requires gradients with respect to the routing scores $p_t$.&lt;/p&gt;
+&lt;h4&gt;Smoothing module&lt;/h4&gt;
+&lt;p&gt;The &lt;strong&gt;smoothing module&lt;/strong&gt; blends the main network’s output $\hat{z}_t$ with the previous smoothed representation using the boundary probability $P_t$, and passes the result to the upsampler.
+$$
+\bar{z}_t=P_t\hat{z}&lt;em&gt;t+(1-P_t)\bar{z}&lt;/em&gt;{t-1}.
+$$&lt;/p&gt;
+&lt;p&gt;Here, $t$ indexes the compressed sequence rather than the original byte sequence.&lt;/p&gt;
+&lt;p&gt;The smoothing module serves three roles:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Boundary learning:&lt;/strong&gt; provide a differentiable path from the prediction loss to the routing scores.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Error correction:&lt;/strong&gt; soften the effect of uncertain boundaries by incorporating information from preceding chunks.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Training stability:&lt;/strong&gt; reduce early commitment to suboptimal chunking patterns.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;Upsampler&lt;/h4&gt;
+&lt;p&gt;The upsampler restores the original sequence length by repeating each smoothed chunk representation until the next boundary:
+$$
+\tilde{z}&lt;em&gt;t=\bar{z}&lt;/em&gt;{\sum_{k=1}^{t} b_k}.
+$$&lt;/p&gt;
+&lt;p&gt;It then weights the result by the router&apos;s confidence in the current decision, $c_t=p_t^{b_t}(1-p_t)^{1-b_t}$, passed through a straight-through estimator $\mathrm{STE}(c_t)=c_t+\mathrm{sg}(1-c_t)$:
+$$
+u_t=\operatorname{STE}(c_t)\cdot\tilde{z}_t.
+$$&lt;/p&gt;
+&lt;p&gt;Here, $\mathrm{sg}$ denotes stop-gradient. The STE sets the multiplier to one in the forward pass, so $u_t=\tilde{z}&lt;em&gt;t$, but keeps a gradient path to $p_t$. The contribution through this multiplier is:
+$$
+\left.\frac{\partial\mathcal{L}}{\partial p_t}\right|&lt;/em&gt;{\mathrm{STE}}
+=(2b_t-1)\left(\frac{\partial\mathcal{L}}{\partial u_t}\right)^{!\top}\tilde{z}_t.
+$$
+When strengthening $\tilde{z}_t$ would lower the loss, this gradient reinforces the current boundary decision; otherwise it weakens it.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2&gt;Training objective&lt;/h2&gt;
+&lt;h1&gt;LH-Net’s objective is next-byte prediction with compression regularization. The prediction loss provides the main learning signal for the entire model, including chunking, while the ratio loss encourages each stage to meet its target compression ratio.
+$$
+\mathcal{L}&lt;/h1&gt;
+&lt;p&gt;\underbrace{-\frac{1}{L}\sum_{t=1}^{L}\log p_{\theta}(x_{t+1}\mid x_{1:t})}&lt;em&gt;{\text{next-byte prediction}}
++
+\alpha\underbrace{\frac{N}{N-1}\left[(N-1)FG+(1-F)(1-G)\right]}&lt;/em&gt;{\text{ratio loss}},
+$$
+for $F=\frac{1}{L}\sum_{t=1}^{L}b_t$ and $G=\frac{1}{L}\sum_{t=1}^{L}p_t$. $F$ is the fraction of positions selected as boundaries, $G$ is the average routing probability, and $N$ is the target compression ratio. Under $F=G$, the ratio loss is minimized at $F=G=1/N$; when $F\neq G$, it can fall below this value. For multiple chunking stages, the ratio losses are summed across stages.&lt;/p&gt;
+&lt;h2&gt;References&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&quot;https://www.alphaxiv.org/pdf/2507.07955&quot;&gt;Sukjun Hwang, Brandon Wang, and Albert Gu, &lt;em&gt;Dynamic Chunking for End-to-End Hierarchical Sequence Modeling&lt;/em&gt; (2025)&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://www.cartesia.ai/blog/from-tokens-to-bytes-part-1#aside-how-does-this-compare-to-the-original-h-net&quot;&gt;Cartesia Research, &lt;em&gt;From tokens to bytes I: Scaling hierarchical networks&lt;/em&gt; (2026)&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://aclanthology.org/P16-1162/&quot;&gt;Rico Sennrich, Barry Haddow, and Alexandra Birch, &lt;em&gt;Neural Machine Translation of Rare Words with Subword Units&lt;/em&gt; (ACL 2016)&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://arxiv.org/abs/2401.13660&quot;&gt;Junxiong Wang et al., &lt;em&gt;MambaByte: Token-free Selective State Space Model&lt;/em&gt; (2024)&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://aclanthology.org/2022.findings-naacl.117/&quot;&gt;Piotr Nawrot et al., &lt;em&gt;Hierarchical Transformers Are More Efficient Language Models&lt;/em&gt; (Findings of NAACL 2022)&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://arxiv.org/abs/2305.07185&quot;&gt;Lili Yu et al., &lt;em&gt;MEGABYTE: Predicting Million-byte Sequences with Multiscale Transformers&lt;/em&gt; (2023)&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://arxiv.org/abs/2404.14408&quot;&gt;Kevin Slagle, &lt;em&gt;SpaceByte: Towards Deleting Tokenization from Large Language Modeling&lt;/em&gt; (2024)&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://arxiv.org/abs/2412.09871&quot;&gt;Artidoro Pagnoni et al., &lt;em&gt;Byte Latent Transformer: Patches Scale Better Than Tokens&lt;/em&gt; (2024)&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://aclanthology.org/2023.acl-long.353/&quot;&gt;Piotr Nawrot et al., &lt;em&gt;Efficient Transformers with Dynamic Token Pooling&lt;/em&gt; (ACL 2023)&lt;/a&gt;&lt;/p&gt;</content:encoded><h:img src="undefined"/><enclosure url="undefined"/></item><item><title>Learning to tokenize (1): The bitter lesson meets tokenization</title><link>https://junoh-kang.github.io/blog/learning-to-tokenize-1</link><guid isPermaLink="true">https://junoh-kang.github.io/blog/learning-to-tokenize-1</guid><pubDate>Mon, 16 Nov 2026 00:00:00 GMT</pubDate><content:encoded>&lt;h2&gt;Modern LLMs through the lens of the bitter lesson&lt;/h2&gt;
 &lt;blockquote&gt;
 &lt;p&gt;&lt;strong&gt;general methods that leverage computation&lt;/strong&gt; are ultimately the most effective, and by a large margin.&lt;/p&gt;
 &lt;p&gt;— Richard Sutton, &lt;a href=&quot;https://www.cs.utexas.edu/~eunsol/courses/data/bitter_lesson.pdf&quot;&gt;&lt;em&gt;The bitter lesson&lt;/em&gt; (2019)&lt;/a&gt;&lt;/p&gt;
