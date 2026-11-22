@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="470" height="219" viewBox="0 42 470 219" role="img" aria-labelledby="title desc">
+<title id="title">Main context used to predict each byte</title>
+<desc id="desc">Assuming a split between camp and ing, H-Net is inferred to update after p, before predicting i. LH-Net updates after i, before predicting n.</desc>
+<rect width="470" height="274" fill="white"/>
+<g font-family="Helvetica, Arial, sans-serif" fill="#24282b">
+<path d="M282 52v158" stroke="#92999c" stroke-dasharray="3 4"/>
+<text x="88" y="80" text-anchor="end" font-size="18">LH-Net</text>
+<rect x="102" y="55" width="38" height="38" fill="#edf0f3" stroke="#929aa5"/><text x="121" y="80" text-anchor="middle" font-size="19" font-weight="bold" fill="#374151">c</text>
+<rect x="145" y="55" width="38" height="38" fill="#edf0f3" stroke="#929aa5"/><text x="164" y="80" text-anchor="middle" font-size="19" font-weight="bold" fill="#374151">a</text>
+<rect x="188" y="55" width="38" height="38" fill="#edf0f3" stroke="#929aa5"/><text x="207" y="80" text-anchor="middle" font-size="19" font-weight="bold" fill="#374151">m</text>
+<rect x="231" y="55" width="38" height="38" fill="#edf0f3" stroke="#929aa5"/><text x="250" y="80" text-anchor="middle" font-size="19" font-weight="bold" fill="#374151">p</text>
+<rect x="297" y="55" width="38" height="38" fill="#1f4e7a" stroke="#929aa5"/><text x="316" y="80" text-anchor="middle" font-size="19" font-weight="bold" fill="#ffffff">i</text>
+<rect x="340" y="55" width="38" height="38" fill="#edf0f3" stroke="#929aa5"/><text x="359" y="80" text-anchor="middle" font-size="19" font-weight="bold" fill="#374151">n</text>
+<rect x="383" y="55" width="38" height="38" fill="#edf0f3" stroke="#929aa5"/><text x="402" y="80" text-anchor="middle" font-size="19" font-weight="bold" fill="#374151">g</text>
+<text x="88" y="114" text-anchor="end" font-size="12">Main context</text>
+<rect x="102" y="98" width="233" height="24" fill="#edf0f3"/><text x="218.5" y="114" text-anchor="middle" font-size="13" fill="#424d50">Previous</text>
+<rect x="340" y="98" width="81" height="24" fill="#dde8f2"/><text x="380.5" y="114" text-anchor="middle" font-size="13" fill="#1f4e7a">Updated</text>
+<text x="88" y="174" text-anchor="end" font-size="18">H-Net</text>
+<rect x="102" y="149" width="38" height="38" fill="#edf0f3" stroke="#929aa5"/><text x="121" y="174" text-anchor="middle" font-size="19" font-weight="bold" fill="#374151">c</text>
+<rect x="145" y="149" width="38" height="38" fill="#edf0f3" stroke="#929aa5"/><text x="164" y="174" text-anchor="middle" font-size="19" font-weight="bold" fill="#374151">a</text>
+<rect x="188" y="149" width="38" height="38" fill="#edf0f3" stroke="#929aa5"/><text x="207" y="174" text-anchor="middle" font-size="19" font-weight="bold" fill="#374151">m</text>
+<rect x="231" y="149" width="38" height="38" fill="#1f4e7a" stroke="#929aa5"/><text x="250" y="174" text-anchor="middle" font-size="19" font-weight="bold" fill="#ffffff">p</text>
+<rect x="297" y="149" width="38" height="38" fill="#edf0f3" stroke="#929aa5"/><text x="316" y="174" text-anchor="middle" font-size="19" font-weight="bold" fill="#374151">i</text>
+<rect x="340" y="149" width="38" height="38" fill="#edf0f3" stroke="#929aa5"/><text x="359" y="174" text-anchor="middle" font-size="19" font-weight="bold" fill="#374151">n</text>
+<rect x="383" y="149" width="38" height="38" fill="#edf0f3" stroke="#929aa5"/><text x="402" y="174" text-anchor="middle" font-size="19" font-weight="bold" fill="#374151">g</text>
+<text x="88" y="208" text-anchor="end" font-size="12">Main context</text>
+<rect x="102" y="192" width="167" height="24" fill="#edf0f3"/><text x="185.5" y="208" text-anchor="middle" font-size="13" fill="#424d50">Previous</text>
+<rect x="297" y="192" width="124" height="24" fill="#dde8f2"/><text x="359" y="208" text-anchor="middle" font-size="13" fill="#1f4e7a">Updated</text>
+<rect x="162" y="239" width="12" height="12" fill="#1f4e7a"/><text x="182" y="250" font-size="15">Boundary decided at</text>
+</g></svg>
