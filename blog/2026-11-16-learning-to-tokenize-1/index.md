@@ -1,7 +1,7 @@
 ---
 title: "Learning to tokenize (1): The bitter lesson meets tokenization"
 publishDate: '2026-11-16'
-tags: [llm]
+tags: [representation]
 language: en
 series: "Learning to tokenize"
 seriesOrder: 1

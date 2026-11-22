@@ -1,7 +1,7 @@
 ---
 title: "Learning to tokenize (4): From LH-Net to H-Net"
 publishDate: '2026-11-23'
-tags: [llm]
+tags: [representation]
 language: en
 series: "Learning to tokenize"
 seriesOrder: 4

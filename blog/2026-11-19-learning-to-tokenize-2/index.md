@@ -1,7 +1,7 @@
 ---
 title: "Learning to tokenize (2): How LH-Net works"
 publishDate: '2026-11-19'
-tags: [llm]
+tags: [representation]
 language: en
 series: "Learning to tokenize"
 seriesOrder: 2
