@@ -25,6 +25,11 @@ We can view tokenization and learned compression methods through a shared frame:
 
 Viewed through this lens, BPE and the prior approaches discussed in the paper differ in how they construct compressed representations and choose their boundaries. The limitations below follow the paper’s discussion.
 
+<figure>
+  <img src="/blog/post/20261119/compression-approaches.png" alt="Five ways to segment the same sentence: BPE merges, individual bytes, fixed-size blocks, heuristic boundaries, and learned boundaries." style="display: block; width: 100%; height: auto;" />
+  <figcaption style="font-size: 0.8rem; line-height: 1.5; color: hsl(var(--muted-foreground, 0 0% 45%));">Alternating colors mark successive units in “the cat sat on the mat.” The bottom row illustrates one possible learned segmentation.</figcaption>
+</figure>
+
 | Approach | How compression works | Limitation |
 | --- | --- | --- |
 | BPE<sup class="cite">[<a href="#ref-3">3</a>]</sup> | Merge bytes into vocabulary tokens. | Segmentation stays fixed during language-model training. |
