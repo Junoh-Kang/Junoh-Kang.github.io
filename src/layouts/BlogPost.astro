@@ -17,11 +17,12 @@ interface Props {
 }
 
 const {
-  post: { id, data, filePath },
+  post,
   posts,
   headings,
   remarkPluginFrontmatter
 } = Astro.props
+const { id, data } = post
 
 const {
   heroImage,
@@ -58,15 +59,10 @@ const seriesPosts = data.series
 
 // `slides:` names a deck beside index.md. Post files are served at /blog/post/<YYYYMMDD>/<file>;
 // slides-thumb.png (made by scripts/slides-thumb.sh) is the card's preview image.
-const assetBase = `/blog/post/${publishDate.toISOString().slice(0, 10).replaceAll('-', '')}`
-const hasThumb = !!filePath && existsSync(join(dirname(filePath), 'slides-thumb.png'))
-const slides = data.slides
-  ? {
-      href: `${assetBase}/${data.slides}`,
-      kind: data.slides.toLowerCase().endsWith('.pdf') ? 'PDF' : 'Web',
-      thumb: hasThumb ? `${assetBase}/slides-thumb.png` : undefined
-    }
-  : undefined
+const slidePost = data.slides ? post : seriesPosts.find((entry) => entry.data.seriesOrder === 1)
+const slideFilename = slidePost?.data.slides
+const assetBase = slidePost && `/blog/post/${slidePost.data.publishDate.toISOString().slice(0, 10).replaceAll('-', '')}`
+const hasThumb = !!slidePost?.filePath && existsSync(join(dirname(slidePost.filePath), 'slides-thumb.png'))
 ---
 
 <PageLayout
@@ -97,22 +93,15 @@ const slides = data.slides
         </ol>
       </nav>
     )}
+    {slideFilename && (
+      <a href={`${assetBase}/${slideFilename}`} target='_blank' rel='noopener' class='slides-card' data-pagefind-ignore>
+        {hasThumb && <img src={`${assetBase}/slides-thumb.png`} alt='' class='thumb' loading='lazy' />}
+        <span>Open slides ↗</span>
+      </a>
+    )}
   </Fragment>
 
   <Hero {data} {remarkPluginFrontmatter} slot='header' />
-  {/* Slide deck card under the title, the same on every screen size */}
-  {
-    slides && (
-      <a href={slides.href} target='_blank' rel='noopener' class='slides-card' slot='header' data-pagefind-ignore>
-        {slides.thumb && <img src={slides.thumb} alt='' class='thumb' loading='lazy' />}
-        <span class='body'>
-          <span class='name'>Slides</span>
-          <span class='kind'>{slides.kind}</span>
-          <span class='open'>Open slides ↗</span>
-        </span>
-      </a>
-    )
-  }
 
   <slot />
 
@@ -199,40 +188,24 @@ const slides = data.slides
   }
 
   .slides-card {
-    margin-top: 1.5rem;
+    margin: 1rem 0.25rem 1rem 0;
     display: flex;
-    gap: 1rem;
+    gap: 0.6rem;
     align-items: center;
-    max-width: 26rem;
     padding: 0.6rem;
     border: 1px solid hsl(var(--border));
     border-radius: 0.75rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: hsl(var(--primary));
   }
   .slides-card:hover {
     border-color: hsl(var(--primary) / 0.4);
   }
   .thumb {
-    width: 8.5rem;
+    width: 5.25rem;
     margin: 0;
     border: 1px solid hsl(var(--border));
     border-radius: 0.4rem;
-  }
-  .body {
-    display: flex;
-    flex-direction: column;
-    gap: 0.15rem;
-    font-size: 0.875rem;
-  }
-  .name {
-    font-weight: 600;
-  }
-  .kind {
-    font-size: 0.8125rem;
-    color: hsl(var(--muted-foreground));
-  }
-  .open {
-    margin-top: 0.3rem;
-    font-weight: 500;
-    color: hsl(var(--primary));
   }
 </style>

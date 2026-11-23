@@ -59,7 +59,7 @@ blog/YYYY-MM-DD-<slug>/
 - The folder name starts with the post's `publishDate`, so posts sort by date. The build stops if the two differ.
 - The post URL is `/blog/<slug>`, without the date.
 - Files next to `index.md` are served at `/blog/post/<YYYYMMDD>/<file>`, where `YYYYMMDD` is the post's `publishDate`. Refer to them with that path inside the post, for example `<img src="/blog/post/20260312/fig/cm.png" />`. This matches the old Jekyll URLs.
-- A slide deck goes beside `index.md` and is named in the front matter, for example `slides: presentation.pdf` (PDF or HTML). The post then shows a Slides card under its title. Make the card's preview image once with `scripts/slides-thumb.sh blog/<post>/`, run from the repository root, which writes `slides-thumb.png` next to the deck.
+- Place slide decks (PDF or HTML) beside `index.md` and set `slides: presentation.pdf` or the matching filename. For a series-wide deck, set `slides` only on the post with `seriesOrder: 1`. Later parts link to that deck unless they specify their own. The link appears in the sidebar after the series list or table of contents. Run `scripts/slides-thumb.sh blog/<post>/` from the repository root to generate `slides-thumb.png` beside the deck.
 - Posts use optional, free-form `tags` (for example, `[diffusion]` or `[life]`); there is no fixed category list or required post type. Tag names are trimmed, lowercased, and deduplicated.
 - Tags name the post's topics. Reuse existing names when they fit, and add a new tag only when at least two posts will use it; a narrower topic stays under its broader tag until then.
 - `finance` is for research on financial data and modeling; investment views and market interpretation use `investing`.

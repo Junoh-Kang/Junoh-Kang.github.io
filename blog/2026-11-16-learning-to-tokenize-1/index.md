@@ -5,6 +5,7 @@ tags: [representation]
 language: en
 series: "Learning to tokenize"
 seriesOrder: 1
+slides: learning-to-tokenize-h-nets.html
 draft: false
 ---
 
