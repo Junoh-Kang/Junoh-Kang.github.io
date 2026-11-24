@@ -20,7 +20,7 @@ We can view tokenization and learned compression methods through a shared frame:
 
 <figure>
   <img src="/blog/post/20261119/representation-pipeline.svg" alt="Raw representation passes through an encoder, a compressed representation, a main network, another compressed representation, and a decoder to produce raw-level predictions." width="800" height="620" style="display: block; width: 100%; max-width: 640px; height: auto; margin: 0 auto;" />
-  <figcaption style="font-size: 0.8rem; line-height: 1.5; font-weight: 400; color: hsl(var(--muted-foreground, 0 0% 45%)); max-width: 768px; margin: 0.4rem auto 0; text-align: center;">A conceptual view of sequence modeling. Encoder and decoder denote transformations, not necessarily learned networks; compression refers to sequence length.</figcaption>
+  <figcaption style="font-size: 0.8rem; line-height: 1.5; font-weight: 400; color: hsl(var(--muted-foreground, 0 0% 45%)); max-width: 768px; margin: 0.4rem auto 0; text-align: left;">A conceptual view of sequence modeling. Encoder and decoder denote transformations, not necessarily learned networks; compression refers to sequence length.</figcaption>
 </figure>
 
 Viewed through this lens, BPE and the prior approaches discussed in the paper differ in how they construct compressed representations and choose their boundaries. The limitations below follow the paper’s discussion.
@@ -50,7 +50,7 @@ Crucially, *the main network can itself be another LH-Net*, allowing the same st
 
 <figure>
   <img src="/blog/post/20261119/hnet-figure-1.png" alt="Figure 1: two-stage H-Net architecture and the routing, downsampling, smoothing, and upsampling components." width="1300" height="1134" style="display: block; width: 100%; height: auto; margin: 0 auto;" />
-  <figcaption style="font-size: 0.8rem; line-height: 1.5; font-weight: 400; color: hsl(var(--muted-foreground, 0 0% 45%)); margin: 0.4rem auto 0; text-align: center;">Two-stage architecture (left) and dynamic chunking components (right). Source: Hwang et al., Figure 1.<sup class="cite">[<a href="#ref-1">1</a>]</sup></figcaption>
+  <figcaption style="font-size: 0.8rem; line-height: 1.5; font-weight: 400; color: hsl(var(--muted-foreground, 0 0% 45%)); margin: 0.4rem auto 0; text-align: left;">Two-stage architecture (left) and dynamic chunking components (right). Source: Hwang et al., Figure 1.<sup class="cite">[<a href="#ref-1">1</a>]</sup></figcaption>
 </figure>
 
 The architecture and its learning objective can be understood through the following principles:

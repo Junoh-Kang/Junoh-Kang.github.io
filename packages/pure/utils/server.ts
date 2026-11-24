@@ -12,6 +12,10 @@ export async function getBlogCollection<T extends CollectionKey = 'blog'>(
   })
 }
 
+export async function getListedBlogCollection() {
+  return (await getBlogCollection('blog')).filter(({ data }) => !data.archived)
+}
+
 function getYearFromCollection<T extends CollectionKey>(
   collection: CollectionEntry<T>
 ): number | undefined {

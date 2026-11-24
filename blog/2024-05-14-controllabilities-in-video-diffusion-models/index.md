@@ -2,6 +2,7 @@
 title: Controllabilities in Video Diffusion Models
 publishDate: '2024-05-14'
 tags: [diffusion]
+archived: true
 slides: presentation.pdf
 ---
 

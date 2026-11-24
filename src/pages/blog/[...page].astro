@@ -3,7 +3,7 @@ import type { GetStaticPaths, Page } from 'astro'
 import type { CollectionEntry } from 'astro:content'
 
 import { Paginator } from 'astro-pure/components/pages'
-import { getBlogCollection, getTagsWithCount, sortMDByDate } from 'astro-pure/server'
+import { getListedBlogCollection, getTagsWithCount, sortMDByDate } from 'astro-pure/server'
 import { Button, Icon } from 'astro-pure/user'
 import PostList from '@/components/PostList.astro'
 import PageLayout from '@/layouts/BaseLayout.astro'
@@ -12,7 +12,7 @@ import config from '@/site-config'
 export const prerender = true
 
 export const getStaticPaths = (async ({ paginate }) => {
-  const allPosts = await getBlogCollection()
+  const allPosts = await getListedBlogCollection()
   const tags = getTagsWithCount(allPosts)
   const collections = sortMDByDate<'blog'>(allPosts)
   const collectionsCount = collections.length
@@ -67,8 +67,8 @@ const paginationProps = {
                 <span class='text-muted-foreground'>
                   Page {page.currentPage} - Showing {page.data.length} of {collectionsCount} posts
                 </span>
-                <a aria-label='View all blog by years' href='/archives' data-astro-prefetch>
-                  View all posts by years →
+                <a href='/archives' data-astro-prefetch>
+                  Browse archives →
                 </a>
               </div>
               {/* posts */}

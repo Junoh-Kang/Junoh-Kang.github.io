@@ -21,7 +21,7 @@
 
 Choose the body citation format by source type, while keeping evidence sources in `## References`.
 
-- For papers, use the paper title with a numbered citation at first mention: `<sup class="cite">[<a href="#ref-1">1</a>]</sup>`. Later citations may use the number alone. In References, include authors, title, year, and a link to the paper.
+- For papers, use the paper title with a numbered citation at first mention: `<sup class="cite">[<a href="#ref-1">1</a>]</sup>`. Cite the paper again only when readers need a reminder of which source supports a claim. In References, include authors, title, year, and a link to the paper.
 - For blog posts, link the source name or post title directly in the body without a citation number. Also include the source in References with its author or organization, title, and link.
 - Use an `<ol class="references">` list with `<li id="ref-1">` entries for References. Order all entries by first mention; paper citation numbers match their entries even when blog entries have no numbered body citation.
 - For other sources supporting a claim, number, quote, definition, or reused figure, use numbered citations and matching References entries.
@@ -63,7 +63,7 @@ blog/YYYY-MM-DD-<slug>/
 - Posts use optional, free-form `tags` (for example, `[diffusion]` or `[life]`); there is no fixed category list or required post type. Tag names are trimmed, lowercased, and deduplicated.
 - Tags name the post's topics. Reuse existing names when they fit, and add a new tag only when at least two posts will use it; a narrower topic stays under its broader tag until then.
 - `finance` is for research on financial data and modeling; investment views and market interpretation use `investing`.
-- The default blog listing includes every published post, including `life`. Clicking a tag shows posts with that tag; only tags used by published posts appear in production navigation.
+- Set `archived: true` to keep a published post in Archives and at its original URL while excluding it from the blog list, tag lists, and RSS. Tag navigation counts posts in the blog list.
 - Language is independent of tags; set the optional `language` field per post as needed.
 - Field types, defaults, and constraints are defined in [src/content.config.ts](../src/content.config.ts).
 

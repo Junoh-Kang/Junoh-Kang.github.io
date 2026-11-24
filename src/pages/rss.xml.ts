@@ -9,7 +9,7 @@ import remarkRehype from 'remark-rehype'
 import { unified } from 'unified'
 import { visit } from 'unist-util-visit'
 
-import { getBlogCollection, sortMDByDate } from 'astro-pure/server'
+import { getListedBlogCollection, sortMDByDate } from 'astro-pure/server'
 import config from 'virtual:config'
 
 // Get dynamic import of images as a map collection
@@ -54,7 +54,7 @@ const renderContent = async (post: CollectionEntry<'blog'>, site: URL) => {
 }
 
 const GET = async (context: AstroGlobal) => {
-  const allPostsByDate = sortMDByDate(await getBlogCollection()) as CollectionEntry<'blog'>[]
+  const allPostsByDate = sortMDByDate<'blog'>(await getListedBlogCollection())
   const siteUrl = context.site ?? new URL(import.meta.env.SITE)
 
   return rss({
